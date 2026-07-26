@@ -1,0 +1,35 @@
+{
+	"folders": [
+		{
+			"path": ".",
+			"name": "root"
+		},
+		{
+			"path": "packages/ui",
+			"name": "ui"
+		}
+	],
+	"settings": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"files.associations": {
+			"*.css": "tailwindcss"
+		},
+		"tailwindCSS.classFunctions": [
+			"tv",
+			"cv",
+			"clsx",
+			"cx"
+		],
+		"editor.formatOnSave": true,
+		"editor.useTabStops": true,
+		"editor.tabSize": 2
+	},
+	"extensions": {
+		"recommendations": [
+			"svelte.svelte-vscode",
+			"esbenp.prettier-vscode",
+			"dbaeumer.vscode-eslint",
+			"bradlc.vscode-tailwindcss"
+		]
+	}
+}

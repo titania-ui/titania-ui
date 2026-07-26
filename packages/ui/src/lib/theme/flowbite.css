@@ -1,0 +1,419 @@
+@import 'tailwindcss';
+@plugin '@iconify/tailwind4' {
+	scale: 0;
+}
+
+@theme {
+	--font-sans:
+		'Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'system-ui', 'Segoe UI', 'Roboto',
+		'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji',
+		'Segoe UI Symbol', 'Noto Color Emoji';
+	--font-mono:
+		'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono',
+		'Courier New', 'monospace';
+
+	/* TEXT VARIABLES */
+	--text-2xs: 0.625rem;
+	--spacing-8xl: 90rem;
+	--leading-9: 36px; /* rem pls */
+	--leading-7: 28px;
+	--leading-8: 32px;
+	--leading-6: 24px;
+	--leading-4: 16px;
+	--leading-none: 1;
+	--leading-5: 20px;
+	--tracking-tighter: -0.8px;
+	--leading-heading-none: 60px;
+	--tracking-tight: -0.4px;
+
+	/* BORDER RADIUS VARIABLES */
+	--radius-0: 0px;
+	--radius-xxs: 2px;
+	--radius-xs: 4px;
+	--radius-sm: 6px;
+	--radius: 8px;
+	--radius-base: 12px;
+	--radius-lg: 16px;
+
+	/* BORDER WIDTH VARIABLES */
+	--default-border-width: 1px;
+
+	/* TEXT COLORS VARIABLES */
+	/* main text color */
+	--color-body: var(--color-gray-600);
+	--color-body-subtle: var(--color-gray-500);
+
+	/* text heading colors */
+	--color-heading: var(--color-gray-900);
+
+	/* used for custom brand colors */
+	--color-fg-brand-subtle: var(--color-blue-200);
+	--color-fg-brand: var(--color-blue-700);
+	--color-fg-brand-strong: var(--color-blue-900);
+
+	/* used for status colors */
+	--color-fg-success: var(--color-emerald-700);
+	--color-fg-success-strong: var(--color-emerald-900);
+	--color-fg-danger: var(--color-rose-700);
+	--color-fg-danger-strong: var(--color-rose-900);
+	--color-fg-warning-subtle: var(--color-orange-600);
+	--color-fg-warning: var(--color-orange-900);
+	--color-fg-yellow: var(--color-yellow-400);
+	--color-fg-disabled: var(--color-gray-400);
+	--color-fg-purple: var(--color-purple-600);
+	--color-fg-cyan: var(--color-cyan-600);
+	--color-fg-indigo: var(--color-indigo-600);
+	--color-fg-pink: var(--color-pink-600);
+	--color-fg-lime: var(--color-lime-600);
+
+	/* BACKGROUND COLOR VARIABLES */
+	/* used for neutral colors */
+	--color-neutral-primary-soft: var(--color-white);
+	--color-neutral-primary: var(--color-white);
+	--color-neutral-primary-medium: var(--color-white);
+	--color-neutral-primary-strong: var(--color-white);
+	--color-neutral-secondary-soft: var(--color-gray-50);
+	--color-neutral-secondary: var(--color-gray-50);
+	--color-neutral-secondary-medium: var(--color-gray-50);
+	--color-neutral-secondary-strong: var(--color-gray-50);
+	--color-neutral-secondary-strongest: var(--color-gray-50);
+	--color-neutral-tertiary-soft: var(--color-gray-100);
+	--color-neutral-tertiary: var(--color-gray-100);
+	--color-neutral-tertiary-medium: var(--color-gray-100);
+	--color-neutral-quaternary: var(--color-gray-200);
+	--color-neutral-quaternary-medium: var(--color-gray-200);
+	--color-gray: var(--color-gray-300);
+
+	/* used for brand colors */
+	--color-brand-softer: var(--color-blue-50);
+	--color-brand-soft: var(--color-blue-100);
+	--color-brand: var(--color-blue-700);
+	--color-brand-medium: var(--color-blue-200);
+	--color-brand-strong: var(--color-blue-800);
+
+	/* used for status colors */
+	--color-success-soft: var(--color-emerald-50);
+	--color-success: var(--color-emerald-700);
+	--color-success-medium: var(--color-emerald-100);
+	--color-success-strong: var(--color-emerald-800);
+	--color-danger-soft: var(--color-rose-50);
+	--color-danger: var(--color-rose-700);
+	--color-danger-medium: var(--color-rose-100);
+	--color-danger-strong: var(--color-rose-800);
+	--color-warning-soft: var(--color-orange-50);
+	--color-warning: var(--color-orange-500);
+	--color-warning-medium: var(--color-orange-100);
+	--color-warning-strong: var(--color-orange-700);
+	--color-dark-soft: var(--color-gray-800);
+	--color-dark: var(--color-gray-800);
+	--color-dark-strong: var(--color-gray-900);
+	--color-disabled: var(--color-gray-100);
+	--color-purple: var(--color-purple-500);
+	--color-sky: var(--color-sky-500);
+	--color-teal: var(--color-teal-600);
+	--color-pink: var(--color-pink-600);
+	--color-cyan: var(--color-cyan-500);
+	--color-fuchsia: var(--color-fuchsia-600);
+	--color-indigo: var(--color-indigo-600);
+	--color-orange: var(--color-orange-400);
+
+	/* BORDER COLOR VARIABLES */
+	--color-buffer: var(--color-white);
+	--color-buffer-medium: var(--color-white);
+	--color-buffer-strong: var(--color-white);
+	--color-muted: var(--color-gray-50);
+	--color-light-subtle: var(--color-gray-100);
+	--color-light: var(--color-gray-100);
+	--color-light-medium: var(--color-gray-100);
+	--color-default-subtle: var(--color-gray-200);
+	--color-default: var(--color-gray-200);
+	--color-default-medium: var(--color-gray-200);
+	--color-default-strong: var(--color-gray-200);
+
+	/* used for status colors */
+	--color-success-subtle: var(--color-emerald-200);
+	--color-danger-subtle: var(--color-rose-200);
+	--color-warning-subtle: var(--color-orange-200);
+	--color-brand-subtle: var(--color-blue-200);
+	--color-brand-light: var(--color-blue-600);
+	--color-dark-subtle: var(--color-gray-800);
+	--color-dark-backdrop: var(--color-gray-950);
+
+	/* shiki variables */
+	--color-shiki-fg-brand: #79b8ff;
+	--color-shiki-fg-brand-subtle: #9ecbff;
+}
+
+@theme inline {
+	--font-body: var(--font-sans);
+}
+
+@layer components {
+	.taalert {
+		@apply my-4 grid grid-cols-[1fr] items-center gap-2 rounded-base p-4 text-sm;
+
+		&:has(> *[data-slot='button']) {
+			@apply grid-cols-[1fr_auto];
+			&:has(> *[data-slot='alert-indicator']) {
+				@apply grid-cols-[auto_1fr_auto];
+			}
+		}
+
+		&:has(> *[data-slot='alert-indicator']) {
+			@apply grid-cols-[auto_1fr];
+			.taalert__description {
+				@apply col-start-2;
+			}
+			.taalert__title {
+				@apply col-start-2;
+			}
+		}
+
+		&:has(> *[data-slot='alert-title']) {
+			.taalert__description {
+				@apply row-start-2;
+			}
+		}
+
+		.taalert__description {
+			@apply row-start-1;
+		}
+
+		.taalert__title {
+			@apply row-start-1 font-medium;
+		}
+
+		.taalert__indicator {
+			@apply size-4 **:size-4!;
+
+			.taalert__indicator__default {
+				@apply icon-[flowbite--info-circle-outline];
+			}
+
+			&.taalert__indicator--status-danger .taalert__indicator__default {
+				@apply icon-[flowbite--exclamation-circle-outline];
+			}
+
+			&.taalert__indicator--status-warning .taalert__indicator__default {
+				@apply icon-[material-symbols--warning-outline-rounded];
+			}
+
+			&.taalert__indicator--status-success .taalert__indicator__default {
+				@apply icon-[flowbite--check-circle-outline];
+			}
+		}
+
+		&.taalert--status-danger {
+			@apply border-danger-subtle bg-danger-soft text-fg-danger-strong;
+		}
+
+		&.taalert--status-warning {
+			@apply border-warning-subtle bg-warning-soft text-fg-warning;
+		}
+
+		&.taalert--status-success {
+			@apply border-success-subtle bg-success-soft text-fg-success-strong;
+		}
+
+		&.taalert--status-info {
+			@apply border-brand-subtle bg-brand-softer text-fg-brand-strong;
+		}
+
+		&.taalert--status-default {
+			@apply border-default-medium bg-neutral-secondary-medium text-heading;
+		}
+	}
+
+	.taspinner {
+		.taspinner__icon {
+			@apply icon-[svg-spinners--90-ring-with-bg] inline-block;
+		}
+
+		&.taspinner__icon--status-danger {
+			@apply text-fg-danger-strong;
+		}
+
+		&.taspinner__icon--status-warning {
+			@apply text-fg-warning;
+		}
+
+		&.taspinner__icon--status-success {
+			@apply text-fg-success-strong;
+		}
+
+		&.taspinner__icon--status-info {
+			@apply text-fg-brand-strong;
+		}
+	}
+
+	.taclosebutton {
+		@apply -mx-1.5 -my-1.5 ms-auto inline-flex size-8 shrink-0 items-center justify-center rounded hover:bg-neutral-tertiary-medium focus:ring-2 focus:ring-neutral-tertiary *:data-[slot=icon]:size-4;
+
+		.taclosebutton__default {
+			@apply icon-[flowbite--close-outline];
+		}
+
+		&:is(.taalert--status-success > *) {
+			@apply hover:bg-success-medium focus:ring-success-medium;
+		}
+
+		&:is(.taalert--status-danger > *) {
+			@apply hover:bg-danger-medium focus:ring-danger-medium;
+		}
+
+		&:is(.taalert--status-warning > *) {
+			@apply hover:bg-warning-medium focus:ring-warning-medium;
+		}
+
+		&:is(.taalert--status-info > *) {
+			@apply hover:bg-brand-soft focus:ring-brand-medium;
+		}
+	}
+
+	.taheading {
+		@apply my-4 font-bold text-heading;
+
+		&.taheading--level-1 {
+			@apply text-5xl;
+		}
+
+		&.taheading--level-2 {
+			@apply text-4xl;
+		}
+
+		&.taheading--level-3 {
+			@apply text-3xl;
+		}
+
+		&.taheading--level-4 {
+			@apply text-2xl;
+		}
+
+		&.taheading--level-5 {
+			@apply text-xl;
+		}
+
+		&.taheading--level-6 {
+			@apply text-lg;
+		}
+	}
+
+	.tatext {
+		@apply my-3 text-left text-base text-body rtl:text-right;
+
+		[data-slot='icon'] {
+			@apply inline-block size-4 align-sub;
+		}
+	}
+
+	.talink {
+		@apply font-medium text-fg-brand hover:underline;
+
+		&:is(p > *) {
+			@apply underline hover:no-underline;
+		}
+	}
+
+	.tastrong {
+		@apply font-semibold text-heading;
+	}
+
+	.tabutton {
+		@apply box-border rounded-base border px-4 py-2.5 text-base text-sm leading-5 font-medium focus:ring-4 focus:outline-none;
+
+		[data-slot='icon'] {
+			@apply inline-block size-4 align-sub;
+		}
+
+		&.tabutton--variant-default {
+			@apply border-transparent bg-dark text-white shadow-xs hover:bg-dark-strong focus:ring-neutral-tertiary;
+		}
+
+		&.tabutton--variant-primary {
+			@apply border-transparent bg-brand text-white shadow-xs hover:bg-brand-strong focus:ring-brand-medium;
+		}
+
+		&.tabutton--variant-secondary {
+			@apply border-default bg-neutral-secondary-medium text-body shadow-xs hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-neutral-tertiary;
+		}
+
+		&.tabutton--variant-tertiary {
+			@apply border-default bg-neutral-primary-soft text-body shadow-xs hover:bg-neutral-secondary-medium hover:text-heading focus:ring-neutral-tertiary-soft;
+		}
+
+		&.tabutton--variant-danger {
+			@apply border-transparent bg-danger text-white shadow-xs hover:bg-danger-strong focus:ring-danger-medium;
+		}
+
+		&.tabutton--variant-ghost {
+			@apply border-transparent bg-transparent text-heading hover:bg-neutral-secondary-medium focus:ring-neutral-tertiary;
+		}
+	}
+
+	.tachip {
+		@apply inline-flex w-fit shrink-0 items-center gap-1 rounded font-medium;
+
+		--chip-bg: var(--default);
+		--chip-fg: currentColor;
+		--chip-border: var(--default);
+
+		background-color: var(--chip-bg);
+		color: var(--chip-fg);
+		border-color: var(--chip-border);
+		--tw-ring-color: var(--chip-border);
+
+		& > [data-slot='icon'] {
+			@apply size-3;
+		}
+
+		&.tachip--size-lg > [data-slot='icon'] {
+			@apply size-3.5;
+		}
+
+		&.tachip--size-sm {
+			@apply border px-1.5 py-0.5 text-xs;
+		}
+
+		&.tachip--size-md {
+			@apply border px-2 py-1 text-xs;
+		}
+
+		&.tachip--size-lg {
+			@apply gap-1.5 px-2 py-1 text-sm ring-1 ring-inset;
+		}
+
+		&.tachip--color-default {
+			--chip-fg: var(--color-heading);
+			--chip-border: var(--color-default-medium);
+			--chip-bg: var(--color-neutral-secondary-medium);
+		}
+
+		&.tachip--color-accent {
+			--chip-fg: var(--color-fg-brand-strong);
+			--chip-border: var(--color-brand-subtle);
+			--chip-bg: var(--color-brand-softer);
+		}
+
+		&.tachip--color-success {
+			--chip-fg: var(--color-fg-success-strong);
+			--chip-border: var(--color-success-subtle);
+			--chip-bg: var(--color-success-soft);
+		}
+
+		&.tachip--color-warning {
+			--chip-fg: var(--color-fg-warning);
+			--chip-border: var(--color-warning-subtle);
+			--chip-bg: var(--color-warning-soft);
+		}
+
+		&.tachip--color-danger {
+			--chip-fg: var(--color-fg-danger-strong);
+			--chip-border: var(--color-danger-subtle);
+			--chip-bg: var(--color-danger-soft);
+		}
+	}
+}
+
+body {
+	@apply font-body antialiased;
+}
