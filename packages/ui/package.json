@@ -32,10 +32,10 @@
 		}
 	},
 	"peerDependencies": {
-		"bits-ui": "^2.0.0",
-		"svelte": "^5.0.0",
-		"tailwind-variants": "3.0.0",
-		"tailwindcss": "^4.0.0"
+		"bits-ui": "^2.18.0",
+		"svelte": "^5.2.0",
+		"tailwind-variants": "3.2.0",
+		"tailwindcss": "^4.3.0"
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "^5.2.1",
@@ -69,7 +69,6 @@
 		"storybook": "^10.5.2",
 		"svelte": "^5.56.1",
 		"svelte-check": "^4.6.0",
-		"svelte-toolbelt": "^0.10.6",
 		"tailwind-variants": "3.2.2",
 		"tailwindcss": "^4.3.0",
 		"typescript": "^6.0.3",
@@ -78,6 +77,12 @@
 		"vitest": "^4.1.10"
 	},
 	"keywords": [
-		"svelte"
-	]
+		"svelte",
+		"ui",
+		"components",
+		"tailwind"
+	],
+	"dependencies": {
+		"svelte-toolbelt": "^0.10.6"
+	}
 }
