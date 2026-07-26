@@ -136,8 +136,6 @@
 	</div>
 {/each}
 
-<!--<Form.Root></Form.Root>-->
-
 <Form form={form_signup}>
 	{#snippet render({ props })}
 		<form method="POST" use:enhance {...props}>
