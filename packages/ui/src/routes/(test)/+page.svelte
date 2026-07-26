@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { superForm } from 'sveltekit-superforms';
+	import { untrack } from 'svelte';
+	import { zodClient } from 'sveltekit-superforms/adapters';
 	import {
 		Alert,
 		Spinner,
@@ -8,8 +11,22 @@
 		Strong,
 		Button,
 		Icon,
-		Chip
+		Chip,
+		Form
 	} from '../../lib/index.ts';
+	import { schema_signup } from './shared.ts';
+
+	let { data } = $props();
+
+	let form_signup = superForm(
+		untrack(() => data.form_signup),
+		{
+			validators: zodClient(schema_signup),
+			validationMethod: 'oninput'
+		}
+	);
+
+	const { enhance, form } = form_signup;
 </script>
 
 <Alert status="default">
@@ -118,3 +135,41 @@
 		{/each}
 	</div>
 {/each}
+
+<!--<Form.Root></Form.Root>-->
+
+<Form form={form_signup}>
+	{#snippet render({ props })}
+		<form method="POST" use:enhance {...props}>
+			<Form.Field name="name">
+				<Form.Label>Name</Form.Label>
+				<Form.Input type="text" />
+				<Form.Description>We’ll never share your details</Form.Description>
+				<Form.Error />
+			</Form.Field>
+			<Form.Field name="email">
+				<Form.Label>Email</Form.Label>
+				<Form.Input type="email" />
+				<Form.Error />
+			</Form.Field>
+			<Form.Field name="age">
+				<Form.Label>Age</Form.Label>
+				<Form.Input type="number" />
+				<Form.Error />
+			</Form.Field>
+			<Form.Field name="password">
+				<Form.Label>Password</Form.Label>
+				<Form.Input type="password" />
+				<Form.Error />
+			</Form.Field>
+			<Form.Field name="confirmPassword">
+				<Form.Label>Confirm Password</Form.Label>
+				<Form.Input type="password" />
+				<Form.Error />
+			</Form.Field>
+			<Form.Field name="terms">
+				<Form.Label>Terms and Conditions</Form.Label>
+			</Form.Field>
+		</form>
+	{/snippet}
+</Form>

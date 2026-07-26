@@ -1,5 +1,5 @@
 import type { ReadableBox, WritableBox } from 'svelte-toolbelt';
-import { Context } from '../../utils/context.ts';
+import { Context } from '../../utils/index.ts';
 import type { theme } from './theme.ts';
 
 export interface AlertCtx {

@@ -2,6 +2,9 @@
 export { default as Button } from './components/button/index.ts';
 export { default as CloseButton } from './components/close-button/index.ts';
 
+// Forms
+export { default as Form } from './components/form/index.ts';
+
 // Feedback
 export { default as Alert } from './components/alert/index.ts';
 export { default as Spinner } from './components/spinner/index.ts';
