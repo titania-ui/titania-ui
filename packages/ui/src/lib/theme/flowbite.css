@@ -150,7 +150,7 @@
 
 @layer components {
 	.taalert {
-		@apply my-4 grid grid-cols-[1fr] items-center gap-2 rounded-base p-4 text-sm;
+		@apply my-4 grid grid-cols-[1fr] items-center gap-2 rounded-base border p-4 text-sm;
 
 		&:has(> *[data-slot='button']) {
 			@apply grid-cols-[1fr_auto];
@@ -184,7 +184,11 @@
 		}
 
 		.taalert__indicator {
-			@apply size-4 **:size-4!;
+			@apply size-4;
+
+			[data-slot='icon'] {
+				@apply align-baseline;
+			}
 
 			.taalert__indicator__default {
 				@apply icon-[flowbite--info-circle-outline];
@@ -319,7 +323,11 @@
 	}
 
 	.tabutton {
-		@apply box-border rounded-base border px-4 py-2.5 text-base text-sm leading-5 font-medium focus:ring-4 focus:outline-none;
+		@apply box-border rounded-base border px-4 py-2.5 text-sm leading-5 font-medium focus:ring-4 focus:outline-none;
+
+		&:has(> *[data-slot='icon']) {
+			@apply inline-flex items-center gap-2;
+		}
 
 		&.tabutton--variant-default {
 			@apply border-transparent bg-dark text-white shadow-xs hover:bg-dark-strong focus:ring-neutral-tertiary;
