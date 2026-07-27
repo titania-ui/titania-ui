@@ -10,10 +10,17 @@ export const theme = tv({
 			tertiary: 'tabutton--variant-tertiary',
 			danger: 'tabutton--variant-danger',
 			ghost: 'tabutton--variant-ghost'
+		},
+		size: {
+			sm: 'tabutton--size-sm',
+			md: 'tabutton--size-md',
+			lg: 'tabutton--size-lg',
+			xl: 'tabutton--size-xl'
 		}
 	},
 	defaultVariants: {
-		variant: 'default'
+		variant: 'default',
+		size: 'md'
 	}
 });
 

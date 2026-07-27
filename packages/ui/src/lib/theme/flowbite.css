@@ -323,7 +323,7 @@
 	}
 
 	.tabutton {
-		@apply box-border rounded-base border px-4 py-2.5 text-sm leading-5 font-medium focus:ring-4 focus:outline-none;
+		@apply box-border rounded-base border leading-5 font-medium focus:ring-4 focus:outline-none;
 
 		&:has(> *[data-slot='icon']) {
 			@apply inline-flex items-center gap-2;
@@ -351,6 +351,22 @@
 
 		&.tabutton--variant-ghost {
 			@apply border-transparent bg-transparent text-heading hover:bg-neutral-secondary-medium focus:ring-neutral-tertiary;
+		}
+
+		&.tabutton--size-sm {
+			@apply px-3 py-2 text-sm;
+		}
+
+		&.tabutton--size-md {
+			@apply px-4 py-2.5 text-sm;
+		}
+
+		&.tabutton--size-lg {
+			@apply px-5 py-3 text-base;
+		}
+
+		&.tabutton--size-xl {
+			@apply px-6 py-3.5 text-base;
 		}
 	}
 
