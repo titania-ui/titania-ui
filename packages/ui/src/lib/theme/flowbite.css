@@ -224,9 +224,13 @@
 		}
 	}
 
+	[data-slot='icon'] {
+		@apply inline-block size-4 align-sub;
+	}
+
 	.taspinner {
 		.taspinner__icon {
-			@apply icon-[svg-spinners--90-ring-with-bg] inline-block;
+			@apply icon-[svg-spinners--90-ring-with-bg] size-full;
 		}
 
 		&.taspinner__icon--status-danger {
@@ -300,10 +304,6 @@
 
 	.tatext {
 		@apply my-3 text-left text-base text-body rtl:text-right;
-
-		[data-slot='icon'] {
-			@apply inline-block size-4 align-sub;
-		}
 	}
 
 	.talink {
@@ -320,10 +320,6 @@
 
 	.tabutton {
 		@apply box-border rounded-base border px-4 py-2.5 text-base text-sm leading-5 font-medium focus:ring-4 focus:outline-none;
-
-		[data-slot='icon'] {
-			@apply inline-block size-4 align-sub;
-		}
 
 		&.tabutton--variant-default {
 			@apply border-transparent bg-dark text-white shadow-xs hover:bg-dark-strong focus:ring-neutral-tertiary;

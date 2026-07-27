@@ -15,6 +15,6 @@
 </script>
 
 <div bind:this={ref} role="status" data-slot="icon" {...attrs} class={classValue}>
-	<span aria-hidden="true" class="taspinner__icon" data-slot="icon"></span>
+	<span aria-hidden="true" class="taspinner__icon"></span>
 	<span class="sr-only">Loading...</span>
 </div>
