@@ -6,7 +6,8 @@ import { rootTheme, fieldTheme, type RootThemeVariants, type FieldThemeVariants 
 export { rootTheme, fieldTheme, type RootThemeVariants, type FieldThemeVariants };
 
 // State
-export * from './form-context.ts';
+import { formCtx, fieldCtx } from './form-context.ts';
+export { formCtx, fieldCtx };
 
 // Root
 export type RootPropsRaw<T extends Record<string, unknown>, M = any> = {
@@ -53,6 +54,8 @@ const EXPORT = Object.assign(Root, {
 	Error,
 	Description,
 	rootTheme,
-	fieldTheme
+	fieldTheme,
+	formCtx,
+	fieldCtx
 });
 export default EXPORT;

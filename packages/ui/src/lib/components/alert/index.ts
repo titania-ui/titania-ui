@@ -5,7 +5,8 @@ import { theme, type ThemeVariants } from './theme.ts';
 export { theme, type ThemeVariants };
 
 // State
-export * from './alert-context.ts';
+import { alertCtx } from './alert-context.ts';
+export { alertCtx };
 
 // Root
 export type RootPropsRaw = { dismissed?: boolean; onDismiss?: () => void };
@@ -32,5 +33,13 @@ export type DismissPropsRaw = {};
 export type DismissProps = SwitchableTagComponentProps<'button', DismissPropsRaw>;
 import { default as Dismiss } from './components/alert-dismiss.svelte';
 
-const EXPORT = Object.assign(Root, { Root, Title, Description, Indicator, Dismiss, theme });
+const EXPORT = Object.assign(Root, {
+	Root,
+	Title,
+	Description,
+	Indicator,
+	Dismiss,
+	theme,
+	alertCtx
+});
 export default EXPORT;
