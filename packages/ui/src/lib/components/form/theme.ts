@@ -17,7 +17,20 @@ export const fieldTheme = tv({
 		input: 'tainput',
 		description: 'tafield__description'
 	},
-	variants: {}
+	variants: {
+		invalid: {
+			true: {
+				root: 'tafield--invalid',
+				error: 'tafield__error--invalid',
+				input: 'tainput--invalid',
+				label: 'talabel--invalid',
+				description: 'tafield__description--invalid'
+			}
+		}
+	},
+	defaultVariants: {
+		invalid: false
+	}
 });
 
 export type FieldThemeVariants = VariantProps<typeof fieldTheme>;

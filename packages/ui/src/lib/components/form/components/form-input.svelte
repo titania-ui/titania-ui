@@ -8,6 +8,7 @@
 
 	let {
 		type,
+		value = $bindable(undefined),
 		//
 		id = uid,
 		ref = $bindable(null),
@@ -15,7 +16,12 @@
 		...props
 	}: InputProps = $props();
 
-	const _form = form_ctx.form.current.form;
+	const isAuto = ctx.auto.current;
+
+	if (isAuto && !form_ctx)
+		throw new Error(
+			'Form.Input: a parent Form.Root component is required if Form.Field "auto" is true'
+		);
 
 	$effect.pre(() => {
 		ctx.inputId.current = id!;
@@ -27,15 +33,25 @@
 	const mergedProps = $derived({
 		'data-slot': 'control',
 		'aria-labelledby': ctx.labelId.current,
-		'aria-invalid': ctx.errors.current ? 'true' : undefined,
+		'aria-invalid': ctx.errors.current.length > 0 ? 'true' : undefined,
 		name: ctx.name.current,
 		type,
-		...ctx.constraints.current,
+		id,
 		...ctx.attrs.current,
 		...props,
-		id,
 		class: ctx.slots.current.input({ className })
 	});
+
+	const _form = form_ctx.form.current.form;
 </script>
 
-<input bind:this={ref} bind:value={$_form[ctx.name.current]} {...mergedProps} />
+{#if isAuto}
+	<input
+		bind:this={ref}
+		bind:value={$_form[ctx.name.current]}
+		{...ctx.constraints.current}
+		{...mergedProps}
+	/>
+{:else}
+	<input bind:this={ref} bind:value {...mergedProps} />
+{/if}

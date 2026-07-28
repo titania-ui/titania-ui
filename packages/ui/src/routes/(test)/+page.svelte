@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { superForm } from 'sveltekit-superforms';
+	import SuperDebug, { superForm } from 'sveltekit-superforms';
 	import { untrack } from 'svelte';
 	import { zodClient } from 'sveltekit-superforms/adapters';
 	import {
@@ -26,7 +26,7 @@
 		}
 	);
 
-	const { enhance, form } = form_signup;
+	const { enhance, form, constraints, errors } = form_signup;
 </script>
 
 <Alert status="default">
@@ -163,7 +163,19 @@
 <Form form={form_signup}>
 	{#snippet render({ props })}
 		<form method="POST" use:enhance {...props}>
-			<Form.Field name="name">
+			<Form.Field auto name="name">
+				<Form.Label>Name</Form.Label>
+				<Form.Input type="text" />
+				<Form.Description>We’ll never share your details</Form.Description>
+				<Form.Error />
+			</Form.Field>
+			<Form.Field errors={$errors.email} required>
+				<Form.Label>Email</Form.Label>
+				<Form.Input type="text" bind:value={$form.email} {...$constraints.email} />
+				<Form.Error />
+				<p>{$errors.email}</p>
+			</Form.Field>
+			<!--<Form.Field name="name">
 				<Form.Label>Name</Form.Label>
 				<Form.Input type="text" />
 				<Form.Description>We’ll never share your details</Form.Description>
@@ -191,7 +203,9 @@
 			</Form.Field>
 			<Form.Field name="terms">
 				<Form.Label>Terms and Conditions</Form.Label>
-			</Form.Field>
+			</Form.Field>-->
 		</form>
 	{/snippet}
 </Form>
+
+<SuperDebug data={form} />

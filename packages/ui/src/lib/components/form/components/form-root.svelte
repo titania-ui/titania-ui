@@ -7,6 +7,7 @@
 	import { themeAttrs } from '../../../utils/index.ts';
 	import { boxWith } from 'svelte-toolbelt';
 	import { formCtx } from '../form-context.ts';
+	import { fromStore } from 'svelte/store';
 
 	const uid = $props.id();
 
@@ -25,11 +26,16 @@
 	const slots = $derived(rootTheme(props));
 	const attrs = $derived(themeAttrs(rootTheme, props));
 
+	const __constraints = $derived(fromStore(form.constraints).current);
+	const __errors = $derived(fromStore(form.errors).current);
+
 	formCtx.set({
 		id: boxWith(() => id),
 		slots: boxWith(() => slots),
 		attrs: boxWith(() => attrs),
-		form: boxWith(() => form)
+		form: boxWith(() => form),
+		constraints: boxWith(() => __constraints),
+		errors: boxWith(() => __errors)
 	});
 
 	const mergedProps = $derived({

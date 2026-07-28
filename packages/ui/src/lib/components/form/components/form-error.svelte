@@ -15,6 +15,8 @@
 		...props
 	}: ErrorProps = $props();
 
+	const hasError = $derived(ctx.errors.current.length > 0);
+
 	const mergedProps = $derived({
 		'data-slot': 'error',
 		...ctx.attrs.current,
@@ -24,7 +26,7 @@
 	});
 </script>
 
-{#if ctx.errors.current}
+{#if hasError}
 	{#if render}
 		{@render render({ props: mergedProps })}
 	{:else}

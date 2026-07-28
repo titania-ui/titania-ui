@@ -444,14 +444,12 @@
 	.tafield {
 		@apply mb-6;
 
-		&[data-invalid] {
-			.talabel {
-				@apply text-fg-danger-strong;
-			}
+		.talabel--invalid {
+			@apply text-fg-danger-strong;
+		}
 
-			.tainput {
-				@apply border-danger-subtle bg-danger-soft text-fg-danger-strong;
-			}
+		.tainput--invalid {
+			@apply border-danger-subtle bg-danger-soft text-fg-danger-strong;
 		}
 
 		.tafield__error {

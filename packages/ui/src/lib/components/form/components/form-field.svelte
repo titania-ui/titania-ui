@@ -5,7 +5,11 @@
 	import { fieldTheme, type FieldProps } from '../index.ts';
 
 	let {
-		name,
+		auto = false,
+		name = undefined,
+		required = false,
+		disabled = false,
+		errors = [],
 		//
 		as: Tag = 'div',
 		ref = $bindable(null),
@@ -15,29 +19,43 @@
 		...props
 	}: FieldProps = $props();
 
-	const slots = $derived(fieldTheme(props));
-	const attrs = $derived(themeAttrs(fieldTheme, props));
-
 	const form_ctx = formCtx.get();
 
-	const _errors = form_ctx.form.current.errors;
-	const _constraints = form_ctx.form.current.constraints;
-	let errors = $derived($_errors[name]);
-	let constraints = $derived($_constraints[name]);
+	$effect.pre(() => {
+		if (auto && !name) throw new Error('Form.Field: "name" is required when "auto" is true');
+		if (!form_ctx) throw new Error('Form.Field: "auto" requires a parent Form.Root component');
+	});
+
+	const __errors = $derived<string[]>(
+		!auto ? errors : name ? (form_ctx.errors.current?.[name] ?? []) : []
+	);
+	const __constraints = $derived<Record<string, unknown>>(
+		name ? form_ctx.constraints.current?.[name] : {}
+	);
+	const __required = $derived<boolean>(!auto ? required : (__constraints?.required ?? false));
+
+	const slots = $derived(
+		fieldTheme({ auto, required, disabled, invalid: __errors.length > 0, ...props })
+	);
+	const attrs = $derived(themeAttrs(fieldTheme, props));
 
 	const ctx = fieldCtx.set({
-		name: boxWith(() => name),
+		name: boxWith(() => name ?? ''),
 		slots: boxWith(() => slots),
 		attrs: boxWith(() => attrs),
+
 		labelId: box<string | undefined>(undefined),
 		inputId: box<string | undefined>(undefined),
-		errors: boxWith(() => errors),
-		constraints: boxWith(() => constraints)
+
+		auto: boxWith(() => auto),
+		required: boxWith(() => __required),
+		disabled: boxWith(() => disabled),
+		errors: boxWith(() => __errors),
+		constraints: boxWith(() => __constraints)
 	});
 
 	const mergedProps = $derived({
 		'data-slot': 'field',
-		'data-invalid': ctx.errors.current ? '' : undefined,
 		...ctx.attrs.current,
 		...props,
 		class: ctx.slots.current.root({ className })

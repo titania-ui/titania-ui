@@ -21,7 +21,13 @@ export type RootProps<T extends Record<string, unknown>, M = any> = SwitchableTa
 import { default as Root } from './components/form-root.svelte';
 
 // Field
-export type FieldPropsRaw = { name: string };
+export type FieldPropsRaw = {
+	auto?: boolean;
+	name?: string;
+	required?: boolean;
+	disabled?: boolean;
+	errors?: string[];
+};
 export type FieldProps = SwitchableTagComponentProps<'div', FieldPropsRaw, FieldThemeVariants>;
 import { default as Field } from './components/form-field.svelte';
 
