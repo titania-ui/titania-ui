@@ -15,6 +15,7 @@ export const fieldTheme = tv({
 		label: 'talabel',
 		error: 'tafield__error',
 		input: 'tainput',
+		textarea: 'tatextarea',
 		description: 'tafield__description'
 	},
 	variants: {
@@ -24,6 +25,7 @@ export const fieldTheme = tv({
 				error: 'tafield__error--invalid',
 				input: 'tainput--invalid',
 				label: 'talabel--invalid',
+				textarea: 'tatextarea--invalid',
 				description: 'tafield__description--invalid'
 			}
 		}

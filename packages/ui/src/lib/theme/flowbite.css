@@ -448,7 +448,8 @@
 			@apply text-fg-danger-strong;
 		}
 
-		.tainput--invalid {
+		.tainput--invalid,
+		.tatextarea--invalid {
 			@apply border-danger-subtle bg-danger-soft text-fg-danger-strong;
 		}
 
@@ -467,6 +468,10 @@
 
 	.tainput {
 		@apply block w-full rounded-base border border-default-medium bg-neutral-secondary-medium px-3 py-2.5 text-sm text-heading shadow-xs placeholder:text-body focus:border-brand focus:ring-brand;
+	}
+
+	.tatextarea {
+		@apply block w-full rounded-base border border-default-medium bg-neutral-secondary-medium p-3.5 text-sm text-heading shadow-xs placeholder:text-body focus:border-brand focus:ring-brand;
 	}
 }
 

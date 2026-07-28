@@ -171,7 +171,7 @@
 			</Form.Field>
 			<Form.Field errors={$errors.email} required>
 				<Form.Label>Email</Form.Label>
-				<Form.Input type="text" bind:value={$form.email} {...$constraints.email} />
+				<Form.Textarea bind:value={$form.email} {...$constraints.email} />
 				<Form.Error />
 				<p>{$errors.email}</p>
 			</Form.Field>

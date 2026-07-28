@@ -42,6 +42,11 @@ export type InputPropsRaw = { type: InputType };
 export type InputProps = FixedTagComponentProps<'input', InputPropsRaw>;
 import { default as Input } from './components/form-input.svelte';
 
+// Textarea
+export type TextareaPropsRaw = {};
+export type TextareaProps = FixedTagComponentProps<'textarea', TextareaPropsRaw>;
+import { default as Textarea } from './components/form-textarea.svelte';
+
 // Error
 export type ErrorPropsRaw = {};
 export type ErrorProps = Omit<SwitchableTagComponentProps<'p', ErrorPropsRaw>, 'children'>;
@@ -57,6 +62,7 @@ const EXPORT = Object.assign(Root, {
 	Field,
 	Label,
 	Input,
+	Textarea,
 	Error,
 	Description,
 	rootTheme,
