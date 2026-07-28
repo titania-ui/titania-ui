@@ -16,6 +16,9 @@ export const theme = tv({
 			md: 'tabutton--size-md',
 			lg: 'tabutton--size-lg',
 			xl: 'tabutton--size-xl'
+		},
+		disabled: {
+			true: 'tabutton--disabled'
 		}
 	},
 	defaultVariants: {

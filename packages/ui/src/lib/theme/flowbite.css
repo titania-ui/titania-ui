@@ -229,7 +229,7 @@
 	}
 
 	[data-slot='icon'] {
-		@apply inline-block size-4 align-sub;
+		@apply inline size-4 align-sub;
 	}
 
 	.taspinner {
@@ -323,10 +323,14 @@
 	}
 
 	.tabutton {
-		@apply box-border rounded-base border leading-5 font-medium focus:ring-4 focus:outline-none;
+		@apply relative isolate box-border rounded-base border leading-5 font-medium whitespace-nowrap focus:ring-4 focus:outline-none;
 
 		&:has(> *[data-slot='icon']) {
-			@apply inline-flex items-center gap-2;
+			@apply inline-flex items-center gap-x-2;
+		}
+
+		& > [data-slot='icon'] {
+			@apply size-4;
 		}
 
 		&.tabutton--variant-default {
@@ -367,6 +371,10 @@
 
 		&.tabutton--size-xl {
 			@apply px-6 py-3.5 text-base;
+		}
+
+		&.tabutton--disabled {
+			@apply cursor-not-allowed opacity-50;
 		}
 	}
 

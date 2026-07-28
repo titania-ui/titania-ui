@@ -6,7 +6,7 @@ export { theme, type ThemeVariants };
 
 // Root
 export type RootPropsRaw = { href?: string; disabled?: boolean };
-export type RootProps = FixedTagComponentProps<'button' | 'a', RootPropsRaw, ThemeVariants>;
+export type RootProps = FixedTagComponentProps<'button', RootPropsRaw, ThemeVariants>;
 import { default as Root } from './button-root.svelte';
 
 const EXPORT = Object.assign(Root, { Root, theme });

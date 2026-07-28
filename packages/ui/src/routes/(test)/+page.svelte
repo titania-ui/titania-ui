@@ -120,6 +120,30 @@
 	<Button variant="ghost">Ghost</Button>
 </div>
 
+<div class="my-4">
+	<Button variant="primary"><Spinner /> Spinner</Button>
+	<Button variant="primary"><Icon icon="icon-[noto--smiling-face-with-sunglasses]" /> Icon</Button>
+	<Button variant="primary"><Icon icon="icon-[noto--smiling-face-with-sunglasses]" />Icon</Button>
+	<Button variant="primary"
+		><Icon icon="icon-[noto--smiling-face-with-sunglasses]" />Icon<Icon
+			icon="icon-[noto--smiling-face-with-sunglasses]"
+		/></Button
+	>
+</div>
+
+<div class="my-4">
+	<Button size="sm">Small</Button>
+	<Button size="md">Medium</Button>
+	<Button size="lg">Large</Button>
+	<Button size="xl">Extra Large</Button>
+</div>
+
+<div class="my-4">
+	<Button disabled>Default</Button>
+	<Button disabled variant="danger">Danger</Button>
+	<Button disabled><Spinner /> Spinner</Button>
+</div>
+
 {#each ['sm', 'md', 'lg'] as size (size)}
 	<div class="my-4 space-y-1 space-x-2">
 		{#each ['default', 'accent', 'success', 'warning', 'danger'] as color (color)}
