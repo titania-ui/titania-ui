@@ -32,7 +32,6 @@
 	formCtx.set({
 		id: boxWith(() => id),
 		slots: boxWith(() => slots),
-		attrs: boxWith(() => attrs),
 		form: boxWith(() => form),
 		constraints: boxWith(() => __constraints),
 		errors: boxWith(() => __errors)
@@ -40,6 +39,7 @@
 
 	const mergedProps = $derived({
 		'data-slot': 'form',
+		method: 'POST',
 		...attrs,
 		id,
 		class: slots.root({ className })
@@ -49,7 +49,7 @@
 {#if render}
 	{@render render({ props: mergedProps })}
 {:else}
-	<svelte:element this={Tag} bind:this={ref} {...mergedProps}>
+	<svelte:element this={Tag} bind:this={ref} use:form.enhance novalidate {...mergedProps}>
 		{@render children?.()}
 	</svelte:element>
 {/if}

@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { controlCtx, fieldCtx } from '../form-context.ts';
+	import { fieldCtx } from '../form-context.ts';
 	import type { LabelProps } from '../index.ts';
 
-	const ctx = controlCtx.get();
-	const field_ctx = fieldCtx.get();
+	const ctx = fieldCtx.get();
 	const uid = $props.id();
 
 	let {
@@ -26,10 +25,11 @@
 
 	const mergedProps = $derived({
 		'data-slot': 'label',
-		for: field_ctx.name.current,
+		for: ctx.name.current,
+		...ctx.attrs.current,
 		...props,
 		id,
-		class: field_ctx.slots.current.label({ className })
+		class: ctx.slots.current.label({ className })
 	});
 </script>
 

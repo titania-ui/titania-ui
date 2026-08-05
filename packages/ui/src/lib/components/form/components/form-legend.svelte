@@ -1,35 +1,32 @@
 <script lang="ts">
-	import { controlCtx, fieldCtx } from '../form-context.ts';
-	import type { LabelProps } from '../index.ts';
+	import { fieldsetCtx, formCtx, type LegendProps } from '../index.ts';
 
-	const ctx = controlCtx.get();
-	const field_ctx = fieldCtx.get();
+	const form_ctx = formCtx.get();
+	const ctx = fieldsetCtx.get();
 	const uid = $props.id();
 
 	let {
 		//
 		id = uid,
-		as: Tag = 'label',
+		as: Tag = 'div',
 		ref = $bindable(null),
 		class: className = undefined,
 		render,
 		children,
 		...props
-	}: LabelProps = $props();
+	}: LegendProps = $props();
 
 	$effect.pre(() => {
-		ctx.labelId.current = id;
+		ctx.legendId.current = id;
 		return () => {
-			if (ctx.labelId.current === id) ctx.labelId.current = undefined;
+			if (ctx.legendId.current === id) ctx.legendId.current = undefined;
 		};
 	});
 
 	const mergedProps = $derived({
-		'data-slot': 'label',
-		for: field_ctx.name.current,
+		'data-slot': 'legend',
 		...props,
-		id,
-		class: field_ctx.slots.current.label({ className })
+		class: form_ctx.slots.current.legend({ class: className })
 	});
 </script>
 

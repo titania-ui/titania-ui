@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { themeAttrs } from '../../../utils/index.ts';
-	import { box, boxWith } from 'svelte-toolbelt';
+	import { boxWith } from 'svelte-toolbelt';
 	import { fieldCtx, formCtx } from '../form-context.ts';
 	import { fieldTheme, type FieldProps } from '../index.ts';
 
@@ -42,10 +42,6 @@
 	const ctx = fieldCtx.set({
 		name: boxWith(() => name ?? ''),
 		slots: boxWith(() => slots),
-		attrs: boxWith(() => attrs),
-
-		labelId: box<string | undefined>(undefined),
-		inputId: box<string | undefined>(undefined),
 
 		auto: boxWith(() => auto),
 		required: boxWith(() => __required),
@@ -56,7 +52,7 @@
 
 	const mergedProps = $derived({
 		'data-slot': 'field',
-		...ctx.attrs.current,
+		...attrs,
 		...props,
 		class: ctx.slots.current.root({ className })
 	});

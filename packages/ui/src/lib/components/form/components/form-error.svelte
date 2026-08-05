@@ -19,7 +19,6 @@
 
 	const mergedProps = $derived({
 		'data-slot': 'error',
-		...ctx.attrs.current,
 		...props,
 		id,
 		class: ctx.slots.current.error({ className })

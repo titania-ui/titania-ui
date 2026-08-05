@@ -6,7 +6,6 @@ import type { SuperValidated } from 'sveltekit-superforms';
 export interface FormCtx {
 	readonly id: ReadableBox<string>;
 	readonly slots: ReadableBox<ReturnType<typeof rootTheme>>;
-	readonly attrs: ReadableBox<Record<string, unknown>>;
 
 	readonly form: ReadableBox<SuperValidated<Record<string, unknown>>>;
 	readonly constraints: ReadableBox<Record<string, unknown>>;
@@ -18,10 +17,6 @@ export const formCtx = new Context<FormCtx>('Form.Root');
 export interface FieldCtx {
 	readonly name: ReadableBox<string>;
 	readonly slots: ReadableBox<ReturnType<typeof fieldTheme>>;
-	readonly attrs: ReadableBox<Record<string, unknown>>;
-
-	readonly labelId: WritableBox<string | undefined>;
-	readonly inputId: WritableBox<string | undefined>;
 
 	readonly auto: ReadableBox<boolean>;
 	readonly required: ReadableBox<boolean>;
@@ -31,3 +26,17 @@ export interface FieldCtx {
 }
 
 export const fieldCtx = new Context<FieldCtx>('Form.Field');
+
+export interface FieldsetCtx {
+	readonly legendId: WritableBox<string | undefined>;
+}
+
+export const fieldsetCtx = new Context<FieldsetCtx>('Form.Fieldset');
+
+export interface ControlCtx {
+	readonly labelId: WritableBox<string | undefined>;
+	readonly inputId: ReadableBox<string | undefined>;
+	readonly props: ReadableBox<Record<string, unknown>>;
+}
+
+export const controlCtx = new Context<ControlCtx>('Form.Control');

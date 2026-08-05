@@ -1,26 +1,22 @@
 <script lang="ts">
-	import { fieldCtx } from '../form-context.ts';
-	import type { DescriptionProps } from '../index.ts';
+	import { formCtx, type FieldGroupProps } from '../index.ts';
 
-	const ctx = fieldCtx.get();
-	const uid = $props.id();
+	const ctx = formCtx.get();
 
 	let {
 		//
-		id = uid,
-		as: Tag = 'p',
+		as: Tag = 'div',
 		ref = $bindable(null),
 		class: className = undefined,
 		render,
 		children,
 		...props
-	}: DescriptionProps = $props();
+	}: FieldGroupProps = $props();
 
 	const mergedProps = $derived({
-		'data-slot': 'description',
+		'data-slot': 'control',
 		...props,
-		id,
-		class: ctx.slots.current.description({ className })
+		class: ctx.slots.current.fieldgroup({ class: className })
 	});
 </script>
 

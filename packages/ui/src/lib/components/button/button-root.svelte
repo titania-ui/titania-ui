@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { theme, type RootProps } from './index.ts';
 	import { themeAttrs } from '../../utils/themeAttrs.ts';
+	import { useHover, useFocusRing, useActivePress } from '../../index.ts';
 
 	let {
 		href,
@@ -27,11 +28,24 @@
 		tabindex={disabled ? -1 : 0}
 		{...attrs}
 		class={classValue}
+		{@attach useHover({ isDisabled: disabled })}
+		{@attach useFocusRing()}
+		{@attach useActivePress({ disabled })}
 	>
 		{@render children?.()}
 	</a>
 {:else}
-	<button bind:this={ref} tabindex="0" data-slot="button" {disabled} {...attrs} class={classValue}>
+	<button
+		bind:this={ref}
+		tabindex="0"
+		data-slot="button"
+		{disabled}
+		{...attrs}
+		class={classValue}
+		{@attach useHover({ isDisabled: disabled })}
+		{@attach useFocusRing()}
+		{@attach useActivePress({ disabled })}
+	>
 		{@render children?.()}
 	</button>
 {/if}

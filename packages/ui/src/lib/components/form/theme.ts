@@ -2,7 +2,10 @@ import { tv, type VariantProps } from 'tailwind-variants/lite';
 
 export const rootTheme = tv({
 	slots: {
-		root: 'taform'
+		root: 'taform',
+		fieldset: 'taform__fieldset',
+		legend: 'taform__legend',
+		fieldgroup: 'taform__fieldgroup'
 	},
 	variants: {}
 });
@@ -12,21 +15,17 @@ export type RootThemeVariants = VariantProps<typeof rootTheme>;
 export const fieldTheme = tv({
 	slots: {
 		root: 'tafield',
-		label: 'talabel',
 		error: 'tafield__error',
-		input: 'tainput',
-		textarea: 'tatextarea',
-		description: 'tafield__description'
+		description: 'tafield__description',
+		label: 'tafield__label'
 	},
 	variants: {
 		invalid: {
 			true: {
 				root: 'tafield--invalid',
 				error: 'tafield__error--invalid',
-				input: 'tainput--invalid',
-				label: 'talabel--invalid',
-				textarea: 'tatextarea--invalid',
-				description: 'tafield__description--invalid'
+				description: 'tafield__description--invalid',
+				label: 'tafield__label--invalid'
 			}
 		}
 	},
