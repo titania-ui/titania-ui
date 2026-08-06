@@ -333,7 +333,7 @@
 	}
 
 	.tatext {
-		@apply mb-3 text-left text-base text-body rtl:text-right;
+		@apply mb-3 text-base text-body;
 
 		[data-slot='icon'] {
 			@apply inline size-4 align-sub;
@@ -777,5 +777,9 @@
 			--chip-fg: var(--color-white);
 			--chip-bg: var(--color-zinc-700);
 		}
+	}
+
+	.tasidebar {
+		@apply fixed top-0 left-0 z-40 h-full w-64 -translate-x-full transition-transform sm:translate-x-0;
 	}
 }
