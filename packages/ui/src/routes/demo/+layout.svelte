@@ -1,9 +1,7 @@
 <script lang="ts">
-	import '../../lib/theme/cataclyst.css';
+	import '../../lib/theme/flowbite.css';
 
 	const { children } = $props();
 </script>
 
-<div class="flex h-lvh w-lvw items-center justify-center">
-	{@render children()}
-</div>
+{@render children()}

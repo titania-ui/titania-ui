@@ -144,13 +144,353 @@
 	--color-shiki-fg-brand-subtle: #9ecbff;
 }
 
-@theme inline {
-	--font-body: var(--font-sans);
+.dark {
+	/* text color variables */
+	--color-body: var(--color-gray-400);
+	--color-body-subtle: var(--color-gray-400);
+	--color-heading: var(--color-white);
+	--color-fg-brand-subtle: var(--color-blue-200);
+	--color-fg-brand: var(--color-blue-500);
+	--color-fg-brand-strong: var(--color-blue-400);
+	--color-fg-success: var(--color-emerald-600);
+	--color-fg-success-strong: var(--color-emerald-300);
+	--color-fg-danger: var(--color-rose-500);
+	--color-fg-danger-strong: var(--color-rose-300);
+	--color-fg-warning-subtle: var(--color-orange-500);
+	--color-fg-warning: var(--color-orange-300);
+	--color-fg-yellow: var(--color-yellow-400);
+	--color-fg-disabled: var(--color-gray-600);
+	--color-fg-purple: var(--color-purple-500);
+	--color-fg-cyan: var(--color-cyan-500);
+	--color-fg-indigo: var(--color-indigo-500);
+	--color-fg-pink: var(--color-pink-500);
+	--color-fg-lime: var(--color-lime-500);
+
+	/* background color variables */
+	--color-neutral-primary-soft: var(--color-gray-900);
+	--color-neutral-primary: var(--color-gray-950);
+	--color-neutral-primary-medium: var(--color-gray-800);
+	--color-neutral-primary-strong: var(--color-gray-700);
+	--color-neutral-secondary-soft: var(--color-gray-900);
+	--color-neutral-secondary: var(--color-gray-950);
+	--color-neutral-secondary-medium: var(--color-gray-800);
+	--color-neutral-secondary-strong: var(--color-gray-700);
+	--color-neutral-secondary-strongest: var(--color-gray-600);
+	--color-neutral-tertiary-soft: var(--color-gray-900);
+	--color-neutral-tertiary: var(--color-gray-800);
+	--color-neutral-tertiary-medium: var(--color-gray-700);
+	--color-neutral-quaternary: var(--color-gray-700);
+	--color-neutral-quaternary-medium: var(--color-gray-600);
+	--color-gray: var(--color-gray-600);
+	--color-brand-softer: var(--color-blue-950);
+	--color-brand-soft: var(--color-blue-900);
+	--color-brand: var(--color-blue-600);
+	--color-brand-medium: var(--color-blue-900);
+	--color-brand-strong: var(--color-blue-700);
+	--color-success-soft: var(--color-emerald-950);
+	--color-success: var(--color-emerald-600);
+	--color-success-medium: var(--color-emerald-900);
+	--color-success-strong: var(--color-emerald-700);
+	--color-danger-soft: var(--color-rose-950);
+	--color-danger: var(--color-rose-700);
+	--color-danger-medium: var(--color-rose-900);
+	--color-danger-strong: var(--color-rose-800);
+	--color-warning-soft: var(--color-orange-950);
+	--color-warning: var(--color-orange-600);
+	--color-warning-medium: var(--color-orange-900);
+	--color-warning-strong: var(--color-orange-700);
+	--color-dark-soft: var(--color-gray-700);
+	--color-dark: var(--color-gray-800);
+	--color-dark-strong: var(--color-gray-700);
+	--color-disabled: var(--color-gray-800);
+	--color-purple: var(--color-purple-500);
+	--color-sky: var(--color-sky-500);
+	--color-teal: var(--color-teal-500);
+	--color-pink: var(--color-pink-500);
+	--color-cyan: var(--color-cyan-500);
+	--color-fuchsia: var(--color-fuchsia-500);
+	--color-indigo: var(--color-indigo-500);
+	--color-orange: var(--color-orange-400);
+
+	/* border color variables */
+	--color-buffer: var(--color-gray-950);
+	--color-buffer-medium: var(--color-gray-900);
+	--color-buffer-strong: var(--color-gray-800);
+	--color-muted: var(--color-gray-900);
+	--color-light-subtle: var(--color-gray-900);
+	--color-light: var(--color-gray-800);
+	--color-light-medium: var(--color-gray-700);
+	--color-default-subtle: var(--color-gray-900);
+	--color-default: var(--color-gray-800);
+	--color-default-medium: var(--color-gray-700);
+	--color-default-strong: var(--color-gray-600);
+	--color-success-subtle: var(--color-emerald-900);
+	--color-danger-subtle: var(--color-rose-900);
+	--color-warning-subtle: var(--color-orange-900);
+	--color-brand-subtle: var(--color-blue-900);
+	--color-brand-light: var(--color-blue-600);
+	--color-dark-subtle: var(--color-gray-700);
+	--color-dark-backdrop: var(--color-gray-950);
+}
+
+@layer base {
+	* {
+		box-sizing: border-box;
+	}
+
+	html {
+		@apply text-zinc-950 lg:bg-zinc-100 dark:bg-zinc-900 dark:text-white dark:lg:bg-zinc-950;
+	}
+
+	body {
+		@apply bg-neutral-primary font-sans antialiased;
+	}
 }
 
 @layer components {
+	.taheading {
+		@apply my-4 font-bold text-heading;
+
+		&.taheading--level-1 {
+			@apply text-5xl;
+		}
+
+		&.taheading--level-2 {
+			@apply text-4xl;
+		}
+
+		&.taheading--level-3 {
+			@apply text-3xl;
+		}
+
+		&.taheading--level-4 {
+			@apply text-2xl;
+		}
+
+		&.taheading--level-5 {
+			@apply text-xl;
+		}
+
+		&.taheading--level-6 {
+			@apply text-lg;
+		}
+	}
+
+	.taform__legend {
+		@apply mb-4 text-xl font-bold text-heading;
+	}
+
+	.taform__fieldgroup {
+		@apply space-y-6;
+	}
+
+	.tafield {
+		@apply mb-6;
+
+		.tafield__label {
+			@apply mb-2.5 block text-sm font-medium text-heading;
+			&.tafield__label--invalid {
+				@apply text-fg-danger-strong;
+			}
+		}
+		.tafield__error {
+			@apply mt-2.5 text-sm text-fg-danger-strong;
+		}
+		.tafield__description {
+			@apply mt-2.5 text-sm text-body;
+		}
+	}
+
+	.tainput__wrapper,
+	.taselect__wrapper,
+	.tatextarea__wrapper {
+		@apply contents;
+	}
+
+	.tainput {
+		@apply block w-full rounded-base border border-default-medium bg-neutral-secondary-medium px-3 py-2.5 text-sm text-heading shadow-xs placeholder:text-body focus:border-brand focus:ring-brand;
+		&.tainput--invalid {
+			@apply border-danger-subtle bg-danger-soft text-fg-danger-strong placeholder:text-fg-danger-strong focus:border-danger focus:ring-danger;
+		}
+	}
+
+	.taselect {
+		@apply block w-full rounded-base border border-default-medium bg-neutral-secondary-medium px-3 py-2.5 text-sm text-heading shadow-xs placeholder:text-body focus:border-brand focus:ring-brand;
+		&.taselect--invalid {
+			@apply border-danger-subtle bg-danger-soft text-fg-danger-strong placeholder:text-fg-danger-strong focus:border-danger focus:ring-danger;
+		}
+	}
+
+	.taselect__icon__wrapper {
+		@apply hidden;
+	}
+
+	.tatextarea {
+		@apply block w-full rounded-base border border-default-medium bg-neutral-secondary-medium p-3.5 text-sm text-heading shadow-xs placeholder:text-body focus:border-brand focus:ring-brand;
+		&.tatextarea--invalid {
+			@apply border-danger-subtle bg-danger-soft text-fg-danger-strong placeholder:text-fg-danger-strong focus:border-danger focus:ring-danger;
+		}
+	}
+
+	.tatext {
+		@apply my-3 text-left text-base text-body rtl:text-right;
+
+		[data-slot='icon'] {
+			@apply inline size-4 align-sub;
+		}
+	}
+
+	.tastrong {
+		@apply font-semibold text-heading;
+	}
+
+	.talink {
+		@apply font-medium text-fg-brand hover:underline;
+
+		&:is(.tatext > *) {
+			@apply underline hover:no-underline;
+		}
+	}
+
+	.tabutton {
+		@apply relative isolate box-border inline-flex items-center gap-x-2 rounded-base border leading-5 font-medium whitespace-nowrap focus:ring-4 focus:outline-none;
+
+		& > [data-slot='icon'] {
+			@apply size-4;
+		}
+
+		&.tabutton--size-xs {
+			@apply px-3 py-1.5 text-xs;
+		}
+
+		&.tabutton--size-sm {
+			@apply px-3 py-2 text-sm;
+		}
+
+		&.tabutton--size-md {
+			@apply px-4 py-2.5 text-sm;
+		}
+
+		&.tabutton--size-lg {
+			@apply px-5 py-3 text-base;
+		}
+
+		&.tabutton--variant-default,
+		&.tabutton--variant-dark {
+			@apply border-transparent bg-dark text-white shadow-xs hover:bg-dark-strong focus:ring-neutral-tertiary;
+		}
+
+		&.tabutton--variant-primary {
+			@apply border-transparent bg-brand text-white shadow-xs hover:bg-brand-strong focus:ring-brand-medium;
+		}
+
+		&.tabutton--variant-secondary {
+			@apply border-default bg-neutral-secondary-medium text-body shadow-xs hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-neutral-tertiary;
+		}
+
+		&.tabutton--variant-tertiary {
+			@apply border-default bg-neutral-primary-soft text-body shadow-xs hover:bg-neutral-secondary-medium hover:text-heading focus:ring-neutral-tertiary-soft;
+		}
+
+		&.tabutton--variant-outline {
+			@apply border border-default bg-neutral-primary text-body hover:bg-neutral-secondary-soft hover:text-heading focus:ring-neutral-tertiary;
+		}
+
+		&.tabutton--variant-ghost {
+			@apply border-transparent bg-transparent text-heading hover:bg-neutral-secondary-medium focus:ring-neutral-tertiary;
+		}
+
+		&.tabutton--variant-danger {
+			@apply border-transparent bg-danger text-white shadow-xs hover:bg-danger-strong focus:ring-danger-medium;
+		}
+
+		&.tabutton--color-zinc {
+			@apply border-transparent bg-zinc-700 text-white shadow-xs hover:bg-zinc-800 focus:ring-zinc-100;
+		}
+
+		&.tabutton--color-white {
+			@apply border-transparent bg-white text-black shadow-xs hover:bg-zinc-300 focus:ring-zinc-100;
+		}
+
+		&.tabutton--color-indigo {
+			@apply border-transparent bg-indigo-700 text-white shadow-xs hover:bg-indigo-800 focus:ring-indigo-100;
+		}
+
+		&.tabutton--color-cyan {
+			@apply border-transparent bg-cyan-700 text-white shadow-xs hover:bg-cyan-800 focus:ring-cyan-100;
+		}
+
+		&.tabutton--color-red {
+			@apply border-transparent bg-red-700 text-white shadow-xs hover:bg-red-800 focus:ring-red-100;
+		}
+
+		&.tabutton--color-orange {
+			@apply border-transparent bg-orange-700 text-white shadow-xs hover:bg-orange-800 focus:ring-orange-100;
+		}
+
+		&.tabutton--color-amber {
+			@apply border-transparent bg-amber-700 text-white shadow-xs hover:bg-amber-800 focus:ring-amber-100;
+		}
+
+		&.tabutton--color-yellow {
+			@apply border-transparent bg-yellow-700 text-white shadow-xs hover:bg-yellow-800 focus:ring-yellow-100;
+		}
+
+		&.tabutton--color-lime {
+			@apply border-transparent bg-lime-700 text-white shadow-xs hover:bg-lime-800 focus:ring-lime-100;
+		}
+
+		&.tabutton--color-green {
+			@apply border-transparent bg-green-700 text-white shadow-xs hover:bg-green-800 focus:ring-green-100;
+		}
+
+		&.tabutton--color-emerald {
+			@apply border-transparent bg-emerald-700 text-white shadow-xs hover:bg-emerald-800 focus:ring-emerald-100;
+		}
+
+		&.tabutton--color-teal {
+			@apply border-transparent bg-teal-700 text-white shadow-xs hover:bg-teal-800 focus:ring-teal-100;
+		}
+
+		&.tabutton--color-sky {
+			@apply border-transparent bg-sky-700 text-white shadow-xs hover:bg-sky-800 focus:ring-sky-100;
+		}
+
+		&.tabutton--color-blue {
+			@apply border-transparent bg-blue-700 text-white shadow-xs hover:bg-blue-800 focus:ring-blue-100;
+		}
+
+		&.tabutton--color-violet {
+			@apply border-transparent bg-violet-700 text-white shadow-xs hover:bg-violet-800 focus:ring-violet-100;
+		}
+
+		&.tabutton--color-purple {
+			@apply border-transparent bg-purple-700 text-white shadow-xs hover:bg-purple-800 focus:ring-purple-100;
+		}
+
+		&.tabutton--color-fuchsia {
+			@apply border-transparent bg-fuchsia-700 text-white shadow-xs hover:bg-fuchsia-800 focus:ring-fuchsia-100;
+		}
+
+		&.tabutton--color-pink {
+			@apply border-transparent bg-pink-700 text-white shadow-xs hover:bg-pink-800 focus:ring-pink-100;
+		}
+
+		&.tabutton--color-rose {
+			@apply border-transparent bg-rose-700 text-white shadow-xs hover:bg-rose-800 focus:ring-rose-100;
+		}
+
+		&.tabutton--disabled {
+			@apply border-default-medium bg-disabled text-fg-disabled shadow-xs hover:bg-disabled hover:text-fg-disabled focus:ring-transparent;
+
+			&:has(> *[data-slot='icon']) {
+				@apply text-body;
+			}
+		}
+	}
+
 	.taalert {
-		@apply my-4 grid grid-cols-[1fr] items-center gap-2 rounded-base border p-4 text-sm;
+		@apply mb-4 grid grid-cols-[1fr] items-center gap-2 rounded-base border p-4 text-sm;
 
 		&:has(> *[data-slot='button']) {
 			@apply grid-cols-[1fr_auto];
@@ -187,7 +527,7 @@
 			@apply size-4;
 
 			[data-slot='icon'] {
-				@apply align-baseline;
+				@apply size-4 align-baseline;
 			}
 
 			.taalert__indicator__default {
@@ -228,10 +568,6 @@
 		}
 	}
 
-	[data-slot='icon'] {
-		@apply inline size-4 align-sub;
-	}
-
 	.taspinner {
 		.taspinner__icon {
 			@apply icon-[svg-spinners--90-ring-with-bg] size-full;
@@ -255,7 +591,7 @@
 	}
 
 	.taclosebutton {
-		@apply -mx-1.5 -my-1.5 ms-auto inline-flex size-8 shrink-0 items-center justify-center rounded hover:bg-neutral-tertiary-medium focus:ring-2 focus:ring-neutral-tertiary *:data-[slot=icon]:size-4;
+		@apply -mx-1.5 -my-1.5 ms-auto inline-flex size-8 shrink-0 items-center justify-center rounded bg-transparent hover:bg-neutral-tertiary-medium focus:ring-2 focus:ring-neutral-tertiary *:data-[slot=icon]:size-4;
 
 		.taclosebutton__default {
 			@apply icon-[flowbite--close-outline];
@@ -276,114 +612,21 @@
 		&:is(.taalert--status-info > *) {
 			@apply hover:bg-brand-soft focus:ring-brand-medium;
 		}
-	}
 
-	.taheading {
-		@apply my-4 font-bold text-heading;
-
-		&.taheading--level-1 {
-			@apply text-5xl;
+		&:is(.tachip > *) {
+			@apply m-0 size-auto rounded-xs bg-transparent p-0.5 text-sm hover:bg-[var(--chip-hover)] *:data-[slot=icon]:size-3;
 		}
 
-		&.taheading--level-2 {
-			@apply text-4xl;
-		}
-
-		&.taheading--level-3 {
-			@apply text-3xl;
-		}
-
-		&.taheading--level-4 {
-			@apply text-2xl;
-		}
-
-		&.taheading--level-5 {
-			@apply text-xl;
-		}
-
-		&.taheading--level-6 {
-			@apply text-lg;
-		}
-	}
-
-	.tatext {
-		@apply my-3 text-left text-base text-body rtl:text-right;
-	}
-
-	.talink {
-		@apply font-medium text-fg-brand hover:underline;
-
-		&:is(p > *) {
-			@apply underline hover:no-underline;
-		}
-	}
-
-	.tastrong {
-		@apply font-semibold text-heading;
-	}
-
-	.tabutton {
-		@apply relative isolate box-border rounded-base border leading-5 font-medium whitespace-nowrap focus:ring-4 focus:outline-none;
-
-		&:has(> *[data-slot='icon']) {
-			@apply inline-flex items-center gap-x-2;
-		}
-
-		& > [data-slot='icon'] {
-			@apply size-4;
-		}
-
-		&.tabutton--variant-default {
-			@apply border-transparent bg-dark text-white shadow-xs hover:bg-dark-strong focus:ring-neutral-tertiary;
-		}
-
-		&.tabutton--variant-primary {
-			@apply border-transparent bg-brand text-white shadow-xs hover:bg-brand-strong focus:ring-brand-medium;
-		}
-
-		&.tabutton--variant-secondary {
-			@apply border-default bg-neutral-secondary-medium text-body shadow-xs hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-neutral-tertiary;
-		}
-
-		&.tabutton--variant-tertiary {
-			@apply border-default bg-neutral-primary-soft text-body shadow-xs hover:bg-neutral-secondary-medium hover:text-heading focus:ring-neutral-tertiary-soft;
-		}
-
-		&.tabutton--variant-danger {
-			@apply border-transparent bg-danger text-white shadow-xs hover:bg-danger-strong focus:ring-danger-medium;
-		}
-
-		&.tabutton--variant-ghost {
-			@apply border-transparent bg-transparent text-heading hover:bg-neutral-secondary-medium focus:ring-neutral-tertiary;
-		}
-
-		&.tabutton--size-sm {
-			@apply px-3 py-2 text-sm;
-		}
-
-		&.tabutton--size-md {
-			@apply px-4 py-2.5 text-sm;
-		}
-
-		&.tabutton--size-lg {
-			@apply px-5 py-3 text-base;
-		}
-
-		&.tabutton--size-xl {
-			@apply px-6 py-3.5 text-base;
-		}
-
-		&.tabutton--disabled {
-			@apply cursor-not-allowed opacity-50;
-		}
+		&: is(.tachip);
 	}
 
 	.tachip {
 		@apply inline-flex w-fit shrink-0 items-center gap-1 rounded font-medium;
 
-		--chip-bg: var(--default);
+		--chip-bg: var(--color-neutral-secondary-medium);
 		--chip-fg: currentColor;
-		--chip-border: var(--default);
+		--chip-border: transparent;
+		--chip-hover: --alpha(var(--color-black) / 20%);
 
 		background-color: var(--chip-bg);
 		color: var(--chip-fg);
@@ -414,67 +657,125 @@
 			--chip-fg: var(--color-heading);
 			--chip-border: var(--color-default-medium);
 			--chip-bg: var(--color-neutral-secondary-medium);
+			--chip-hover: var(--color-neutral-quaternary);
 		}
 
 		&.tachip--color-accent {
 			--chip-fg: var(--color-fg-brand-strong);
 			--chip-border: var(--color-brand-subtle);
 			--chip-bg: var(--color-brand-softer);
+			--chip-hover: var(--color-brand-soft);
 		}
 
 		&.tachip--color-success {
 			--chip-fg: var(--color-fg-success-strong);
 			--chip-border: var(--color-success-subtle);
 			--chip-bg: var(--color-success-soft);
+			--chip-hover: var(--color-success-medium);
 		}
 
 		&.tachip--color-warning {
 			--chip-fg: var(--color-fg-warning);
 			--chip-border: var(--color-warning-subtle);
 			--chip-bg: var(--color-warning-soft);
+			--chip-hover: var(--color-warning-medium);
 		}
 
 		&.tachip--color-danger {
 			--chip-fg: var(--color-fg-danger-strong);
 			--chip-border: var(--color-danger-subtle);
 			--chip-bg: var(--color-danger-soft);
-		}
-	}
-
-	.tafield {
-		@apply mb-6;
-
-		.talabel--invalid {
-			@apply text-fg-danger-strong;
+			--chip-hover: var(--color-danger-medium);
 		}
 
-		.tainput--invalid,
-		.tatextarea--invalid {
-			@apply border-danger-subtle bg-danger-soft text-fg-danger-strong;
+		&.tachip--color-red {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-red-700);
 		}
 
-		.tafield__error {
-			@apply mt-2.5 text-sm text-fg-danger-strong;
+		&.tachip--color-orange {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-orange-700);
 		}
 
-		.tafield__description {
-			@apply mt-2.5 text-sm text-body;
+		&.tachip--color-amber {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-amber-700);
+		}
+
+		&.tachip--color-yellow {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-yellow-700);
+		}
+
+		&.tachip--color-lime {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-lime-700);
+		}
+
+		&.tachip--color-green {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-green-700);
+		}
+
+		&.tachip--color-emerald {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-emerald-700);
+		}
+
+		&.tachip--color-teal {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-teal-700);
+		}
+
+		&.tachip--color-cyan {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-cyan-700);
+		}
+
+		&.tachip--color-sky {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-sky-700);
+		}
+
+		&.tachip--color-blue {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-blue-700);
+		}
+
+		&.tachip--color-indigo {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-indigo-700);
+		}
+
+		&.tachip--color-violet {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-violet-700);
+		}
+
+		&.tachip--color-purple {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-purple-700);
+		}
+
+		&.tachip--color-fuchsia {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-fuchsia-700);
+		}
+
+		&.tachip--color-pink {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-pink-700);
+		}
+
+		&.tachip--color-rose {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-rose-700);
+		}
+
+		&.tachip--color-zinc {
+			--chip-fg: var(--color-white);
+			--chip-bg: var(--color-zinc-700);
 		}
 	}
-
-	.talabel {
-		@apply mb-2.5 block text-base text-sm font-medium text-heading;
-	}
-
-	.tainput {
-		@apply block w-full rounded-base border border-default-medium bg-neutral-secondary-medium px-3 py-2.5 text-sm text-heading shadow-xs placeholder:text-body focus:border-brand focus:ring-brand;
-	}
-
-	.tatextarea {
-		@apply block w-full rounded-base border border-default-medium bg-neutral-secondary-medium p-3.5 text-sm text-heading shadow-xs placeholder:text-body focus:border-brand focus:ring-brand;
-	}
-}
-
-body {
-	@apply font-body antialiased;
 }
