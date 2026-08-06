@@ -333,7 +333,7 @@
 	}
 
 	.tatext {
-		@apply my-3 text-left text-base text-body rtl:text-right;
+		@apply mb-3 text-left text-base text-body rtl:text-right;
 
 		[data-slot='icon'] {
 			@apply inline size-4 align-sub;
@@ -353,7 +353,7 @@
 	}
 
 	.tabutton {
-		@apply relative isolate box-border inline-flex items-center gap-x-2 rounded-base border leading-5 font-medium whitespace-nowrap focus:ring-4 focus:outline-none;
+		@apply relative isolate box-border inline-flex items-center justify-center gap-x-2 rounded-base border leading-5 font-medium whitespace-nowrap focus:ring-4 focus:outline-none;
 
 		& > [data-slot='icon'] {
 			@apply size-4;
