@@ -12,7 +12,8 @@
 		Strong,
 		Spinner,
 		Chip,
-		Link
+		Link,
+		Code
 	} from '../../lib/index.ts';
 	import { superForm } from 'sveltekit-superforms';
 	import { zod4 } from 'sveltekit-superforms/adapters';
@@ -46,10 +47,12 @@
 		<Heading level={6}>Heading 6</Heading>
 		<Text
 			>Lorem ipsum <Strong>dolor sit amet</Strong>, consectetur adipisicing elit. Veniam magnam ad
-			libero obcaecati dolores <Icon icon="icon-[noto--bullet-train]" /> cumque deserunt, iusto, nostrum,
-			ea corporis <Strong>sequi maiores exercitationem</Strong> nobis nihil vel pariatur maxime repellendus
-			dicta doloremque. <Link href="#">Eligendi sed laborum</Link> dolorum vero unde cumque sunt nihil?</Text
-		>
+			libero obcaecati dolores <Icon icon="icon-[noto--bullet-train]" /> cumque deserunt, <Code
+				>Lorem ipsum dolor sit amet.</Code
+			> iusto, nostrum, ea corporis <Strong>sequi maiores exercitationem</Strong> nobis nihil vel pariatur
+			maxime repellendus dicta doloremque. <Link href="#">Eligendi sed laborum</Link> dolorum vero unde
+			cumque sunt nihil? <Code>Lorem ipsum dolor sit amet.</Code>
+		</Text>
 	</div>
 
 	{#each Object.keys(Button.theme.variants.size) as size (size)}

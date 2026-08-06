@@ -21,8 +21,12 @@ export { default as Text } from './components/typography/text.ts';
 export { default as Link } from './components/typography/link.ts';
 export { default as Strong } from './components/typography/strong.ts';
 export { default as Icon } from './components/typography/icon.ts';
+export { default as Code } from './components/typography/code.ts';
 
 // Helpers
 export { useHover } from './helpers/useHover.ts';
 export { useActivePress } from './helpers/useActivePress.ts';
 export { useFocusRing } from './helpers/useFocusRing.ts';
+
+// Sidebar
+export { default as Sidebar } from './components/sidebar/index.ts';
