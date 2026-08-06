@@ -616,8 +616,6 @@
 		&:is(.tachip > *) {
 			@apply m-0 size-auto rounded-xs bg-transparent p-0.5 text-sm hover:bg-[var(--chip-hover)] *:data-[slot=icon]:size-3;
 		}
-
-		&: is(.tachip);
 	}
 
 	.tachip {
