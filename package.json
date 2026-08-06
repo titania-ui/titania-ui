@@ -1,7 +1,8 @@
 {
   "name": "@titania/monorepo",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "pnpm -r build",
+    "version": "changeset version && pnpm install --lockfile-only"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +14,8 @@
       "onFail": "download"
     }
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@changesets/cli": "^2.31.1"
+  }
 }

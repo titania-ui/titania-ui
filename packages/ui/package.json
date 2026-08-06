@@ -91,5 +91,13 @@
 	],
 	"dependencies": {
 		"svelte-toolbelt": "^0.10.6"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/titania-ui/titania-ui.git",
+		"directory": "packages/ui"
 	}
 }
