@@ -13,7 +13,9 @@
 		Spinner,
 		Chip,
 		Link,
-		Code
+		Code,
+		Sidebar,
+		DescriptionList
 	} from '../../lib/index.ts';
 	import { superForm } from 'sveltekit-superforms';
 	import { zod4 } from 'sveltekit-superforms/adapters';
@@ -174,4 +176,65 @@
 			{/each}
 		</div>
 	{/each}
+
+	<div class="h-256 w-64">
+		<Sidebar>
+			<Sidebar.Header>
+				<Sidebar.Section>
+					<Sidebar.Item href="#">
+						<Icon icon="icon-[flowbite--home-solid]" />
+						<Sidebar.Label>Cucumber</Sidebar.Label>
+					</Sidebar.Item>
+					<Sidebar.Item href="#">
+						<Icon icon="icon-[flowbite--briefcase-solid]" />
+						<Sidebar.Label>Orange Juice</Sidebar.Label>
+					</Sidebar.Item>
+				</Sidebar.Section>
+			</Sidebar.Header>
+			<Sidebar.Body>
+				<Sidebar.Section>
+					<Sidebar.Item href="#" current>
+						<Sidebar.Label>Apple Pie</Sidebar.Label>
+					</Sidebar.Item>
+					<Sidebar.Item href="#">
+						<Sidebar.Label>Strawberry Cake</Sidebar.Label>
+					</Sidebar.Item>
+					<Sidebar.Item href="#">
+						<Sidebar.Label>Blueberry Muffin</Sidebar.Label>
+					</Sidebar.Item>
+					<Sidebar.Item href="#">
+						<Sidebar.Label>Banana Bread</Sidebar.Label>
+					</Sidebar.Item>
+				</Sidebar.Section>
+				<Sidebar.Spacer />
+				<Sidebar.Section>
+					<Sidebar.Item href="#">
+						<Sidebar.Label>Chocolate Chip Cookies</Sidebar.Label>
+					</Sidebar.Item>
+					<Sidebar.Item href="#">
+						<Sidebar.Label>Oatmeal Raisin Cookies</Sidebar.Label>
+					</Sidebar.Item>
+				</Sidebar.Section>
+			</Sidebar.Body>
+			<Sidebar.Footer>
+				<Sidebar.Section>
+					<Sidebar.Item href="#">
+						<Sidebar.Label>Cereal</Sidebar.Label>
+					</Sidebar.Item>
+					<Sidebar.Item href="#">
+						<Sidebar.Label>Milk</Sidebar.Label>
+					</Sidebar.Item>
+				</Sidebar.Section>
+			</Sidebar.Footer>
+		</Sidebar>
+	</div>
+
+	<DescriptionList>
+		{#each [{ term: 'Wood', description: 'Made from trees' }, { term: 'Metal', description: 'Made from minerals' }, { term: 'Plastic', description: 'Made from oil' }] as item (item.term)}
+			<DescriptionList.Item>
+				<DescriptionList.Term>{item.term}</DescriptionList.Term>
+				<DescriptionList.Description>{item.description}</DescriptionList.Description>
+			</DescriptionList.Item>
+		{/each}
+	</DescriptionList>
 </div>

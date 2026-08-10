@@ -1,0 +1,9 @@
+import type { ReadableBox } from 'svelte-toolbelt';
+import { Context } from '../../utils/index.ts';
+import type { theme } from './theme.ts';
+
+export interface DescriptionListCtx {
+	readonly slots: ReadableBox<ReturnType<typeof theme>>;
+}
+
+export const descriptionListCtx = new Context<DescriptionListCtx>('DescriptionList.Root');

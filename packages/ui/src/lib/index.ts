@@ -14,6 +14,7 @@ export { default as Spinner } from './components/spinner/index.ts';
 
 // Display
 export { default as Chip } from './components/chip/index.ts';
+export { default as DescriptionList } from './components/description-list/index.ts';
 
 // Typography
 export { default as Heading } from './components/typography/heading.ts';

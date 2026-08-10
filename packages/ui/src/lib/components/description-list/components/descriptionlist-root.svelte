@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { theme, type RootProps } from '../index.ts';
 	import { themeAttrs } from '../../../utils/themeAttrs.ts';
-	import { sidebarCtx } from '../sidebar-context.ts';
+	import { descriptionListCtx } from '../dl-context.ts';
 	import { boxWith } from 'svelte-toolbelt';
 
 	let {
 		//
-		as: Tag = 'aside',
+		as: Tag = 'dl',
 		ref = $bindable(null),
 		class: className = undefined,
 		render,
@@ -16,7 +16,7 @@
 
 	const slots = $derived(theme(props));
 
-	sidebarCtx.set({
+	descriptionListCtx.set({
 		slots: boxWith(() => slots)
 	});
 

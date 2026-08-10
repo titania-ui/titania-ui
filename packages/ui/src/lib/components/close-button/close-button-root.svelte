@@ -2,6 +2,7 @@
 	import { theme, type RootProps } from './index.ts';
 	import { themeAttrs } from '../../utils/themeAttrs.ts';
 	import { Icon } from '../../index.ts';
+	import TouchTarget from '../button/components/touch-target.svelte';
 
 	let {
 		//
@@ -18,7 +19,7 @@
 
 <button bind:this={ref} data-slot="button" {...attrs} class={classValue}>
 	{#if children}
-		{@render children?.()}
+		<TouchTarget {children} />
 	{:else}
 		<Icon class="taclosebutton__default" />
 	{/if}

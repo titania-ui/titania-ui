@@ -1,0 +1,19 @@
+@import 'tailwindcss';
+@plugin '@iconify/tailwind4' {
+	scale: 0;
+}
+
+@layer utilities {
+	.trim-inline {
+		margin-trim: inline;
+	}
+
+	@supports not (margin-trim: inline) {
+		.trim-inline > :first-child {
+			margin-inline-start: 0;
+		}
+		.trim-inline > :last-child {
+			margin-inline-end: 0;
+		}
+	}
+}
