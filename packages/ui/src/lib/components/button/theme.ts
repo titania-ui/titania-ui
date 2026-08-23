@@ -1,4 +1,4 @@
-import { tv, type VariantProps } from 'tailwind-variants/lite';
+import { tv } from 'tailwind-variants/lite';
 
 export const theme = tv({
 	base: 'tabutton',
@@ -10,13 +10,15 @@ export const theme = tv({
 			tertiary: 'tabutton--variant-tertiary',
 			outline: 'tabutton--variant-outline',
 			ghost: 'tabutton--variant-ghost',
-			danger: 'tabutton--variant-danger'
+			danger: 'tabutton--variant-danger',
+			'danger-soft': 'tabutton--variant-danger-soft'
 		},
 		size: {
 			xs: 'tabutton--size-xs',
 			sm: 'tabutton--size-sm',
 			md: 'tabutton--size-md',
-			lg: 'tabutton--size-lg'
+			lg: 'tabutton--size-lg',
+			xl: 'tabutton--size-xl'
 		},
 		disabled: {
 			true: 'tabutton--disabled'
@@ -46,8 +48,7 @@ export const theme = tv({
 	},
 	defaultVariants: {
 		variant: 'default',
-		size: 'md'
+		size: 'md',
+		disabled: false
 	}
 });
-
-export type ThemeVariants = VariantProps<typeof theme>;

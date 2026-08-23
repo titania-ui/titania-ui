@@ -2,7 +2,7 @@
 	import { theme, type RootProps } from './index.ts';
 	import { themeAttrs } from '../../utils/themeAttrs.ts';
 	import { Icon } from '../../index.ts';
-	import TouchTarget from '../button/components/touch-target.svelte';
+	import TouchTarget from '../../helpers/touch-target.svelte';
 
 	let {
 		//

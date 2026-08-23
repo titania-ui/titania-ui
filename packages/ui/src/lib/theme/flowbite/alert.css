@@ -1,0 +1,3 @@
+.taalert {
+	@apply mb-4 grid grid-cols-[1fr] items-center gap-2 rounded-base border p-4 text-sm;
+}

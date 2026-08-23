@@ -245,6 +245,10 @@
 }
 
 @layer components {
+	[data-slot='icon'] {
+		@apply inline-block size-4 align-sub;
+	}
+
 	.taheading {
 		@apply my-4 font-bold text-heading;
 
@@ -331,10 +335,6 @@
 
 	.tatext {
 		@apply mb-3 text-base text-body;
-
-		[data-slot='icon'] {
-			@apply inline size-4 align-sub;
-		}
 	}
 
 	.tastrong {
@@ -351,143 +351,6 @@
 
 	.tacode {
 		@apply rounded-base border border-default-medium bg-neutral-tertiary px-1 py-0.5 text-sm text-heading;
-	}
-
-	.tabutton {
-		@apply relative isolate box-border inline-flex items-center justify-center gap-x-2 rounded-base border leading-5 font-medium whitespace-nowrap focus:ring-4 focus:outline-none;
-
-		& > [data-slot='icon'] {
-			@apply size-4;
-		}
-
-		&.tabutton--size-xs {
-			@apply px-3 py-1.5 text-xs;
-		}
-
-		&.tabutton--size-sm {
-			@apply px-3 py-2 text-sm;
-		}
-
-		&.tabutton--size-md {
-			@apply px-4 py-2.5 text-sm;
-		}
-
-		&.tabutton--size-lg {
-			@apply px-5 py-3 text-base;
-		}
-
-		&.tabutton--variant-default,
-		&.tabutton--variant-dark {
-			@apply border-transparent bg-dark text-white shadow-xs hover:bg-dark-strong focus:ring-neutral-tertiary;
-		}
-
-		&.tabutton--variant-primary {
-			@apply border-transparent bg-brand text-white shadow-xs hover:bg-brand-strong focus:ring-brand-medium;
-		}
-
-		&.tabutton--variant-secondary {
-			@apply border-default bg-neutral-secondary-medium text-body shadow-xs hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-neutral-tertiary;
-		}
-
-		&.tabutton--variant-tertiary {
-			@apply border-default bg-neutral-primary-soft text-body shadow-xs hover:bg-neutral-secondary-medium hover:text-heading focus:ring-neutral-tertiary-soft;
-		}
-
-		&.tabutton--variant-outline {
-			@apply border border-default bg-neutral-primary text-body hover:bg-neutral-secondary-soft hover:text-heading focus:ring-neutral-tertiary;
-		}
-
-		&.tabutton--variant-ghost {
-			@apply border-transparent bg-transparent text-heading hover:bg-neutral-secondary-medium focus:ring-neutral-tertiary;
-		}
-
-		&.tabutton--variant-danger {
-			@apply border-transparent bg-danger text-white shadow-xs hover:bg-danger-strong focus:ring-danger-medium;
-		}
-
-		&.tabutton--color-zinc {
-			@apply border-transparent bg-zinc-700 text-white shadow-xs hover:bg-zinc-800 focus:ring-zinc-100;
-		}
-
-		&.tabutton--color-white {
-			@apply border-transparent bg-white text-black shadow-xs hover:bg-zinc-300 focus:ring-zinc-100;
-		}
-
-		&.tabutton--color-indigo {
-			@apply border-transparent bg-indigo-700 text-white shadow-xs hover:bg-indigo-800 focus:ring-indigo-100;
-		}
-
-		&.tabutton--color-cyan {
-			@apply border-transparent bg-cyan-700 text-white shadow-xs hover:bg-cyan-800 focus:ring-cyan-100;
-		}
-
-		&.tabutton--color-red {
-			@apply border-transparent bg-red-700 text-white shadow-xs hover:bg-red-800 focus:ring-red-100;
-		}
-
-		&.tabutton--color-orange {
-			@apply border-transparent bg-orange-700 text-white shadow-xs hover:bg-orange-800 focus:ring-orange-100;
-		}
-
-		&.tabutton--color-amber {
-			@apply border-transparent bg-amber-700 text-white shadow-xs hover:bg-amber-800 focus:ring-amber-100;
-		}
-
-		&.tabutton--color-yellow {
-			@apply border-transparent bg-yellow-700 text-white shadow-xs hover:bg-yellow-800 focus:ring-yellow-100;
-		}
-
-		&.tabutton--color-lime {
-			@apply border-transparent bg-lime-700 text-white shadow-xs hover:bg-lime-800 focus:ring-lime-100;
-		}
-
-		&.tabutton--color-green {
-			@apply border-transparent bg-green-700 text-white shadow-xs hover:bg-green-800 focus:ring-green-100;
-		}
-
-		&.tabutton--color-emerald {
-			@apply border-transparent bg-emerald-700 text-white shadow-xs hover:bg-emerald-800 focus:ring-emerald-100;
-		}
-
-		&.tabutton--color-teal {
-			@apply border-transparent bg-teal-700 text-white shadow-xs hover:bg-teal-800 focus:ring-teal-100;
-		}
-
-		&.tabutton--color-sky {
-			@apply border-transparent bg-sky-700 text-white shadow-xs hover:bg-sky-800 focus:ring-sky-100;
-		}
-
-		&.tabutton--color-blue {
-			@apply border-transparent bg-blue-700 text-white shadow-xs hover:bg-blue-800 focus:ring-blue-100;
-		}
-
-		&.tabutton--color-violet {
-			@apply border-transparent bg-violet-700 text-white shadow-xs hover:bg-violet-800 focus:ring-violet-100;
-		}
-
-		&.tabutton--color-purple {
-			@apply border-transparent bg-purple-700 text-white shadow-xs hover:bg-purple-800 focus:ring-purple-100;
-		}
-
-		&.tabutton--color-fuchsia {
-			@apply border-transparent bg-fuchsia-700 text-white shadow-xs hover:bg-fuchsia-800 focus:ring-fuchsia-100;
-		}
-
-		&.tabutton--color-pink {
-			@apply border-transparent bg-pink-700 text-white shadow-xs hover:bg-pink-800 focus:ring-pink-100;
-		}
-
-		&.tabutton--color-rose {
-			@apply border-transparent bg-rose-700 text-white shadow-xs hover:bg-rose-800 focus:ring-rose-100;
-		}
-
-		&.tabutton--disabled {
-			@apply border-default-medium bg-disabled text-fg-disabled shadow-xs hover:bg-disabled hover:text-fg-disabled focus:ring-transparent;
-
-			&:has(> *[data-slot='icon']) {
-				@apply text-body;
-			}
-		}
 	}
 
 	.taalert {

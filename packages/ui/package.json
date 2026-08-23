@@ -43,7 +43,6 @@
 		"zod": "^4.0.0"
 	},
 	"devDependencies": {
-		"@chromatic-com/storybook": "^5.2.1",
 		"@eslint/js": "^10.0.1",
 		"@iconify/json": "^2.2.500",
 		"@iconify/tailwind4": "^1.2.3",
