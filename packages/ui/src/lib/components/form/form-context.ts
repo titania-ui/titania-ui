@@ -1,5 +1,5 @@
 import type { ReadableBox, WritableBox } from 'svelte-toolbelt';
-import { Context } from '../../utils/index.ts';
+import { Context } from '#lib/utils/context.js';
 import type { rootTheme, fieldTheme } from './theme.ts';
 import type { SuperValidated } from 'sveltekit-superforms';
 

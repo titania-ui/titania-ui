@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { theme, type RootProps } from '../index.ts';
-	import { themeAttrs } from '../../../utils/themeAttrs.ts';
+	import { themeAttrs } from '#lib/utils/themeAttrs.js';
 	import { sidebarCtx } from '../sidebar-context.ts';
 	import { boxWith } from 'svelte-toolbelt';
 

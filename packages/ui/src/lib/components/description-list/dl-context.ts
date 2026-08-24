@@ -1,5 +1,5 @@
 import type { ReadableBox } from 'svelte-toolbelt';
-import { Context } from '../../utils/index.ts';
+import { Context } from '#lib/utils/context.js';
 import type { theme } from './theme.ts';
 
 export interface DescriptionListCtx {

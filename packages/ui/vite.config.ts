@@ -51,6 +51,10 @@ export default defineConfig({
 							{
 								browser: 'firefox',
 								headless: true
+							},
+							{
+								browser: 'webkit',
+								headless: true
 							}
 						]
 					},
@@ -80,7 +84,7 @@ export default defineConfig({
 						enabled: true,
 						headless: true,
 						provider: playwright({}),
-						instances: [{ browser: 'chromium' }, { browser: 'firefox' }]
+						instances: [{ browser: 'chromium' }, { browser: 'firefox' }, { browser: 'webkit' }]
 					}
 				}
 			}

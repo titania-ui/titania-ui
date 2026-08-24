@@ -1,5 +1,5 @@
 import type { ReadableBox, WritableBox } from 'svelte-toolbelt';
-import { Context } from '#lib/utils/index.js';
+import { Context } from '#lib/utils/context.js';
 
 export interface ChipCtx {
 	readonly id: ReadableBox<string>;

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { themeAttrs } from '../../../utils/index.ts';
+	import { themeAttrs } from '#lib/utils/themeAttrs.js';
 	import { boxWith } from 'svelte-toolbelt';
 	import { fieldCtx, formCtx } from '../form-context.ts';
 	import { fieldTheme, type FieldProps } from '../index.ts';

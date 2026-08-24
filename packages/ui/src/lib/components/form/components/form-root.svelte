@@ -4,7 +4,7 @@
 
 <script lang="ts" generics="T extends Record<string, unknown>">
 	import { rootTheme, type RootProps } from '../index.ts';
-	import { themeAttrs } from '../../../utils/index.ts';
+	import { themeAttrs } from '#lib/utils/themeAttrs.js';
 	import { boxWith } from 'svelte-toolbelt';
 	import { formCtx } from '../form-context.ts';
 	import { fromStore } from 'svelte/store';

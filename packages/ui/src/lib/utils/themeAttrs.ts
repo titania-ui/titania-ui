@@ -1,4 +1,4 @@
-import type { Pretty } from '../types/props.ts';
+import type { Pretty } from '#lib/types/utils.js';
 
 const passthroughCache = new WeakMap<AnyTheme, Set<string>>();
 

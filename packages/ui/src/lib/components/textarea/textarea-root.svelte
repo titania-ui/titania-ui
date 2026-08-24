@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { theme, type RootProps } from './index.ts';
-	import { themeAttrs } from '../../utils/themeAttrs.ts';
+	import { themeAttrs } from '#lib/utils/themeAttrs.js';
 	import { controlCtx, fieldCtx, formCtx } from '../form/form-context.ts';
 	import { fieldValue } from '../form/field-value.svelte.ts';
 
