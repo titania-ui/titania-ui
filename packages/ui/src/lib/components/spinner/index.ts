@@ -1,4 +1,4 @@
-import type { As, Define, Props, ThemeOf } from '../../types/props.ts';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
 
 import { theme } from './theme.ts';
 export { theme };
@@ -14,5 +14,11 @@ export type RootProps<TAs extends As | undefined = undefined> = Omit<
 >;
 import { default as Root } from './components/spinner-root.svelte';
 
-const EXPORT = Object.assign(Root, { Root, theme });
+const EXPORT: typeof Root & {
+	Root: typeof Root;
+	theme: typeof theme;
+} = Object.assign(Root, {
+	Root,
+	theme
+});
 export default EXPORT;

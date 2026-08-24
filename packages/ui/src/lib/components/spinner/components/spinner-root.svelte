@@ -1,7 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { theme, type RootProps } from '../index.ts';
-	import { splitVariants } from '$lib/utils/themeAttrs.ts';
-	import type { As } from '$lib/types/props.ts';
+	import { splitVariants } from '#lib/utils/themeAttrs.js';
+	import type { As } from '#lib/types/props.js';
 
 	let {
 		//

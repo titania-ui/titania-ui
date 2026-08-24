@@ -1,5 +1,5 @@
-import type { As, Define, Props, ThemeOf } from '../../types/props.ts';
-import type { CloseButton, Icon } from '../../index.ts';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import type { CloseButton, Icon } from '#lib';
 
 // Theme
 import { theme } from './theme.ts';
@@ -39,7 +39,15 @@ export type DismissCfg = Define<{ tag: typeof CloseButton; child: true }>;
 export type DismissProps<TAs extends As | undefined = undefined> = Props<TAs, DismissCfg>;
 import { default as Dismiss } from './components/alert-dismiss.svelte';
 
-const EXPORT = Object.assign(Root, {
+const EXPORT: typeof Root & {
+	Root: typeof Root;
+	Title: typeof Title;
+	Description: typeof Description;
+	Indicator: typeof Indicator;
+	Dismiss: typeof Dismiss;
+	theme: typeof theme;
+	alertCtx: typeof alertCtx;
+} = Object.assign(Root, {
 	Root,
 	Title,
 	Description,

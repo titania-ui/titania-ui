@@ -2,8 +2,8 @@
 	import { box, boxWith } from 'svelte-toolbelt';
 	import { alertCtx } from '../alert-context.ts';
 	import { theme, type RootCfg, type RootProps } from '../index.ts';
-	import { splitVariants } from '../../../utils/themeAttrs.ts';
-	import type { As, ChildArgOf } from '../../../types/props.ts';
+	import { splitVariants } from '#lib/utils/themeAttrs.js';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
 
 	const uid = $props.id();
 

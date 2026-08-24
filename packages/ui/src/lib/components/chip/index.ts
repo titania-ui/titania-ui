@@ -1,5 +1,5 @@
-import type { As, Define, Props, ThemeOf } from '../../types/props.ts';
-import type { CloseButton } from '../../index.ts';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import type { CloseButton } from '#lib';
 
 // Theme
 import { theme } from './theme.ts';
@@ -20,5 +20,9 @@ export type DismissCfg = Define<{ tag: typeof CloseButton; child: true }>;
 export type DismissProps<TAs extends As | undefined = undefined> = Props<TAs, DismissCfg>;
 import { default as Dismiss } from './components/chip-dismiss.svelte';
 
-const EXPORT = Object.assign(Root, { Root, Dismiss, theme });
+const EXPORT: typeof Root & {
+	Root: typeof Root;
+	Dismiss: typeof Dismiss;
+	theme: typeof theme;
+} = Object.assign(Root, { Root, Dismiss, theme });
 export default EXPORT;

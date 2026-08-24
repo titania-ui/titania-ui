@@ -1,4 +1,4 @@
-import type { As, Define, Props, ThemeOf } from '../../types/props.ts';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
 
 // Theme
 import { theme } from './theme.ts';
@@ -11,7 +11,10 @@ export type RootCfg = Define<{
 	child: true;
 }>;
 export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
-import { default as Root } from './close-button-root.svelte';
+import { default as Root } from './components/close-button-root.svelte';
 
-const EXPORT = Object.assign(Root, { Root, theme });
+const EXPORT: typeof Root & {
+	Root: typeof Root;
+	theme: typeof theme;
+} = Object.assign(Root, { Root, theme });
 export default EXPORT;

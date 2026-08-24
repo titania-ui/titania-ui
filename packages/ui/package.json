@@ -34,6 +34,10 @@
 			"default": "./dist/theme/flowbite/index.css"
 		}
 	},
+	"imports": {
+		"#lib": "./src/lib/index.js",
+		"#lib/*": "./src/lib/*"
+	},
 	"peerDependencies": {
 		"bits-ui": "^2.18.0",
 		"svelte": "^5.2.0",

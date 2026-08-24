@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type ItemProps } from '../index.ts';
 	import { sidebarCtx } from '../sidebar-context.ts';
-	import LinkBtn from '$lib/helpers/link-btn.svelte';
+	import LinkBtn from '#lib/helpers/link-btn.svelte';
 
 	const ctx = sidebarCtx.get();
 

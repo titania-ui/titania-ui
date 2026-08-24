@@ -3,13 +3,13 @@
 	generics="TAs extends As | undefined = undefined, THref extends string | undefined = undefined"
 >
 	import { theme, type RootCfg, type RootProps } from '../index.ts';
-	import { splitVariants } from '$lib/utils/themeAttrs.ts';
-	import type { As, ChildArgOf } from '$lib/types/props.ts';
+	import { splitVariants } from '#lib/utils/themeAttrs.js';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { createAttachmentKey } from 'svelte/attachments';
-	import { useActivePress } from '$lib/helpers/useActivePress.ts';
-	import { useFocusRing } from '$lib/helpers/useFocusRing.ts';
-	import { useHover } from '$lib/helpers/useHover.ts';
-	import TouchTarget from '$lib/helpers/touch-target.svelte';
+	import { useActivePress } from '#lib/helpers/useActivePress.js';
+	import { useFocusRing } from '#lib/helpers/useFocusRing.js';
+	import { useHover } from '#lib/helpers/useHover.js';
+	import TouchTarget from '#lib/helpers/touch-target.svelte';
 
 	let {
 		href,

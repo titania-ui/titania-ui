@@ -1,7 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
+	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { alertCtx } from '../alert-context.ts';
 	import { theme, type TitleCfg, type TitleProps } from '../index.ts';
-	import type { As, ChildArgOf } from '../../../types/props.ts';
 
 	const ctx = alertCtx.get();
 	const uid = $props.id();

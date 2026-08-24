@@ -1,12 +1,12 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { theme, type RootCfg, type RootProps } from './index.ts';
-	import { Icon } from '../../index.ts';
-	import { splitVariants } from '$lib/utils/themeAttrs.ts';
-	import type { As, ChildArgOf } from '$lib/types/props.ts';
-	import { useActivePress } from '$lib/helpers/useActivePress.ts';
-	import { useFocusRing } from '$lib/helpers/useFocusRing.ts';
-	import { useHover } from '$lib/helpers/useHover.ts';
-	import TouchTarget from '$lib/helpers/touch-target.svelte';
+	import { theme, type RootCfg, type RootProps } from '../index.ts';
+	import { Icon } from '#lib';
+	import { splitVariants } from '#lib/utils/themeAttrs.js';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { useActivePress } from '#lib/helpers/useActivePress.js';
+	import { useFocusRing } from '#lib/helpers/useFocusRing.js';
+	import { useHover } from '#lib/helpers/useHover.js';
+	import TouchTarget from '#lib/helpers/touch-target.svelte';
 	import { createAttachmentKey } from 'svelte/attachments';
 
 	let {

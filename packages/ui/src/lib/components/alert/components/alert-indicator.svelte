@@ -1,8 +1,8 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { type IndicatorProps, type IndicatorCfg, theme } from '../index.ts';
-	import { Icon } from '../../../index.ts';
+	import { Icon } from '#lib';
 	import { alertCtx } from '../alert-context.ts';
-	import type { As, ChildArgOf } from '../../../types/props.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { cx } from 'tailwind-variants/lite';
 
 	const ctx = alertCtx.get();

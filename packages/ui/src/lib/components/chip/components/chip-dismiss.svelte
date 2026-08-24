@@ -1,8 +1,8 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import type { DismissProps, DismissCfg } from '../index.ts';
-	import { CloseButton } from '../../../index.ts';
+	import { CloseButton } from '#lib';
 	import { chipCtx } from '../chip-context.ts';
-	import type { As, ChildArgOf } from '../../../types/props.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
 
 	const ctx = chipCtx.get();
 

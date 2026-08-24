@@ -1,5 +1,5 @@
 import type { ReadableBox, WritableBox } from 'svelte-toolbelt';
-import { Context } from '../../utils/index.ts';
+import { Context } from '#lib/utils/context.js';
 
 export interface AlertCtx {
 	readonly id: ReadableBox<string>;

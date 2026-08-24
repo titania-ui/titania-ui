@@ -1,7 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { alertCtx } from '../alert-context.ts';
 	import { theme, type DescriptionCfg, type DescriptionProps } from '../index.ts';
-	import type { As, ChildArgOf } from '../../../types/props.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
 
 	const ctx = alertCtx.get();
 	const uid = $props.id();
