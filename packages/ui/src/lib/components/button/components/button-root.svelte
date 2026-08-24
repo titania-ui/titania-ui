@@ -3,12 +3,13 @@
 	generics="TAs extends As | undefined = undefined, THref extends string | undefined = undefined"
 >
 	import { theme, type RootCfg, type RootProps } from '../index.ts';
-	import { splitVariants } from '../../../utils/themeAttrs.ts';
-	import type { As, ChildArgOf } from '../../../types/props.ts';
+	import { splitVariants } from '$lib/utils/themeAttrs.ts';
+	import type { As, ChildArgOf } from '$lib/types/props.ts';
 	import { createAttachmentKey } from 'svelte/attachments';
-	import { useActivePress } from '../../../helpers/useActivePress.ts';
-	import { useFocusRing } from '../../../helpers/useFocusRing.ts';
-	import { useHover } from '../../../helpers/useHover.ts';
+	import { useActivePress } from '$lib/helpers/useActivePress.ts';
+	import { useFocusRing } from '$lib/helpers/useFocusRing.ts';
+	import { useHover } from '$lib/helpers/useHover.ts';
+	import TouchTarget from '$lib/helpers/touch-target.svelte';
 
 	let {
 		href,
@@ -42,24 +43,26 @@
 	const FOCUS = createAttachmentKey();
 	const PRESS = createAttachmentKey();
 
+	let isDisabled = $derived(state.disabled || state.pending);
+
 	const attrs = $derived({
 		'data-slot': 'button',
 		...split.attrs,
 		class: cls,
-		[HOVER]: useHover({ isDisabled: disabled }),
+		[HOVER]: useHover({ isDisabled }),
 		[FOCUS]: useFocusRing(),
-		[PRESS]: useActivePress({ disabled }),
+		[PRESS]: useActivePress({ disabled: isDisabled }),
 		...(Tag === 'button'
 			? {
 					type: split.attrs.type ?? 'button',
-					disabled: state.disabled || undefined,
+					disabled: isDisabled || undefined,
 					tabindex: split.attrs.type ?? '0'
 				}
 			: {
-					href: state.disabled ? undefined : href,
-					'aria-disabled': state.disabled || undefined,
-					tabindex: state.disabled ? -1 : (split.attrs.type ?? 0),
-					role: state.disabled ? (split.attrs.type ?? 'link') : undefined,
+					href: isDisabled ? undefined : href,
+					'aria-disabled': isDisabled || undefined,
+					tabindex: isDisabled ? -1 : (split.attrs.type ?? 0),
+					role: isDisabled ? (split.attrs.type ?? 'link') : undefined,
 					onclick: disabled ? undefined : split.attrs.onclick
 				})
 	});
@@ -73,10 +76,14 @@
 	} as ChildArgOf<RootCfg>)}
 {:else if typeof Tag === 'string'}
 	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.(state)}
+		<TouchTarget>
+			{@render children?.(state)}
+		</TouchTarget>
 	</svelte:element>
 {:else}
 	<Tag bind:ref {...attrs}>
-		{@render children?.(state)}
+		<TouchTarget>
+			{@render children?.(state)}
+		</TouchTarget>
 	</Tag>
 {/if}

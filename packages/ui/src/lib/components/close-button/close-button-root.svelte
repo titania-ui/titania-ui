@@ -1,27 +1,71 @@
-<script lang="ts">
-	import { theme, type RootProps } from './index.ts';
-	import { themeAttrs } from '../../utils/themeAttrs.ts';
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import { theme, type RootCfg, type RootProps } from './index.ts';
 	import { Icon } from '../../index.ts';
-	import TouchTarget from '../../helpers/touch-target.svelte';
+	import { splitVariants } from '$lib/utils/themeAttrs.ts';
+	import type { As, ChildArgOf } from '$lib/types/props.ts';
+	import { useActivePress } from '$lib/helpers/useActivePress.ts';
+	import { useFocusRing } from '$lib/helpers/useFocusRing.ts';
+	import { useHover } from '$lib/helpers/useHover.ts';
+	import TouchTarget from '$lib/helpers/touch-target.svelte';
+	import { createAttachmentKey } from 'svelte/attachments';
 
 	let {
 		//
-		ref = $bindable(null),
+		as: Tag = 'button',
 		class: className = undefined,
+		ref = $bindable(null),
 		children,
-		...props
-	}: RootProps = $props();
+		child,
+		...rest
+	}: RootProps<TAs> = $props();
 
-	const attrs = $derived(themeAttrs(theme, props));
+	const split = $derived(splitVariants(theme, rest));
 
-	const classValue = $derived(theme(props).root({ className }));
+	const cls = $derived(
+		theme().root({
+			...split.variants,
+			class: className
+		} as never)
+	);
+
+	const HOVER = createAttachmentKey();
+	const FOCUS = createAttachmentKey();
+	const PRESS = createAttachmentKey();
+
+	const attrs = $derived({
+		'data-slot': 'button',
+		'aria-label': 'Close',
+		role: 'button',
+		...split.attrs,
+		class: cls,
+		[HOVER]: useHover(),
+		[FOCUS]: useFocusRing(),
+		[PRESS]: useActivePress()
+	});
 </script>
 
-<button bind:this={ref} data-slot="button" {...attrs} class={classValue}>
+{#snippet childOrElse()}
 	{#if children}
-		<TouchTarget {children} />
+		{@render children()}
 	{:else}
-		<Icon class="taclosebutton__default" />
+		<Icon class={theme().placeholder()} />
 	{/if}
-	<span class="sr-only">Close</span>
-</button>
+{/snippet}
+
+{#if child}
+	{@render child({
+		props: attrs
+	} as ChildArgOf<RootCfg>)}
+{:else if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
+		<TouchTarget>
+			{@render childOrElse()}
+		</TouchTarget>
+	</svelte:element>
+{:else}
+	<Tag bind:ref {...attrs}>
+		<TouchTarget>
+			{@render childOrElse()}
+		</TouchTarget>
+	</Tag>
+{/if}

@@ -245,6 +245,9 @@
 }
 
 @layer components {
-	@import './alert.css';
-	@import './button.css';
+	@import './components/alert.css';
+	@import './components/button.css';
+	@import './components/chip.css';
+	@import './components/closebutton.css';
+	@import './components/spinner.css';
 }

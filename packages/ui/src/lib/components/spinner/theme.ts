@@ -1,31 +1,17 @@
-import { tv, type VariantProps } from 'tailwind-variants/lite';
+import { tv } from 'tailwind-variants/lite';
 
 export const theme = tv({
-	slots: {
-		root: 'taspinner'
-	},
+	base: 'taspinner',
 	variants: {
-		status: {
-			default: {
-				root: 'taspinner--status-default'
-			},
-			info: {
-				root: 'taspinner--status-info'
-			},
-			success: {
-				root: 'taspinner--status-success'
-			},
-			warning: {
-				root: 'taspinner--status-warning'
-			},
-			danger: {
-				root: 'taspinner--status-danger'
-			}
+		color: {
+			default: 'taspinner--color-default',
+			accent: 'taspinner--color-accent',
+			success: 'taspinner--color-success',
+			warning: 'taspinner--color-warning',
+			danger: 'taspinner--color-danger'
 		}
 	},
 	defaultVariants: {
-		status: 'default'
+		color: 'default'
 	}
 });
-
-export type ThemeVariants = VariantProps<typeof theme>;

@@ -31,7 +31,7 @@
 			"svelte": "./dist/index.js"
 		},
 		"./theme/flowbite.css": {
-			"default": "./dist/theme/flowbite.css"
+			"default": "./dist/theme/flowbite/index.css"
 		}
 	},
 	"peerDependencies": {

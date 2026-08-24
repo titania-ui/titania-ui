@@ -1,4 +1,4 @@
-import type { As, Define, Props, StateOf, ThemeOf } from '../../types/props.ts';
+import type { As, Define, Props, ThemeOf } from '../../types/props.ts';
 
 // Theme
 import { theme } from './theme.ts';
@@ -17,7 +17,6 @@ export type RootProps<
 	TAs extends As | undefined = undefined,
 	THref extends string | undefined = undefined
 > = Props<TAs, RootCfg, THref>;
-export type RootState = StateOf<RootCfg>;
 import { default as Root } from './components/button-root.svelte';
 
 const EXPORT = Object.assign(Root, { Root, theme });

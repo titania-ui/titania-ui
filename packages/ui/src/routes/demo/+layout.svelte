@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '../../lib/theme/flowbite.css';
+	import '../../lib/theme/flowbite/index.css';
 
 	const { children } = $props();
 </script>

@@ -125,19 +125,6 @@
 		--button-fg: var(--color-fg-danger);
 	}
 
-	&.tabutton--disabled {
-		@apply shadow-xs;
-		--button-bg: var(--color-disabled);
-		--button-bg-hover: var(--color-disabled);
-		--tw-ring-color: transparent;
-		--button-border: var(--color-default-medium);
-		--button-fg: var(--color-fg-disabled);
-		--button-fg-hover: var(--color-fg-disabled);
-		&:has(> *[data-slot='icon']) {
-			--button-fg: var(--color-text-body);
-		}
-	}
-
 	&[class*='tabutton--color-'] {
 		@apply shadow-xs;
 		--button-border: transparent;
@@ -263,5 +250,22 @@
 		--button-bg: var(--color-rose-700);
 		--button-bg-hover: var(--color-rose-800);
 		--tw-ring-color: var(--color-rose-100);
+	}
+
+	&.tabutton--disabled {
+		@apply shadow-xs;
+		--button-bg: var(--color-disabled);
+		--button-bg-hover: var(--color-disabled);
+		--tw-ring-color: transparent;
+		--button-border: var(--color-default-medium);
+		--button-fg: var(--color-fg-disabled);
+		--button-fg-hover: var(--color-fg-disabled);
+		&:has(> *[data-slot='icon']) {
+			--button-fg: var(--color-text-body);
+		}
+	}
+
+	&.tabutton--pending {
+		@apply opacity-70;
 	}
 }

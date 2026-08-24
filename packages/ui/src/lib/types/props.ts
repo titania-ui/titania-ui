@@ -79,6 +79,7 @@ type Build<TTag extends As, TOwn, C extends Config, TAsProp> = Omit<
 		Omit<TOwn, keyof Theme<C>> &
 			Theme<C> & {
 				class?: ClassValue;
+				id?: string;
 				ref?: RefOf<TTag> | null;
 			} & ([HasAs<C>] extends [true] ? { as?: TAsProp } : {})
 	>;
@@ -125,7 +126,7 @@ export type Props<TAs extends As | undefined, C extends Config, TWhen = undefine
 	ResolvedTag<TAs, C, TWhen>,
 	ResolvedOwn<C, TWhen>,
 	C,
-	TAs & As
+	TAs
 > &
 	Content<ContentTags<C>, State<C>, HasChild<C>>;
 

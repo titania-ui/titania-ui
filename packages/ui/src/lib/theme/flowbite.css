@@ -454,34 +454,6 @@
 		}
 	}
 
-	.taclosebutton {
-		@apply -mx-1.5 -my-1.5 ms-auto inline-flex size-8 shrink-0 items-center justify-center rounded bg-transparent hover:bg-neutral-tertiary-medium focus:ring-2 focus:ring-neutral-tertiary *:data-[slot=icon]:size-4;
-
-		.taclosebutton__default {
-			@apply icon-[flowbite--close-outline];
-		}
-
-		&:is(.taalert--status-success > *) {
-			@apply hover:bg-success-medium focus:ring-success-medium;
-		}
-
-		&:is(.taalert--status-danger > *) {
-			@apply hover:bg-danger-medium focus:ring-danger-medium;
-		}
-
-		&:is(.taalert--status-warning > *) {
-			@apply hover:bg-warning-medium focus:ring-warning-medium;
-		}
-
-		&:is(.taalert--status-info > *) {
-			@apply hover:bg-brand-soft focus:ring-brand-medium;
-		}
-
-		&:is(.tachip > *) {
-			@apply m-0 size-auto rounded-xs bg-transparent p-0.5 text-sm hover:bg-[var(--chip-hover)] *:data-[slot=icon]:size-3;
-		}
-	}
-
 	.tachip {
 		@apply inline-flex w-fit shrink-0 items-center gap-1 rounded font-medium;
 

@@ -1,6 +1,6 @@
-import type { ClassValue } from 'tailwind-variants';
+import type { ClassValue } from 'tailwind-variants/lite';
 import type { SvelteHTMLElements } from 'svelte/elements';
-import type { Component, ComponentProps, Snippet } from 'svelte';
+import type { Snippet } from 'svelte';
 
 /**
  * Resolves an HTML tag name (e.g. "div", "nav", "svg") to its corresponding

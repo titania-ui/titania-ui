@@ -1,4 +1,4 @@
-import { tv, type VariantProps } from 'tailwind-variants/lite';
+import { tv } from 'tailwind-variants/lite';
 
 export const theme = tv({
 	base: 'tachip',
@@ -41,5 +41,3 @@ export const theme = tv({
 		variant: 'primary'
 	}
 });
-
-export type ThemeVariants = VariantProps<typeof theme>;

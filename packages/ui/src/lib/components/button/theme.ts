@@ -23,6 +23,9 @@ export const theme = tv({
 		disabled: {
 			true: 'tabutton--disabled'
 		},
+		pending: {
+			true: 'tabutton--pending'
+		},
 		color: {
 			dark: 'tabutton--color-dark',
 			zinc: 'tabutton--color-zinc',
@@ -49,6 +52,7 @@ export const theme = tv({
 	defaultVariants: {
 		variant: 'default',
 		size: 'md',
-		disabled: false
+		disabled: false,
+		pending: false
 	}
 });

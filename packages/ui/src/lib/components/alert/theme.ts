@@ -1,4 +1,4 @@
-import { tv, type VariantProps } from 'tailwind-variants/lite';
+import { tv } from 'tailwind-variants/lite';
 
 export const theme = tv({
 	slots: {
@@ -6,7 +6,7 @@ export const theme = tv({
 		description: 'taalert__description',
 		title: 'taalert__title',
 		indicator: 'taalert__indicator',
-		indicatorDefault: 'taalert__indicator__default'
+		indicator_placeholder: 'taalert__indicator--placeholder'
 	},
 	variants: {
 		status: {
@@ -16,11 +16,11 @@ export const theme = tv({
 				title: 'taalert__title--status-default',
 				indicator: 'taalert__indicator--status-default'
 			},
-			info: {
-				root: 'taalert--status-info',
-				description: 'taalert__description--status-info',
-				title: 'taalert__title--status-info',
-				indicator: 'taalert__indicator--status-info'
+			accent: {
+				root: 'taalert--status-accent',
+				description: 'taalert__description--status-accent',
+				title: 'taalert__title--status-accent',
+				indicator: 'taalert__indicator--status-accent'
 			},
 			success: {
 				root: 'taalert--status-success',
@@ -46,5 +46,3 @@ export const theme = tv({
 		status: 'default'
 	}
 });
-
-export type ThemeVariants = VariantProps<typeof theme>;

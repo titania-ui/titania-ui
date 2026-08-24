@@ -1,6 +1,7 @@
-<script lang="ts">
+<script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { alertCtx } from '../alert-context.ts';
-	import type { TitleProps } from '../index.ts';
+	import { theme, type TitleCfg, type TitleProps } from '../index.ts';
+	import type { As, ChildArgOf } from '../../../types/props.ts';
 
 	const ctx = alertCtx.get();
 	const uid = $props.id();
@@ -9,12 +10,12 @@
 		//
 		id = uid,
 		as: Tag = 'h3',
-		ref = $bindable(null),
 		class: className = undefined,
-		render,
+		ref = $bindable(null),
 		children,
-		...props
-	}: TitleProps = $props();
+		child,
+		...rest
+	}: TitleProps<TAs> = $props();
 
 	$effect.pre(() => {
 		ctx.titleId.current = id;
@@ -23,19 +24,31 @@
 		};
 	});
 
-	const mergedProps = $derived<TitleProps>({
+	const cls = $derived(
+		theme().title({
+			...ctx.variants.current,
+			class: className
+		} as never)
+	);
+
+	const attrs = $derived({
 		'data-slot': 'alert-title',
-		...ctx.attrs.current,
-		...props,
-		id,
-		class: ctx.slots.current.title({ className })
+		...rest,
+		class: cls,
+		id
 	});
 </script>
 
-{#if render}
-	{@render render({ props: mergedProps })}
-{:else}
-	<svelte:element this={Tag} bind:this={ref} {...mergedProps}>
+{#if child}
+	{@render child({
+		props: attrs
+	} as ChildArgOf<TitleCfg>)}
+{:else if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
 		{@render children?.()}
 	</svelte:element>
+{:else}
+	<Tag bind:ref {...attrs}>
+		{@render children?.()}
+	</Tag>
 {/if}

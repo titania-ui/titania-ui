@@ -1,6 +1,6 @@
 <script lang="ts" module>
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { Button, Icon } from '../../index.ts';
+	import { Button, Icon, Spinner } from '../../index.ts';
 	import { expect, fn } from 'storybook/test';
 	import { capitalize } from '../../utils/capitalize.ts';
 	import type { ToolingProps } from '../../types/props.ts';
@@ -248,6 +248,35 @@
 	}}
 >
 	Focus Me
+</Story>
+
+<Story
+	name="Pending"
+	args={{
+		onclick: fn()
+	}}
+>
+	{#snippet template()}
+		{let pending = $state(false)}
+		<Button
+			{pending}
+			onclick={async () => {
+				pending = true;
+				await new Promise((r) => setTimeout(r, 1000));
+				pending = false;
+			}}
+		>
+			{#snippet children({ pending })}
+				{#if pending}
+					<Spinner />
+					Loading...
+				{:else}
+					<Icon icon="icon-[flowbite--search-outline]" />
+					Button
+				{/if}
+			{/snippet}
+		</Button>
+	{/snippet}
 </Story>
 
 <Story
