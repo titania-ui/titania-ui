@@ -23,14 +23,16 @@
 	let split = $derived(splitVariants(theme, rest));
 
 	const cls = $derived(
-		theme({
+		theme().root({
 			...split.variants,
 			class: className
 		} as never)
 	);
 
-	chipCtx.set({
+	const ctx = chipCtx.set({
 		id: boxWith(() => id),
+		labelId: boxWith(() => undefined),
+		variants: boxWith(() => split.variants),
 		dismissed: boxWith(
 			() => dismissed,
 			(v) => {
@@ -42,6 +44,7 @@
 
 	const attrs = $derived({
 		'data-slot': 'chip',
+		'aria-describedby': ctx.labelId.current,
 		...split.attrs,
 		class: cls,
 		id
