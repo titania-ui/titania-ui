@@ -1,43 +1,44 @@
-<script lang="ts">
-	import { cx } from 'tailwind-variants/lite';
-	import type { RootProps } from './heading.ts';
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import { theme, type RootProps } from './heading.ts';
+	import type { As } from '#lib/types/props.ts';
+	import { splitVariants } from '#lib/utils/themeAttrs.ts';
 
 	let {
 		level = 1,
 		//
-		as: Tag = undefined,
-		ref = $bindable(null),
+		as: _Tag = undefined,
 		class: className = undefined,
-		render,
+		ref = $bindable(null),
 		children,
-		...props
-	}: RootProps = $props();
+		...rest
+	}: RootProps<TAs> = $props();
 
-	const classValue = $derived(
-		cx(
-			'taheading',
-			level === 1 && 'taheading--level-1',
-			level === 2 && 'taheading--level-2',
-			level === 3 && 'taheading--level-3',
-			level === 4 && 'taheading--level-4',
-			level === 5 && 'taheading--level-5',
-			level === 6 && 'taheading--level-6',
-			className
-		)
+	let Tag = $derived(_Tag ?? (`h${level}` as As));
+
+	let split = $derived(splitVariants(theme, rest));
+
+	const cls = $derived(
+		theme({
+			level,
+			...split.variants,
+			class: className
+		} as never)
 	);
 
-	const mergedProps = $derived<RootProps>({
+	const attrs = $derived({
 		role: 'heading',
 		'aria-level': level,
-		...props,
-		class: classValue
+		...split.attrs,
+		class: cls
 	});
 </script>
 
-{#if render}
-	{@render render({ props: mergedProps })}
-{:else}
-	<svelte:element this={!Tag ? `h${level}` : Tag} bind:this={ref} {...mergedProps}>
+{#if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
 		{@render children?.()}
 	</svelte:element>
+{:else}
+	<Tag bind:ref {...attrs}>
+		{@render children?.()}
+	</Tag>
 {/if}

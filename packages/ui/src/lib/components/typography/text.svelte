@@ -1,26 +1,35 @@
-<script lang="ts">
-	import { cx } from 'tailwind-variants/lite';
-	import type { RootProps } from './heading.ts';
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import { theme, type RootProps } from './text.ts';
+	import type { As } from '#lib/types/props.ts';
+	import { splitVariants } from '#lib/utils/themeAttrs.ts';
 
 	let {
 		//
 		as: Tag = 'p',
-		ref = $bindable(null),
 		class: className = undefined,
-		render,
+		ref = $bindable(null),
 		children,
-		...props
-	}: RootProps = $props();
+		...rest
+	}: RootProps<TAs> = $props();
 
-	const classValue = $derived(cx('tatext', className));
+	let split = $derived(splitVariants(theme, rest));
 
-	const mergedProps = $derived<RootProps>({ 'data-slot': 'text', ...props, class: classValue });
+	const cls = $derived(
+		theme({
+			...split.variants,
+			class: className
+		} as never)
+	);
+
+	const attrs = $derived({ 'data-slot': 'text', ...split.attrs, class: cls });
 </script>
 
-{#if render}
-	{@render render({ props: mergedProps })}
-{:else}
-	<svelte:element this={Tag} bind:this={ref} {...mergedProps}>
+{#if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
 		{@render children?.()}
 	</svelte:element>
+{:else}
+	<Tag bind:ref {...attrs}>
+		{@render children?.()}
+	</Tag>
 {/if}
