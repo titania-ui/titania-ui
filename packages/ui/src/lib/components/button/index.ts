@@ -10,7 +10,13 @@ export type RootCfg = Define<{
 	when: { href: 'a' };
 	own: { href?: string; pending?: boolean; disabled?: boolean };
 	theme: ThemeOf<typeof theme>;
-	state: { pending: boolean; disabled: boolean };
+	state: {
+		pending: boolean;
+		disabled: boolean;
+		hovered: boolean;
+		pressed: boolean;
+		focused: boolean;
+	};
 	child: true;
 }>;
 export type RootProps<

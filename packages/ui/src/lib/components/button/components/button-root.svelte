@@ -26,15 +26,25 @@
 
 	const Tag = $derived<As>(_Tag ?? (href != null ? 'a' : 'button'));
 
-	const state = $derived({ pending, disabled });
+	let _HOVERED = $state(false);
+	let _PRESSED = $state(false);
+	let _FOCUSED = $state(false);
+
+	const childrenState = $derived({
+		pending,
+		disabled,
+		hovered: _HOVERED,
+		pressed: _PRESSED,
+		focused: _FOCUSED
+	});
 
 	const split = $derived(splitVariants(theme, rest));
 
 	const cls = $derived(
 		theme({
 			...split.variants,
-			disabled: state.disabled,
-			pending: state.pending,
+			disabled: childrenState.disabled,
+			pending: childrenState.pending,
 			class: className
 		} as never)
 	);
@@ -43,15 +53,15 @@
 	const FOCUS = createAttachmentKey();
 	const PRESS = createAttachmentKey();
 
-	let isDisabled = $derived(state.disabled || state.pending);
+	let isDisabled = $derived(childrenState.disabled || childrenState.pending);
 
 	const attrs = $derived({
 		'data-slot': 'button',
 		...split.attrs,
 		class: cls,
-		[HOVER]: useHover({ isDisabled }),
-		[FOCUS]: useFocusRing(),
-		[PRESS]: useActivePress({ disabled: isDisabled }),
+		[HOVER]: useHover({ isDisabled, onHoverChange: (v) => (_HOVERED = v) }),
+		[FOCUS]: useFocusRing({ onFocusVisibleChange: (v) => (_FOCUSED = v) }),
+		[PRESS]: useActivePress({ disabled: isDisabled, onPressedChange: (v) => (_PRESSED = v) }),
 		...(Tag === 'button'
 			? {
 					type: split.attrs.type ?? 'button',
@@ -71,19 +81,18 @@
 {#if child}
 	{@render child({
 		props: attrs,
-		pending: state.pending,
-		disabled: state.disabled
+		...childrenState
 	} as ChildArgOf<RootCfg>)}
 {:else if typeof Tag === 'string'}
 	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
 		<TouchTarget>
-			{@render children?.(state)}
+			{@render children?.(childrenState)}
 		</TouchTarget>
 	</svelte:element>
 {:else}
 	<Tag bind:ref {...attrs}>
 		<TouchTarget>
-			{@render children?.(state)}
+			{@render children?.(childrenState)}
 		</TouchTarget>
 	</Tag>
 {/if}
