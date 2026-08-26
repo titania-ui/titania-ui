@@ -1,34 +1,25 @@
-<script lang="ts">
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import type { As } from '#lib/types/props.ts';
 	import { theme, type RootProps } from '../index.ts';
-	import { themeAttrs } from '#lib/utils/themeAttrs.js';
-	import { descriptionListCtx } from '../dl-context.ts';
-	import { boxWith } from 'svelte-toolbelt';
 
 	let {
 		//
 		as: Tag = 'dl',
 		ref = $bindable(null),
 		class: className = undefined,
-		render,
 		children,
-		...props
-	}: RootProps = $props();
+		...rest
+	}: RootProps<TAs> = $props();
 
-	const slots = $derived(theme(props));
-
-	descriptionListCtx.set({
-		slots: boxWith(() => slots)
-	});
-
-	const attrs = $derived(themeAttrs(theme, props));
-
-	const mergedProps = $derived<RootProps>({ ...attrs, class: slots.root({ className }) });
+	const attrs = $derived({ ...rest, class: theme().root({ className }) });
 </script>
 
-{#if render}
-	{@render render({ props: mergedProps })}
-{:else}
-	<svelte:element this={Tag} bind:this={ref} {...mergedProps}>
+{#if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
 		{@render children?.()}
 	</svelte:element>
+{:else}
+	<Tag bind:ref {...attrs}>
+		{@render children?.()}
+	</Tag>
 {/if}

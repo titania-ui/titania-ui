@@ -1,0 +1,39 @@
+.tasidebar {
+	@apply flex h-full min-h-0 flex-col border-e border-default bg-neutral-primary-soft px-3 py-4;
+
+	.tasidebar__section {
+		@apply space-y-2 font-medium;
+	}
+
+	.tasidebar__item {
+		@apply relative flex items-center rounded-base px-2 py-1.5 text-body data-hover:bg-neutral-tertiary data-hover:text-fg-brand;
+
+		& > [data-slot='icon'] {
+			@apply size-5 shrink-0 transition duration-75;
+		}
+	}
+
+	.tasidebar__label {
+		@apply ms-3 flex-1 whitespace-nowrap;
+	}
+
+	.tasidebar__header {
+		@apply flex flex-col border-b border-default pb-4 [&>[data-slot=section]+[data-slot=section]]:mt-3;
+	}
+
+	.tasidebar__body {
+		@apply flex flex-1 flex-col overflow-y-auto py-4 [&>[data-slot=section]+[data-slot=section]]:mt-3;
+	}
+
+	.tasidebar__footer {
+		@apply flex flex-col border-t border-default pt-4 [&>[data-slot=section]+[data-slot=section]]:mt-3;
+	}
+
+	.tasidebar__spacer {
+		@apply flex-1;
+	}
+
+	.tasidebar__divider {
+		@apply my-3 border-t border-default;
+	}
+}

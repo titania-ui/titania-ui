@@ -1,26 +1,36 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { sidebarCtx, theme, type SectionProps } from '../index.ts';
-	import type { As } from '#lib/types/props.js';
+	import { fieldCtx, theme, type DescriptionProps } from '../index.ts';
+	import type { As } from '#lib/types/props.ts';
 
-	const ctx = sidebarCtx.get();
+	const field_ctx = fieldCtx.get();
+	const uid = $props.id();
 
 	let {
 		//
-		as: Tag = 'ul',
+		id = uid,
+		as: Tag = 'p',
 		class: className = undefined,
 		ref = $bindable(null),
 		children,
 		...rest
-	}: SectionProps<TAs> = $props();
+	}: DescriptionProps<TAs> = $props();
+
+	$effect.pre(() => {
+		field_ctx.descriptionId.current = id;
+		return () => {
+			if (field_ctx.descriptionId.current === id) field_ctx.descriptionId.current = undefined;
+		};
+	});
 
 	const cls = $derived(
-		theme().section({
-			...ctx.variants.current,
+		theme().description({
+			...field_ctx.variants.current,
 			class: className
 		} as never)
 	);
 
 	const attrs = $derived({
+		'data-slot': 'description',
 		...rest,
 		class: cls
 	});

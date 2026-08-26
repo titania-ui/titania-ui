@@ -1,6 +1,7 @@
 // field-value.svelte.ts
 import { get } from 'svelte/store';
-import { fieldCtx, formCtx } from './form-context.ts';
+import { fieldCtx } from '../field';
+import { formCtx } from '../form';
 
 export function fieldValue<T>(getManual: () => T, setManual: (v: T) => void) {
 	const ctx = fieldCtx.get();
@@ -14,7 +15,7 @@ export function fieldValue<T>(getManual: () => T, setManual: (v: T) => void) {
 	return {
 		get current() {
 			if (!isAuto) return getManual();
-			return get(form_ctx!.form.current.form)[ctx.name.current] as T;
+			return get(form_ctx!.form.current.form)[ctx.name.current!] as T;
 		},
 		set current(v: T) {
 			if (!isAuto) {
@@ -22,7 +23,7 @@ export function fieldValue<T>(getManual: () => T, setManual: (v: T) => void) {
 				return;
 			}
 			form_ctx!.form.current.form.update((f) => {
-				f[ctx.name.current] = v;
+				f[ctx.name.current!] = v;
 				return f;
 			});
 		},

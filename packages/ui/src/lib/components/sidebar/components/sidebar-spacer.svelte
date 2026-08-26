@@ -1,26 +1,33 @@
-<script lang="ts">
-	import { type SpacerProps } from '../index.ts';
-	import { sidebarCtx } from '../sidebar-context.ts';
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import { sidebarCtx, theme, type SpacerProps } from '../index.ts';
+	import type { As } from '#lib/types/props.js';
 
 	const ctx = sidebarCtx.get();
 
 	let {
 		//
 		as: Tag = 'div',
-		ref = $bindable(null),
 		class: className = undefined,
-		render,
-		...props
-	}: SpacerProps = $props();
+		ref = $bindable(null),
+		...rest
+	}: SpacerProps<TAs> = $props();
 
-	const mergedProps = $derived({
-		...props,
-		class: ctx.slots.current.spacer({ className })
+	const cls = $derived(
+		theme().spacer({
+			...ctx.variants.current,
+			class: className
+		} as never)
+	);
+
+	const attrs = $derived({
+		...rest,
+		class: cls
 	});
 </script>
 
-{#if render}
-	{@render render({ props: mergedProps })}
+{#if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}
+	></svelte:element>
 {:else}
-	<svelte:element this={Tag} bind:this={ref} {...mergedProps} />
+	<Tag bind:ref {...attrs} />
 {/if}

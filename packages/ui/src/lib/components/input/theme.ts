@@ -1,4 +1,4 @@
-import { tv, type VariantProps } from 'tailwind-variants/lite';
+import { tv } from 'tailwind-variants/lite';
 
 export const theme = tv({
 	slots: {
@@ -11,18 +11,9 @@ export const theme = tv({
 				root: 'tainput--invalid',
 				wrapper: 'tainput__wrapper--invalid'
 			}
-		},
-		disabled: {
-			true: {
-				root: 'tainput--disabled',
-				wrapper: 'tainput__wrapper--disabled'
-			}
 		}
 	},
 	defaultVariants: {
-		invalid: false,
-		disabled: false
+		invalid: false
 	}
 });
-
-export type ThemeVariants = VariantProps<typeof theme>;

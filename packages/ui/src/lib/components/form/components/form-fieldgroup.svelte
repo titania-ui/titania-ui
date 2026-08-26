@@ -1,29 +1,38 @@
-<script lang="ts">
-	import { formCtx, type FieldGroupProps } from '../index.ts';
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import { formCtx, theme, type FieldGroupProps } from '../index.ts';
+	import type { As } from '#lib/types/props.ts';
 
-	const ctx = formCtx.get();
+	const form_ctx = formCtx.get();
 
 	let {
 		//
 		as: Tag = 'div',
-		ref = $bindable(null),
 		class: className = undefined,
-		render,
+		ref = $bindable(null),
 		children,
-		...props
-	}: FieldGroupProps = $props();
+		...rest
+	}: FieldGroupProps<TAs> = $props();
 
-	const mergedProps = $derived({
+	const cls = $derived(
+		theme().fieldgroup({
+			...form_ctx.variants.current,
+			class: className
+		} as never)
+	);
+
+	const attrs = $derived({
 		'data-slot': 'control',
-		...props,
-		class: ctx.slots.current.fieldgroup({ class: className })
+		...rest,
+		class: cls
 	});
 </script>
 
-{#if render}
-	{@render render({ props: mergedProps })}
-{:else}
-	<svelte:element this={Tag} bind:this={ref} {...mergedProps}>
+{#if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
 		{@render children?.()}
 	</svelte:element>
+{:else}
+	<Tag bind:ref {...attrs}>
+		{@render children?.()}
+	</Tag>
 {/if}

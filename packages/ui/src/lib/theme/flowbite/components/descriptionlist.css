@@ -1,0 +1,21 @@
+.tadescriptionlist {
+	@apply max-w-md divide-y divide-default text-heading;
+
+	.tadescriptionlist__item {
+		@apply flex flex-col py-3;
+		&:first-child {
+			@apply pt-0;
+		}
+		&:last-child {
+			@apply pb-0;
+		}
+	}
+
+	.tadescriptionlist__term {
+		@apply mb-1 text-body;
+	}
+
+	.tadescriptionlist__description {
+		@apply text-lg font-medium;
+	}
+}

@@ -1,19 +1,21 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { box, boxWith } from 'svelte-toolbelt';
-	import { formCtx } from '../form-context.ts';
+	import { fieldCtx } from '../field-context.ts';
 	import { theme, type RootCfg, type RootProps } from '../index.ts';
 	import { splitVariants } from '#lib/utils/themeAttrs.js';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
-	import { fromStore } from 'svelte/store';
-	import { createAttachmentKey, fromAction } from 'svelte/attachments';
+	import { formCtx } from '#lib/components/form/form-context.ts';
 
-	const uid = $props.id();
+	const form_ctx = formCtx.getOr(undefined);
 
 	let {
-		form,
+		name = undefined,
+		auto = false,
+		disabled = false,
+		required = false,
+		errors = [],
 		//
-		id = uid,
-		as: Tag = 'form',
+		as: Tag = 'div',
 		class: className = undefined,
 		ref = $bindable(null),
 		children,
@@ -23,16 +25,30 @@
 
 	let split = $derived(splitVariants(theme, rest));
 
-	const __constraints = $derived(fromStore(form.constraints).current);
-	const __errors = $derived(fromStore(form.errors).current);
+	const __errors = $derived<string[]>(
+		!auto || !form_ctx || !name ? errors : ((form_ctx.errors.current?.[name] ?? []) as string[])
+	);
+	const __constraints = $derived<Record<string, unknown>>(
+		!auto || !form_ctx || !name
+			? {}
+			: (form_ctx.constraints.current?.[name] as Record<string, unknown>)
+	);
+	const __required = $derived<boolean>(
+		!auto || !form_ctx || !name ? required : ((__constraints?.required ?? false) as boolean)
+	);
 
-	const ctx = formCtx.set({
-		id: boxWith(() => id),
+	const ctx = fieldCtx.set({
+		name: boxWith(() => name),
 		variants: boxWith(() => split.variants),
 
-		form: boxWith(() => form),
+		auto: boxWith(() => auto),
+		required: boxWith(() => __required),
+		disabled: boxWith(() => disabled),
+		errors: boxWith(() => __errors),
 		constraints: boxWith(() => __constraints),
-		errors: boxWith(() => __errors)
+
+		descriptionId: box<string | undefined>(undefined),
+		labelId: box<string | undefined>(undefined)
 	});
 
 	const cls = $derived(
@@ -42,17 +58,10 @@
 		} as never)
 	);
 
-	const ENHANCE = createAttachmentKey();
-
 	const attrs = $derived({
-		'data-slot': 'form',
-		method: 'POST',
-		enctype: 'multipart/form-data',
-		novalidate: true,
+		'data-slot': 'field',
 		...split.attrs,
-		[ENHANCE]: fromAction(form.enhance),
-		class: cls,
-		id
+		class: cls
 	});
 </script>
 

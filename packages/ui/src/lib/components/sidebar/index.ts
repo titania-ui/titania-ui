@@ -1,74 +1,80 @@
-import type { SwitchableTagComponentProps } from '../../types.ts';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.ts';
 
 // Theme
-import { theme, type ThemeVariants } from './theme.ts';
-export { theme, type ThemeVariants };
+import { theme } from './theme.ts';
+export { theme };
 
 // State
 import { sidebarCtx } from './sidebar-context.ts';
 export { sidebarCtx };
 
 // Root
-export type RootPropsRaw = {};
-export type RootProps = SwitchableTagComponentProps<'aside', RootPropsRaw, ThemeVariants>;
+export type RootCfg = Define<{ tag: 'aside'; theme: ThemeOf<typeof theme> }>;
+export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
 import { default as Root } from './components/sidebar-root.svelte';
 
 // Header
-export type HeaderPropsRaw = {};
-export type HeaderProps = SwitchableTagComponentProps<'div', HeaderPropsRaw, ThemeVariants>;
+export type HeaderCfg = Define<{ tag: 'div' }>;
+export type HeaderProps<TAs extends As | undefined = undefined> = Props<TAs, HeaderCfg>;
 import { default as Header } from './components/sidebar-header.svelte';
 
 // Body
-export type BodyPropsRaw = {};
-export type BodyProps = SwitchableTagComponentProps<'div', BodyPropsRaw, ThemeVariants>;
+export type BodyCfg = Define<{ tag: 'div' }>;
+export type BodyProps<TAs extends As | undefined = undefined> = Props<TAs, BodyCfg>;
 import { default as Body } from './components/sidebar-body.svelte';
 
 // Footer
-export type FooterPropsRaw = {};
-export type FooterProps = SwitchableTagComponentProps<'div', FooterPropsRaw, ThemeVariants>;
+export type FooterCfg = Define<{ tag: 'div' }>;
+export type FooterProps<TAs extends As | undefined = undefined> = Props<TAs, FooterCfg>;
 import { default as Footer } from './components/sidebar-footer.svelte';
 
 // Section
-export type SectionPropsRaw = {};
-export type SectionProps = SwitchableTagComponentProps<'ul', SectionPropsRaw, ThemeVariants>;
+export type SectionCfg = Define<{ tag: 'ul' }>;
+export type SectionProps<TAs extends As | undefined = undefined> = Props<TAs, SectionCfg>;
 import { default as Section } from './components/sidebar-section.svelte';
 
-// Divider
-export type DividerPropsRaw = {};
-export type DividerProps = Omit<
-	SwitchableTagComponentProps<'hr', DividerPropsRaw, ThemeVariants>,
-	'children'
->;
-import { default as Divider } from './components/sidebar-divider.svelte';
-
-// Label
-export type LabelPropsRaw = {};
-export type LabelProps = SwitchableTagComponentProps<'span', LabelPropsRaw, ThemeVariants>;
-import { default as Label } from './components/sidebar-label.svelte';
-
 // Spacer
-export type SpacerPropsRaw = {};
-export type SpacerProps = Omit<
-	SwitchableTagComponentProps<'div', SpacerPropsRaw, ThemeVariants>,
+export type SpacerCfg = Define<{ tag: 'div' }>;
+export type SpacerProps<TAs extends As | undefined = undefined> = Omit<
+	Props<TAs, SpacerCfg>,
 	'children'
 >;
 import { default as Spacer } from './components/sidebar-spacer.svelte';
 
 // Item
-export type ItemPropsRaw = { current?: boolean; disabled?: boolean };
-export type ItemProps = SwitchableTagComponentProps<'a', ItemPropsRaw, ThemeVariants>;
+export type ItemCfg = Define<{
+	tag: 'button';
+	when: { href: 'a' };
+	own: { current?: boolean; disabled?: boolean; href?: string };
+}>;
+export type ItemProps<TAs extends As | undefined = undefined> = Props<TAs, ItemCfg>;
 import { default as Item } from './components/sidebar-item.svelte';
 
-const EXPORT = Object.assign(Root, {
+// Label
+export type LabelCfg = Define<{ tag: 'span' }>;
+export type LabelProps<TAs extends As | undefined = undefined> = Props<TAs, LabelCfg>;
+import { default as Label } from './components/sidebar-label.svelte';
+
+const EXPORT: typeof Root & {
+	Root: typeof Root;
+	Header: typeof Header;
+	Body: typeof Body;
+	Footer: typeof Footer;
+	Section: typeof Section;
+	Item: typeof Item;
+	Spacer: typeof Spacer;
+	Label: typeof Label;
+	theme: typeof theme;
+	sidebarCtx: typeof sidebarCtx;
+} = Object.assign(Root, {
 	Root,
 	Header,
 	Body,
 	Footer,
 	Section,
 	Item,
-	Label,
 	Spacer,
-	Divider,
+	Label,
 	theme,
 	sidebarCtx
 });

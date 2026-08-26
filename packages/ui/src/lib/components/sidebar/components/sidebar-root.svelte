@@ -1,34 +1,43 @@
-<script lang="ts">
-	import { theme, type RootProps } from '../index.ts';
-	import { themeAttrs } from '#lib/utils/themeAttrs.js';
-	import { sidebarCtx } from '../sidebar-context.ts';
+<script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { boxWith } from 'svelte-toolbelt';
+	import { sidebarCtx, theme, type RootProps } from '../index.ts';
+	import { splitVariants } from '#lib/utils/themeAttrs.js';
+	import type { As } from '#lib/types/props.js';
 
 	let {
 		//
 		as: Tag = 'aside',
-		ref = $bindable(null),
 		class: className = undefined,
-		render,
+		ref = $bindable(null),
 		children,
-		...props
-	}: RootProps = $props();
+		...rest
+	}: RootProps<TAs> = $props();
 
-	const slots = $derived(theme(props));
+	let split = $derived(splitVariants(theme, rest));
+
+	const cls = $derived(
+		theme().root({
+			...split.variants,
+			class: className
+		} as never)
+	);
 
 	sidebarCtx.set({
-		slots: boxWith(() => slots)
+		variants: boxWith(() => split.variants)
 	});
 
-	const attrs = $derived(themeAttrs(theme, props));
-
-	const mergedProps = $derived<RootProps>({ ...attrs, class: slots.root({ className }) });
+	const attrs = $derived({
+		...split.attrs,
+		class: cls
+	});
 </script>
 
-{#if render}
-	{@render render({ props: mergedProps })}
-{:else}
-	<svelte:element this={Tag} bind:this={ref} {...mergedProps}>
+{#if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
 		{@render children?.()}
 	</svelte:element>
+{:else}
+	<Tag bind:ref {...attrs}>
+		{@render children?.()}
+	</Tag>
 {/if}

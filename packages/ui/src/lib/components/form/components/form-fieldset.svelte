@@ -1,34 +1,43 @@
-<script lang="ts">
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import { fieldsetCtx, formCtx, theme, type FieldsetProps } from '../index.ts';
+	import type { As } from '#lib/types/props.ts';
 	import { box } from 'svelte-toolbelt';
-	import { fieldsetCtx, formCtx, type FieldsetProps } from '../index.ts';
 
 	const form_ctx = formCtx.get();
 
 	let {
 		//
 		as: Tag = 'fieldset',
-		ref = $bindable(null),
 		class: className = undefined,
-		render,
+		ref = $bindable(null),
 		children,
-		...props
-	}: FieldsetProps = $props();
+		...rest
+	}: FieldsetProps<TAs> = $props();
 
 	const ctx = fieldsetCtx.set({
 		legendId: box<string | undefined>(undefined)
 	});
 
-	const mergedProps = $derived({
+	const cls = $derived(
+		theme().fieldset({
+			...form_ctx.variants.current,
+			class: className
+		} as never)
+	);
+
+	const attrs = $derived({
 		'aria-labelledby': ctx.legendId.current,
-		...props,
-		class: form_ctx.slots.current.fieldset({ class: className })
+		...rest,
+		class: cls
 	});
 </script>
 
-{#if render}
-	{@render render({ props: mergedProps })}
-{:else}
-	<svelte:element this={Tag} bind:this={ref} {...mergedProps}>
+{#if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
 		{@render children?.()}
 	</svelte:element>
+{:else}
+	<Tag bind:ref {...attrs}>
+		{@render children?.()}
+	</Tag>
 {/if}

@@ -1,29 +1,37 @@
-<script lang="ts">
-	import { type LabelProps } from '../index.ts';
-	import { sidebarCtx } from '../sidebar-context.ts';
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import { sidebarCtx, theme, type LabelProps } from '../index.ts';
+	import type { As } from '#lib/types/props.js';
 
 	const ctx = sidebarCtx.get();
 
 	let {
 		//
-		as: Tag = 'span',
-		ref = $bindable(null),
+		as: Tag = 'div',
 		class: className = undefined,
-		render,
+		ref = $bindable(null),
 		children,
-		...props
-	}: LabelProps = $props();
+		...rest
+	}: LabelProps<TAs> = $props();
 
-	const mergedProps = $derived({
-		...props,
-		class: ctx.slots.current.label({ className })
+	const cls = $derived(
+		theme().label({
+			...ctx.variants.current,
+			class: className
+		} as never)
+	);
+
+	const attrs = $derived({
+		...rest,
+		class: cls
 	});
 </script>
 
-{#if render}
-	{@render render({ props: mergedProps })}
-{:else}
-	<svelte:element this={Tag} bind:this={ref} {...mergedProps}>
+{#if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
 		{@render children?.()}
 	</svelte:element>
+{:else}
+	<Tag bind:ref {...attrs}>
+		{@render children?.()}
+	</Tag>
 {/if}

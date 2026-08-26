@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { box, boxWith } from 'svelte-toolbelt';
-	import { controlCtx, fieldCtx } from '../form-context.ts';
-	import type { ControlProps } from '../index.ts';
+	import { fieldCtx, type ControlProps } from '../index.ts';
 
 	const field_ctx = fieldCtx.get();
 	const uid = $props.id();
@@ -13,15 +11,10 @@
 		...props
 	}: ControlProps = $props();
 
-	const ctx = controlCtx.set({
-		inputId: boxWith(() => id),
-		labelId: box<string | undefined>(undefined),
-		props: boxWith(() => mergedProps)
-	});
-
 	const mergedProps = $derived({
 		'data-slot': 'control',
-		'aria-labelledby': ctx.labelId.current,
+		'aria-labelledby': field_ctx.labelId.current,
+		'aria-describedby': field_ctx.descriptionId.current,
 		'aria-invalid': field_ctx.errors.current.length > 0 ? 'true' : undefined,
 		disabled: field_ctx.disabled.current || undefined,
 		name: field_ctx.name.current,

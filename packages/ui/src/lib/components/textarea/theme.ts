@@ -1,4 +1,4 @@
-import { tv, type VariantProps } from 'tailwind-variants/lite';
+import { tv } from 'tailwind-variants/lite';
 
 export const theme = tv({
 	slots: {
@@ -11,18 +11,9 @@ export const theme = tv({
 				root: 'tatextarea--invalid',
 				wrapper: 'tatextarea__wrapper--invalid'
 			}
-		},
-		disabled: {
-			true: {
-				root: 'tatextarea--disabled',
-				wrapper: 'tatextarea__wrapper--disabled'
-			}
 		}
 	},
 	defaultVariants: {
-		invalid: false,
-		disabled: false
+		invalid: false
 	}
 });
-
-export type ThemeVariants = VariantProps<typeof theme>;

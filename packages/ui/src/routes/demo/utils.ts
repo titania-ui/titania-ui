@@ -9,5 +9,8 @@ export const loginSchema = z.object({
 export const reservationSchema = z.object({
 	party_size: z.number().min(1, { error: 'Party size is required' }),
 	seating: z.enum(['indoor', 'patio', 'bar'], { error: 'Seating preference is required' }),
-	notes: z.string().optional()
+	notes: z.string().optional(),
+	date: z.iso.date().refine((date) => new Date(date) >= new Date(), {
+		message: 'Date must be in the future'
+	})
 });

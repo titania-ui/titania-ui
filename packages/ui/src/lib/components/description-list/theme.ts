@@ -1,4 +1,4 @@
-import { tv, type VariantProps } from 'tailwind-variants/lite';
+import { tv } from 'tailwind-variants/lite';
 
 export const theme = tv({
 	slots: {
@@ -8,5 +8,3 @@ export const theme = tv({
 		description: 'tadescriptionlist__description'
 	}
 });
-
-export type ThemeVariants = VariantProps<typeof theme>;
