@@ -1,8 +1,20 @@
-import type { SwitchableTagComponentProps } from '../../types.ts';
+import { tv } from 'tailwind-variants/lite';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.ts';
+
+export const theme = tv({
+	base: 'tacode'
+});
 
 // Root
-export type RootPropsRaw = {};
-export type RootProps = SwitchableTagComponentProps<'code', RootPropsRaw>;
+export type RootCfg = Define<{ tag: 'code'; theme: ThemeOf<typeof theme> }>;
+export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
 import { default as Root } from './code.svelte';
 
-export default Root;
+const EXPORT: typeof Root & {
+	Root: typeof Root;
+	theme: typeof theme;
+} = Object.assign(Root, {
+	Root,
+	theme
+});
+export default EXPORT;

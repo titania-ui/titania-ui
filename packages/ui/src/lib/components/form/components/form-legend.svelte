@@ -1,5 +1,6 @@
-<script lang="ts">
-	import { fieldsetCtx, formCtx, type LegendProps } from '../index.ts';
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import { fieldsetCtx, formCtx, theme, type LegendProps } from '../index.ts';
+	import type { As } from '#lib/types/props.ts';
 
 	const form_ctx = formCtx.get();
 	const ctx = fieldsetCtx.get();
@@ -8,13 +9,12 @@
 	let {
 		//
 		id = uid,
-		as: Tag = 'div',
-		ref = $bindable(null),
+		as: Tag = 'legend',
 		class: className = undefined,
-		render,
+		ref = $bindable(null),
 		children,
-		...props
-	}: LegendProps = $props();
+		...rest
+	}: LegendProps<TAs> = $props();
 
 	$effect.pre(() => {
 		ctx.legendId.current = id;
@@ -23,17 +23,26 @@
 		};
 	});
 
-	const mergedProps = $derived({
+	const cls = $derived(
+		theme().legend({
+			...form_ctx.variants.current,
+			class: className
+		} as never)
+	);
+
+	const attrs = $derived({
 		'data-slot': 'legend',
-		...props,
-		class: form_ctx.slots.current.legend({ class: className })
+		...rest,
+		class: cls
 	});
 </script>
 
-{#if render}
-	{@render render({ props: mergedProps })}
-{:else}
-	<svelte:element this={Tag} bind:this={ref} {...mergedProps}>
+{#if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
 		{@render children?.()}
 	</svelte:element>
+{:else}
+	<Tag bind:ref {...attrs}>
+		{@render children?.()}
+	</Tag>
 {/if}

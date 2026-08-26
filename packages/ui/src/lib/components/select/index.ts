@@ -1,17 +1,23 @@
-import type { FixedTagComponentProps } from '../../types.ts';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
 
-import { theme, type ThemeVariants } from './theme.ts';
-export { theme, type ThemeVariants };
+// Theme
+import { theme } from './theme.ts';
+export { theme };
 
 // Root
-export type RootPropsRaw = {
-	value?: unknown;
-	invalid?: boolean;
-	disabled?: boolean;
-	multiple?: boolean;
-};
-export type RootProps = FixedTagComponentProps<'select', RootPropsRaw, ThemeVariants>;
-import { default as Root } from './select-root.svelte';
+export type RootCfg = Define<{
+	tag: 'select';
+	own: { invalid?: boolean; multiple?: boolean };
+	theme: ThemeOf<typeof theme>;
+}>;
+export type RootProps = Props<'input', RootCfg>;
+import { default as Root } from './components/select-root.svelte';
 
-const EXPORT = Object.assign(Root, { Root, theme });
+const EXPORT: typeof Root & {
+	Root: typeof Root;
+	theme: typeof theme;
+} = Object.assign(Root, {
+	Root,
+	theme
+});
 export default EXPORT;

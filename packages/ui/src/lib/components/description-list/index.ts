@@ -1,39 +1,40 @@
-import type { SwitchableTagComponentProps } from '../../types.ts';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.ts';
 
 // Theme
-import { theme, type ThemeVariants } from './theme.ts';
-export { theme, type ThemeVariants };
-
-// State
-import { descriptionListCtx } from './dl-context.ts';
-export { descriptionListCtx };
+import { theme } from './theme.ts';
+export { theme };
 
 // Root
-export type RootPropsRaw = {};
-export type RootProps = SwitchableTagComponentProps<'dl', RootPropsRaw, ThemeVariants>;
+export type RootCfg = Define<{ tag: 'dl'; theme: ThemeOf<typeof theme> }>;
+export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
 import { default as Root } from './components/descriptionlist-root.svelte';
 
 // Item
-export type ItemPropsRaw = {};
-export type ItemProps = SwitchableTagComponentProps<'div', ItemPropsRaw>;
+export type ItemCfg = Define<{ tag: 'div' }>;
+export type ItemProps<TAs extends As | undefined = undefined> = Props<TAs, ItemCfg>;
 import { default as Item } from './components/descriptionlist-item.svelte';
 
 // Term
-export type TermPropsRaw = {};
-export type TermProps = SwitchableTagComponentProps<'dt', TermPropsRaw>;
+export type TermCfg = Define<{ tag: 'dt' }>;
+export type TermProps<TAs extends As | undefined = undefined> = Props<TAs, TermCfg>;
 import { default as Term } from './components/descriptionlist-term.svelte';
 
 // Description
-export type DescriptionPropsRaw = {};
-export type DescriptionProps = SwitchableTagComponentProps<'dd', DescriptionPropsRaw>;
+export type DescriptionCfg = Define<{ tag: 'dd' }>;
+export type DescriptionProps<TAs extends As | undefined = undefined> = Props<TAs, DescriptionCfg>;
 import { default as Description } from './components/descriptionlist-description.svelte';
 
-const EXPORT = Object.assign(Root, {
+const EXPORT: typeof Root & {
+	Root: typeof Root;
+	Item: typeof Item;
+	Term: typeof Term;
+	Description: typeof Description;
+	theme: typeof theme;
+} = Object.assign(Root, {
 	Root,
 	Item,
 	Term,
 	Description,
-	theme,
-	descriptionListCtx
+	theme
 });
 export default EXPORT;

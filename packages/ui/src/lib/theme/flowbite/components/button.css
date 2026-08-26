@@ -1,0 +1,271 @@
+.tabutton {
+	@apply relative isolate box-border inline-flex items-center justify-center gap-x-2 rounded-base border leading-5 font-medium whitespace-nowrap;
+
+	--button-bg: transparent;
+	--button-bg-hover: var(--button-bg);
+	--tw-ring-color: var(--button-bg-hover);
+	--button-border: currentColor;
+	--button-fg: currentColor;
+	--button-fg-hover: var(--button-fg);
+
+	background-color: var(--button-bg);
+	border-color: var(--button-border);
+	color: var(--button-fg);
+
+	&[data-hover] {
+		background-color: var(--button-bg-hover);
+		color: var(--button-fg-hover);
+	}
+
+	&:focus {
+		@apply outline-none;
+	}
+
+	&[data-focus] {
+		@apply ring-4;
+	}
+
+	[data-slot='icon'] {
+		@apply size-4;
+	}
+
+	&.tabutton--size-xs {
+		@apply px-3 py-1.5 text-xs leading-5;
+
+		[data-slot='icon'] {
+			@apply size-3.5;
+		}
+	}
+
+	&.tabutton--size-sm {
+		@apply px-3 py-2 text-sm leading-5;
+	}
+
+	&.tabutton--size-md {
+		@apply px-4 py-2.5 text-sm leading-5;
+	}
+
+	&.tabutton--size-lg {
+		@apply px-5 py-3 text-base;
+
+		[data-slot='icon'] {
+			@apply size-4.5;
+		}
+	}
+
+	&.tabutton--size-xl {
+		@apply px-6 py-3.5 text-base;
+
+		[data-slot='icon'] {
+			@apply size-4.5;
+		}
+	}
+
+	&.tabutton--variant-default,
+	&.tabutton--variant-primary {
+		@apply shadow-xs;
+		--button-bg: var(--color-brand);
+		--button-bg-hover: var(--color-brand-strong);
+		--tw-ring-color: var(--color-brand-medium);
+		--button-border: transparent;
+		--button-fg: var(--color-white);
+	}
+
+	&.tabutton--variant-secondary {
+		@apply shadow-xs;
+		--button-bg: var(--color-neutral-secondary-medium);
+		--button-bg-hover: var(--color-neutral-tertiary-medium);
+		--tw-ring-color: var(--color-neutral-tertiary);
+		--button-border: var(--color-default);
+		--button-fg: var(--color-body);
+		--button-fg-hover: var(--color-heading);
+	}
+
+	&.tabutton--variant-tertiary {
+		@apply shadow-xs;
+		--button-bg: var(--color-neutral-primary-soft);
+		--button-bg-hover: var(--color-neutral-secondary-medium);
+		--tw-ring-color: var(--color-neutral-tertiary-soft);
+		--button-border: var(--color-default);
+		--button-fg: var(--color-body);
+		--button-fg-hover: var(--color-heading);
+	}
+
+	&.tabutton--variant-outline {
+		--button-bg: var(--color-neutral-primary);
+		--button-bg-hover: var(--color-neutral-secondary-soft);
+		--tw-ring-color: var(--color-neutral-tertiary);
+		--button-border: var(--color-default);
+		--button-fg: var(--color-body);
+		--button-fg-hover: var(--color-heading);
+	}
+
+	&.tabutton--variant-ghost {
+		--button-bg-hover: var(--color-neutral-secondary-medium);
+		--tw-ring-color: var(--color-neutral-tertiary);
+		--button-border: transparent;
+		--button-fg: var(--color-body);
+	}
+
+	&.tabutton--variant-danger {
+		@apply shadow-xs;
+		--button-bg: var(--color-danger);
+		--button-bg-hover: var(--color-danger-strong);
+		--tw-ring-color: var(--color-danger-medium);
+		--button-border: transparent;
+		--button-fg: var(--color-white);
+	}
+
+	&.tabutton--variant-danger-soft {
+		@apply shadow-xs;
+		--button-bg: var(--color-danger-soft);
+		--button-bg-hover: var(--color-danger-medium);
+		--tw-ring-color: var(--color-danger-medium);
+		--button-border: transparent;
+		--button-fg: var(--color-fg-danger);
+	}
+
+	&[class*='tabutton--color-'] {
+		@apply shadow-xs;
+		--button-border: transparent;
+		--button-fg: var(--color-white);
+	}
+
+	&.tabutton--color-dark {
+		--button-bg: var(--color-black);
+		--button-bg-hover: var(--color-gray-800);
+		--tw-ring-color: var(--color-gray-100);
+	}
+
+	&.tabutton--color-zinc {
+		--button-bg: var(--color-zinc-700);
+		--button-bg-hover: var(--color-zinc-800);
+		--tw-ring-color: var(--color-zinc-100);
+	}
+
+	&.tabutton--color-white {
+		--button-bg: var(--color-white);
+		--button-bg-hover: var(--color-zinc-200);
+		--tw-ring-color: var(--color-zinc-100);
+		--button-fg: var(--color-black);
+	}
+
+	&.tabutton--color-red {
+		--button-bg: var(--color-red-700);
+		--button-bg-hover: var(--color-red-800);
+		--tw-ring-color: var(--color-red-100);
+	}
+
+	&.tabutton--color-orange {
+		--button-bg: var(--color-orange-700);
+		--button-bg-hover: var(--color-orange-800);
+		--tw-ring-color: var(--color-orange-100);
+	}
+
+	&.tabutton--color-amber {
+		--button-bg: var(--color-amber-700);
+		--button-bg-hover: var(--color-amber-800);
+		--tw-ring-color: var(--color-amber-100);
+	}
+
+	&.tabutton--color-yellow {
+		--button-bg: var(--color-yellow-700);
+		--button-bg-hover: var(--color-yellow-800);
+		--tw-ring-color: var(--color-yellow-100);
+	}
+
+	&.tabutton--color-lime {
+		--button-bg: var(--color-lime-700);
+		--button-bg-hover: var(--color-lime-800);
+		--tw-ring-color: var(--color-lime-100);
+	}
+
+	&.tabutton--color-green {
+		--button-bg: var(--color-green-700);
+		--button-bg-hover: var(--color-green-800);
+		--tw-ring-color: var(--color-green-100);
+	}
+
+	&.tabutton--color-emerald {
+		--button-bg: var(--color-emerald-700);
+		--button-bg-hover: var(--color-emerald-800);
+		--tw-ring-color: var(--color-emerald-100);
+	}
+
+	&.tabutton--color-teal {
+		--button-bg: var(--color-teal-700);
+		--button-bg-hover: var(--color-teal-800);
+		--tw-ring-color: var(--color-teal-100);
+	}
+
+	&.tabutton--color-cyan {
+		--button-bg: var(--color-cyan-700);
+		--button-bg-hover: var(--color-cyan-800);
+		--tw-ring-color: var(--color-cyan-100);
+	}
+
+	&.tabutton--color-sky {
+		--button-bg: var(--color-sky-700);
+		--button-bg-hover: var(--color-sky-800);
+		--tw-ring-color: var(--color-sky-100);
+	}
+
+	&.tabutton--color-blue {
+		--button-bg: var(--color-blue-700);
+		--button-bg-hover: var(--color-blue-800);
+		--tw-ring-color: var(--color-blue-100);
+	}
+
+	&.tabutton--color-indigo {
+		--button-bg: var(--color-indigo-700);
+		--button-bg-hover: var(--color-indigo-800);
+		--tw-ring-color: var(--color-indigo-100);
+	}
+
+	&.tabutton--color-violet {
+		--button-bg: var(--color-violet-700);
+		--button-bg-hover: var(--color-violet-800);
+		--tw-ring-color: var(--color-violet-100);
+	}
+
+	&.tabutton--color-purple {
+		--button-bg: var(--color-purple-700);
+		--button-bg-hover: var(--color-purple-800);
+		--tw-ring-color: var(--color-purple-100);
+	}
+
+	&.tabutton--color-fuchsia {
+		--button-bg: var(--color-fuchsia-700);
+		--button-bg-hover: var(--color-fuchsia-800);
+		--tw-ring-color: var(--color-fuchsia-100);
+	}
+
+	&.tabutton--color-pink {
+		--button-bg: var(--color-pink-700);
+		--button-bg-hover: var(--color-pink-800);
+		--tw-ring-color: var(--color-pink-100);
+	}
+
+	&.tabutton--color-rose {
+		--button-bg: var(--color-rose-700);
+		--button-bg-hover: var(--color-rose-800);
+		--tw-ring-color: var(--color-rose-100);
+	}
+
+	&.tabutton--disabled {
+		@apply shadow-xs;
+		--button-bg: var(--color-disabled);
+		--button-bg-hover: var(--color-disabled);
+		--tw-ring-color: transparent;
+		--button-border: var(--color-default-medium);
+		--button-fg: var(--color-fg-disabled);
+		--button-fg-hover: var(--color-fg-disabled);
+		&:has(> *[data-slot='icon']) {
+			--button-fg: var(--color-text-body);
+		}
+	}
+
+	&.tabutton--pending {
+		@apply opacity-70;
+	}
+}

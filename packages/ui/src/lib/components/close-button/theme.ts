@@ -1,9 +1,9 @@
-import { tv, type VariantProps } from 'tailwind-variants/lite';
+import { tv } from 'tailwind-variants/lite';
 
 export const theme = tv({
 	slots: {
-		root: 'taclosebutton'
-	}
+		root: 'taclosebutton',
+		placeholder: 'taclosebutton__placeholder'
+	},
+	variants: {}
 });
-
-export type ThemeVariants = VariantProps<typeof theme>;

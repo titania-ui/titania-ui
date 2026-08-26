@@ -1,0 +1,51 @@
+.taclosebutton {
+	@apply -mx-1.5 -my-1.5 ms-auto inline-flex size-8 shrink-0 items-center justify-center rounded bg-transparent;
+
+	--button-bg-hover: var(--color-neutral-tertiary-medium);
+	--button-focus: var(--color-neutral-tertiary);
+
+	& > [data-slot='icon'] {
+		@apply size-4;
+	}
+
+	&[data-hover] {
+		@apply bg-(--button-bg-hover);
+	}
+
+	&[data-focus] {
+		@apply bg-(--button-focus) ring-2;
+	}
+
+	.taclosebutton__placeholder {
+		@apply icon-[flowbite--close-outline];
+	}
+
+	&:is(.taalert--status-success > *) {
+		--button-bg-hover: var(--color-success-medium);
+		--button-focus: var(--color-success-medium);
+	}
+
+	&:is(.taalert--status-danger > *) {
+		--button-bg-hover: var(--color-danger-medium);
+		--button-focus: var(--color-danger-medium);
+	}
+
+	&:is(.taalert--status-warning > *) {
+		--button-bg-hover: var(--color-warning-medium);
+		--button-focus: var(--color-warning-medium);
+	}
+
+	&:is(.taalert--status-accent > *) {
+		--button-bg-hover: var(--color-brand-soft);
+		--button-focus: var(--color-brand-medium);
+	}
+
+	&:is(.tachip > *) {
+		--button-bg-hover: var(--chip-hover);
+		@apply m-0 size-auto rounded-xs p-0.5 text-sm;
+
+		& > [data-slot='icon'] {
+			@apply size-3;
+		}
+	}
+}

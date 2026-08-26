@@ -4,6 +4,8 @@ export { default as CloseButton } from './components/close-button/index.ts';
 
 // Forms
 export { default as Form } from './components/form/index.ts';
+export { default as Field } from './components/field/index.ts';
+export { default as Label } from './components/label/index.ts';
 export { default as Input } from './components/input/index.ts';
 export { default as Textarea } from './components/textarea/index.ts';
 export { default as Select } from './components/select/index.ts';

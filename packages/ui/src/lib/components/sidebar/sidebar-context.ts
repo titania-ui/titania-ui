@@ -1,9 +1,8 @@
 import type { ReadableBox } from 'svelte-toolbelt';
-import { Context } from '../../utils/index.ts';
-import type { theme } from './theme.ts';
+import { Context } from '#lib/utils/context.js';
 
 export interface SidebarCtx {
-	readonly slots: ReadableBox<ReturnType<typeof theme>>;
+	readonly variants: ReadableBox<Record<string, unknown>>;
 }
 
 export const sidebarCtx = new Context<SidebarCtx>('Sidebar.Root');

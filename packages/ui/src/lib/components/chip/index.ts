@@ -1,18 +1,34 @@
-import type { SwitchableTagComponentProps } from '../../types.ts';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import type { CloseButton } from '#lib';
 
 // Theme
-import { theme, type ThemeVariants } from './theme.ts';
-export { theme, type ThemeVariants };
+import { theme } from './theme.ts';
+export { theme };
 
 // Root
-export type RootPropsRaw = { dismissed?: boolean; onDismiss?: () => void };
-export type RootProps = SwitchableTagComponentProps<'div', RootPropsRaw, ThemeVariants>;
+export type RootCfg = Define<{
+	tag: 'div';
+	own: { dismissed?: boolean; ondismiss?: () => void };
+	theme: ThemeOf<typeof theme>;
+	child: true;
+}>;
+export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
 import { default as Root } from './components/chip-root.svelte';
 
+// Label
+export type LabelCfg = Define<{ tag: 'span' }>;
+export type LabelProps<TAs extends As | undefined = undefined> = Props<TAs, LabelCfg>;
+import { default as Label } from './components/chip-label.svelte';
+
 // Dismiss
-export type DismissPropsRaw = {};
-export type DismissProps = SwitchableTagComponentProps<'button', DismissPropsRaw>;
+export type DismissCfg = Define<{ tag: typeof CloseButton; child: true }>;
+export type DismissProps<TAs extends As | undefined = undefined> = Props<TAs, DismissCfg>;
 import { default as Dismiss } from './components/chip-dismiss.svelte';
 
-const EXPORT = Object.assign(Root, { Root, Dismiss, theme });
+const EXPORT: typeof Root & {
+	Root: typeof Root;
+	Label: typeof Label;
+	Dismiss: typeof Dismiss;
+	theme: typeof theme;
+} = Object.assign(Root, { Root, Label, Dismiss, theme });
 export default EXPORT;

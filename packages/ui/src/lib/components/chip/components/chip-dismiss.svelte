@@ -1,34 +1,37 @@
-<script lang="ts">
-	import type { DismissProps } from '../index.ts';
-	import { CloseButton } from '../../../index.ts';
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import type { DismissProps, DismissCfg } from '../index.ts';
+	import { CloseButton } from '#lib';
 	import { chipCtx } from '../chip-context.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
 
 	const ctx = chipCtx.get();
 
 	let {
-		as: Tag = undefined,
+		as: Tag = CloseButton,
 		ref = $bindable(null),
-		class: className = undefined,
-		render,
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		children, // needs to be destructure for rest props
-		onclick,
-		...props
-	}: DismissProps = $props();
+		children,
+		child,
+		...rest
+	}: DismissProps<TAs> = $props();
 
-	const mergedProps = $derived<DismissProps>({
+	const attrs = $derived({
 		'aria-controls': ctx.id.current,
-		...props,
+		...rest,
 		onclick: (e: MouseEvent) => {
-			onclick?.(e);
+			if (typeof rest.onclick === 'function') rest.onclick?.(e);
 			if (!e.defaultPrevented) ctx.dismissed.current = true;
-		},
-		class: className
+		}
 	});
 </script>
 
-{#if render}
-	{@render render({ props: mergedProps })}
+{#if child}
+	{@render child({
+		props: attrs
+	} as ChildArgOf<DismissCfg>)}
+{:else if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
+		{@render children?.()}
+	</svelte:element>
 {:else}
-	<CloseButton as={Tag} bind:ref {...mergedProps} />
+	<Tag bind:ref {...attrs} {children} />
 {/if}

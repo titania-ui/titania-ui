@@ -1,65 +1,75 @@
-<script lang="ts">
-	import { theme, type RootProps } from '../index.ts';
-	import { themeAttrs } from '../../../utils/index.ts';
+<script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { box, boxWith } from 'svelte-toolbelt';
 	import { alertCtx } from '../alert-context.ts';
+	import { theme, type RootCfg, type RootProps } from '../index.ts';
+	import { splitVariants } from '#lib/utils/themeAttrs.js';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
 
 	const uid = $props.id();
 
 	let {
 		dismissed = $bindable(false),
-		onDismiss = undefined,
+		ondismiss = undefined,
 		//
 		id = uid,
 		as: Tag = 'div',
-		ref = $bindable(null),
 		class: className = undefined,
-		render,
+		ref = $bindable(null),
 		children,
-		...props
-	}: RootProps = $props();
+		child,
+		...rest
+	}: RootProps<TAs> = $props();
 
-	const slots = $derived(theme(props));
-	const attrs = $derived(themeAttrs(theme, props));
+	let split = $derived(splitVariants(theme, rest));
+
+	const cls = $derived(
+		theme().root({
+			...split.variants,
+			class: className
+		} as never)
+	);
 
 	const ctx = alertCtx.set({
 		id: boxWith(() => id),
-		slots: boxWith(() => slots),
-		attrs: boxWith(() => attrs),
+		variants: boxWith(() => split.variants),
 		titleId: box<string | undefined>(undefined),
 		descriptionId: box<string | undefined>(undefined),
 		dismissed: boxWith(
 			() => dismissed,
 			(v) => {
 				dismissed = v;
-				if (v) onDismiss?.();
+				if (v) ondismiss?.();
 			}
 		)
 	});
 
-	const role = $derived(
-		props.status === 'warning' || props.status === 'danger' ? 'alert' : 'status'
-	);
-
-	const mergedProps = $derived<RootProps>({
-		role,
+	const attrs = $derived({
+		'data-slot': 'alert',
+		role:
+			split.variants.status === 'warning' || split.variants.status === 'danger'
+				? 'alert'
+				: 'status',
 		'aria-atomic': 'true',
 		'aria-labelledby': ctx.titleId.current,
 		'aria-describedby': ctx.descriptionId.current,
-		'data-slot': 'alert',
-		...attrs,
-		...props,
-		id,
-		class: slots.root({ className })
+		...split.attrs,
+		class: cls,
+		id
 	});
 </script>
 
 {#if !dismissed}
-	{#if render}
-		{@render render({ props: mergedProps })}
-	{:else}
-		<svelte:element this={Tag} bind:this={ref} {...mergedProps}>
+	{#if child}
+		{@render child({
+			props: attrs
+		} as ChildArgOf<RootCfg>)}
+	{:else if typeof Tag === 'string'}
+		<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
 			{@render children?.()}
 		</svelte:element>
+	{:else}
+		<Tag bind:ref {...attrs}>
+			{@render children?.()}
+		</Tag>
 	{/if}
 {/if}

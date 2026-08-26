@@ -1,15 +1,23 @@
-import type { FixedTagComponentProps } from '../../types.ts';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
 
-import { theme, type ThemeVariants } from './theme.ts';
-export { theme, type ThemeVariants };
+// Theme
+import { theme } from './theme.ts';
+export { theme };
 
 // Root
-export type RootPropsRaw = { value?: unknown; invalid?: boolean; disabled?: boolean };
-export type RootProps = Omit<
-	FixedTagComponentProps<'textarea', RootPropsRaw, ThemeVariants>,
-	'children'
->;
-import { default as Root } from './textarea-root.svelte';
+export type RootCfg = Define<{
+	tag: 'textarea';
+	own: { invalid?: boolean };
+	theme: ThemeOf<typeof theme>;
+}>;
+export type RootProps = Props<'textarea', RootCfg>;
+import { default as Root } from './components/textarea-root.svelte';
 
-const EXPORT = Object.assign(Root, { Root, theme });
+const EXPORT: typeof Root & {
+	Root: typeof Root;
+	theme: typeof theme;
+} = Object.assign(Root, {
+	Root,
+	theme
+});
 export default EXPORT;

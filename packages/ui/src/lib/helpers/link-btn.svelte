@@ -9,7 +9,7 @@
 	import { useActivePress } from './useActivePress.ts';
 	import { useFocusRing } from './useFocusRing.ts';
 	import { useHover } from './useHover.ts';
-	import TouchTarget from '$lib/components/button/components/touch-target.svelte';
+	import TouchTarget from './touch-target.svelte';
 
 	let { disabled = false, ref = $bindable(null), children, ...props }: LinkBtnProps = $props();
 </script>
@@ -25,6 +25,7 @@
 		role={disabled ? 'link' : undefined}
 		tabindex={disabled ? -1 : 0}
 		{...props}
+		onclick={disabled ? undefined : props.onclick}
 	>
 		<TouchTarget {children} />
 	</a>

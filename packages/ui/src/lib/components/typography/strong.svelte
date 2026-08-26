@@ -1,18 +1,35 @@
-<script lang="ts">
-	import { cx } from 'tailwind-variants/lite';
-	import type { RootProps } from './strong.ts';
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import { theme, type RootProps } from './strong.ts';
+	import type { As } from '#lib/types/props.ts';
+	import { splitVariants } from '#lib/utils/themeAttrs.ts';
 
 	let {
 		//
-		ref = $bindable(null),
+		as: Tag = 'strong',
 		class: className = undefined,
+		ref = $bindable(null),
 		children,
-		...props
-	}: RootProps = $props();
+		...rest
+	}: RootProps<TAs> = $props();
 
-	const classValue = $derived(cx('tastrong', className));
+	let split = $derived(splitVariants(theme, rest));
+
+	const cls = $derived(
+		theme({
+			...split.variants,
+			class: className
+		} as never)
+	);
+
+	const attrs = $derived({ ...split.attrs, class: cls });
 </script>
 
-<strong bind:this={ref} {...props} class={classValue}>
-	{@render children?.()}
-</strong>
+{#if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
+		{@render children?.()}
+	</svelte:element>
+{:else}
+	<Tag bind:ref {...attrs}>
+		{@render children?.()}
+	</Tag>
+{/if}

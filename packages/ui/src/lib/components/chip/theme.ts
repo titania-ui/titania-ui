@@ -1,38 +1,41 @@
-import { tv, type VariantProps } from 'tailwind-variants/lite';
+import { tv } from 'tailwind-variants/lite';
 
 export const theme = tv({
-	base: 'tachip',
+	slots: {
+		root: 'tachip',
+		label: 'tachip__label'
+	},
 	variants: {
 		color: {
-			default: 'tachip--color-default',
-			accent: 'tachip--color-accent',
-			success: 'tachip--color-success',
-			warning: 'tachip--color-warning',
-			danger: 'tachip--color-danger',
+			default: { root: 'tachip--color-default' },
+			accent: { root: 'tachip--color-accent' },
+			success: { root: 'tachip--color-success' },
+			warning: { root: 'tachip--color-warning' },
+			danger: { root: 'tachip--color-danger' },
 
-			red: 'tachip--color-red',
-			orange: 'tachip--color-orange',
-			amber: 'tachip--color-amber',
-			yellow: 'tachip--color-yellow',
-			lime: 'tachip--color-lime',
-			green: 'tachip--color-green',
-			emerald: 'tachip--color-emerald',
-			teal: 'tachip--color-teal',
-			cyan: 'tachip--color-cyan',
-			sky: 'tachip--color-sky',
-			blue: 'tachip--color-blue',
-			indigo: 'tachip--color-indigo',
-			violet: 'tachip--color-violet',
-			purple: 'tachip--color-purple',
-			fuchsia: 'tachip--color-fuchsia',
-			pink: 'tachip--color-pink',
-			rose: 'tachip--color-rose',
-			zinc: 'tachip--color-zinc'
+			red: { root: 'tachip--color-red' },
+			orange: { root: 'tachip--color-orange' },
+			amber: { root: 'tachip--color-amber' },
+			yellow: { root: 'tachip--color-yellow' },
+			lime: { root: 'tachip--color-lime' },
+			green: { root: 'tachip--color-green' },
+			emerald: { root: 'tachip--color-emerald' },
+			teal: { root: 'tachip--color-teal' },
+			cyan: { root: 'tachip--color-cyan' },
+			sky: { root: 'tachip--color-sky' },
+			blue: { root: 'tachip--color-blue' },
+			indigo: { root: 'tachip--color-indigo' },
+			violet: { root: 'tachip--color-violet' },
+			purple: { root: 'tachip--color-purple' },
+			fuchsia: { root: 'tachip--color-fuchsia' },
+			pink: { root: 'tachip--color-pink' },
+			rose: { root: 'tachip--color-rose' },
+			zinc: { root: 'tachip--color-zinc' }
 		},
 		size: {
-			sm: 'tachip--size-sm',
-			md: 'tachip--size-md',
-			lg: 'tachip--size-lg'
+			sm: { root: 'tachip--size-sm' },
+			md: { root: 'tachip--size-md' },
+			lg: { root: 'tachip--size-lg' }
 		}
 	},
 	defaultVariants: {
@@ -41,5 +44,3 @@ export const theme = tv({
 		variant: 'primary'
 	}
 });
-
-export type ThemeVariants = VariantProps<typeof theme>;

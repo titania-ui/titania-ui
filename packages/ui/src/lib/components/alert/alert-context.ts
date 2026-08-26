@@ -1,11 +1,9 @@
 import type { ReadableBox, WritableBox } from 'svelte-toolbelt';
-import { Context } from '../../utils/index.ts';
-import type { theme } from './theme.ts';
+import { Context } from '#lib/utils/context.js';
 
 export interface AlertCtx {
 	readonly id: ReadableBox<string>;
-	readonly slots: ReadableBox<ReturnType<typeof theme>>;
-	readonly attrs: ReadableBox<Record<string, unknown>>;
+	readonly variants: ReadableBox<Record<string, unknown>>;
 	readonly titleId: WritableBox<string | undefined>;
 	readonly descriptionId: WritableBox<string | undefined>;
 	readonly dismissed: WritableBox<boolean>;

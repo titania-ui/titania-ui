@@ -1,0 +1,19 @@
+.taspinner {
+	@apply icon-[svg-spinners--90-ring-with-bg];
+
+	&.taspinner--color-danger {
+		@apply text-fg-danger-strong;
+	}
+
+	&.taspinner--color-warning {
+		@apply text-fg-warning;
+	}
+
+	&.taspinner--color-success {
+		@apply text-fg-success-strong;
+	}
+
+	&.taspinner--color-accent {
+		@apply text-fg-brand-strong;
+	}
+}

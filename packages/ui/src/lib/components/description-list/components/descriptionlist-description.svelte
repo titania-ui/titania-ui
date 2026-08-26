@@ -1,29 +1,25 @@
-<script lang="ts">
-	import { type DescriptionProps } from '../index.ts';
-	import { descriptionListCtx } from '../dl-context.ts';
-
-	const ctx = descriptionListCtx.get();
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import { theme, type DescriptionProps } from '../index.ts';
+	import type { As } from '#lib/types/props.ts';
 
 	let {
 		//
 		as: Tag = 'dd',
 		ref = $bindable(null),
 		class: className = undefined,
-		render,
 		children,
-		...props
-	}: DescriptionProps = $props();
+		...rest
+	}: DescriptionProps<TAs> = $props();
 
-	const mergedProps = $derived({
-		...props,
-		class: ctx.slots.current.description({ className })
-	});
+	const attrs = $derived({ ...rest, class: theme().description({ className }) });
 </script>
 
-{#if render}
-	{@render render({ props: mergedProps })}
-{:else}
-	<svelte:element this={Tag} bind:this={ref} {...mergedProps}>
+{#if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
 		{@render children?.()}
 	</svelte:element>
+{:else}
+	<Tag bind:ref {...attrs}>
+		{@render children?.()}
+	</Tag>
 {/if}

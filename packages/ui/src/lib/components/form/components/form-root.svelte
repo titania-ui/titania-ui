@@ -1,13 +1,11 @@
-<script lang="ts" module>
-	type T = unknown;
-</script>
-
-<script lang="ts" generics="T extends Record<string, unknown>">
-	import { rootTheme, type RootProps } from '../index.ts';
-	import { themeAttrs } from '../../../utils/index.ts';
-	import { boxWith } from 'svelte-toolbelt';
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import { box, boxWith } from 'svelte-toolbelt';
 	import { formCtx } from '../form-context.ts';
+	import { theme, type RootCfg, type RootProps } from '../index.ts';
+	import { splitVariants } from '#lib/utils/themeAttrs.js';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { fromStore } from 'svelte/store';
+	import { createAttachmentKey, fromAction } from 'svelte/attachments';
 
 	const uid = $props.id();
 
@@ -16,40 +14,58 @@
 		//
 		id = uid,
 		as: Tag = 'form',
-		ref = $bindable(null),
 		class: className = undefined,
-		render,
+		ref = $bindable(null),
 		children,
-		...props
-	}: RootProps<T> = $props();
+		child,
+		...rest
+	}: RootProps<TAs> = $props();
 
-	const slots = $derived(rootTheme(props));
-	const attrs = $derived(themeAttrs(rootTheme, props));
+	let split = $derived(splitVariants(theme, rest));
 
 	const __constraints = $derived(fromStore(form.constraints).current);
 	const __errors = $derived(fromStore(form.errors).current);
 
-	formCtx.set({
+	const ctx = formCtx.set({
 		id: boxWith(() => id),
-		slots: boxWith(() => slots),
+		variants: boxWith(() => split.variants),
+
 		form: boxWith(() => form),
 		constraints: boxWith(() => __constraints),
 		errors: boxWith(() => __errors)
 	});
 
-	const mergedProps = $derived({
+	const cls = $derived(
+		theme().root({
+			...split.variants,
+			class: className
+		} as never)
+	);
+
+	const ENHANCE = createAttachmentKey();
+
+	const attrs = $derived({
 		'data-slot': 'form',
 		method: 'POST',
-		...attrs,
-		id,
-		class: slots.root({ className })
+		enctype: 'multipart/form-data',
+		novalidate: true,
+		...split.attrs,
+		[ENHANCE]: fromAction(form.enhance),
+		class: cls,
+		id
 	});
 </script>
 
-{#if render}
-	{@render render({ props: mergedProps })}
-{:else}
-	<svelte:element this={Tag} bind:this={ref} use:form.enhance novalidate {...mergedProps}>
+{#if child}
+	{@render child({
+		props: attrs
+	} as ChildArgOf<RootCfg>)}
+{:else if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
 		{@render children?.()}
 	</svelte:element>
+{:else}
+	<Tag bind:ref {...attrs}>
+		{@render children?.()}
+	</Tag>
 {/if}

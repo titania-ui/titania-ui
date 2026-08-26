@@ -1,37 +1,49 @@
-<script lang="ts">
-	import type { IndicatorProps } from '../index.ts';
-	import { Icon } from '../../../index.ts';
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import { type IndicatorProps, type IndicatorCfg, theme } from '../index.ts';
+	import { Icon } from '#lib';
 	import { alertCtx } from '../alert-context.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { cx } from 'tailwind-variants/lite';
 
 	const ctx = alertCtx.get();
 
 	let {
 		//
-		as: Tag = 'div',
-		ref = $bindable(null),
+		as: _Tag = undefined,
 		class: className = undefined,
-		render,
+		ref = $bindable(null),
 		children,
-		...props
-	}: IndicatorProps = $props();
+		child,
+		...rest
+	}: IndicatorProps<TAs> = $props();
 
-	const mergedProps = $derived<IndicatorProps>({
-		'aria-hidden': 'true',
-		'data-slot': 'alert-indicator',
-		...ctx.attrs.current,
-		...props,
-		class: ctx.slots.current.indicator({ className })
+	const Tag = $derived(_Tag ?? Icon);
+
+	const cls = $derived(
+		cx(
+			theme().indicator({
+				...ctx.variants.current,
+				class: className
+			} as never),
+			!_Tag && theme().indicator_placeholder()
+		)
+	);
+
+	const attrs = $derived({
+		'data-slot': 'icon',
+		...rest,
+		class: cls
 	});
 </script>
 
-{#if render}
-	{@render render({ props: mergedProps })}
-{:else}
-	<svelte:element this={Tag} bind:this={ref} {...mergedProps}>
-		{#if children}
-			{@render children?.()}
-		{:else}
-			<Icon class={ctx.slots.current.indicatorDefault()} />
-		{/if}
+{#if child}
+	{@render child({
+		props: attrs
+	} as ChildArgOf<IndicatorCfg>)}
+{:else if typeof Tag === 'string'}
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
+		{@render children?.()}
 	</svelte:element>
+{:else}
+	<Tag bind:ref {...attrs} {children} />
 {/if}

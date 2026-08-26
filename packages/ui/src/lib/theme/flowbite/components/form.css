@@ -1,0 +1,55 @@
+.taform__legend {
+	@apply mb-4 text-xl font-bold text-heading;
+}
+
+.taform__fieldgroup {
+	@apply space-y-6;
+}
+
+.tafield {
+	@apply mb-6;
+
+	.tafield__error {
+		@apply mt-2.5 text-sm text-fg-danger-strong;
+	}
+	.tafield__description {
+		@apply mt-2.5 text-sm text-body;
+	}
+}
+
+.talabel {
+	@apply mb-2.5 block text-sm font-medium text-heading;
+	&.talabel--invalid {
+		@apply text-fg-danger-strong;
+	}
+}
+
+.tainput__wrapper,
+.taselect__wrapper,
+.tatextarea__wrapper {
+	@apply contents;
+}
+
+.tainput {
+	@apply block w-full rounded-base border border-default-medium bg-neutral-secondary-medium px-3 py-2.5 text-sm text-heading shadow-xs placeholder:text-body focus:border-brand focus:ring-brand;
+	&.tainput--invalid {
+		@apply border-danger-subtle bg-danger-soft text-fg-danger-strong placeholder:text-fg-danger-strong focus:border-danger focus:ring-danger;
+	}
+}
+
+.tatextarea {
+	@apply block w-full rounded-base border border-default-medium bg-neutral-secondary-medium p-3.5 text-sm text-heading shadow-xs placeholder:text-body focus:border-brand focus:ring-brand;
+	&.tatextarea--invalid {
+		@apply border-danger-subtle bg-danger-soft text-fg-danger-strong placeholder:text-fg-danger-strong focus:border-danger focus:ring-danger;
+	}
+}
+
+.taselect {
+	@apply block w-full rounded-base border border-default-medium bg-neutral-secondary-medium px-3 py-2.5 text-sm text-heading shadow-xs placeholder:text-body focus:border-brand focus:ring-brand;
+	&.taselect--invalid {
+		@apply border-danger-subtle bg-danger-soft text-fg-danger-strong placeholder:text-fg-danger-strong focus:border-danger focus:ring-danger;
+	}
+	.taselect__icon__wrapper {
+		@apply hidden;
+	}
+}

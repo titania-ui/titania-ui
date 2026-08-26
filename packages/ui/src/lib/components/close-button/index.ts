@@ -1,13 +1,20 @@
-import type { FixedTagComponentProps } from '../../types.ts';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
 
 // Theme
-import { theme, type ThemeVariants } from './theme.ts';
-export { theme, type ThemeVariants };
+import { theme } from './theme.ts';
+export { theme };
 
 // Root
-export type RootPropsRaw = {};
-export type RootProps = FixedTagComponentProps<'button', RootPropsRaw, ThemeVariants>;
-import { default as Root } from './close-button-root.svelte';
+export type RootCfg = Define<{
+	tag: 'button';
+	theme: ThemeOf<typeof theme>;
+	child: true;
+}>;
+export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
+import { default as Root } from './components/close-button-root.svelte';
 
-const EXPORT = Object.assign(Root, { Root, theme });
+const EXPORT: typeof Root & {
+	Root: typeof Root;
+	theme: typeof theme;
+} = Object.assign(Root, { Root, theme });
 export default EXPORT;

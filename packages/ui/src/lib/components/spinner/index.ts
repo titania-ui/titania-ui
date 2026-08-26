@@ -1,15 +1,24 @@
-import type { FixedTagComponentProps } from '../../types.ts';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
 
-import { theme, type ThemeVariants } from './theme.ts';
-export { theme, type ThemeVariants };
+import { theme } from './theme.ts';
+export { theme };
 
 // Root
-export type RootPropsRaw = { dismissible?: boolean; dismissed?: boolean };
-export type RootProps = Omit<
-	FixedTagComponentProps<'div', RootPropsRaw, ThemeVariants>,
+export type RootCfg = Define<{
+	tag: 'span';
+	theme: ThemeOf<typeof theme>;
+}>;
+export type RootProps<TAs extends As | undefined = undefined> = Omit<
+	Props<TAs, RootCfg>,
 	'children'
 >;
-import { default as Root } from './spinner-root.svelte';
+import { default as Root } from './components/spinner-root.svelte';
 
-const EXPORT = Object.assign(Root, { Root, theme });
+const EXPORT: typeof Root & {
+	Root: typeof Root;
+	theme: typeof theme;
+} = Object.assign(Root, {
+	Root,
+	theme
+});
 export default EXPORT;

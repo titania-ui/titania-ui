@@ -2,11 +2,7 @@
 	import {
 		Alert,
 		Button,
-		Form,
 		Text,
-		Input,
-		Textarea,
-		Select,
 		Icon,
 		Heading,
 		Strong,
@@ -14,8 +10,14 @@
 		Chip,
 		Link,
 		Code,
-		Sidebar,
-		DescriptionList
+		Form,
+		Field,
+		Label,
+		Input,
+		Textarea,
+		Select,
+		DescriptionList,
+		Sidebar
 	} from '../../lib/index.ts';
 	import { superForm } from 'sveltekit-superforms';
 	import { zod4 } from 'sveltekit-superforms/adapters';
@@ -110,36 +112,36 @@
 			<Form.Legend>Reservation details</Form.Legend>
 			<Text>Without this your odds of getting a table are low.</Text>
 			<Form.FieldGroup>
-				<Form.Field auto name="party_size">
-					<Form.Control>
-						<Form.Label>Party size</Form.Label>
-						<Input type="number" />
-					</Form.Control>
-					<Form.Error />
-				</Form.Field>
-				<Form.Field auto name="seating">
-					<Form.Control>
-						<Form.Label>Seating preference</Form.Label>
-						<Select>
-							<option value="indoor">Indoor</option>
-							<option value="patio">Patio</option>
-							<option value="bar">Bar</option>
-						</Select>
-					</Form.Control>
-					<Form.Description>We currently only offer indoor, patio, or bar seating.</Form.Description
-					>
-					<Form.Error />
-				</Form.Field>
-				<Form.Field auto name="notes">
-					<Form.Control>
-						<Form.Label>Special requests</Form.Label>
-						<Textarea />
-					</Form.Control>
-					<Form.Description
-						>If you're celebrating something, we'd like to know about it.</Form.Description
-					>
-					<Form.Error />
-				</Form.Field>
+				<Field auto name="party_size">
+					<Label>Party size</Label>
+					<Input type="number" />
+					<Field.Error />
+				</Field>
+				<Field auto name="seating">
+					<Label>Seating preference</Label>
+					<Select>
+						<option value="indoor">Indoor</option>
+						<option value="patio">Patio</option>
+						<option value="bar">Bar</option>
+					</Select>
+					<Field.Description>
+						We currently only offer indoor, patio, or bar seating.
+					</Field.Description>
+					<Field.Error />
+				</Field>
+				<Field auto name="notes">
+					<Label>Special requests</Label>
+					<Textarea />
+					<Field.Description>
+						If you're celebrating something, we'd like to know about it.
+					</Field.Description>
+					<Field.Error />
+				</Field>
+				<Field auto name="date">
+					<Label>Date</Label>
+					<Input type="date" />
+					<Field.Error />
+				</Field>
 			</Form.FieldGroup>
 		</Form.Fieldset>
 	</Form>

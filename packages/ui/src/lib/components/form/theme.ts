@@ -1,6 +1,6 @@
-import { tv, type VariantProps } from 'tailwind-variants/lite';
+import { tv } from 'tailwind-variants/lite';
 
-export const rootTheme = tv({
+export const theme = tv({
 	slots: {
 		root: 'taform',
 		fieldset: 'taform__fieldset',
@@ -9,29 +9,3 @@ export const rootTheme = tv({
 	},
 	variants: {}
 });
-
-export type RootThemeVariants = VariantProps<typeof rootTheme>;
-
-export const fieldTheme = tv({
-	slots: {
-		root: 'tafield',
-		error: 'tafield__error',
-		description: 'tafield__description',
-		label: 'tafield__label'
-	},
-	variants: {
-		invalid: {
-			true: {
-				root: 'tafield--invalid',
-				error: 'tafield__error--invalid',
-				description: 'tafield__description--invalid',
-				label: 'tafield__label--invalid'
-			}
-		}
-	},
-	defaultVariants: {
-		invalid: false
-	}
-});
-
-export type FieldThemeVariants = VariantProps<typeof fieldTheme>;

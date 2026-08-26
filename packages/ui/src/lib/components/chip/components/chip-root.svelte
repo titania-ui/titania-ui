@@ -1,48 +1,68 @@
-<script lang="ts">
-	import { theme, type RootProps } from '../index.ts';
-	import { themeAttrs } from '../../../utils/themeAttrs.ts';
+<script lang="ts" generics="TAs extends As | undefined = undefined">
+	import { theme, type RootCfg, type RootProps } from '../index.ts';
 	import { chipCtx } from '../chip-context.ts';
 	import { boxWith } from 'svelte-toolbelt';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { splitVariants } from '#lib/utils/themeAttrs.js';
 
 	const uid = $props.id();
 
 	let {
 		dismissed = $bindable(false),
-		onDismiss = undefined,
+		ondismiss = undefined,
 		//
 		id = uid,
 		as: Tag = 'div',
-		ref = $bindable(null),
 		class: className = undefined,
-		render,
+		ref = $bindable(null),
 		children,
-		...props
-	}: RootProps = $props();
+		child,
+		...rest
+	}: RootProps<TAs> = $props();
 
-	const attrs = $derived(themeAttrs(theme, props));
+	let split = $derived(splitVariants(theme, rest));
+
+	const cls = $derived(
+		theme().root({
+			...split.variants,
+			class: className
+		} as never)
+	);
 
 	const ctx = chipCtx.set({
 		id: boxWith(() => id),
+		labelId: boxWith(() => undefined),
+		variants: boxWith(() => split.variants),
 		dismissed: boxWith(
 			() => dismissed,
 			(v) => {
 				dismissed = v;
-				if (v) onDismiss?.();
+				if (v) ondismiss?.();
 			}
 		)
 	});
 
-	const classValue = $derived(theme({ className, ...props }));
-
-	const mergedProps = $derived<RootProps>({ 'data-slot': 'chip', id, ...attrs, class: classValue });
+	const attrs = $derived({
+		'data-slot': 'chip',
+		'aria-describedby': ctx.labelId.current,
+		...split.attrs,
+		class: cls,
+		id
+	});
 </script>
 
 {#if !dismissed}
-	{#if render}
-		{@render render({ props: mergedProps })}
-	{:else}
-		<svelte:element this={Tag} bind:this={ref} {...mergedProps}>
+	{#if child}
+		{@render child({
+			props: attrs
+		} as ChildArgOf<RootCfg>)}
+	{:else if typeof Tag === 'string'}
+		<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
 			{@render children?.()}
 		</svelte:element>
+	{:else}
+		<Tag bind:ref {...attrs}>
+			{@render children?.()}
+		</Tag>
 	{/if}
 {/if}
