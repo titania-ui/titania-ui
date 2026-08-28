@@ -8,6 +8,7 @@ export { theme };
 export type RootCfg = Define<{
 	tag: 'button';
 	theme: ThemeOf<typeof theme>;
+	state: { hovered: boolean; pressed: boolean; focused: boolean };
 	child: true;
 }>;
 export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;

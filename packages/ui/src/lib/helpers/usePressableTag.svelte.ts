@@ -22,6 +22,9 @@ export interface PressableTagOptions {
 
 export interface PressableTag {
 	readonly tag: As;
+	/** The hover / focus-ring / active-press attachments only — nothing tag-specific. */
+	readonly attachments: Record<string, unknown>;
+	/** `attachments` plus the resolved `button` / link attribute branch. */
 	readonly attrs: Record<string, unknown>;
 	readonly state: { hovered: boolean; pressed: boolean; focused: boolean };
 }
@@ -42,10 +45,14 @@ export function usePressableTag(options: PressableTagOptions = {}): PressableTag
 	const FOCUS = createAttachmentKey();
 	const PRESS = createAttachmentKey();
 
-	const attrs = $derived({
+	const attachments = $derived({
 		[HOVER]: useHover({ isDisabled: pressDisabled, onHoverChange: (v) => (hovered = v) }),
 		[FOCUS]: useFocusRing({ onFocusVisibleChange: (v) => (focused = v) }),
-		[PRESS]: useActivePress({ disabled: pressDisabled, onPressedChange: (v) => (pressed = v) }),
+		[PRESS]: useActivePress({ disabled: pressDisabled, onPressedChange: (v) => (pressed = v) })
+	});
+
+	const attrs = $derived({
+		...attachments,
 		...(tag === 'button'
 			? {
 					type: type() ?? 'button',
@@ -64,6 +71,9 @@ export function usePressableTag(options: PressableTagOptions = {}): PressableTag
 	return {
 		get tag() {
 			return tag;
+		},
+		get attachments() {
+			return attachments;
 		},
 		get attrs() {
 			return attrs;

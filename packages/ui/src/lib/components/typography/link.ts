@@ -18,6 +18,7 @@ export type RootCfg = Define<{
 	tag: 'a';
 	theme: ThemeOf<typeof theme>;
 	own: { disabled?: boolean };
+	child: true;
 }>;
 export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
 import { default as Root } from './link.svelte';

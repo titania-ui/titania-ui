@@ -1,6 +1,6 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { fieldsetCtx, formCtx, theme, type FieldsetProps } from '../index.ts';
-	import type { As } from '#lib/types/props.ts';
+	import { fieldsetCtx, formCtx, theme, type FieldsetCfg, type FieldsetProps } from '../index.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import { box } from 'svelte-toolbelt';
 
@@ -12,6 +12,7 @@
 		class: className = undefined,
 		ref = $bindable(null),
 		children,
+		child,
 		...rest
 	}: FieldsetProps<TAs> = $props();
 
@@ -33,4 +34,11 @@
 	});
 </script>
 
-<Polymorphic tag={Tag} {attrs} bind:ref {children} />
+<Polymorphic
+	tag={Tag}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs } as ChildArgOf<FieldsetCfg>}
+	{children}
+/>

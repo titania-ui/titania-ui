@@ -15,6 +15,7 @@
 		class: className = undefined,
 		ref = $bindable(null),
 		children,
+		child,
 		...rest
 	}: ItemProps<TAs> = $props();
 
@@ -51,10 +52,15 @@
 	});
 </script>
 
+{#snippet body()}
+	{@render children?.(childrenState)}
+{/snippet}
+
 <Polymorphic
 	tag={Tag}
 	{attrs}
 	bind:ref
-	{children}
+	{child}
 	childArg={{ props: attrs, ...childrenState } as ChildArgOf<ItemCfg>}
+	children={body}
 />

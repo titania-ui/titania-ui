@@ -64,13 +64,23 @@
 		...split.attrs,
 		class: cls
 	});
+
+	const childrenState = $derived({
+		errors: __errors,
+		required: __required,
+		disabled
+	});
 </script>
+
+{#snippet body()}
+	{@render children?.(childrenState)}
+{/snippet}
 
 <Polymorphic
 	tag={Tag}
 	{attrs}
 	bind:ref
 	{child}
-	childArg={{ props: attrs } as ChildArgOf<RootCfg>}
-	{children}
+	childArg={{ props: attrs, ...childrenState } as ChildArgOf<RootCfg>}
+	children={body}
 />

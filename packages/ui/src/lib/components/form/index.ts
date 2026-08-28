@@ -20,12 +20,12 @@ export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootC
 import { default as Root } from './components/form-root.svelte';
 
 // Fieldset
-export type FieldsetCfg = Define<{ tag: 'fieldset' }>;
+export type FieldsetCfg = Define<{ tag: 'fieldset'; child: true }>;
 export type FieldsetProps<TAs extends As | undefined = undefined> = Props<TAs, FieldsetCfg>;
 import { default as Fieldset } from './components/form-fieldset.svelte';
 
 // Legend
-export type LegendCfg = Define<{ tag: 'legend' }>;
+export type LegendCfg = Define<{ tag: 'legend'; child: true }>;
 export type LegendProps<TAs extends As | undefined = undefined> = Props<TAs, LegendCfg>;
 import { default as Legend } from './components/form-legend.svelte';
 

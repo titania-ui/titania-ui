@@ -6,7 +6,12 @@ export const theme = tv({
 });
 
 // Root
-export type RootCfg = Define<{ tag: 'span'; theme: ThemeOf<typeof theme>; own: { icon?: string } }>;
+export type RootCfg = Define<{
+	tag: 'span';
+	theme: ThemeOf<typeof theme>;
+	own: { icon?: string };
+	child: true;
+}>;
 export type RootProps<TAs extends As | undefined = undefined> = Omit<
 	Props<TAs, RootCfg>,
 	'children'

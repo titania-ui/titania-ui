@@ -1,6 +1,6 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { theme, type RootProps } from './icon.ts';
-	import type { As } from '#lib/types/props.ts';
+	import { theme, type RootCfg, type RootProps } from './icon.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import { splitVariants } from '#lib/utils/themeAttrs.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import { cx } from 'tailwind-variants/lite';
@@ -11,6 +11,7 @@
 		as: Tag = 'span',
 		class: className = undefined,
 		ref = $bindable(null),
+		child,
 		...rest
 	}: RootProps<TAs> = $props();
 
@@ -32,4 +33,10 @@
 	});
 </script>
 
-<Polymorphic tag={Tag as As} {attrs} bind:ref />
+<Polymorphic
+	tag={Tag as As}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs } as ChildArgOf<RootCfg>}
+/>

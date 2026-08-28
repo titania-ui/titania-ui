@@ -46,6 +46,14 @@ export type ItemCfg = Define<{
 	tag: 'button';
 	when: { href: 'a' };
 	own: { current?: boolean; disabled?: boolean; href?: string };
+	state: {
+		disabled: boolean;
+		current: boolean;
+		hovered: boolean;
+		pressed: boolean;
+		focused: boolean;
+	};
+	child: true;
 }>;
 export type ItemProps<TAs extends As | undefined = undefined> = Props<TAs, ItemCfg>;
 import { default as Item } from './components/sidebar-item.svelte';

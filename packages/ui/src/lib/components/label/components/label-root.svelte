@@ -1,6 +1,6 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { theme, type RootProps } from '../index.ts';
-	import type { As } from '#lib/types/props.ts';
+	import { theme, type RootCfg, type RootProps } from '../index.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import { splitVariants } from '#lib/utils/themeAttrs.ts';
 	import { registerId } from '#lib/utils/registerId.js';
 	import { fieldCtx } from '#lib/components/field/field-context.ts';
@@ -18,6 +18,7 @@
 		class: className = undefined,
 		ref = $bindable(null),
 		children,
+		child,
 		...rest
 	}: RootProps<TAs> = $props();
 
@@ -27,6 +28,8 @@
 
 	const __required = $derived(field_ctx ? field_ctx.required.current : required);
 	const __invalid = $derived(field_ctx ? field_ctx.errors.current.length > 0 : invalid);
+
+	const childrenState = $derived({ required: Boolean(__required), invalid: Boolean(__invalid) });
 
 	let split = $derived(splitVariants(theme, rest));
 
@@ -48,4 +51,15 @@
 	});
 </script>
 
-<Polymorphic tag={Tag} {attrs} bind:ref {children} />
+{#snippet body()}
+	{@render children?.(childrenState)}
+{/snippet}
+
+<Polymorphic
+	tag={Tag}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs, ...childrenState } as ChildArgOf<RootCfg>}
+	children={body}
+/>

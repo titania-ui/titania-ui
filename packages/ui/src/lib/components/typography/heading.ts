@@ -22,6 +22,7 @@ export type RootCfg = Define<{
 	own: {
 		level?: 1 | 2 | 3 | 4 | 5 | 6;
 	};
+	child: true;
 }>;
 export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
 import { default as Root } from './heading.svelte';

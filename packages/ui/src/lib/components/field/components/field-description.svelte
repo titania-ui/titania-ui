@@ -1,6 +1,6 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { fieldCtx, theme, type DescriptionProps } from '../index.ts';
-	import type { As } from '#lib/types/props.ts';
+	import { fieldCtx, theme, type DescriptionCfg, type DescriptionProps } from '../index.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import { registerId } from '#lib/utils/registerId.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
@@ -14,6 +14,7 @@
 		class: className = undefined,
 		ref = $bindable(null),
 		children,
+		child,
 		...rest
 	}: DescriptionProps<TAs> = $props();
 
@@ -29,8 +30,16 @@
 	const attrs = $derived({
 		'data-slot': 'description',
 		...rest,
-		class: cls
+		class: cls,
+		id
 	});
 </script>
 
-<Polymorphic tag={Tag} {attrs} bind:ref {children} />
+<Polymorphic
+	tag={Tag}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs } as ChildArgOf<DescriptionCfg>}
+	{children}
+/>

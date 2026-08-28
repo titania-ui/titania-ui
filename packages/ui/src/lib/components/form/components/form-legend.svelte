@@ -1,6 +1,6 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { fieldsetCtx, formCtx, theme, type LegendProps } from '../index.ts';
-	import type { As } from '#lib/types/props.ts';
+	import { fieldsetCtx, formCtx, theme, type LegendCfg, type LegendProps } from '../index.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import { registerId } from '#lib/utils/registerId.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
@@ -15,6 +15,7 @@
 		class: className = undefined,
 		ref = $bindable(null),
 		children,
+		child,
 		...rest
 	}: LegendProps<TAs> = $props();
 
@@ -30,8 +31,16 @@
 	const attrs = $derived({
 		'data-slot': 'legend',
 		...rest,
-		class: cls
+		class: cls,
+		id
 	});
 </script>
 
-<Polymorphic tag={Tag} {attrs} bind:ref {children} />
+<Polymorphic
+	tag={Tag}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs } as ChildArgOf<LegendCfg>}
+	{children}
+/>

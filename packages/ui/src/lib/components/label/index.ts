@@ -9,6 +9,7 @@ export type RootCfg = Define<{
 	tag: 'label';
 	own: { required?: boolean; invalid?: boolean };
 	theme: ThemeOf<typeof theme>;
+	state: { required: boolean; invalid: boolean };
 	child: true;
 }>;
 export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
