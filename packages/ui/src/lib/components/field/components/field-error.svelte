@@ -1,6 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { fieldCtx, theme, type DescriptionProps } from '../index.ts';
 	import type { As } from '#lib/types/props.ts';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const field_ctx = fieldCtx.get();
 
@@ -30,13 +31,7 @@
 </script>
 
 {#if hasError}
-	{#if typeof Tag === 'string'}
-		<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-			{field_ctx.errors.current[0]}
-		</svelte:element>
-	{:else}
-		<Tag bind:ref {...attrs}>
-			{field_ctx.errors.current[0]}
-		</Tag>
-	{/if}
+	<Polymorphic tag={Tag} {attrs} bind:ref>
+		{field_ctx.errors.current[0]}
+	</Polymorphic>
 {/if}

@@ -7,6 +7,7 @@
 	import { useFocusRing } from '#lib/helpers/useFocusRing.js';
 	import { useHover } from '#lib/helpers/useHover.js';
 	import TouchTarget from '#lib/helpers/touch-target.svelte';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import { createAttachmentKey } from 'svelte/attachments';
 
 	let {
@@ -52,20 +53,17 @@
 	{/if}
 {/snippet}
 
-{#if child}
-	{@render child({
-		props: attrs
-	} as ChildArgOf<RootCfg>)}
-{:else if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		<TouchTarget>
-			{@render childOrElse()}
-		</TouchTarget>
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs}>
-		<TouchTarget>
-			{@render childOrElse()}
-		</TouchTarget>
-	</Tag>
-{/if}
+{#snippet body()}
+	<TouchTarget>
+		{@render childOrElse()}
+	</TouchTarget>
+{/snippet}
+
+<Polymorphic
+	tag={Tag}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs } as ChildArgOf<RootCfg>}
+	children={body}
+/>

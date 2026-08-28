@@ -1,10 +1,8 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { sidebarCtx, theme, type ItemProps } from '../index.ts';
-	import type { As } from '#lib/types/props.ts';
-	import { useHover } from '#lib/helpers/useHover.js';
-	import { createAttachmentKey } from 'svelte/attachments';
-	import { useFocusRing } from '#lib/helpers/useFocusRing.ts';
-	import { useActivePress } from '#lib/helpers/useActivePress.ts';
+	import { sidebarCtx, theme, type ItemCfg, type ItemProps } from '../index.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
+	import { usePressableTag } from '#lib/helpers/usePressableTag.svelte.ts';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const ctx = sidebarCtx.get();
 
@@ -20,18 +18,20 @@
 		...rest
 	}: ItemProps<TAs> = $props();
 
-	const Tag = $derived<As>(_Tag ?? (href != null ? 'a' : 'button'));
+	const pressable = usePressableTag({
+		as: () => _Tag as As | undefined,
+		href: () => href,
+		disabled: () => disabled,
+		type: () => rest.type,
+		onclick: () => rest.onclick
+	});
 
-	let _HOVERED = $state(false);
-	let _PRESSED = $state(false);
-	let _FOCUSED = $state(false);
+	const Tag = $derived<As>(pressable.tag);
 
 	const childrenState = $derived({
 		disabled,
 		current,
-		hovered: _HOVERED,
-		pressed: _PRESSED,
-		focused: _FOCUSED
+		...pressable.state
 	});
 
 	const cls = $derived(
@@ -43,39 +43,18 @@
 		} as never)
 	);
 
-	const HOVER = createAttachmentKey();
-	const FOCUS = createAttachmentKey();
-	const PRESS = createAttachmentKey();
-
 	const attrs = $derived({
 		'data-slot': 'button',
 		...rest,
 		class: cls,
-		[HOVER]: useHover({ isDisabled: disabled, onHoverChange: (v) => (_HOVERED = v) }),
-		[FOCUS]: useFocusRing({ onFocusVisibleChange: (v) => (_FOCUSED = v) }),
-		[PRESS]: useActivePress({ disabled, onPressedChange: (v) => (_PRESSED = v) }),
-		...(Tag === 'button'
-			? {
-					type: rest.type ?? 'button',
-					disabled: disabled || undefined,
-					tabindex: rest.type ?? '0'
-				}
-			: {
-					href: disabled ? undefined : href,
-					'aria-disabled': disabled || undefined,
-					tabindex: disabled ? -1 : (rest.type ?? 0),
-					role: disabled ? (rest.type ?? 'link') : undefined,
-					onclick: disabled ? undefined : rest.onclick
-				})
+		...pressable.attrs
 	});
 </script>
 
-{#if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.()}
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs}>
-		{@render children?.()}
-	</Tag>
-{/if}
+<Polymorphic
+	tag={Tag}
+	{attrs}
+	bind:ref
+	{children}
+	childArg={{ props: attrs, ...childrenState } as ChildArgOf<ItemCfg>}
+/>

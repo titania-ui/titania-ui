@@ -1,6 +1,8 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { fieldCtx, theme, type DescriptionProps } from '../index.ts';
 	import type { As } from '#lib/types/props.ts';
+	import { registerId } from '#lib/utils/registerId.js';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const field_ctx = fieldCtx.get();
 	const uid = $props.id();
@@ -15,12 +17,7 @@
 		...rest
 	}: DescriptionProps<TAs> = $props();
 
-	$effect.pre(() => {
-		field_ctx.descriptionId.current = id;
-		return () => {
-			if (field_ctx.descriptionId.current === id) field_ctx.descriptionId.current = undefined;
-		};
-	});
+	$effect.pre(() => registerId(field_ctx.descriptionId, id));
 
 	const cls = $derived(
 		theme().description({
@@ -36,12 +33,4 @@
 	});
 </script>
 
-{#if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.()}
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs}>
-		{@render children?.()}
-	</Tag>
-{/if}
+<Polymorphic tag={Tag} {attrs} bind:ref {children} />

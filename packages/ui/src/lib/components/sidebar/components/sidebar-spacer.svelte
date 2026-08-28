@@ -1,6 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { sidebarCtx, theme, type SpacerProps } from '../index.ts';
 	import type { As } from '#lib/types/props.js';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const ctx = sidebarCtx.get();
 
@@ -25,9 +26,4 @@
 	});
 </script>
 
-{#if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}
-	></svelte:element>
-{:else}
-	<Tag bind:ref {...attrs} />
-{/if}
+<Polymorphic tag={Tag as As} {attrs} bind:ref />

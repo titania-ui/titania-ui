@@ -2,6 +2,7 @@
 	import { theme, type RootProps } from './heading.ts';
 	import type { As } from '#lib/types/props.ts';
 	import { splitVariants } from '#lib/utils/themeAttrs.ts';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	let {
 		level = 1,
@@ -33,12 +34,4 @@
 	});
 </script>
 
-{#if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.()}
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs}>
-		{@render children?.()}
-	</Tag>
-{/if}
+<Polymorphic tag={Tag} {attrs} bind:ref {children} />

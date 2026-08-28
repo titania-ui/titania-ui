@@ -2,6 +2,8 @@
 	import { alertCtx } from '../alert-context.ts';
 	import { theme, type DescriptionCfg, type DescriptionProps } from '../index.ts';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { registerId } from '#lib/utils/registerId.js';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const ctx = alertCtx.get();
 	const uid = $props.id();
@@ -17,12 +19,7 @@
 		...rest
 	}: DescriptionProps<TAs> = $props();
 
-	$effect.pre(() => {
-		ctx.descriptionId.current = id;
-		return () => {
-			if (ctx.descriptionId.current === id) ctx.descriptionId.current = undefined;
-		};
-	});
+	$effect.pre(() => registerId(ctx.descriptionId, id));
 
 	const cls = $derived(
 		theme().description({
@@ -39,16 +36,11 @@
 	});
 </script>
 
-{#if child}
-	{@render child({
-		props: attrs
-	} as ChildArgOf<DescriptionCfg>)}
-{:else if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.()}
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs}>
-		{@render children?.()}
-	</Tag>
-{/if}
+<Polymorphic
+	tag={Tag}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs } as ChildArgOf<DescriptionCfg>}
+	{children}
+/>

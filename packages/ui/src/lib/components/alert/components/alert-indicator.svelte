@@ -3,6 +3,7 @@
 	import { Icon } from '#lib';
 	import { alertCtx } from '../alert-context.ts';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import { cx } from 'tailwind-variants/lite';
 
 	const ctx = alertCtx.get();
@@ -36,14 +37,11 @@
 	});
 </script>
 
-{#if child}
-	{@render child({
-		props: attrs
-	} as ChildArgOf<IndicatorCfg>)}
-{:else if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.()}
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs} {children} />
-{/if}
+<Polymorphic
+	tag={Tag}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs } as ChildArgOf<IndicatorCfg>}
+	{children}
+/>

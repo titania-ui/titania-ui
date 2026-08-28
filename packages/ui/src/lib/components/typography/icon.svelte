@@ -2,6 +2,7 @@
 	import { theme, type RootProps } from './icon.ts';
 	import type { As } from '#lib/types/props.ts';
 	import { splitVariants } from '#lib/utils/themeAttrs.ts';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import { cx } from 'tailwind-variants/lite';
 
 	let {
@@ -31,9 +32,4 @@
 	});
 </script>
 
-{#if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}
-	></svelte:element>
-{:else}
-	<Tag bind:ref {...attrs} />
-{/if}
+<Polymorphic tag={Tag as As} {attrs} bind:ref />

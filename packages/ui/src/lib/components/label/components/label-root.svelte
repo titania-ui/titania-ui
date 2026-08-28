@@ -2,7 +2,9 @@
 	import { theme, type RootProps } from '../index.ts';
 	import type { As } from '#lib/types/props.ts';
 	import { splitVariants } from '#lib/utils/themeAttrs.ts';
+	import { registerId } from '#lib/utils/registerId.js';
 	import { fieldCtx } from '#lib/components/field/field-context.ts';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	let field_ctx = fieldCtx.getOr(undefined);
 	const uid = $props.id();
@@ -20,12 +22,7 @@
 	}: RootProps<TAs> = $props();
 
 	$effect.pre(() => {
-		if (field_ctx) {
-			field_ctx.labelId.current = id;
-			return () => {
-				if (field_ctx.labelId.current === id) field_ctx.labelId.current = undefined;
-			};
-		}
+		if (field_ctx) return registerId(field_ctx.labelId, id);
 	});
 
 	const __required = $derived(field_ctx ? field_ctx.required.current : required);
@@ -51,12 +48,4 @@
 	});
 </script>
 
-{#if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.()}
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs}>
-		{@render children?.()}
-	</Tag>
-{/if}
+<Polymorphic tag={Tag} {attrs} bind:ref {children} />

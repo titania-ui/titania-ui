@@ -1,6 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { sidebarCtx, theme, type HeaderProps } from '../index.ts';
 	import type { As } from '#lib/types/props.js';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const ctx = sidebarCtx.get();
 
@@ -26,12 +27,4 @@
 	});
 </script>
 
-{#if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.()}
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs}>
-		{@render children?.()}
-	</Tag>
-{/if}
+<Polymorphic tag={Tag} {attrs} bind:ref {children} />

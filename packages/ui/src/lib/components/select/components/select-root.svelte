@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { theme, type RootProps } from '../index.ts';
 	import { splitVariants } from '#lib/utils/themeAttrs.ts';
+	import { fieldControlAttrs, fieldInvalid } from '#lib/utils/fieldControl.ts';
 	import { fieldCtx } from '#lib/components/field/field-context.ts';
 	import { fieldValue } from '#lib/components/input/field-value.svelte.ts';
 
@@ -17,7 +18,7 @@
 		...rest
 	}: RootProps = $props();
 
-	const __invalid = $derived(field_ctx ? field_ctx.errors.current.length > 0 : invalid);
+	const __invalid = $derived(fieldInvalid(field_ctx, invalid));
 
 	let split = $derived(splitVariants(theme, rest));
 
@@ -31,18 +32,8 @@
 	);
 
 	const attrs = $derived<Record<string, unknown>>({
-		'data-slot': 'control',
-		'aria-invalid': __invalid ? 'true' : undefined,
+		...fieldControlAttrs(field_ctx, invalid),
 		multiple,
-		...(field_ctx
-			? {
-					'aria-labelledby': field_ctx.labelId.current,
-					'aria-describedby': field_ctx.descriptionId.current,
-					disabled: field_ctx.disabled.current || undefined,
-					name: field_ctx.name.current,
-					...field_ctx.constraints.current
-				}
-			: {}),
 		...split.attrs,
 		class: cls
 	});

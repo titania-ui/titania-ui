@@ -1,6 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { fieldsetCtx, formCtx, theme, type FieldsetProps } from '../index.ts';
 	import type { As } from '#lib/types/props.ts';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import { box } from 'svelte-toolbelt';
 
 	const form_ctx = formCtx.get();
@@ -32,12 +33,4 @@
 	});
 </script>
 
-{#if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.()}
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs}>
-		{@render children?.()}
-	</Tag>
-{/if}
+<Polymorphic tag={Tag} {attrs} bind:ref {children} />

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { fieldCtx, type ControlProps } from '../index.ts';
+	import { fieldControlAttrs } from '#lib/utils/fieldControl.ts';
 
 	const field_ctx = fieldCtx.get();
 	const uid = $props.id();
@@ -12,14 +13,8 @@
 	}: ControlProps = $props();
 
 	const mergedProps = $derived({
-		'data-slot': 'control',
-		'aria-labelledby': field_ctx.labelId.current,
-		'aria-describedby': field_ctx.descriptionId.current,
-		'aria-invalid': field_ctx.errors.current.length > 0 ? 'true' : undefined,
-		disabled: field_ctx.disabled.current || undefined,
-		name: field_ctx.name.current,
+		...fieldControlAttrs(field_ctx),
 		id,
-		...field_ctx.constraints.current,
 		...props
 	});
 </script>
