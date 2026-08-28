@@ -2,7 +2,6 @@
 	import { theme, type LabelProps } from '../index.ts';
 	import { chipCtx } from '../chip-context.ts';
 	import type { As } from '#lib/types/props.js';
-	import { splitVariants } from '#lib/utils/themeAttrs.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const ctx = chipCtx.get();
@@ -17,8 +16,6 @@
 		children,
 		...rest
 	}: LabelProps<TAs> = $props();
-
-	let split = $derived(splitVariants(theme, rest));
 
 	const cls = $derived(
 		theme().label({

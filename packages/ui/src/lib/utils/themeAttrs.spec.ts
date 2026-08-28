@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { themeAttrs, splitVariants } from './themeAttrs';
+import { splitVariants } from './themeAttrs';
 
 function makeTheme(variantKeys: readonly string[]) {
 	return { variantKeys };
@@ -64,7 +64,7 @@ describe('splitVariants', () => {
 
 	it('a keep entry that is not present in rest has no effect', () => {
 		const theme = makeTheme(['color']);
-		// @ts-ignore Error is expected
+		// @ts-expect-error keep entry not present in rest
 		const result = splitVariants(theme, { id: 'x' }, ['color']);
 		expect(result.variants).toEqual({});
 		expect(result.attrs).toEqual({ id: 'x' });

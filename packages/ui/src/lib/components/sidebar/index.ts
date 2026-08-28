@@ -35,10 +35,9 @@ import { default as Section } from './components/sidebar-section.svelte';
 
 // Spacer
 export type SpacerCfg = Define<{ tag: 'div' }>;
-export type SpacerProps<TAs extends As | undefined = undefined> = Omit<
-	Props<TAs, SpacerCfg>,
-	'children'
->;
+export type SpacerProps<TAs extends As | undefined = undefined> = Props<TAs, SpacerCfg> & {
+	children?: never;
+};
 import { default as Spacer } from './components/sidebar-spacer.svelte';
 
 // Item
@@ -55,7 +54,10 @@ export type ItemCfg = Define<{
 	};
 	child: true;
 }>;
-export type ItemProps<TAs extends As | undefined = undefined> = Props<TAs, ItemCfg>;
+export type ItemProps<
+	TAs extends As | undefined = undefined,
+	THref extends string | undefined = undefined
+> = Props<TAs, ItemCfg, THref>;
 import { default as Item } from './components/sidebar-item.svelte';
 
 // Label

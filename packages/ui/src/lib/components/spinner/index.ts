@@ -8,10 +8,9 @@ export type RootCfg = Define<{
 	tag: 'span';
 	theme: ThemeOf<typeof theme>;
 }>;
-export type RootProps<TAs extends As | undefined = undefined> = Omit<
-	Props<TAs, RootCfg>,
-	'children'
->;
+export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg> & {
+	children?: never;
+};
 import { default as Root } from './components/spinner-root.svelte';
 
 const EXPORT: typeof Root & {

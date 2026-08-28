@@ -12,10 +12,9 @@ export type RootCfg = Define<{
 	own: { icon?: string };
 	child: true;
 }>;
-export type RootProps<TAs extends As | undefined = undefined> = Omit<
-	Props<TAs, RootCfg>,
-	'children'
->;
+export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg> & {
+	children?: never;
+};
 import { default as Root } from './icon.svelte';
 
 const EXPORT: typeof Root & {

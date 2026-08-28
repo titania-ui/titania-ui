@@ -38,7 +38,7 @@
 		!auto || !form_ctx || !name ? required : ((__constraints?.required ?? false) as boolean)
 	);
 
-	const ctx = fieldCtx.set({
+	fieldCtx.set({
 		name: boxWith(() => name),
 		variants: boxWith(() => split.variants),
 

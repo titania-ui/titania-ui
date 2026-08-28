@@ -1,7 +1,6 @@
 <script lang="ts" module>
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { Chip, Icon, Spinner } from '#lib';
-	import { expect, fn } from 'storybook/test';
+	import { Chip, Icon } from '#lib';
 	import { capitalize } from '#lib/utils/capitalize.js';
 	import type { ToolingProps } from '#lib/types/props.js';
 	import type { RootCfg } from './index.ts';

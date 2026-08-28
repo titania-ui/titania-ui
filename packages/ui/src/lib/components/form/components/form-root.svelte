@@ -1,5 +1,5 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { box, boxWith } from 'svelte-toolbelt';
+	import { boxWith } from 'svelte-toolbelt';
 	import { formCtx } from '../form-context.ts';
 	import { theme, type RootCfg, type RootProps } from '../index.ts';
 	import { splitVariants } from '#lib/utils/themeAttrs.js';
@@ -27,7 +27,7 @@
 	const __constraints = $derived(fromStore(form.constraints).current);
 	const __errors = $derived(fromStore(form.errors).current);
 
-	const ctx = formCtx.set({
+	formCtx.set({
 		id: boxWith(() => id),
 		variants: boxWith(() => split.variants),
 

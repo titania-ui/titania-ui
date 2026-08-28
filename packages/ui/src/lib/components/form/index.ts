@@ -12,6 +12,7 @@ export { formCtx, fieldsetCtx };
 // Root
 export type RootCfg = Define<{
 	tag: 'form';
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- the caller's schema shape is theirs to know
 	own: { form: SuperForm<any> };
 	theme: ThemeOf<typeof theme>;
 	child: true;

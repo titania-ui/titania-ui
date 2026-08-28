@@ -1,4 +1,7 @@
-<script lang="ts" generics="TAs extends As | undefined = undefined">
+<script
+	lang="ts"
+	generics="TAs extends As | undefined = undefined, THref extends string | undefined = undefined"
+>
 	import { sidebarCtx, theme, type ItemCfg, type ItemProps } from '../index.ts';
 	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import { usePressableTag } from '#lib/helpers/usePressableTag.svelte.ts';
@@ -17,7 +20,7 @@
 		children,
 		child,
 		...rest
-	}: ItemProps<TAs> = $props();
+	}: ItemProps<TAs, THref> = $props();
 
 	const pressable = usePressableTag({
 		as: () => _Tag as As | undefined,
