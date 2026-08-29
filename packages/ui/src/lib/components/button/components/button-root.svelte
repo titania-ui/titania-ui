@@ -3,7 +3,7 @@
 	generics="TAs extends As | undefined = undefined, THref extends string | undefined = undefined"
 >
 	import { theme, type RootCfg, type RootProps } from '../index.ts';
-	import { splitVariants } from '#lib/utils/themeAttrs.js';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { usePressableTag } from '#lib/helpers/usePressableTag.svelte.ts';
 	import TouchTarget from '#lib/helpers/touch-target.svelte';

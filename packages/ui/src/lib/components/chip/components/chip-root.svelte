@@ -3,7 +3,7 @@
 	import { chipCtx } from '../chip-context.ts';
 	import { boxWith } from 'svelte-toolbelt';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
-	import { splitVariants } from '#lib/utils/themeAttrs.js';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const uid = $props.id();

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { theme, type RootProps } from '../index.ts';
-	import { splitVariants } from '#lib/utils/themeAttrs.ts';
+	import { splitVariants } from '#lib/utils/splitVariants.ts';
 	import { fieldControlAttrs, fieldInvalid } from '#lib/utils/fieldControl.ts';
 	import { fieldCtx } from '#lib/components/field/field-context.ts';
 	import { fieldValue } from '../field-value.svelte.ts';

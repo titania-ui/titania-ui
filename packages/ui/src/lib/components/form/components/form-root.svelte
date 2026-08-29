@@ -2,7 +2,7 @@
 	import { boxWith } from 'svelte-toolbelt';
 	import { formCtx } from '../form-context.ts';
 	import { theme, type RootCfg, type RootProps } from '../index.ts';
-	import { splitVariants } from '#lib/utils/themeAttrs.js';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import { fromStore } from 'svelte/store';

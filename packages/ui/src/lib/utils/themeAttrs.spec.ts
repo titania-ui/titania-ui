@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { splitVariants } from './themeAttrs';
+import { splitVariants } from './splitVariants';
 
 function makeTheme(variantKeys: readonly string[]) {
 	return { variantKeys };
