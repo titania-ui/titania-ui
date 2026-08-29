@@ -2,8 +2,8 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { Button, Icon, Spinner } from '#lib';
 	import { expect, fn } from 'storybook/test';
-	import { capitalize } from '#lib/utils/capitalize.js';
-	import type { ToolingProps } from '#lib/types/props.js';
+	import { capitalize } from '#lib/utils/capitalize.ts';
+	import type { ToolingProps } from '#lib/types/props.ts';
 	import type { RootCfg } from './index.ts';
 	import type { Snippet } from 'svelte';
 

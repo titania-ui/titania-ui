@@ -2,7 +2,7 @@
 	import { theme, type RootCfg, type RootProps } from './link.ts';
 	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import { splitVariants } from '#lib/utils/splitVariants.ts';
-	import { useHover } from '#lib/helpers/useHover.js';
+	import { useHover } from '#lib/helpers/useHover.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import { createAttachmentKey } from 'svelte/attachments';
 

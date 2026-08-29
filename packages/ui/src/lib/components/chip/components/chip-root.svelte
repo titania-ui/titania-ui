@@ -2,8 +2,8 @@
 	import { theme, type RootCfg, type RootProps } from '../index.ts';
 	import { chipCtx } from '../chip-context.ts';
 	import { boxWith } from 'svelte-toolbelt';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
-	import { splitVariants } from '#lib/utils/splitVariants.js';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
+	import { splitVariants } from '#lib/utils/splitVariants.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const uid = $props.id();

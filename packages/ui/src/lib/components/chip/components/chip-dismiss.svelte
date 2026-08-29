@@ -2,7 +2,7 @@
 	import type { DismissProps, DismissCfg } from '../index.ts';
 	import { CloseButton } from '#lib';
 	import { chipCtx } from '../chip-context.ts';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const ctx = chipCtx.get();

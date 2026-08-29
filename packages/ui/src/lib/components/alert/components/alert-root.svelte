@@ -2,8 +2,8 @@
 	import { box, boxWith } from 'svelte-toolbelt';
 	import { alertCtx } from '../alert-context.ts';
 	import { theme, type RootCfg, type RootProps } from '../index.ts';
-	import { splitVariants } from '#lib/utils/splitVariants.js';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { splitVariants } from '#lib/utils/splitVariants.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const uid = $props.id();

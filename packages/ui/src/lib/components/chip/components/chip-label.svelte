@@ -1,7 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { theme, type LabelProps } from '../index.ts';
 	import { chipCtx } from '../chip-context.ts';
-	import type { As } from '#lib/types/props.js';
+	import type { As } from '#lib/types/props.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const ctx = chipCtx.get();

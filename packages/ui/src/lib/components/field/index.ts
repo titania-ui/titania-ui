@@ -1,4 +1,4 @@
-import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.ts';
 import type { Snippet } from 'svelte';
 
 // Theme

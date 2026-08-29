@@ -2,7 +2,7 @@
 	import { theme, type RootCfg, type RootProps } from '../index.ts';
 	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import { splitVariants } from '#lib/utils/splitVariants.ts';
-	import { registerId } from '#lib/utils/registerId.js';
+	import { registerId } from '#lib/utils/registerId.ts';
 	import { fieldCtx } from '#lib/components/field/field-context.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 

@@ -1,7 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { theme, type RootProps } from '../index.ts';
-	import { splitVariants } from '#lib/utils/splitVariants.js';
-	import type { As } from '#lib/types/props.js';
+	import { splitVariants } from '#lib/utils/splitVariants.ts';
+	import type { As } from '#lib/types/props.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	let {

@@ -2,7 +2,7 @@
 	import type { DismissProps, DismissCfg } from '../index.ts';
 	import { CloseButton } from '#lib';
 	import { alertCtx } from '../alert-context.ts';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const ctx = alertCtx.get();

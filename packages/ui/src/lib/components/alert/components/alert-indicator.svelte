@@ -2,7 +2,7 @@
 	import { type IndicatorProps, type IndicatorCfg, theme } from '../index.ts';
 	import { Icon } from '#lib';
 	import { alertCtx } from '../alert-context.ts';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import { cx } from 'tailwind-variants/lite';
 
