@@ -1,5 +1,15 @@
 <script lang="ts">
-	import { Button, Form, Heading, Link, Strong, Text, Input } from '../../../../lib/index.ts';
+	import {
+		Button,
+		Form,
+		Heading,
+		Link,
+		Strong,
+		Text,
+		Input,
+		Field,
+		Label
+	} from '../../../../lib/index.ts';
 	import { superForm } from 'sveltekit-superforms';
 	import { zod4 } from 'sveltekit-superforms/adapters';
 	import { untrack } from 'svelte';
@@ -16,28 +26,22 @@
 </script>
 
 <Form {form} class="grid w-full max-w-sm grid-cols-1 gap-8">
-	<Heading>Sign in to your account</Heading>
-	<Form.Field auto name="email">
-		<Form.Control>
-			<Form.Label>Email</Form.Label>
-			<Input type="email" />
-		</Form.Control>
-		<Form.Error />
-	</Form.Field>
-	<Form.Field auto name="password">
-		<Form.Control>
-			<Form.Label>Password</Form.Label>
-			<Input type="password" />
-		</Form.Control>
-		<Form.Error />
-	</Form.Field>
+	<Heading level={2}>Sign in to your account</Heading>
+	<Field auto name="email">
+		<Label>Email</Label>
+		<Input type="email" />
+		<Field.Error />
+	</Field>
+	<Field auto name="password">
+		<Label>Password</Label>
+		<Input type="password" />
+		<Field.Error />
+	</Field>
 	<div class="flex items-center justify-between">
-		<Form.Field auto name="remember">
-			<Form.Control>
-				<Form.Label>Remember me</Form.Label>
-			</Form.Control>
-			<Form.Error />
-		</Form.Field>
+		<Field auto name="remember">
+			<Label>Remember me</Label>
+			<Field.Error />
+		</Field>
 		<!--
 			<CheckboxField>
 				<Checkbox name="remember" />
