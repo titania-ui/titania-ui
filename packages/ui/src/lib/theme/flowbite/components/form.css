@@ -53,3 +53,37 @@
 		@apply hidden;
 	}
 }
+
+.tainputgroup {
+	@apply flex -space-x-0.5 rounded-base shadow-xs;
+
+	.tainputgroup__prefix,
+	.tainputgroup__suffix {
+		@apply z-10 box-border inline-flex shrink-0 items-center border border-default-medium bg-neutral-secondary-medium px-4 py-2.5 text-sm leading-5 font-medium text-body focus:outline-none;
+
+		&[data-focus] {
+			@apply ring-4 ring-neutral-tertiary;
+		}
+
+		[data-slot='icon'] {
+			@apply size-4;
+		}
+
+		&.tainputgroup__prefix--invalid,
+		&.tainputgroup__suffix--invalid {
+			@apply border-danger-subtle bg-danger-soft text-fg-danger-strong focus:border-danger focus:ring-danger;
+		}
+	}
+
+	.tainputgroup__prefix {
+		@apply rounded-s-base;
+	}
+
+	.tainputgroup__suffix {
+		@apply rounded-e-base;
+	}
+
+	.tainput {
+		@apply rounded-none;
+	}
+}

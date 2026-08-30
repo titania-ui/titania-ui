@@ -17,7 +17,8 @@
 		Textarea,
 		Select,
 		DescriptionList,
-		Sidebar
+		Sidebar,
+		InputGroup
 	} from '../../lib/index.ts';
 	import { superForm } from 'sveltekit-superforms';
 	import { zod4 } from 'sveltekit-superforms/adapters';
@@ -114,7 +115,13 @@
 			<Form.FieldGroup>
 				<Field auto name="party_size">
 					<Label>Party size</Label>
-					<Input type="number" />
+					<InputGroup>
+						<InputGroup.Prefix>
+							<Icon icon="icon-[fluent-emoji-flat--party-popper]" />
+						</InputGroup.Prefix>
+						<Input type="number" />
+						<InputGroup.Suffix>Guests</InputGroup.Suffix>
+					</InputGroup>
 					<Field.Error />
 				</Field>
 				<Field auto name="seating">
