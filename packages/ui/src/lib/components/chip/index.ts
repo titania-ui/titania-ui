@@ -7,7 +7,7 @@ export { theme };
 
 // Root
 export type RootCfg = Define<{
-	tag: 'div';
+	tag: 'span';
 	own: { dismissed?: boolean; ondismiss?: () => void };
 	theme: ThemeOf<typeof theme>;
 	child: true;

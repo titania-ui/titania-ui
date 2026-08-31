@@ -13,7 +13,7 @@
 		ondismiss = undefined,
 		//
 		id = uid,
-		as: Tag = 'div',
+		as: Tag = 'span',
 		class: className = undefined,
 		ref = $bindable(null),
 		children,
