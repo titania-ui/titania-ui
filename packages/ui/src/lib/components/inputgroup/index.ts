@@ -11,7 +11,7 @@ export { inputGroupCtx };
 export type RootCfg = Define<{
 	tag: 'div';
 	theme: ThemeOf<typeof theme>;
-	own: { invalid?: boolean };
+	own: { invalid?: boolean; disabled?: boolean };
 }>;
 export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
 import { default as Root } from './components/inputgroup-root.svelte';

@@ -4,12 +4,15 @@
 	import { fieldControlAttrs, fieldInvalid } from '#lib/utils/fieldControl.ts';
 	import { fieldCtx } from '#lib/components/field/field-context.ts';
 	import { fieldValue } from '#lib/components/input/field-value.svelte.ts';
+	import { createAttachmentKey } from 'svelte/attachments';
+	import { useHover } from '#lib/helpers/useHover.ts';
 
 	let field_ctx = fieldCtx.getOr(undefined);
 
 	let {
 		value = $bindable(null),
-		invalid = false,
+		invalid = undefined,
+		disabled = undefined,
 		multiple = false,
 		//
 		class: className = undefined,
@@ -19,13 +22,17 @@
 	}: RootProps = $props();
 
 	const __invalid = $derived(fieldInvalid(field_ctx, invalid));
+	const __disabled = $derived(field_ctx ? field_ctx.disabled.current : disabled);
 
-	let split = $derived(splitVariants(theme, rest));
+	let split = $derived(
+		splitVariants(theme, { ...rest, invalid: __invalid, disabled: __disabled }, ['disabled'])
+	);
 
 	const cls = $derived(
 		theme().root({
 			...split.variants,
 			invalid: __invalid,
+			disabled: __disabled,
 			multiple,
 			class: className
 		} as never)
@@ -35,6 +42,7 @@
 		...fieldControlAttrs(field_ctx, invalid),
 		multiple,
 		...split.attrs,
+		[createAttachmentKey()]: useHover({ isDisabled: __disabled }),
 		class: cls
 	});
 
@@ -48,7 +56,8 @@
 	data-slot="control"
 	class={theme().wrapper({
 		...split.variants,
-		invalid: __invalid
+		invalid: __invalid,
+		disabled: __disabled
 	})}
 >
 	<select bind:this={ref} bind:value={() => val.current, (v) => (val.current = v)} {...attrs}>

@@ -10,7 +10,8 @@
 	let field_ctx = fieldCtx.getOr(undefined);
 
 	let {
-		invalid = false,
+		invalid = undefined,
+		disabled = undefined,
 		//
 		as: Tag = 'div',
 		class: className = undefined,
@@ -20,13 +21,15 @@
 	}: RootProps<TAs> = $props();
 
 	const __invalid = $derived(fieldInvalid(field_ctx, invalid));
+	const __disabled = $derived(field_ctx ? field_ctx.disabled.current : disabled);
 
-	let split = $derived(splitVariants(theme, { ...rest, invalid: __invalid }));
+	let split = $derived(splitVariants(theme, { ...rest, invalid: __invalid, disabled: __disabled }));
 
 	const cls = $derived(
 		theme().root({
 			...split.variants,
 			invalid: __invalid,
+			disabled: __disabled,
 			class: className
 		} as never)
 	);

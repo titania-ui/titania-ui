@@ -13,9 +13,22 @@ export const theme = tv({
 				root: 'taselect--invalid',
 				wrapper: 'taselect__wrapper--invalid'
 			}
+		},
+		disabled: {
+			true: {
+				root: 'taselect--disabled',
+				wrapper: 'taselect__wrapper--disabled'
+			}
+		},
+		multiple: {
+			true: {
+				root: 'taselect--multiple'
+			}
 		}
 	},
 	defaultVariants: {
-		invalid: false
+		invalid: false,
+		disabled: false,
+		multiple: false
 	}
 });

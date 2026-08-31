@@ -11,9 +11,16 @@ export const theme = tv({
 				root: 'tatextarea--invalid',
 				wrapper: 'tatextarea__wrapper--invalid'
 			}
+		},
+		disabled: {
+			true: {
+				root: 'tatextarea--disabled',
+				wrapper: 'tatextarea__wrapper--disabled'
+			}
 		}
 	},
 	defaultVariants: {
-		invalid: false
+		invalid: false,
+		disabled: false
 	}
 });

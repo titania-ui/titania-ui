@@ -7,7 +7,7 @@ export { theme };
 // Root
 export type RootCfg = Define<{
 	tag: 'input';
-	own: { invalid?: boolean };
+	own: { invalid?: boolean; disabled?: boolean };
 	theme: ThemeOf<typeof theme>;
 }>;
 export type RootProps = Props<'input', RootCfg>;

@@ -7,7 +7,7 @@ export { theme };
 // Root
 export type RootCfg = Define<{
 	tag: 'textarea';
-	own: { invalid?: boolean };
+	own: { invalid?: boolean; disabled?: boolean };
 	theme: ThemeOf<typeof theme>;
 }>;
 export type RootProps = Props<'textarea', RootCfg>;

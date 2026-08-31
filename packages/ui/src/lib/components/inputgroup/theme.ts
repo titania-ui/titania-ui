@@ -13,9 +13,17 @@ export const theme = tv({
 				prefix: 'tainputgroup__prefix--invalid',
 				suffix: 'tainputgroup__suffix--invalid'
 			}
+		},
+		disabled: {
+			true: {
+				root: 'tainputgroup--disabled',
+				prefix: 'tainputgroup__prefix--disabled',
+				suffix: 'tainputgroup__suffix--disabled'
+			}
 		}
 	},
 	defaultVariants: {
-		invalid: false
+		invalid: false,
+		disabled: false
 	}
 });
