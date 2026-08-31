@@ -1,6 +1,6 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { sidebarCtx, theme, type BodyProps } from '../index.ts';
-	import type { As } from '#lib/types/props.ts';
+	import { sidebarCtx, theme, type BodyProps } from '../index.js';
+	import type { As } from '#lib/types/props.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const ctx = sidebarCtx.get();

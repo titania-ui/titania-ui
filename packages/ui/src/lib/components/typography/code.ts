@@ -1,5 +1,5 @@
 import { tv } from 'tailwind-variants/lite';
-import type { As, Define, Props, ThemeOf } from '#lib/types/props.ts';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
 
 export const theme = tv({
 	base: 'tacode'

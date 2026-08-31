@@ -1,4 +1,4 @@
-import type { Pretty } from '#lib/types/utils.ts';
+import type { Pretty } from '#lib/types/utils.js';
 
 type AnyTheme = { variantKeys: readonly string[] };
 

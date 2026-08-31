@@ -1,6 +1,6 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { inputGroupCtx, theme, type SuffixProps } from '../index.ts';
-	import type { As } from '#lib/types/props.ts';
+	import { inputGroupCtx, theme, type SuffixProps } from '../index.js';
+	import type { As } from '#lib/types/props.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const ctx = inputGroupCtx.get();

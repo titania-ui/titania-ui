@@ -2,9 +2,9 @@
 	lang="ts"
 	generics="TAs extends As | undefined = undefined, THref extends string | undefined = undefined"
 >
-	import { sidebarCtx, theme, type ItemCfg, type ItemProps } from '../index.ts';
-	import type { As, ChildArgOf } from '#lib/types/props.ts';
-	import { usePressableTag } from '#lib/helpers/usePressableTag.svelte.ts';
+	import { sidebarCtx, theme, type ItemCfg, type ItemProps } from '../index.js';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { usePressableTag } from '#lib/helpers/usePressableTag.svelte.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const ctx = sidebarCtx.get();

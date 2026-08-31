@@ -1,9 +1,9 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { theme, type RootCfg, type RootProps } from '../index.ts';
-	import { chipCtx } from '../chip-context.ts';
+	import { theme, type RootCfg, type RootProps } from '../index.js';
+	import { chipCtx } from '../chip-context.js';
 	import { boxWith } from 'svelte-toolbelt';
-	import type { As, ChildArgOf } from '#lib/types/props.ts';
-	import { splitVariants } from '#lib/utils/splitVariants.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const uid = $props.id();

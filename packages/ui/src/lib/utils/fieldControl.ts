@@ -1,4 +1,4 @@
-import type { FieldCtx } from '#lib/components/field/field-context.ts';
+import type { FieldCtx } from '#lib/components/field/field-context.js';
 
 export function fieldInvalid(
 	field_ctx: FieldCtx | undefined,
