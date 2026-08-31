@@ -1,8 +1,8 @@
-import type { As, Define, Props, ThemeOf } from '#lib/types/props.ts';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
 import type { CloseButton } from '#lib';
 
 // Theme
-import { theme } from './theme.ts';
+import { theme } from './theme.js';
 export { theme };
 
 // Root

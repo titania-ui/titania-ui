@@ -1,5 +1,5 @@
 import type { ReadableBox } from 'svelte-toolbelt';
-import { Context } from '#lib/utils/context.ts';
+import { Context } from '#lib/utils/context.js';
 
 export interface InputGroupCtx {
 	readonly variants: ReadableBox<Record<string, unknown>>;

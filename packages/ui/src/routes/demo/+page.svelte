@@ -19,11 +19,11 @@
 		DescriptionList,
 		Sidebar,
 		InputGroup
-	} from '../../lib/index.ts';
+	} from '../../lib/index.js';
 	import { superForm } from 'sveltekit-superforms';
 	import { zod4 } from 'sveltekit-superforms/adapters';
 	import { untrack } from 'svelte';
-	import { reservationSchema } from './utils.ts';
+	import { reservationSchema } from './utils.js';
 
 	let { data } = $props();
 

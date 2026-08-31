@@ -9,11 +9,11 @@
 		Input,
 		Field,
 		Label
-	} from '../../../../lib/index.ts';
+	} from '../../../../lib/index.js';
 	import { superForm } from 'sveltekit-superforms';
 	import { zod4 } from 'sveltekit-superforms/adapters';
 	import { untrack } from 'svelte';
-	import { loginSchema } from '../../utils.ts';
+	import { loginSchema } from '../../utils.js';
 
 	let { data } = $props();
 
