@@ -1,6 +1,6 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { fieldCtx, theme, type ErrorCfg, type ErrorProps } from '../index.js';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { fieldCtx, theme, type ErrorCfg, type ErrorProps } from '../index.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const field_ctx = fieldCtx.get();

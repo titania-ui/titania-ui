@@ -1,7 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import type { As } from '#lib/types/props.js';
+	import type { As } from '#lib/types/props.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
-	import { theme, type TermProps } from '../index.js';
+	import { theme, type TermProps } from '../index.ts';
 
 	let {
 		//

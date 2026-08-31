@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Component, ComponentProps, Snippet } from 'svelte';
-import type { ClassValue, HTMLAttributes, SvelteHTMLElements } from 'svelte/eleme.js';
-import type { Pretty } from './utils.js';
+import type { ClassValue, HTMLAttributes, SvelteHTMLElements } from 'svelte/elements';
+import type { Pretty } from './utils.ts';
 
 /* Every conditional below uses `[T] extends [X]` instead of a bare
    `T extends X ? ... : ...`, because the bare form distributes over

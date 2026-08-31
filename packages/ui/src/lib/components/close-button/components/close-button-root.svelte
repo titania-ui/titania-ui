@@ -1,9 +1,9 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { theme, type RootCfg, type RootProps } from '../index.js';
+	import { theme, type RootCfg, type RootProps } from '../index.ts';
 	import { Icon } from '#lib';
-	import { splitVariants } from '#lib/utils/splitVariants.js';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
-	import { usePressableTag } from '#lib/helpers/usePressableTag.svelte.js';
+	import { splitVariants } from '#lib/utils/splitVariants.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
+	import { usePressableTag } from '#lib/helpers/usePressableTag.svelte.ts';
 	import TouchTarget from '#lib/helpers/touch-target.svelte';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 

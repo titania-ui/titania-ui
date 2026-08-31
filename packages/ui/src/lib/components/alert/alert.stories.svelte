@@ -2,9 +2,9 @@
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { Alert, Button, Spinner } from '#lib';
 	import { expect, fn } from 'storybook/test';
-	import { capitalize } from '#lib/utils/capitalize.js';
-	import type { ToolingProps } from '#lib/types/props.js';
-	import type { RootCfg } from './index.js';
+	import { capitalize } from '#lib/utils/capitalize.ts';
+	import type { ToolingProps } from '#lib/types/props.ts';
+	import type { RootCfg } from './index.ts';
 	import type { Snippet } from 'svelte';
 
 	const { Story } = defineMeta<Snippet<[ToolingProps<RootCfg>, unknown]>, typeof Alert>({

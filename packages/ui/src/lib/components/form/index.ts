@@ -1,12 +1,12 @@
-import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.ts';
 import type { SuperForm } from 'sveltekit-superforms';
 
 // Theme
-import { theme } from './theme.js';
+import { theme } from './theme.ts';
 export { theme };
 
 // State
-import { formCtx, fieldsetCtx } from './form-context.js';
+import { formCtx, fieldsetCtx } from './form-context.ts';
 export { formCtx, fieldsetCtx };
 
 // Root

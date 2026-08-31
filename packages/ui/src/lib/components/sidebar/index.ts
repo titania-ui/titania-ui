@@ -1,11 +1,11 @@
-import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.ts';
 
 // Theme
-import { theme } from './theme.js';
+import { theme } from './theme.ts';
 export { theme };
 
 // State
-import { sidebarCtx } from './sidebar-context.js';
+import { sidebarCtx } from './sidebar-context.ts';
 export { sidebarCtx };
 
 // Root

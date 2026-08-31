@@ -1,7 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { fieldsetCtx, formCtx, theme, type LegendCfg, type LegendProps } from '../index.js';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
-	import { registerId } from '#lib/utils/registerId.js';
+	import { fieldsetCtx, formCtx, theme, type LegendCfg, type LegendProps } from '../index.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
+	import { registerId } from '#lib/utils/registerId.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const form_ctx = formCtx.get();

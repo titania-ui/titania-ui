@@ -1,9 +1,9 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { theme, type RootCfg, type RootProps } from '../index.js';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
-	import { splitVariants } from '#lib/utils/splitVariants.js';
-	import { registerId } from '#lib/utils/registerId.js';
-	import { fieldCtx } from '#lib/components/field/field-context.js';
+	import { theme, type RootCfg, type RootProps } from '../index.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
+	import { splitVariants } from '#lib/utils/splitVariants.ts';
+	import { registerId } from '#lib/utils/registerId.ts';
+	import { fieldCtx } from '#lib/components/field/field-context.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	let field_ctx = fieldCtx.getOr(undefined);

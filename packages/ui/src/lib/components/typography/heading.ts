@@ -1,5 +1,5 @@
 import { tv } from 'tailwind-variants/lite';
-import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.ts';
 
 export const theme = tv({
 	base: 'taheading',

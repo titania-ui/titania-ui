@@ -1,4 +1,4 @@
-import type { Attachment } from 'svelte/attachme.js';
+import type { Attachment } from 'svelte/attachments';
 
 export interface HoverEvent {
 	type: 'hoverstart' | 'hoverend';

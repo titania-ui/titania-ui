@@ -1,10 +1,10 @@
-import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.ts';
 
-import { theme } from './theme.js';
+import { theme } from './theme.ts';
 export { theme };
 
 // State
-import { inputGroupCtx } from './inputgroup-context.js';
+import { inputGroupCtx } from './inputgroup-context.ts';
 export { inputGroupCtx };
 
 // Root

@@ -1,6 +1,6 @@
-import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.ts';
 
-import { theme } from './theme.js';
+import { theme } from './theme.ts';
 export { theme };
 
 // Root

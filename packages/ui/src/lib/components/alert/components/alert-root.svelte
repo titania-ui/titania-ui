@@ -1,9 +1,9 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { box, boxWith } from 'svelte-toolbelt';
-	import { alertCtx } from '../alert-context.js';
-	import { theme, type RootCfg, type RootProps } from '../index.js';
-	import { splitVariants } from '#lib/utils/splitVariants.js';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { alertCtx } from '../alert-context.ts';
+	import { theme, type RootCfg, type RootProps } from '../index.ts';
+	import { splitVariants } from '#lib/utils/splitVariants.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const uid = $props.id();

@@ -1,12 +1,12 @@
-import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.ts';
 import type { CloseButton, Icon } from '#lib';
 
 // Theme
-import { theme } from './theme.js';
+import { theme } from './theme.ts';
 export { theme };
 
 // State
-import { alertCtx } from './alert-context.js';
+import { alertCtx } from './alert-context.ts';
 export { alertCtx };
 
 // Root

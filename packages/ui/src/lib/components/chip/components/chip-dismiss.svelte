@@ -1,8 +1,8 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import type { DismissProps, DismissCfg } from '../index.js';
+	import type { DismissProps, DismissCfg } from '../index.ts';
 	import { CloseButton } from '#lib';
-	import { chipCtx } from '../chip-context.js';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { chipCtx } from '../chip-context.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 
 	const ctx = chipCtx.get();

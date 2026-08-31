@@ -1,12 +1,12 @@
-import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.ts';
 import type { Snippet } from 'svelte';
 
 // Theme
-import { theme } from './theme.js';
+import { theme } from './theme.ts';
 export { theme };
 
 // State
-import { fieldCtx } from './field-context.js';
+import { fieldCtx } from './field-context.ts';
 export { fieldCtx };
 
 // Root

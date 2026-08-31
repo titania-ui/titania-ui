@@ -1,6 +1,6 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { fieldsetCtx, formCtx, theme, type FieldsetCfg, type FieldsetProps } from '../index.js';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { fieldsetCtx, formCtx, theme, type FieldsetCfg, type FieldsetProps } from '../index.ts';
+	import type { As, ChildArgOf } from '#lib/types/props.ts';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import { box } from 'svelte-toolbelt';
 
