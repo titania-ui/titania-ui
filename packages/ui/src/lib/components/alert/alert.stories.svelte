@@ -153,10 +153,10 @@
 </Story>
 
 <Story name="Status">
-	{#snippet template({ props })}
+	{#snippet template(props)}
 		<div class="space-y-4">
 			{#each Object.keys(Alert.theme.variants.status) as status (status)}
-				<Alert {...props} {status}>
+				<Alert {...props} status={status as keyof typeof Alert.theme.variants.status}>
 					<Alert.Title>{capitalize(status)}s</Alert.Title>
 					<Alert.Description>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae libero sed eligendi
