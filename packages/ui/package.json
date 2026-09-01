@@ -33,6 +33,9 @@
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
 		},
+		"./theme/base.css": {
+			"default": "./dist/theme/base.css"
+		},
 		"./theme/flowbite.css": {
 			"default": "./dist/theme/flowbite/index.css"
 		}
