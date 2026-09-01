@@ -1,5 +1,5 @@
 .taavatar {
-	@apply relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-base bg-neutral-tertiary text-sm;
+	@apply relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-base border-2 border-buffer bg-neutral-tertiary text-sm;
 
 	&.taavatar--size-sm {
 		@apply size-8;
