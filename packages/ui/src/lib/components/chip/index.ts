@@ -1,8 +1,10 @@
-import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
 import type { CloseButton } from '#lib';
-
-// Theme
+import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import { default as Dismiss } from './components/chip-dismiss.svelte';
+import { default as Label } from './components/chip-label.svelte';
+import { default as Root } from './components/chip-root.svelte';
 import { theme } from './theme.js';
+
 export { theme };
 
 // Root
@@ -13,17 +15,14 @@ export type RootCfg = Define<{
 	child: true;
 }>;
 export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
-import { default as Root } from './components/chip-root.svelte';
 
 // Label
 export type LabelCfg = Define<{ tag: 'span' }>;
 export type LabelProps<TAs extends As | undefined = undefined> = Props<TAs, LabelCfg>;
-import { default as Label } from './components/chip-label.svelte';
 
 // Dismiss
 export type DismissCfg = Define<{ tag: typeof CloseButton; child: true }>;
 export type DismissProps<TAs extends As | undefined = undefined> = Props<TAs, DismissCfg>;
-import { default as Dismiss } from './components/chip-dismiss.svelte';
 
 const EXPORT: typeof Root & {
 	Root: typeof Root;

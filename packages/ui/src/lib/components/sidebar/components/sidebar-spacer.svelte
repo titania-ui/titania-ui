@@ -1,7 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { sidebarCtx, theme, type SpacerProps } from '../index.js';
-	import type { As } from '#lib/types/props.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import type { As } from '#lib/types/props.js';
+	import { type SpacerProps, sidebarCtx, theme } from '../index.js';
 
 	const ctx = sidebarCtx.get();
 

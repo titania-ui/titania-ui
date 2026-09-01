@@ -1,7 +1,7 @@
 // field-value.svelte.ts
-import { get } from 'svelte/store';
 import { fieldCtx } from '../field';
 import { formCtx } from '../form';
+import { get } from 'svelte/store';
 
 export function fieldValue<T>(getManual: () => T, setManual: (v: T) => void) {
 	const ctx = fieldCtx.get();

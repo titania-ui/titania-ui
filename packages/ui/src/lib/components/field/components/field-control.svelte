@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { fieldCtx, type ControlProps } from '../index.js';
 	import { fieldControlAttrs } from '#lib/utils/fieldControl.js';
+	import { type ControlProps, fieldCtx } from '../index.js';
 
 	const field_ctx = fieldCtx.get();
 	const uid = $props.id();

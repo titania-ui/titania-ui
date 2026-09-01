@@ -1,9 +1,9 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { theme, type RootCfg, type RootProps } from './link.js';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import { useHover } from '#lib/helpers/useHover.js';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { splitVariants } from '#lib/utils/splitVariants.js';
-	import { useHover } from '#lib/helpers/useHover.js';
-	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import { type RootCfg, type RootProps, theme } from './link.js';
 	import { createAttachmentKey } from 'svelte/attachments';
 
 	let {

@@ -1,9 +1,9 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { registerId } from '#lib/utils/registerId.js';
-	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import { alertCtx } from '../alert-context.js';
-	import { theme, type TitleCfg, type TitleProps } from '../index.js';
+	import { type TitleCfg, type TitleProps, theme } from '../index.js';
 
 	const ctx = alertCtx.get();
 	const uid = $props.id();

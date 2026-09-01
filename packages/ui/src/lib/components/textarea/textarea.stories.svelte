@@ -1,9 +1,9 @@
 <script lang="ts" module>
-	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { Textarea, Field, Label } from '#lib';
-	import { expect } from 'storybook/test';
+	import { Field, Label, Textarea } from '#lib';
 	import type { ToolingProps } from '#lib/types/props.js';
 	import type { RootCfg, RootProps } from './index.js';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { expect } from 'storybook/test';
 	import type { Snippet } from 'svelte';
 
 	const { Story } = defineMeta<Snippet<[ToolingProps<RootCfg>, unknown]>, typeof Textarea>({

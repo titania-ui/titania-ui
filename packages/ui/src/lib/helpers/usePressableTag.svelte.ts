@@ -1,8 +1,8 @@
-import { createAttachmentKey } from 'svelte/attachments';
+import type { As } from '#lib/types/props.js';
 import { useActivePress } from './useActivePress.js';
 import { useFocusRing } from './useFocusRing.js';
 import { useHover } from './useHover.js';
-import type { As } from '#lib/types/props.js';
+import { createAttachmentKey } from 'svelte/attachments';
 
 export interface PressableTagOptions {
 	/** Explicit `as` override; otherwise `'a'` when `href` is set, else `'button'`. */

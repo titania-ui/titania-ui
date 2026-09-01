@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { theme, type RootProps } from '../index.js';
-	import { splitVariants } from '#lib/utils/splitVariants.js';
-	import { fieldControlAttrs, fieldInvalid } from '#lib/utils/fieldControl.js';
 	import { fieldCtx } from '#lib/components/field/field-context.js';
 	import { fieldValue } from '#lib/components/input/field-value.svelte.js';
-	import { createAttachmentKey } from 'svelte/attachments';
 	import { useHover } from '#lib/helpers/useHover.js';
+	import { fieldControlAttrs, fieldInvalid } from '#lib/utils/fieldControl.js';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
+	import { type RootProps, theme } from '../index.js';
+	import { createAttachmentKey } from 'svelte/attachments';
 
 	let field_ctx = fieldCtx.getOr(undefined);
 

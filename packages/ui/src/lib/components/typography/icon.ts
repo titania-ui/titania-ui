@@ -1,5 +1,6 @@
-import { tv } from 'tailwind-variants/lite';
 import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import { default as Root } from './icon.svelte';
+import { tv } from 'tailwind-variants/lite';
 
 export const theme = tv({
 	base: 'taicon'
@@ -15,7 +16,6 @@ export type RootCfg = Define<{
 export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg> & {
 	children?: never;
 };
-import { default as Root } from './icon.svelte';
 
 const EXPORT: typeof Root & {
 	Root: typeof Root;

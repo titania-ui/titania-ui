@@ -1,9 +1,9 @@
 <script lang="ts" module>
-	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { Heading, Text, Strong, Code, Link, Icon } from '#lib';
-	import { expect } from 'storybook/test';
+	import { Code, Heading, Icon, Link, Strong, Text } from '#lib';
 	import type { ToolingProps } from '#lib/types/props.js';
 	import type { RootCfg } from './heading.js';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { expect } from 'storybook/test';
 	import type { Snippet } from 'svelte';
 
 	const { Story } = defineMeta<Snippet<[ToolingProps<RootCfg>, unknown]>, typeof Heading>({

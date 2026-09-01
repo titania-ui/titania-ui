@@ -1,10 +1,10 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { theme, type RootCfg, type RootProps } from '../index.js';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
-	import { splitVariants } from '#lib/utils/splitVariants.js';
-	import { registerId } from '#lib/utils/registerId.js';
 	import { fieldCtx } from '#lib/components/field/field-context.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { registerId } from '#lib/utils/registerId.js';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
+	import { type RootCfg, type RootProps, theme } from '../index.js';
 
 	let field_ctx = fieldCtx.getOr(undefined);
 	const uid = $props.id();

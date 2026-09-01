@@ -1,10 +1,10 @@
 <script lang="ts" module>
-	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { Input, Field, Label } from '#lib';
-	import { expect } from 'storybook/test';
-	import { capitalize } from '#lib/utils/capitalize.js';
+	import { Field, Input, Label } from '#lib';
 	import type { ToolingProps } from '#lib/types/props.js';
+	import { capitalize } from '#lib/utils/capitalize.js';
 	import type { RootCfg, RootProps } from './index.js';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { expect } from 'storybook/test';
 	import type { Snippet } from 'svelte';
 
 	const INPUT_TYPES = [

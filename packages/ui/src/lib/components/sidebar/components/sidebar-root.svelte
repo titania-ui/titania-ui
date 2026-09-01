@@ -1,9 +1,9 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { boxWith } from 'svelte-toolbelt';
-	import { sidebarCtx, theme, type RootProps } from '../index.js';
-	import { splitVariants } from '#lib/utils/splitVariants.js';
-	import type { As } from '#lib/types/props.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import type { As } from '#lib/types/props.js';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
+	import { type RootProps, sidebarCtx, theme } from '../index.js';
+	import { boxWith } from 'svelte-toolbelt';
 
 	let {
 		//

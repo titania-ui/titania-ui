@@ -1,8 +1,8 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { theme, type LabelProps } from '../index.js';
-	import { chipCtx } from '../chip-context.js';
-	import type { As } from '#lib/types/props.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import type { As } from '#lib/types/props.js';
+	import { chipCtx } from '../chip-context.js';
+	import { type LabelProps, theme } from '../index.js';
 
 	const ctx = chipCtx.get();
 	const uid = $props.id();

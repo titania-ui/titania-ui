@@ -1,8 +1,8 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { theme, type RootCfg, type RootProps } from './heading.js';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { splitVariants } from '#lib/utils/splitVariants.js';
-	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import { type RootCfg, type RootProps, theme } from './heading.js';
 
 	let {
 		level = 1,

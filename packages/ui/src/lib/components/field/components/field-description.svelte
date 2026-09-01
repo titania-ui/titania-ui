@@ -1,8 +1,8 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { fieldCtx, theme, type DescriptionCfg, type DescriptionProps } from '../index.js';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { registerId } from '#lib/utils/registerId.js';
-	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import { type DescriptionCfg, type DescriptionProps, fieldCtx, theme } from '../index.js';
 
 	const field_ctx = fieldCtx.get();
 	const uid = $props.id();

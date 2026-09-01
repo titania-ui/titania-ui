@@ -1,9 +1,9 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import type { DismissProps, DismissCfg } from '../index.js';
 	import { CloseButton } from '#lib';
-	import { alertCtx } from '../alert-context.js';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { alertCtx } from '../alert-context.js';
+	import type { DismissCfg, DismissProps } from '../index.js';
 
 	const ctx = alertCtx.get();
 

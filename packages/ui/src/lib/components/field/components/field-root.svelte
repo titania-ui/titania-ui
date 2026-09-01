@@ -1,11 +1,11 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { box, boxWith } from 'svelte-toolbelt';
-	import { fieldCtx } from '../field-context.js';
-	import { theme, type RootCfg, type RootProps } from '../index.js';
-	import { splitVariants } from '#lib/utils/splitVariants.js';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
-	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import { formCtx } from '#lib/components/form/form-context.js';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
+	import { fieldCtx } from '../field-context.js';
+	import { type RootCfg, type RootProps, theme } from '../index.js';
+	import { box, boxWith } from 'svelte-toolbelt';
 
 	const form_ctx = formCtx.getOr(undefined);
 

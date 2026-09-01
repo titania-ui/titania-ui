@@ -1,6 +1,6 @@
 <script lang="ts" generics="TChildArg = unknown">
-	import type { Snippet } from 'svelte';
 	import type { As } from '#lib/types/props.js';
+	import type { Snippet } from 'svelte';
 
 	/**
 	 * The polymorphic-tag render block every leaf component ends with, in one

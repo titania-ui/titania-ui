@@ -1,5 +1,6 @@
-import { tv } from 'tailwind-variants/lite';
 import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import { default as Root } from './link.svelte';
+import { tv } from 'tailwind-variants/lite';
 
 export const theme = tv({
 	base: 'talink',
@@ -21,7 +22,6 @@ export type RootCfg = Define<{
 	child: true;
 }>;
 export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
-import { default as Root } from './link.svelte';
 
 const EXPORT: typeof Root & {
 	Root: typeof Root;

@@ -1,12 +1,12 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { boxWith } from 'svelte-toolbelt';
-	import { formCtx } from '../form-context.js';
-	import { theme, type RootCfg, type RootProps } from '../index.js';
-	import { splitVariants } from '#lib/utils/splitVariants.js';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
-	import { fromStore } from 'svelte/store';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
+	import { formCtx } from '../form-context.js';
+	import { type RootCfg, type RootProps, theme } from '../index.js';
+	import { boxWith } from 'svelte-toolbelt';
 	import { createAttachmentKey, fromAction } from 'svelte/attachments';
+	import { fromStore } from 'svelte/store';
 
 	const uid = $props.id();
 

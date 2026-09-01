@@ -1,28 +1,27 @@
 import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
-
-// Theme
+import { default as Description } from './components/descriptionlist-description.svelte';
+import { default as Item } from './components/descriptionlist-item.svelte';
+import { default as Root } from './components/descriptionlist-root.svelte';
+import { default as Term } from './components/descriptionlist-term.svelte';
 import { theme } from './theme.js';
+
 export { theme };
 
 // Root
 export type RootCfg = Define<{ tag: 'dl'; theme: ThemeOf<typeof theme> }>;
 export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
-import { default as Root } from './components/descriptionlist-root.svelte';
 
 // Item
 export type ItemCfg = Define<{ tag: 'div' }>;
 export type ItemProps<TAs extends As | undefined = undefined> = Props<TAs, ItemCfg>;
-import { default as Item } from './components/descriptionlist-item.svelte';
 
 // Term
 export type TermCfg = Define<{ tag: 'dt' }>;
 export type TermProps<TAs extends As | undefined = undefined> = Props<TAs, TermCfg>;
-import { default as Term } from './components/descriptionlist-term.svelte';
 
 // Description
 export type DescriptionCfg = Define<{ tag: 'dd' }>;
 export type DescriptionProps<TAs extends As | undefined = undefined> = Props<TAs, DescriptionCfg>;
-import { default as Description } from './components/descriptionlist-description.svelte';
 
 const EXPORT: typeof Root & {
 	Root: typeof Root;

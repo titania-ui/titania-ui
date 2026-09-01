@@ -1,7 +1,7 @@
 import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
-
-// Theme
+import { default as Root } from './components/close-button-root.svelte';
 import { theme } from './theme.js';
+
 export { theme };
 
 // Root
@@ -12,7 +12,6 @@ export type RootCfg = Define<{
 	child: true;
 }>;
 export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
-import { default as Root } from './components/close-button-root.svelte';
 
 const EXPORT: typeof Root & {
 	Root: typeof Root;

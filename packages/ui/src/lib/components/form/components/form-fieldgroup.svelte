@@ -1,7 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { formCtx, theme, type FieldGroupProps } from '../index.js';
-	import type { As } from '#lib/types/props.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import type { As } from '#lib/types/props.js';
+	import { type FieldGroupProps, formCtx, theme } from '../index.js';
 
 	const form_ctx = formCtx.get();
 

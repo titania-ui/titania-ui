@@ -1,10 +1,10 @@
 <script lang="ts" module>
-	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { Chip, Icon } from '#lib';
-	import { expect, fn } from 'storybook/test';
-	import { capitalize } from '#lib/utils/capitalize.js';
 	import type { ToolingProps } from '#lib/types/props.js';
+	import { capitalize } from '#lib/utils/capitalize.js';
 	import type { RootCfg } from './index.js';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { expect, fn } from 'storybook/test';
 	import type { Snippet } from 'svelte';
 
 	const { Story } = defineMeta<Snippet<[ToolingProps<RootCfg>, unknown]>, typeof Chip>({
