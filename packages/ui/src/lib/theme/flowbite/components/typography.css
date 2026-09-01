@@ -1,3 +1,7 @@
+[data-slot="icon"] {
+	@apply size-4;
+}
+
 .taheading {
 	@apply my-4 font-bold text-heading;
 
