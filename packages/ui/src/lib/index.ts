@@ -1,5 +1,6 @@
 // Components
 export { default as Alert } from './components/alert/index.js';
+export { default as Avatar } from './components/avatar/index.js';
 export { default as Button } from './components/button/index.js';
 export { default as Chip } from './components/chip/index.js';
 export { default as CloseButton } from './components/close-button/index.js';

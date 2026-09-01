@@ -1,0 +1,55 @@
+.taavatar {
+	@apply relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-base bg-neutral-tertiary text-sm;
+
+	&.taavatar--size-sm {
+		@apply size-8;
+
+		[data-slot='icon'] {
+			@apply size-4 align-sub;
+		}
+	}
+
+	&.taavatar--size-md {
+		@apply size-11;
+
+		[data-slot='icon'] {
+			@apply size-6 align-sub;
+		}
+	}
+
+	&.taavatar--size-lg {
+		@apply size-14 text-base;
+
+		[data-slot='icon'] {
+			@apply size-7 align-sub;
+		}
+	}
+}
+
+.taavatar__fallback {
+	@apply contents font-medium;
+}
+
+.taavatar__image {
+	@apply absolute inset-0 aspect-square size-full;
+}
+
+.taavatar__fallback--color-default {
+	@apply text-body;
+}
+
+.taavatar__fallback--color-accent {
+	@apply text-fg-brand;
+}
+
+.taavatar__fallback--color-success {
+	@apply text-fg-success;
+}
+
+.taavatar__fallback--color-warning {
+	@apply text-fg-warning;
+}
+
+.taavatar__fallback--color-danger {
+	@apply text-fg-danger;
+}
