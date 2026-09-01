@@ -187,3 +187,35 @@
 		</div>
 	{/snippet}
 </Story>
+
+<Story
+	name="Avatar Group"
+	parameters={{
+		docs: {
+			source: {
+				code:
+					`<div class="flex -space-x-2">\n` +
+					[0, 1, 2, 3]
+						.map(
+							() =>
+								`\t<Avatar class="rounded-full">\n\t\t<Avatar.Image src="/avatars/john-doe.jpg" alt="John Doe" />\n\t</Avatar>`
+						)
+						.join('\n') +
+					`\n\t<Avatar class="rounded-full">\n\t\t<Avatar.Fallback>+2</Avatar.Fallback>\n\t</Avatar>\n</div>`
+			}
+		}
+	}}
+>
+	{#snippet template(props)}
+		<div class="flex -space-x-2">
+			{#each [0, 1, 2, 3] as i (i)}
+				<Avatar {...props} class="rounded-full">
+					<Avatar.Image src={PHOTO} alt="John Doe" />
+				</Avatar>
+			{/each}
+			<Avatar {...props} class="rounded-full">
+				<Avatar.Fallback>+2</Avatar.Fallback>
+			</Avatar>
+		</div>
+	{/snippet}
+</Story>
