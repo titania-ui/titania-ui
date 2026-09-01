@@ -2,11 +2,11 @@
 	import { Avatar, Icon } from '#lib';
 	import type { ToolingProps } from '#lib/types/props.js';
 	import { capitalize } from '#lib/utils/capitalize.js';
+	import PHOTO from '../../assets/placeholder_avatar.png';
 	import type { RootCfg } from './index.js';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { expect } from 'storybook/test';
 	import type { Snippet } from 'svelte';
-	import PHOTO from '../../assets/placeholder_avatar.png';
 
 	const { Story } = defineMeta<Snippet<[ToolingProps<RootCfg>, unknown]>, typeof Avatar>({
 		title: 'Components/Media/Avatar',
