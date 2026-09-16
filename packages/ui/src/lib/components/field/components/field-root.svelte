@@ -26,7 +26,7 @@
 
 	let split = $derived(splitVariants(theme, rest));
 
-	const __errors = $derived<string[]>(
+	let __errors = $derived<string[]>(
 		!auto || !form_ctx || !name ? errors : ((form_ctx.errors.current?.[name] ?? []) as string[])
 	);
 	const __constraints = $derived<Record<string, unknown>>(
@@ -41,11 +41,13 @@
 	fieldCtx.set({
 		name: boxWith(() => name),
 		variants: boxWith(() => split.variants),
-
 		auto: boxWith(() => auto),
 		required: boxWith(() => __required),
 		disabled: boxWith(() => disabled),
-		errors: boxWith(() => __errors),
+		errors: boxWith(
+			() => __errors,
+			(v) => (__errors = v)
+		),
 		constraints: boxWith(() => __constraints),
 
 		descriptionId: box<string | undefined>(undefined),

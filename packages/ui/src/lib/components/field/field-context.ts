@@ -8,7 +8,7 @@ export interface FieldCtx {
 	readonly auto: ReadableBox<boolean>;
 	readonly required: ReadableBox<boolean>;
 	readonly disabled: ReadableBox<boolean>;
-	readonly errors: ReadableBox<string[]>;
+	readonly errors: WritableBox<string[]>;
 	readonly constraints: ReadableBox<Record<string, unknown>>;
 
 	readonly descriptionId: WritableBox<string | undefined>;
