@@ -5,7 +5,7 @@ import { useHover } from './useHover.js';
 import { createAttachmentKey } from 'svelte/attachments';
 
 export interface PressableTagOptions {
-	/** Explicit `as` override; otherwise `'a'` when `href` is set, else `'button'`. */
+	/* lets you force a specific tag; otherwise <a> if there's an href, <button> if not */
 	as?: () => As | undefined;
 	href?: () => string | undefined;
 	disabled?: () => boolean | undefined;
@@ -14,7 +14,7 @@ export interface PressableTagOptions {
 	 * disabled for hover/press and the `button` attrs, but not the link `onclick`.
 	 */
 	pending?: () => boolean | undefined;
-	/** Fallback for `type` / `tabindex` / `role`, read from the component's leftover attrs. */
+	/** HTML `type` attribute, only used on the `button` branch. Defaults to `'button'`. */
 	type?: () => unknown;
 	/** Link `onclick`, forwarded unless `disabled`. */
 	onclick?: () => unknown;
@@ -22,7 +22,7 @@ export interface PressableTagOptions {
 
 export interface PressableTag {
 	readonly tag: As;
-	/** The hover / focus-ring / active-press attachments only — nothing tag-specific. */
+	/** The hover / focus-ring / active-press attachments only */
 	readonly attachments: Record<string, unknown>;
 	/** `attachments` plus the resolved `button` / link attribute branch. */
 	readonly attrs: Record<string, unknown>;
@@ -32,7 +32,6 @@ export interface PressableTag {
 export function usePressableTag(options: PressableTagOptions = {}): PressableTag {
 	const href = () => options.href?.();
 	const disabled = () => options.disabled?.() ?? false;
-	const type = () => options.type?.();
 
 	const pressDisabled = $derived(disabled() || (options.pending?.() ?? false));
 	const tag = $derived<As>(options.as?.() ?? (href() != null ? 'a' : 'button'));
@@ -55,15 +54,14 @@ export function usePressableTag(options: PressableTagOptions = {}): PressableTag
 		...attachments,
 		...(tag === 'button'
 			? {
-					type: type() ?? 'button',
-					disabled: pressDisabled || undefined,
-					tabindex: type() ?? '0'
+					type: options.type?.() ?? 'button',
+					disabled: pressDisabled || undefined
 				}
 			: {
 					href: pressDisabled ? undefined : href(),
 					'aria-disabled': pressDisabled || undefined,
-					tabindex: pressDisabled ? -1 : (type() ?? 0),
-					role: pressDisabled ? (type() ?? 'link') : undefined,
+					tabindex: pressDisabled ? -1 : undefined,
+					role: pressDisabled ? 'link' : undefined,
 					onclick: disabled() ? undefined : options.onclick?.()
 				})
 	});
