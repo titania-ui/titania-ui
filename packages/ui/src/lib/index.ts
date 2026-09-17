@@ -25,3 +25,6 @@ export { default as Text } from './components/typography/text.js';
 export { useActivePress } from './helpers/useActivePress.js';
 export { useFocusRing } from './helpers/useFocusRing.js';
 export { useHover } from './helpers/useHover.js';
+export { usePressableTag } from './helpers/usePressableTag.svelte.js';
+export { default as Polymorphic } from './helpers/polymorphic.svelte';
+export { default as TouchTarget } from './helpers/touch-target.svelte';
