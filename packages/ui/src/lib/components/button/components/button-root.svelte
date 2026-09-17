@@ -44,8 +44,8 @@
 	const cls = $derived(
 		theme({
 			...split.variants,
-			disabled: childrenState.disabled,
-			pending: childrenState.pending,
+			disabled,
+			pending,
 			class: className
 		} as never)
 	);
@@ -53,8 +53,8 @@
 	const attrs = $derived({
 		'data-slot': 'button',
 		...split.attrs,
-		class: cls,
-		...pressable.attrs
+		...pressable.attrs,
+		class: cls
 	});
 </script>
 
