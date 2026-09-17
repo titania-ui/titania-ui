@@ -14,7 +14,7 @@
 		parameters: {
 			layout: 'centered',
 			controls: {
-				include: ['disabled', 'href', ...Button.theme.variantKeys]
+				include: ['disabled', 'pending', 'href', ...Button.theme.variantKeys]
 			},
 			docs: {
 				description: {
@@ -28,6 +28,17 @@
 		},
 		argTypes: {
 			disabled: {
+				control: {
+					type: 'boolean'
+				},
+				type: 'boolean',
+				table: {
+					category: 'Behavior',
+					type: { summary: 'boolean' },
+					defaultValue: { summary: 'false' }
+				}
+			},
+			pending: {
 				control: {
 					type: 'boolean'
 				},
