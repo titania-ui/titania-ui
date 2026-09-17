@@ -22,8 +22,10 @@
 		...rest
 	}: RootProps<TAs, THref> = $props();
 
+	// Split the rest props into theme variants and the rest of the props.
 	const split = $derived(splitVariants(theme, rest));
 
+	// Helper to determine the correct tag to use and automatically apply helpers
 	const pressable = usePressableTag({
 		as: () => _Tag as As | undefined,
 		href: () => href,
@@ -33,14 +35,14 @@
 		onclick: () => split.attrs.onclick
 	});
 
-	const Tag = $derived<As>(pressable.tag);
-
+	// State to pass to the children function
 	const childrenState = $derived({
 		pending,
 		disabled,
 		...pressable.state
 	});
 
+	// Apply the theme
 	const cls = $derived(
 		theme({
 			...split.variants,
@@ -50,6 +52,7 @@
 		} as never)
 	);
 
+	// Merge the attributes
 	const attrs = $derived({
 		'data-slot': 'button',
 		...split.attrs,
@@ -65,7 +68,7 @@
 {/snippet}
 
 <Polymorphic
-	tag={Tag}
+	tag={pressable.tag}
 	{attrs}
 	bind:ref
 	{child}
