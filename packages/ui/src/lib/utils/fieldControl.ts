@@ -20,6 +20,7 @@ export function fieldControlAttrs(
 					'aria-describedby': field_ctx.descriptionId.current,
 					disabled: field_ctx.disabled.current || undefined,
 					name: field_ctx.name.current,
+					id: field_ctx.name.current,
 					...field_ctx.constraints.current
 				}
 			: {})
