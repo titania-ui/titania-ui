@@ -10,7 +10,7 @@ export const theme = tv({
 export type RootCfg = Define<{
 	tag: 'span';
 	theme: ThemeOf<typeof theme>;
-	own: { icon?: string };
+	own: { icon?: string; alt?: string };
 	child: true;
 }>;
 export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg> & {

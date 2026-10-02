@@ -7,6 +7,7 @@
 
 	let {
 		icon = undefined,
+		alt = undefined,
 		//
 		as: Tag = 'span',
 		class: className = undefined,
@@ -25,9 +26,10 @@
 	);
 
 	const attrs = $derived({
-		role: 'img',
-		'aria-hidden': 'true',
+		role: alt ? 'img' : undefined,
+		'aria-hidden': alt ? undefined : 'true',
 		'data-slot': 'icon',
+		'aria-label': alt,
 		...split.attrs,
 		class: cls
 	});
