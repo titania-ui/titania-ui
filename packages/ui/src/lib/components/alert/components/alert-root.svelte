@@ -4,13 +4,14 @@
 	import { splitVariants } from '#lib/utils/splitVariants.js';
 	import { alertCtx } from '../alert-context.js';
 	import { type RootCfg, type RootProps, theme } from '../index.js';
-	import { box, boxWith } from 'svelte-toolbelt';
+	import { boxWith } from 'svelte-toolbelt';
 
 	const uid = $props.id();
 
 	let {
 		dismissed = $bindable(false),
 		ondismiss = undefined,
+		live = 'auto',
 		//
 		id = uid,
 		as: Tag = 'div',
@@ -26,15 +27,15 @@
 	const cls = $derived(
 		theme().root({
 			...split.variants,
+			live,
+			dismissed,
 			class: className
 		} as never)
 	);
 
-	const ctx = alertCtx.set({
+	alertCtx.set({
 		id: boxWith(() => id),
 		variants: boxWith(() => split.variants),
-		titleId: box<string | undefined>(undefined),
-		descriptionId: box<string | undefined>(undefined),
 		dismissed: boxWith(
 			() => dismissed,
 			(v) => {
@@ -47,12 +48,15 @@
 	const attrs = $derived({
 		'data-slot': 'alert',
 		role:
-			split.variants.status === 'warning' || split.variants.status === 'danger'
-				? 'alert'
-				: 'status',
-		'aria-atomic': 'true',
-		'aria-labelledby': ctx.titleId.current,
-		'aria-describedby': ctx.descriptionId.current,
+			live === 'off'
+				? undefined
+				: live === 'assertive'
+					? 'alert'
+					: live === 'polite'
+						? 'status'
+						: split.variants.status === 'warning' || split.variants.status === 'danger'
+							? 'alert'
+							: 'status',
 		...split.attrs,
 		class: cls,
 		id

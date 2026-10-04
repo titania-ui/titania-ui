@@ -17,6 +17,7 @@
 
 	const attrs = $derived({
 		'aria-controls': ctx.id.current,
+		'aria-label': 'Close alert',
 		...rest,
 		onclick: (e: MouseEvent) => {
 			if (typeof rest.onclick === 'function') rest.onclick?.(e);

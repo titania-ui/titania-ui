@@ -15,7 +15,17 @@ export { alertCtx };
 // Root
 export type RootCfg = Define<{
 	tag: 'div';
-	own: { dismissed?: boolean; ondismiss?: () => void };
+	own: {
+		dismissed?: boolean;
+		ondismiss?: () => void;
+		/**
+		 * Announcement behaviour.
+		 * - `auto` (default): assertive for warning/danger, polite otherwise. Only announced if the alert appears after the page has loaded.
+		 * - `polite` / `assertive`: always announced, even on initial render.
+		 * - `off`: never announced.
+		 */
+		live?: 'auto' | 'polite' | 'assertive' | 'off';
+	};
 	theme: ThemeOf<typeof theme>;
 	child: true;
 }>;
