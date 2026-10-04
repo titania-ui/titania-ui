@@ -2,8 +2,8 @@ import type { Attachment } from 'svelte/attachments';
 
 export interface ActivePressOptions {
 	/** Whether press handling is disabled. */
-	disabled?: boolean;
-	/** Called when the active-press state changes. */
+	disabled?: boolean | null | undefined;
+	/** Called when the pressed state changes. Mirrors `data-pressed`. */
 	onPressedChange?: (pressed: boolean) => void;
 }
 
@@ -29,7 +29,7 @@ function areRectsOverlapping(a: Rect | null, b: Rect | null) {
 
 /**
  * Svelte attachment that tracks whether an element is being actively pressed
- * and toggles a `data-active` attribute, mirroring Headless UI's useActivePress.
+ * and toggles a `data-pressed` attribute, mirroring Headless UI's useActivePress.
  *
  * Uses `pointermove` + geometry overlap instead of `pointerleave`, since
  * iOS Safari fires `pointerleave` inconsistently.
@@ -63,7 +63,7 @@ export function useActivePress(options: ActivePressOptions = {}): Attachment<Ele
 		const setPressed = (next: boolean) => {
 			if (next === pressed) return;
 			pressed = next;
-			node.toggleAttribute('data-active', next);
+			node.toggleAttribute('data-pressed', next);
 			options.onPressedChange?.(next);
 		};
 
@@ -101,7 +101,7 @@ export function useActivePress(options: ActivePressOptions = {}): Attachment<Ele
 			node.removeEventListener('pointerdown', onPointerDown as EventListener);
 			node.removeEventListener('click', reset);
 			dispose();
-			node.removeAttribute('data-active');
+			node.removeAttribute('data-pressed');
 		};
 	};
 }

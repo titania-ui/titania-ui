@@ -45,7 +45,7 @@ export function usePressableTag(options: PressableTagOptions = {}): PressableTag
 	const PRESS = createAttachmentKey();
 
 	const attachments = $derived({
-		[HOVER]: useHover({ isDisabled: pressDisabled, onHoverChange: (v) => (hovered = v) }),
+		[HOVER]: useHover({ disabled: pressDisabled, onHoveredChange: (v) => (hovered = v) }),
 		[FOCUS]: useFocusRing({ onFocusVisibleChange: (v) => (focused = v) }),
 		[PRESS]: useActivePress({ disabled: pressDisabled, onPressedChange: (v) => (pressed = v) })
 	});

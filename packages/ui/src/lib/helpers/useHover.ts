@@ -9,11 +9,13 @@ export interface HoverEvent {
 export interface HoverHandlers {
 	onHoverStart?: (e: HoverEvent) => void;
 	onHoverEnd?: (e: HoverEvent) => void;
-	onHoverChange?: (isHovering: boolean) => void;
+	/** Called when the hovered state changes. Mirrors `data-hovered`. */
+	onHoveredChange?: (hovered: boolean) => void;
 }
 
 export interface HoverOptions extends HoverHandlers {
-	isDisabled?: boolean | null | undefined;
+	/** Whether hover handling is disabled. */
+	disabled?: boolean | null | undefined;
 }
 
 let globalIgnoreEmulatedMouseEvents = false;
@@ -54,36 +56,37 @@ function setupGlobalTouchEvents(): (() => void) | undefined {
 /**
  * Svelte attachment that handles pointer hover interactions for an element.
  * Normalizes behavior across browsers and ignores emulated mouse events on touch devices.
+ * Toggles a `data-hovered` attribute while hovered.
  *
- * Usage: `<div {@attach useHover({ onHoverChange: (h) => isHovered = h })}>`
+ * Usage: `<div {@attach useHover({ onHoveredChange: (h) => hovered = h })}>`
  */
 export function useHover(options: HoverOptions = {}): Attachment<Element> {
 	return (node) => {
 		const teardownGlobal = setupGlobalTouchEvents();
 
-		let isHovered = false;
+		let hovered = false;
 		let target: Element | null = null;
 		let removeOver: (() => void) | undefined;
 
 		const opts = () => options; // captured by closure; re-read on each event
 
 		const triggerHoverStart = (event: PointerEvent, pointerType: string) => {
-			const { isDisabled } = opts();
+			const { disabled } = opts();
 			if (
-				isDisabled ||
+				disabled ||
 				pointerType === 'touch' ||
-				isHovered ||
+				hovered ||
 				!node.contains(event.target as Element)
 			) {
 				return;
 			}
 
-			isHovered = true;
+			hovered = true;
 			target = event.currentTarget as Element;
-			node.setAttribute('data-hover', 'true');
+			node.setAttribute('data-hovered', 'true');
 
 			const onOver = (e: PointerEvent) => {
-				if (isHovered && target && !target.contains(e.target as Element)) {
+				if (hovered && target && !target.contains(e.target as Element)) {
 					triggerHoverEnd(e, e.pointerType);
 				}
 			};
@@ -95,17 +98,17 @@ export function useHover(options: HoverOptions = {}): Attachment<Element> {
 				target,
 				pointerType: pointerType as 'mouse' | 'pen'
 			});
-			opts().onHoverChange?.(true);
+			opts().onHoveredChange?.(true);
 		};
 
 		const triggerHoverEnd = (_event: PointerEvent, pointerType: string) => {
 			const prevTarget = target;
 			target = null;
 
-			if (pointerType === 'touch' || !isHovered || !prevTarget) return;
+			if (pointerType === 'touch' || !hovered || !prevTarget) return;
 
-			isHovered = false;
-			node.removeAttribute('data-hover');
+			hovered = false;
+			node.removeAttribute('data-hovered');
 			removeOver?.();
 			removeOver = undefined;
 
@@ -114,7 +117,7 @@ export function useHover(options: HoverOptions = {}): Attachment<Element> {
 				target: prevTarget,
 				pointerType: pointerType as 'mouse' | 'pen'
 			});
-			opts().onHoverChange?.(false);
+			opts().onHoveredChange?.(false);
 		};
 
 		const onPointerEnter = (e: PointerEvent) => {
@@ -123,7 +126,7 @@ export function useHover(options: HoverOptions = {}): Attachment<Element> {
 		};
 
 		const onPointerLeave = (e: PointerEvent) => {
-			if (!opts().isDisabled && node.contains(e.target as Element)) {
+			if (!opts().disabled && node.contains(e.target as Element)) {
 				triggerHoverEnd(e, e.pointerType);
 			}
 		};
@@ -134,7 +137,7 @@ export function useHover(options: HoverOptions = {}): Attachment<Element> {
 		return () => {
 			node.removeEventListener('pointerenter', onPointerEnter as EventListener);
 			node.removeEventListener('pointerleave', onPointerLeave as EventListener);
-			node.removeAttribute('data-hover');
+			node.removeAttribute('data-hovered');
 			removeOver?.();
 			teardownGlobal?.();
 		};
