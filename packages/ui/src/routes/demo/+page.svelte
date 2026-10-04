@@ -153,7 +153,7 @@
 		</Form.Fieldset>
 	</Form>
 
-	<div>
+	<div class="*:m-0 space-y-4!">
 		{#each Object.keys(Alert.theme.variants.status) as status (status)}
 			<Alert status={status as keyof typeof Alert.theme.variants.status}>
 				<Alert.Indicator />
@@ -162,6 +162,12 @@
 				<Alert.Dismiss />
 			</Alert>
 		{/each}
+		<Alert status="accent">
+			<Alert.Indicator as={Spinner} />
+			<Alert.Title>loading</Alert.Title>
+			<Alert.Description>{lorem10}</Alert.Description>
+			<Alert.Dismiss />
+		</Alert>
 	</div>
 
 	{#each Object.keys(Chip.theme.variants.size) as size (size)}
