@@ -1,11 +1,12 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { box, boxWith } from 'svelte-toolbelt';
-	import { formCtx } from '../form-context.ts';
-	import { theme, type RootCfg, type RootProps } from '../index.ts';
-	import { splitVariants } from '#lib/utils/themeAttrs.js';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
-	import { fromStore } from 'svelte/store';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
+	import { formCtx } from '../form-context.js';
+	import { type RootCfg, type RootProps, theme } from '../index.js';
+	import { boxWith } from 'svelte-toolbelt';
 	import { createAttachmentKey, fromAction } from 'svelte/attachments';
+	import { fromStore } from 'svelte/store';
 
 	const uid = $props.id();
 
@@ -26,7 +27,7 @@
 	const __constraints = $derived(fromStore(form.constraints).current);
 	const __errors = $derived(fromStore(form.errors).current);
 
-	const ctx = formCtx.set({
+	formCtx.set({
 		id: boxWith(() => id),
 		variants: boxWith(() => split.variants),
 
@@ -56,16 +57,11 @@
 	});
 </script>
 
-{#if child}
-	{@render child({
-		props: attrs
-	} as ChildArgOf<RootCfg>)}
-{:else if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.()}
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs}>
-		{@render children?.()}
-	</Tag>
-{/if}
+<Polymorphic
+	tag={Tag}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs } as ChildArgOf<RootCfg>}
+	{children}
+/>

@@ -1,6 +1,8 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { fieldsetCtx, formCtx, theme, type LegendProps } from '../index.ts';
-	import type { As } from '#lib/types/props.ts';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { registerId } from '#lib/utils/registerId.js';
+	import { type LegendCfg, type LegendProps, fieldsetCtx, formCtx, theme } from '../index.js';
 
 	const form_ctx = formCtx.get();
 	const ctx = fieldsetCtx.get();
@@ -13,15 +15,11 @@
 		class: className = undefined,
 		ref = $bindable(null),
 		children,
+		child,
 		...rest
 	}: LegendProps<TAs> = $props();
 
-	$effect.pre(() => {
-		ctx.legendId.current = id;
-		return () => {
-			if (ctx.legendId.current === id) ctx.legendId.current = undefined;
-		};
-	});
+	$effect.pre(() => registerId(ctx.legendId, id));
 
 	const cls = $derived(
 		theme().legend({
@@ -33,16 +31,16 @@
 	const attrs = $derived({
 		'data-slot': 'legend',
 		...rest,
-		class: cls
+		class: cls,
+		id
 	});
 </script>
 
-{#if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.()}
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs}>
-		{@render children?.()}
-	</Tag>
-{/if}
+<Polymorphic
+	tag={Tag}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs } as ChildArgOf<LegendCfg>}
+	{children}
+/>

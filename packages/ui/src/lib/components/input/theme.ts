@@ -11,9 +11,16 @@ export const theme = tv({
 				root: 'tainput--invalid',
 				wrapper: 'tainput__wrapper--invalid'
 			}
+		},
+		disabled: {
+			true: {
+				root: 'tainput--disabled',
+				wrapper: 'tainput__wrapper--disabled'
+			}
 		}
 	},
 	defaultVariants: {
-		invalid: false
+		invalid: false,
+		disabled: false
 	}
 });

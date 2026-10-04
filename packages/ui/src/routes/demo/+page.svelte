@@ -2,27 +2,28 @@
 	import {
 		Alert,
 		Button,
-		Text,
-		Icon,
-		Heading,
-		Strong,
-		Spinner,
 		Chip,
-		Link,
 		Code,
-		Form,
-		Field,
-		Label,
-		Input,
-		Textarea,
-		Select,
 		DescriptionList,
-		Sidebar
-	} from '../../lib/index.ts';
+		Field,
+		Form,
+		Heading,
+		Icon,
+		Input,
+		InputGroup,
+		Label,
+		Link,
+		Select,
+		Sidebar,
+		Spinner,
+		Strong,
+		Text,
+		Textarea
+	} from '../../lib/index.js';
+	import { reservationSchema } from './utils.js';
+	import { untrack } from 'svelte';
 	import { superForm } from 'sveltekit-superforms';
 	import { zod4 } from 'sveltekit-superforms/adapters';
-	import { untrack } from 'svelte';
-	import { reservationSchema } from './utils.ts';
 
 	let { data } = $props();
 
@@ -114,7 +115,13 @@
 			<Form.FieldGroup>
 				<Field auto name="party_size">
 					<Label>Party size</Label>
-					<Input type="number" />
+					<InputGroup>
+						<InputGroup.Prefix>
+							<Icon icon="icon-[fluent-emoji-flat--party-popper]" />
+						</InputGroup.Prefix>
+						<Input type="number" />
+						<InputGroup.Suffix>Guests</InputGroup.Suffix>
+					</InputGroup>
 					<Field.Error />
 				</Field>
 				<Field auto name="seating">
@@ -146,7 +153,7 @@
 		</Form.Fieldset>
 	</Form>
 
-	<div>
+	<div class="*:m-0 space-y-4!">
 		{#each Object.keys(Alert.theme.variants.status) as status (status)}
 			<Alert status={status as keyof typeof Alert.theme.variants.status}>
 				<Alert.Indicator />
@@ -155,6 +162,12 @@
 				<Alert.Dismiss />
 			</Alert>
 		{/each}
+		<Alert status="accent">
+			<Alert.Indicator as={Spinner} />
+			<Alert.Title>loading</Alert.Title>
+			<Alert.Description>{lorem10}</Alert.Description>
+			<Alert.Dismiss />
+		</Alert>
 	</div>
 
 	{#each Object.keys(Chip.theme.variants.size) as size (size)}

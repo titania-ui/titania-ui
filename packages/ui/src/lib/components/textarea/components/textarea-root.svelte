@@ -1,14 +1,18 @@
 <script lang="ts">
-	import { theme, type RootProps } from '../index.ts';
-	import { splitVariants } from '#lib/utils/themeAttrs.ts';
-	import { fieldCtx } from '#lib/components/field/field-context.ts';
-	import { fieldValue } from '#lib/components/input/field-value.svelte.ts';
+	import { fieldCtx } from '#lib/components/field/field-context.js';
+	import { fieldValue } from '#lib/components/input/field-value.svelte.js';
+	import { useHover } from '#lib/helpers/useHover.js';
+	import { fieldControlAttrs, fieldInvalid } from '#lib/utils/fieldControl.js';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
+	import { type RootProps, theme } from '../index.js';
+	import { createAttachmentKey } from 'svelte/attachments';
 
 	let field_ctx = fieldCtx.getOr(undefined);
 
 	let {
 		value = $bindable(null),
 		invalid = undefined,
+		disabled = undefined,
 		//
 		class: className = undefined,
 		ref = $bindable(null),
@@ -16,30 +20,25 @@
 		...rest
 	}: RootProps = $props();
 
-	const __invalid = $derived(field_ctx ? field_ctx.errors.current.length > 0 : invalid);
+	const __invalid = $derived(fieldInvalid(field_ctx, invalid));
+	const __disabled = $derived(field_ctx ? field_ctx.disabled.current : disabled);
 
-	let split = $derived(splitVariants(theme, rest));
+	let split = $derived(
+		splitVariants(theme, { ...rest, invalid: __invalid, disabled: __disabled }, ['disabled'])
+	);
 
 	const cls = $derived(
 		theme().root({
 			...split.variants,
 			invalid: __invalid,
+			disabled: __disabled,
 			class: className
 		} as never)
 	);
 
 	const attrs = $derived({
-		'data-slot': 'control',
-		'aria-invalid': __invalid ? 'true' : undefined,
-		...(field_ctx
-			? {
-					'aria-labelledby': field_ctx.labelId.current,
-					'aria-describedby': field_ctx.descriptionId.current,
-					disabled: field_ctx.disabled.current || undefined,
-					name: field_ctx.name.current,
-					...field_ctx.constraints.current
-				}
-			: {}),
+		...fieldControlAttrs(field_ctx, invalid),
+		[createAttachmentKey()]: useHover({ isDisabled: __disabled }),
 		...split.attrs,
 		class: cls
 	});
@@ -54,7 +53,8 @@
 	data-slot="control"
 	class={theme().wrapper({
 		...split.variants,
-		invalid: __invalid
+		invalid: __invalid,
+		disabled: __disabled
 	})}
 >
 	<textarea bind:this={ref} bind:value={() => val.current, (v) => (val.current = v)} {...attrs}

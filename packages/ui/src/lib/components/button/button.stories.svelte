@@ -1,10 +1,10 @@
 <script lang="ts" module>
-	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { Button, Icon, Spinner } from '#lib';
-	import { expect, fn } from 'storybook/test';
-	import { capitalize } from '#lib/utils/capitalize.js';
 	import type { ToolingProps } from '#lib/types/props.js';
-	import type { RootCfg } from './index.ts';
+	import { capitalize } from '#lib/utils/capitalize.js';
+	import type { RootCfg } from './index.js';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { expect, fn } from 'storybook/test';
 	import type { Snippet } from 'svelte';
 
 	const { Story } = defineMeta<Snippet<[ToolingProps<RootCfg>, unknown]>, typeof Button>({
@@ -14,7 +14,7 @@
 		parameters: {
 			layout: 'centered',
 			controls: {
-				include: ['disabled', 'href', ...Button.theme.variantKeys]
+				include: ['disabled', 'pending', 'href', ...Button.theme.variantKeys]
 			},
 			docs: {
 				description: {
@@ -28,6 +28,17 @@
 		},
 		argTypes: {
 			disabled: {
+				control: {
+					type: 'boolean'
+				},
+				type: 'boolean',
+				table: {
+					category: 'Behavior',
+					type: { summary: 'boolean' },
+					defaultValue: { summary: 'false' }
+				}
+			},
+			pending: {
 				control: {
 					type: 'boolean'
 				},
@@ -320,10 +331,12 @@
 		}
 	}}
 >
-	{#snippet template({ props })}
+	{#snippet template(props)}
 		<div class="flex flex-wrap items-center justify-center gap-4">
 			{#each Object.keys(Button.theme.variants.size) as size (size)}
-				<Button {...props} {size}>{capitalize(size)}</Button>
+				<Button {...props} size={size as keyof typeof Button.theme.variants.size}
+					>{capitalize(size)}</Button
+				>
 			{/each}
 		</div>
 	{/snippet}
@@ -344,10 +357,10 @@
 		}
 	}}
 >
-	{#snippet template({ props })}
+	{#snippet template(props)}
 		<div class="flex flex-wrap items-center justify-center gap-4">
 			{#each Object.keys(Button.theme.variants.size) as size (size)}
-				<Button {...props} {size}
+				<Button {...props} size={size as keyof typeof Button.theme.variants.size}
 					><Icon icon="icon-[flowbite--arrow-down-to-bracket-outline]" />{capitalize(size)}</Button
 				>
 			{/each}
@@ -367,10 +380,12 @@
 		}
 	}}
 >
-	{#snippet template({ props })}
+	{#snippet template(props)}
 		<div class="flex flex-wrap items-center justify-center gap-4">
 			{#each Object.keys(Button.theme.variants.variant) as variant (variant)}
-				<Button {...props} {variant}>{capitalize(variant)}</Button>
+				<Button {...props} variant={variant as keyof typeof Button.theme.variants.variant}
+					>{capitalize(variant)}</Button
+				>
 			{/each}
 		</div>
 	{/snippet}
@@ -388,10 +403,12 @@
 		}
 	}}
 >
-	{#snippet template({ props })}
+	{#snippet template(props)}
 		<div class="flex flex-wrap items-center justify-center gap-4">
 			{#each Object.keys(Button.theme.variants.color) as color (color)}
-				<Button {...props} {color}>{capitalize(color)}</Button>
+				<Button {...props} color={color as keyof typeof Button.theme.variants.color}
+					>{capitalize(color)}</Button
+				>
 			{/each}
 		</div>
 	{/snippet}

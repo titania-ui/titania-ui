@@ -1,13 +1,11 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { theme, type RootCfg, type RootProps } from '../index.ts';
 	import { Icon } from '#lib';
-	import { splitVariants } from '#lib/utils/themeAttrs.js';
-	import type { As, ChildArgOf } from '#lib/types/props.js';
-	import { useActivePress } from '#lib/helpers/useActivePress.js';
-	import { useFocusRing } from '#lib/helpers/useFocusRing.js';
-	import { useHover } from '#lib/helpers/useHover.js';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import TouchTarget from '#lib/helpers/touch-target.svelte';
-	import { createAttachmentKey } from 'svelte/attachments';
+	import { usePressableTag } from '#lib/helpers/usePressableTag.svelte.js';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
+	import { type RootCfg, type RootProps, theme } from '../index.js';
 
 	let {
 		//
@@ -19,6 +17,8 @@
 		...rest
 	}: RootProps<TAs> = $props();
 
+	const pressable = usePressableTag();
+
 	const split = $derived(splitVariants(theme, rest));
 
 	const cls = $derived(
@@ -28,44 +28,35 @@
 		} as never)
 	);
 
-	const HOVER = createAttachmentKey();
-	const FOCUS = createAttachmentKey();
-	const PRESS = createAttachmentKey();
-
 	const attrs = $derived({
 		'data-slot': 'button',
 		'aria-label': 'Close',
 		role: 'button',
 		...split.attrs,
 		class: cls,
-		[HOVER]: useHover(),
-		[FOCUS]: useFocusRing(),
-		[PRESS]: useActivePress()
+		...pressable.attachments
 	});
 </script>
 
 {#snippet childOrElse()}
 	{#if children}
-		{@render children()}
+		{@render children(pressable.state)}
 	{:else}
 		<Icon class={theme().placeholder()} />
 	{/if}
 {/snippet}
 
-{#if child}
-	{@render child({
-		props: attrs
-	} as ChildArgOf<RootCfg>)}
-{:else if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		<TouchTarget>
-			{@render childOrElse()}
-		</TouchTarget>
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs}>
-		<TouchTarget>
-			{@render childOrElse()}
-		</TouchTarget>
-	</Tag>
-{/if}
+{#snippet body()}
+	<TouchTarget>
+		{@render childOrElse()}
+	</TouchTarget>
+{/snippet}
+
+<Polymorphic
+	tag={Tag}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs, ...pressable.state } as ChildArgOf<RootCfg>}
+	children={body}
+/>

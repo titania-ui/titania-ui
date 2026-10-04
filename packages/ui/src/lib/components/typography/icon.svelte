@@ -1,15 +1,18 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { theme, type RootProps } from './icon.ts';
-	import type { As } from '#lib/types/props.ts';
-	import { splitVariants } from '#lib/utils/themeAttrs.ts';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
+	import { type RootCfg, type RootProps, theme } from './icon.js';
 	import { cx } from 'tailwind-variants/lite';
 
 	let {
 		icon = undefined,
+		alt = undefined,
 		//
 		as: Tag = 'span',
 		class: className = undefined,
 		ref = $bindable(null),
+		child,
 		...rest
 	}: RootProps<TAs> = $props();
 
@@ -23,17 +26,19 @@
 	);
 
 	const attrs = $derived({
-		role: 'img',
-		'aria-hidden': 'true',
+		role: alt ? 'img' : undefined,
+		'aria-hidden': alt ? undefined : 'true',
 		'data-slot': 'icon',
+		'aria-label': alt,
 		...split.attrs,
 		class: cls
 	});
 </script>
 
-{#if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}
-	></svelte:element>
-{:else}
-	<Tag bind:ref {...attrs} />
-{/if}
+<Polymorphic
+	tag={Tag as As}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs } as ChildArgOf<RootCfg>}
+/>

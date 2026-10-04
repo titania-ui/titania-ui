@@ -1,8 +1,10 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { theme, type RootProps } from '../index.ts';
-	import type { As } from '#lib/types/props.ts';
-	import { splitVariants } from '#lib/utils/themeAttrs.ts';
-	import { fieldCtx } from '#lib/components/field/field-context.ts';
+	import { fieldCtx } from '#lib/components/field/field-context.js';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { registerId } from '#lib/utils/registerId.js';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
+	import { type RootCfg, type RootProps, theme } from '../index.js';
 
 	let field_ctx = fieldCtx.getOr(undefined);
 	const uid = $props.id();
@@ -16,20 +18,18 @@
 		class: className = undefined,
 		ref = $bindable(null),
 		children,
+		child,
 		...rest
 	}: RootProps<TAs> = $props();
 
 	$effect.pre(() => {
-		if (field_ctx) {
-			field_ctx.labelId.current = id;
-			return () => {
-				if (field_ctx.labelId.current === id) field_ctx.labelId.current = undefined;
-			};
-		}
+		if (field_ctx) return registerId(field_ctx.labelId, id);
 	});
 
 	const __required = $derived(field_ctx ? field_ctx.required.current : required);
 	const __invalid = $derived(field_ctx ? field_ctx.errors.current.length > 0 : invalid);
+
+	const childrenState = $derived({ required: Boolean(__required), invalid: Boolean(__invalid) });
 
 	let split = $derived(splitVariants(theme, rest));
 
@@ -51,12 +51,15 @@
 	});
 </script>
 
-{#if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.()}
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs}>
-		{@render children?.()}
-	</Tag>
-{/if}
+{#snippet body()}
+	{@render children?.(childrenState)}
+{/snippet}
+
+<Polymorphic
+	tag={Tag}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs, ...childrenState } as ChildArgOf<RootCfg>}
+	children={body}
+/>

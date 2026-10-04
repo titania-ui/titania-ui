@@ -3,6 +3,7 @@ packages:
 allowBuilds:
   esbuild: true
   "@tailwindcss/oxide": true
+  sveltekit-superforms@https://codeload.github.com/Kworz/sveltekit-superforms-sk-v3/tar.gz/517fe2cf26cf643038a198769e44bcecaf734fa2: true
 minimumReleaseAge: 4320
 overrides:
   "playwright": "1.61.1"

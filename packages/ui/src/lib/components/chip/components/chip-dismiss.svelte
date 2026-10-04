@@ -1,8 +1,9 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import type { DismissProps, DismissCfg } from '../index.ts';
 	import { CloseButton } from '#lib';
-	import { chipCtx } from '../chip-context.ts';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { chipCtx } from '../chip-context.js';
+	import type { DismissCfg, DismissProps } from '../index.js';
 
 	const ctx = chipCtx.get();
 
@@ -24,14 +25,11 @@
 	});
 </script>
 
-{#if child}
-	{@render child({
-		props: attrs
-	} as ChildArgOf<DismissCfg>)}
-{:else if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.()}
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs} {children} />
-{/if}
+<Polymorphic
+	tag={Tag}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs } as ChildArgOf<DismissCfg>}
+	{children}
+/>

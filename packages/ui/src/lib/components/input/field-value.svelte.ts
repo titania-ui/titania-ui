@@ -1,11 +1,11 @@
 // field-value.svelte.ts
-import { get } from 'svelte/store';
 import { fieldCtx } from '../field';
 import { formCtx } from '../form';
+import { get } from 'svelte/store';
 
 export function fieldValue<T>(getManual: () => T, setManual: (v: T) => void) {
 	const ctx = fieldCtx.get();
-	const form_ctx = formCtx.get();
+	const form_ctx = formCtx.getOr(undefined);
 	const isAuto = ctx.auto.current;
 
 	if (isAuto && !form_ctx) {

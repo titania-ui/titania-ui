@@ -1,10 +1,10 @@
 <script lang="ts" module>
-	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import { Alert, Button, Spinner } from '#lib';
-	import { expect, fn } from 'storybook/test';
-	import { capitalize } from '#lib/utils/capitalize.js';
 	import type { ToolingProps } from '#lib/types/props.js';
-	import type { RootCfg } from './index.ts';
+	import { capitalize } from '#lib/utils/capitalize.js';
+	import type { RootCfg } from './index.js';
+	import { defineMeta } from '@storybook/addon-svelte-csf';
+	import { expect, fn } from 'storybook/test';
 	import type { Snippet } from 'svelte';
 
 	const { Story } = defineMeta<Snippet<[ToolingProps<RootCfg>, unknown]>, typeof Alert>({
@@ -153,10 +153,10 @@
 </Story>
 
 <Story name="Status">
-	{#snippet template({ props })}
+	{#snippet template(props)}
 		<div class="space-y-4">
 			{#each Object.keys(Alert.theme.variants.status) as status (status)}
-				<Alert {...props} {status}>
+				<Alert {...props} status={status as keyof typeof Alert.theme.variants.status}>
 					<Alert.Title>{capitalize(status)}s</Alert.Title>
 					<Alert.Description>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae libero sed eligendi

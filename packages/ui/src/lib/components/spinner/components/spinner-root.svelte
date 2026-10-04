@@ -1,7 +1,8 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { theme, type RootProps } from '../index.ts';
-	import { splitVariants } from '#lib/utils/themeAttrs.js';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import type { As } from '#lib/types/props.js';
+	import { splitVariants } from '#lib/utils/splitVariants.js';
+	import { type RootProps, theme } from '../index.js';
 
 	let {
 		//
@@ -30,9 +31,4 @@
 	});
 </script>
 
-{#if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}
-	></svelte:element>
-{:else}
-	<Tag bind:ref {...attrs}></Tag>
-{/if}
+<Polymorphic tag={Tag as As} {attrs} bind:ref />

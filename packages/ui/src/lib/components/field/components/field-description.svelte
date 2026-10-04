@@ -1,6 +1,8 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { fieldCtx, theme, type DescriptionProps } from '../index.ts';
-	import type { As } from '#lib/types/props.ts';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { registerId } from '#lib/utils/registerId.js';
+	import { type DescriptionCfg, type DescriptionProps, fieldCtx, theme } from '../index.js';
 
 	const field_ctx = fieldCtx.get();
 	const uid = $props.id();
@@ -12,15 +14,11 @@
 		class: className = undefined,
 		ref = $bindable(null),
 		children,
+		child,
 		...rest
 	}: DescriptionProps<TAs> = $props();
 
-	$effect.pre(() => {
-		field_ctx.descriptionId.current = id;
-		return () => {
-			if (field_ctx.descriptionId.current === id) field_ctx.descriptionId.current = undefined;
-		};
-	});
+	$effect.pre(() => registerId(field_ctx.descriptionId, id));
 
 	const cls = $derived(
 		theme().description({
@@ -32,16 +30,16 @@
 	const attrs = $derived({
 		'data-slot': 'description',
 		...rest,
-		class: cls
+		class: cls,
+		id
 	});
 </script>
 
-{#if typeof Tag === 'string'}
-	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.()}
-	</svelte:element>
-{:else}
-	<Tag bind:ref {...attrs}>
-		{@render children?.()}
-	</Tag>
-{/if}
+<Polymorphic
+	tag={Tag}
+	{attrs}
+	bind:ref
+	{child}
+	childArg={{ props: attrs } as ChildArgOf<DescriptionCfg>}
+	{children}
+/>

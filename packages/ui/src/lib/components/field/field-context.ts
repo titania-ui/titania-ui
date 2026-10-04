@@ -1,4 +1,4 @@
-import { Context } from '#lib/utils/context.ts';
+import { Context } from '#lib/utils/context.js';
 import type { ReadableBox, WritableBox } from 'svelte-toolbelt';
 
 export interface FieldCtx {
@@ -8,7 +8,7 @@ export interface FieldCtx {
 	readonly auto: ReadableBox<boolean>;
 	readonly required: ReadableBox<boolean>;
 	readonly disabled: ReadableBox<boolean>;
-	readonly errors: ReadableBox<string[]>;
+	readonly errors: WritableBox<string[]>;
 	readonly constraints: ReadableBox<Record<string, unknown>>;
 
 	readonly descriptionId: WritableBox<string | undefined>;

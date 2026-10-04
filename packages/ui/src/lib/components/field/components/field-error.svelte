@@ -1,6 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
-	import { fieldCtx, theme, type DescriptionProps } from '../index.ts';
-	import type { As } from '#lib/types/props.ts';
+	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import type { As, ChildArgOf } from '#lib/types/props.js';
+	import { type ErrorCfg, type ErrorProps, fieldCtx, theme } from '../index.js';
 
 	const field_ctx = fieldCtx.get();
 
@@ -9,9 +10,9 @@
 		as: Tag = 'p',
 		class: className = undefined,
 		ref = $bindable(null),
-		children,
+		child,
 		...rest
-	}: DescriptionProps<TAs> = $props();
+	}: ErrorProps<TAs> = $props();
 
 	const cls = $derived(
 		theme().error({
@@ -30,13 +31,13 @@
 </script>
 
 {#if hasError}
-	{#if typeof Tag === 'string'}
-		<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-			{field_ctx.errors.current[0]}
-		</svelte:element>
-	{:else}
-		<Tag bind:ref {...attrs}>
-			{field_ctx.errors.current[0]}
-		</Tag>
-	{/if}
+	<Polymorphic
+		tag={Tag}
+		{attrs}
+		bind:ref
+		{child}
+		childArg={{ props: attrs, errors: field_ctx.errors.current } as ChildArgOf<ErrorCfg>}
+	>
+		{field_ctx.errors.current[0]}
+	</Polymorphic>
 {/if}

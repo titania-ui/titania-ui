@@ -1,6 +1,7 @@
 import type { As, Define, Props, ThemeOf } from '#lib/types/props.js';
+import { default as Root } from './components/spinner-root.svelte';
+import { theme } from './theme.js';
 
-import { theme } from './theme.ts';
 export { theme };
 
 // Root
@@ -8,11 +9,9 @@ export type RootCfg = Define<{
 	tag: 'span';
 	theme: ThemeOf<typeof theme>;
 }>;
-export type RootProps<TAs extends As | undefined = undefined> = Omit<
-	Props<TAs, RootCfg>,
-	'children'
->;
-import { default as Root } from './components/spinner-root.svelte';
+export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg> & {
+	children?: never;
+};
 
 const EXPORT: typeof Root & {
 	Root: typeof Root;

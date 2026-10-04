@@ -1,5 +1,5 @@
-import type { Preview } from '@storybook/sveltekit';
 import '../src/lib/theme/flowbite/index.css';
+import type { Preview } from '@storybook/sveltekit';
 
 const preview: Preview = {
 	parameters: {
