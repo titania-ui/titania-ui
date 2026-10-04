@@ -1,5 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import TouchTarget from '#lib/helpers/touch-target.svelte';
+	import { usePressableTag } from '#lib/helpers/usePressableTag.svelte.js';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { splitVariants } from '#lib/utils/splitVariants.js';
 	import { chipCtx } from '../chip-context.js';
@@ -9,11 +11,14 @@
 	const uid = $props.id();
 
 	let {
+		href,
+		onclick,
+		disabled = false,
 		dismissed = $bindable(false),
 		ondismiss = undefined,
 		//
 		id = uid,
-		as: Tag = 'span',
+		as: _Tag,
 		class: className = undefined,
 		ref = $bindable(null),
 		children,
@@ -23,9 +28,24 @@
 
 	let split = $derived(splitVariants(theme, rest));
 
+	const pressable = usePressableTag({
+		as: () => _Tag as As | undefined,
+		href: () => href,
+		disabled: () => disabled,
+		type: () => split.attrs.type,
+		onclick: () => onclick,
+		fallbackTag: () => 'span'
+	});
+
+	const childrenState = $derived({
+		disabled,
+		...pressable.state
+	});
+
 	const cls = $derived(
 		theme().root({
 			...split.variants,
+			disabled,
 			class: className
 		} as never)
 	);
@@ -47,18 +67,25 @@
 		'data-slot': 'chip',
 		'aria-describedby': ctx.labelId.current,
 		...split.attrs,
+		...pressable.attrs,
 		class: cls,
 		id
 	});
 </script>
 
+{#snippet body()}
+	<TouchTarget>
+		{@render children?.(childrenState)}
+	</TouchTarget>
+{/snippet}
+
 {#if !dismissed}
 	<Polymorphic
-		tag={Tag}
+		tag={pressable.tag}
 		{attrs}
 		bind:ref
 		{child}
-		childArg={{ props: attrs } as ChildArgOf<RootCfg>}
-		{children}
+		childArg={{ props: attrs, ...childrenState } as ChildArgOf<RootCfg>}
+		children={body}
 	/>
 {/if}

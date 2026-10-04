@@ -18,6 +18,7 @@ export interface PressableTagOptions {
 	type?: () => unknown;
 	/** Link `onclick`, forwarded unless `disabled`. */
 	onclick?: () => unknown;
+	fallbackTag?: () => As;
 }
 
 export interface PressableTag {
@@ -31,10 +32,23 @@ export interface PressableTag {
 
 export function usePressableTag(options: PressableTagOptions = {}): PressableTag {
 	const href = () => options.href?.();
+	const onclick = () => options.onclick?.();
+	const fallbackTag = () => options.fallbackTag?.();
 	const disabled = () => options.disabled?.() ?? false;
 
-	const pressDisabled = $derived(disabled() || (options.pending?.() ?? false));
-	const tag = $derived<As>(options.as?.() ?? (href() != null ? 'a' : 'button'));
+	const tag = $derived<As>(
+		options.as?.() ??
+			(href() != null
+				? 'a'
+				: onclick() != null
+					? 'button'
+					: fallbackTag()
+						? fallbackTag()!
+						: 'button')
+	);
+	const pressDisabled = $derived(
+		(href() == null && onclick() == null) || !disabled() || (options.pending?.() ?? false)
+	);
 
 	let hovered = $state(false);
 	let pressed = $state(false);
