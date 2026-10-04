@@ -22,7 +22,7 @@ export type RootCfg = Define<{
 export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;
 
 // Title
-export type TitleCfg = Define<{ tag: 'h3'; child: true }>;
+export type TitleCfg = Define<{ tag: 'p'; child: true }>;
 export type TitleProps<TAs extends As | undefined = undefined> = Props<TAs, TitleCfg>;
 
 // Description

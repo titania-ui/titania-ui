@@ -11,7 +11,7 @@
 	let {
 		//
 		id = uid,
-		as: Tag = 'h3',
+		as: Tag = 'p',
 		class: className = undefined,
 		ref = $bindable(null),
 		children,
