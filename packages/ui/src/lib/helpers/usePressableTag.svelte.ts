@@ -47,7 +47,7 @@ export function usePressableTag(options: PressableTagOptions = {}): PressableTag
 						: 'button')
 	);
 	const pressDisabled = $derived(
-		(href() == null && onclick() == null) || !disabled() || (options.pending?.() ?? false)
+		disabled() || (options.pending?.() ?? false) || (tag !== 'a' && tag !== 'button')
 	);
 
 	let hovered = $state(false);
