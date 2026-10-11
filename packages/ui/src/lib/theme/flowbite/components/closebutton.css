@@ -8,12 +8,12 @@
 		@apply size-4;
 	}
 
-	&[data-hover] {
+	&[data-hovered] {
 		@apply bg-(--button-bg-hover);
 	}
 
-	&[data-focus] {
-		@apply bg-(--button-focus) ring-2;
+	&[data-focus-visible] {
+		@apply ring-2 ring-(--button-focus);
 	}
 
 	.taclosebutton__placeholder {

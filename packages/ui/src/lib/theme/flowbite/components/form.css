@@ -61,7 +61,7 @@
 	.tainputgroup__suffix {
 		@apply z-10 box-border inline-flex shrink-0 items-center border border-default-medium bg-neutral-secondary-medium px-4 py-2.5 text-sm leading-5 font-medium text-body focus:outline-none;
 
-		&[data-focus] {
+		&[data-focus-visible] {
 			@apply ring-4 ring-neutral-tertiary;
 		}
 
