@@ -35,10 +35,14 @@
 	);
 
 	const lorem10 = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, sit.';
+
+	const STACK = { class: '*:m-0 space-y-4!' };
+
+	const LIST = { class: 'flex flex-row gap-4 flex-wrap basis' };
 </script>
 
-<div class="space-y-12 p-6">
-	<div>
+<div class="space-y-12! p-6 *:m-0">
+	<div {...STACK}>
 		<Heading level={1}>Heading 1</Heading>
 		<Text>{lorem10}</Text>
 		<Heading level={2}>Heading 2</Heading>
@@ -61,12 +65,11 @@
 	</div>
 
 	{#each Object.keys(Button.theme.variants.size) as size (size)}
-		<div>
+		<div {...LIST}>
 			{#each Object.keys(Button.theme.variants.variant) as variant (variant)}
 				<Button
 					variant={variant as keyof typeof Button.theme.variants.variant}
 					size={size as keyof typeof Button.theme.variants.size}
-					class="m-2"
 				>
 					<Icon icon="icon-[heroicons--inbox-solid]" />
 					{variant}
@@ -76,7 +79,6 @@
 				<Button
 					color={color as keyof typeof Button.theme.variants.color}
 					size={size as keyof typeof Button.theme.variants.size}
-					class="m-2"
 				>
 					{#if index % 3 === 0}
 						<Icon icon="icon-[heroicons--inbox-solid]" />
@@ -89,15 +91,15 @@
 		</div>
 	{/each}
 
-	<div>
+	<div {...LIST}>
 		{#each Object.keys(Button.theme.variants.variant) as variant (variant)}
-			<Button variant={variant as keyof typeof Button.theme.variants.variant} class="m-2" disabled>
+			<Button variant={variant as keyof typeof Button.theme.variants.variant} disabled>
 				<Icon icon="icon-[heroicons--inbox-solid]" />
 				{variant} disabled
 			</Button>
 		{/each}
 		{#each Object.keys(Button.theme.variants.color) as color, index (color)}
-			<Button color={color as keyof typeof Button.theme.variants.color} class="m-2" disabled>
+			<Button color={color as keyof typeof Button.theme.variants.color} disabled>
 				{#if index % 3 === 0}
 					<Icon icon="icon-[heroicons--inbox-solid]" />
 				{:else if index % 3 === 1}
@@ -153,7 +155,7 @@
 		</Form.Fieldset>
 	</Form>
 
-	<div class="*:m-0 space-y-4!">
+	<div {...STACK}>
 		{#each Object.keys(Alert.theme.variants.status) as status (status)}
 			<Alert status={status as keyof typeof Alert.theme.variants.status}>
 				<Alert.Indicator />
@@ -171,12 +173,11 @@
 	</div>
 
 	{#each Object.keys(Chip.theme.variants.size) as size (size)}
-		<div>
+		<div {...LIST}>
 			{#each Object.keys(Chip.theme.variants.color) as color, index (color)}
 				<Chip
 					color={color as keyof typeof Chip.theme.variants.color}
 					size={size as keyof typeof Chip.theme.variants.size}
-					class="m-2"
 				>
 					{#if index % 3 === 0}
 						<Icon icon="icon-[heroicons--inbox-solid]" />
