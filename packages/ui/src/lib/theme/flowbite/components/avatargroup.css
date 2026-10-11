@@ -1,0 +1,3 @@
+.taavatargroup {
+	@apply flex items-center -space-x-2;
+}

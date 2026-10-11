@@ -1,6 +1,9 @@
 <script lang="ts">
+	import PHOTO from '../../lib/assets/placeholder_avatar.png';
 	import {
 		Alert,
+		Avatar,
+		AvatarGroup,
 		Button,
 		Chip,
 		Code,
@@ -253,4 +256,50 @@
 			</DescriptionList.Item>
 		{/each}
 	</DescriptionList>
+
+	<div {...LIST}>
+		<AvatarGroup max={3}>
+			<Avatar>
+				<Avatar.Image src={PHOTO} alt="John Doe" />
+			</Avatar>
+			<Avatar>
+				<Avatar.Image src={PHOTO} alt="John Doe" />
+			</Avatar>
+			<Avatar>
+				<Avatar.Image src={PHOTO} alt="John Doe" />
+			</Avatar>
+			<Avatar>
+				<Avatar.Image src={PHOTO} alt="John Doe" />
+			</Avatar>
+			<Avatar>
+				<Avatar.Image src={PHOTO} alt="John Doe" />
+			</Avatar>
+			<Avatar>
+				<Avatar.Image src={PHOTO} alt="John Doe" />
+			</Avatar>
+		</AvatarGroup>
+
+		<AvatarGroup max={3}>
+			<Avatar>
+				<Avatar.Image src={PHOTO} alt="John Doe" />
+			</Avatar>
+			<Avatar>
+				<Avatar.Image src={PHOTO} alt="John Doe" />
+			</Avatar>
+		</AvatarGroup>
+
+		<Avatar>
+			<Avatar.Image src={PHOTO} alt="John Doe" />
+			<Avatar.Fallback>JD</Avatar.Fallback>
+		</Avatar>
+
+		<Avatar>
+			<Avatar.Fallback>JD</Avatar.Fallback>
+		</Avatar>
+
+		<Avatar>
+			<Avatar.Image src="ERROR" alt="John Doe" />
+			<Avatar.Fallback>JD</Avatar.Fallback>
+		</Avatar>
+	</div>
 </div>

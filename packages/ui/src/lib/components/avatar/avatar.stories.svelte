@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	import { Avatar, Icon } from '#lib';
+	import { Avatar, AvatarGroup, Icon } from '#lib';
 	import type { ToolingProps } from '#lib/types/props.js';
 	import { capitalize } from '#lib/utils/capitalize.js';
 	import PHOTO from '../../assets/placeholder_avatar.png';
@@ -189,33 +189,44 @@
 </Story>
 
 <Story
+	name="Broken Image"
+	play={async ({ canvas, step }) => {
+		await step('falls back when the image fails to load', async () => {
+			await expect(await canvas.findByText('JD')).toBeVisible();
+		});
+	}}
+>
+	{#snippet template(props)}
+		<Avatar {...props}>
+			<Avatar.Image src="/does-not-exist.png" alt="John Doe" />
+			<Avatar.Fallback>JD</Avatar.Fallback>
+		</Avatar>
+	{/snippet}
+</Story>
+
+<Story
 	name="Avatar Group"
 	parameters={{
 		docs: {
 			source: {
-				code:
-					`<div class="flex -space-x-2">\n` +
-					[0, 1, 2, 3]
-						.map(
-							() =>
-								`\t<Avatar class="rounded-full">\n\t\t<Avatar.Image src="/avatars/john-doe.jpg" alt="John Doe" />\n\t</Avatar>`
-						)
-						.join('\n') +
-					`\n\t<Avatar class="rounded-full">\n\t\t<Avatar.Fallback>+2</Avatar.Fallback>\n\t</Avatar>\n</div>`
+				code: `<AvatarGroup max={3}>\n\t<Avatar><Avatar.Image src="/avatars/john-doe.jpg" alt="John Doe" /></Avatar>\n\t<!-- ... -->\n</AvatarGroup>`
 			}
 		}
 	}}
+	play={async ({ canvas, step }) => {
+		await step('limits visible avatars and renders an overflow counter', async () => {
+			await expect(await canvas.findAllByRole('img')).toHaveLength(3);
+			await expect(canvas.getByText('+2')).toBeVisible();
+		});
+	}}
 >
 	{#snippet template(props)}
-		<div class="flex -space-x-2">
-			{#each [0, 1, 2, 3] as i (i)}
-				<Avatar {...props} class="rounded-full">
+		<AvatarGroup {...props} max={3}>
+			{#each [0, 1, 2, 3, 4] as i (i)}
+				<Avatar>
 					<Avatar.Image src={PHOTO} alt="John Doe" />
 				</Avatar>
 			{/each}
-			<Avatar {...props} class="rounded-full">
-				<Avatar.Fallback>+2</Avatar.Fallback>
-			</Avatar>
-		</div>
+		</AvatarGroup>
 	{/snippet}
 </Story>

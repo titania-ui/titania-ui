@@ -10,6 +10,7 @@ export { theme };
 // Root
 export type RootCfg = Define<{
 	tag: 'span';
+	own: { fallbackDelay?: number };
 	theme: ThemeOf<typeof theme>;
 	child: true;
 }>;

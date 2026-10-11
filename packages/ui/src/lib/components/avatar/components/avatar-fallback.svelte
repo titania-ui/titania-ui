@@ -30,11 +30,13 @@
 	});
 </script>
 
-<Polymorphic
-	tag={Tag}
-	{attrs}
-	bind:ref
-	{child}
-	childArg={{ props: attrs } as ChildArgOf<FallbackCfg>}
-	{children}
-/>
+{#if ctx.state.fallbackVisible}
+	<Polymorphic
+		tag={Tag}
+		{attrs}
+		bind:ref
+		{child}
+		childArg={{ props: attrs } as ChildArgOf<FallbackCfg>}
+		{children}
+	/>
+{/if}
