@@ -3,6 +3,8 @@ export { default as Alert } from './components/alert/index.js';
 export { default as Avatar } from './components/avatar/index.js';
 export { default as AvatarGroup } from './components/avatar-group/index.js';
 export { default as Button } from './components/button/index.js';
+export { default as Checkbox } from './components/checkbox/index.js';
+export { default as CheckboxField } from './components/checkbox-field/index.js';
 export { default as Chip } from './components/chip/index.js';
 export { default as CloseButton } from './components/close-button/index.js';
 export { default as DescriptionList } from './components/description-list/index.js';

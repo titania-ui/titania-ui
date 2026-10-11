@@ -12,5 +12,9 @@ export const reservationSchema = z.object({
 	notes: z.string().optional(),
 	date: z.iso.date().refine((date) => new Date(date) >= new Date(), {
 		message: 'Date must be in the future'
-	})
+	}),
+	terms: z
+		.boolean()
+		.default(false)
+		.refine((v) => v, { error: 'You must accept the terms and conditions' })
 });

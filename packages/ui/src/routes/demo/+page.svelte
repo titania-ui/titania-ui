@@ -5,6 +5,8 @@
 		Avatar,
 		AvatarGroup,
 		Button,
+		Checkbox,
+		CheckboxField,
 		Chip,
 		Code,
 		DescriptionList,
@@ -36,6 +38,11 @@
 			validators: zod4(reservationSchema)
 		}
 	);
+
+	let newsletter = $state(true);
+	let items = $state([true, false, false]);
+	const allChecked = $derived(items.every(Boolean));
+	const someChecked = $derived(items.some(Boolean) && !allChecked);
 
 	const lorem10 = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, sit.';
 
@@ -154,6 +161,13 @@
 					<Input type="date" />
 					<Field.Error />
 				</Field>
+				<CheckboxField auto name="terms">
+					<Checkbox>
+						<Checkbox.Control />
+						Accept terms and conditions
+					</Checkbox>
+					<Field.Error />
+				</CheckboxField>
 			</Form.FieldGroup>
 		</Form.Fieldset>
 	</Form>
@@ -301,5 +315,125 @@
 			<Avatar.Image src="ERROR" alt="John Doe" />
 			<Avatar.Fallback>JD</Avatar.Fallback>
 		</Avatar>
+	</div>
+
+	<div {...LIST}>
+		<Checkbox>
+			<Checkbox.Control />
+			Default
+		</Checkbox>
+		<Checkbox checked>
+			<Checkbox.Control />
+			Checked
+		</Checkbox>
+		<Checkbox indeterminate>
+			<Checkbox.Control />
+			Indeterminate
+		</Checkbox>
+		<Checkbox invalid>
+			<Checkbox.Control />
+			Invalid
+		</Checkbox>
+		<Checkbox disabled>
+			<Checkbox.Control />
+			Disabled
+		</Checkbox>
+		<Checkbox disabled checked>
+			<Checkbox.Control />
+			Disabled checked
+		</Checkbox>
+		<Checkbox disabled indeterminate>
+			<Checkbox.Control />
+			Disabled indeterminate
+		</Checkbox>
+		<Checkbox checked>
+			<Checkbox.Control>
+				<Icon icon="icon-[heroicons--heart-solid]" />
+			</Checkbox.Control>
+			Custom control content
+		</Checkbox>
+	</div>
+
+	<div {...LIST}>
+		<Checkbox checked color="dark">
+			<Checkbox.Control />
+			dark
+		</Checkbox>
+		<Checkbox checked color="zinc">
+			<Checkbox.Control />
+			zinc
+		</Checkbox>
+		<Checkbox checked color="white">
+			<Checkbox.Control />
+			white
+		</Checkbox>
+		<Checkbox checked color="red">
+			<Checkbox.Control />
+			red
+		</Checkbox>
+		<Checkbox checked color="orange">
+			<Checkbox.Control />
+			orange
+		</Checkbox>
+		<Checkbox checked color="amber">
+			<Checkbox.Control />
+			amber
+		</Checkbox>
+		<Checkbox checked color="yellow">
+			<Checkbox.Control />
+			yellow
+		</Checkbox>
+		<Checkbox checked color="lime">
+			<Checkbox.Control />
+			lime
+		</Checkbox>
+		<Checkbox checked color="green">
+			<Checkbox.Control />
+			green
+		</Checkbox>
+		<Checkbox checked color="emerald">
+			<Checkbox.Control />
+			emerald
+		</Checkbox>
+		<Checkbox checked color="teal">
+			<Checkbox.Control />
+			teal
+		</Checkbox>
+		<Checkbox checked color="cyan">
+			<Checkbox.Control />
+			cyan
+		</Checkbox>
+		<Checkbox checked color="sky">
+			<Checkbox.Control />
+			sky
+		</Checkbox>
+		<Checkbox checked color="blue">
+			<Checkbox.Control />
+			blue
+		</Checkbox>
+		<Checkbox checked color="indigo">
+			<Checkbox.Control />
+			indigo
+		</Checkbox>
+		<Checkbox checked color="violet">
+			<Checkbox.Control />
+			violet
+		</Checkbox>
+		<Checkbox checked color="purple">
+			<Checkbox.Control />
+			purple
+		</Checkbox>
+		<Checkbox checked color="fuchsia">
+			<Checkbox.Control />
+			fuchsia
+		</Checkbox>
+		<Checkbox checked color="pink">
+			<Checkbox.Control />
+			pink
+		</Checkbox>
+		<Checkbox checked color="rose">
+			<Checkbox.Control />
+			rose
+		</Checkbox>
 	</div>
 </div>

@@ -249,6 +249,7 @@
 	@import './components/avatar.css';
 	@import './components/avatargroup.css';
 	@import './components/button.css';
+	@import './components/checkbox.css';
 	@import './components/chip.css';
 	@import './components/closebutton.css';
 	@import './components/descriptionlist.css';
