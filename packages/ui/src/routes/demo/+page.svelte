@@ -40,11 +40,6 @@
 		}
 	);
 
-	let newsletter = $state(true);
-	let items = $state([true, false, false]);
-	const allChecked = $derived(items.every(Boolean));
-	const someChecked = $derived(items.some(Boolean) && !allChecked);
-
 	const lorem10 = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, sit.';
 
 	const STACK = { class: '*:m-0 space-y-4!' };
