@@ -84,6 +84,7 @@ export function useToggleInput(opts: ToggleInputOptions) {
 		inputAttrs: boxWith(() => inputAttrs),
 		checked: boxWith(() => checked),
 		disabled: boxWith(() => disabled),
+		invalid: boxWith(() => invalid),
 		ref: boxWith(opts.ref, opts.setRef),
 		onchange,
 		labelId,

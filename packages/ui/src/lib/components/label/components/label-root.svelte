@@ -8,7 +8,6 @@
 	import { type RootCfg, type RootProps, theme } from '../index.js';
 
 	let field_ctx = fieldCtx.getOr(undefined);
-	// Inside a Checkbox / Switch the label names that control, not the surrounding Field
 	let toggle_ctx = toggleCtx.getOr(undefined);
 	const uid = $props.id();
 
@@ -31,7 +30,13 @@
 	});
 
 	const __required = $derived(field_ctx ? field_ctx.required.current : required);
-	const __invalid = $derived(field_ctx ? field_ctx.errors.current.length > 0 : invalid);
+	const __invalid = $derived(
+		field_ctx
+			? field_ctx.errors.current.length > 0
+			: toggle_ctx
+				? toggle_ctx.invalid.current
+				: Boolean(invalid)
+	);
 
 	const childrenState = $derived({ required: Boolean(__required), invalid: Boolean(__invalid) });
 

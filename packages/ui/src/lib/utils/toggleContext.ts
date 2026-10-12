@@ -11,6 +11,7 @@ export interface ToggleCtx {
 	readonly inputAttrs: ReadableBox<Record<string, unknown>>;
 	readonly checked: ReadableBox<boolean>;
 	readonly disabled: ReadableBox<boolean>;
+	readonly invalid: ReadableBox<boolean>; // for validation
 	readonly ref: WritableBox<HTMLInputElement | null>;
 	readonly onchange: (e: Event & { currentTarget: HTMLInputElement }) => void;
 
