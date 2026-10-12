@@ -27,42 +27,46 @@
 	);
 </script>
 
-<Form {form} class="grid w-full max-w-sm grid-cols-1 gap-8">
-	<Heading level={2}>Sign in to your account</Heading>
-	<Field auto name="email">
-		<Label>Email</Label>
-		<Input type="email" />
-		<Field.Error />
-	</Field>
-	<Field auto name="password">
-		<Label>Password</Label>
-		<Input type="password" />
-		<Field.Error />
-	</Field>
-	<div class="flex items-center justify-between">
-		<Field auto name="remember">
-			<Label>Remember me</Label>
-			<Field.Error />
-		</Field>
-		<CheckboxField auto name="remember">
-			<Checkbox>
-				<Checkbox.Control />
-				<Checkbox.Content>
-					<Label>Remember me</Label>
-				</Checkbox.Content>
-			</Checkbox>
-		</CheckboxField>
-		<Text>
-			<Link href="#">
-				<Strong>Forgot password?</Strong>
-			</Link>
-		</Text>
+<div
+	class="bg-neutral-primary-soft block border border-default rounded-base shadow w-full sm:max-w-md"
+>
+	<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+		<Heading level={4} as="h1">Sign in to your account</Heading>
+		<Form {form}>
+			<Form.FieldGroup>
+				<Field auto name="email">
+					<Label>Email</Label>
+					<Input type="email" />
+					<Field.Error />
+				</Field>
+				<Field auto name="password">
+					<Label>Password</Label>
+					<Input type="password" />
+					<Field.Error />
+				</Field>
+				<div class="flex items-center justify-between *:m-0">
+					<CheckboxField auto name="remember">
+						<Checkbox>
+							<Checkbox.Control />
+							<Checkbox.Content>
+								<Label>Remember me</Label>
+							</Checkbox.Content>
+						</Checkbox>
+					</CheckboxField>
+					<Text>
+						<Link href="#">
+							<Strong>Forgot password?</Strong>
+						</Link>
+					</Text>
+				</div>
+				<Button variant="primary" type="submit" class="w-full">Login</Button>
+				<Text>
+					Don’t have an account?
+					<Link href="#">
+						<Strong>Sign up</Strong>
+					</Link>
+				</Text>
+			</Form.FieldGroup>
+		</Form>
 	</div>
-	<Button variant="primary" type="submit" class="w-full">Login</Button>
-	<Text>
-		Don’t have an account?
-		<Link href="#">
-			<Strong>Sign up</Strong>
-		</Link>
-	</Text>
-</Form>
+</div>
