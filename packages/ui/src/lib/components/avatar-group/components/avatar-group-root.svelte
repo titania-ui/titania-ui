@@ -42,6 +42,7 @@
 
 	const attrs = $derived({
 		'data-slot': 'avatar-group',
+		role: 'group',
 		...split.attrs,
 		class: cls
 	});

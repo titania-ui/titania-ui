@@ -15,6 +15,6 @@
 	});
 </script>
 
-<Avatar data-slot="avatar-group-count" class={theme().count()}>
+<Avatar data-slot="avatar-group-count" class={theme().count()} alt="{count} more">
 	<Avatar.Fallback>+{count}</Avatar.Fallback>
 </Avatar>
