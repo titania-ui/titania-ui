@@ -36,12 +36,12 @@
 			<Form.FieldGroup>
 				<Field auto name="email">
 					<Label>Email</Label>
-					<Input type="email" />
+					<Input type="email" autocomplete="email" />
 					<Field.Error />
 				</Field>
 				<Field auto name="password">
 					<Label>Password</Label>
-					<Input type="password" />
+					<Input type="password" autocomplete="current-password" />
 					<Field.Error />
 				</Field>
 				<div class="flex items-center justify-between *:m-0">
