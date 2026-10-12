@@ -380,8 +380,8 @@
 		<Checkbox>
 			<Checkbox.Control />
 			<Checkbox.Content>
-				<Label>Free shipping via Flowbite</Label>
-				<Text>For orders shipped from $25 in books or $29 in other categories</Text>
+				<Label>Lorem ipsum dolor sit</Label>
+				<Text>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum, illum?</Text>
 			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox>
@@ -549,8 +549,8 @@
 		<Switch>
 			<Switch.Control />
 			<Switch.Content>
-				<Label>With description</Label>
-				<Text>Get notified when someone mentions you.</Text>
+				<Label>Lorem ipsum dolor sit</Label>
+				<Text>Lorem ipsum dolor sit amet consectetur.</Text>
 			</Switch.Content>
 		</Switch>
 		<Switch>
