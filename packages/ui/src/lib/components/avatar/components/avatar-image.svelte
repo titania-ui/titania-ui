@@ -34,6 +34,7 @@
 
 	const attrs = $derived({
 		'data-slot': 'avatar-image',
+		alt: ctx.alt.current,
 		...rest,
 		class: cls
 	});

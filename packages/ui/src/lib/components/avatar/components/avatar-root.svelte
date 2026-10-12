@@ -14,6 +14,7 @@
 
 	let {
 		fallbackDelay = 600,
+		alt = undefined,
 		//
 		id = uid,
 		as: Tag = 'span',
@@ -43,6 +44,7 @@
 
 	avatarCtx.set({
 		variants: boxWith(() => variants),
+		alt: boxWith(() => alt),
 		state
 	});
 

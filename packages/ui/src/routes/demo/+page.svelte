@@ -183,6 +183,7 @@
 				</CheckboxField>
 			</Form.FieldGroup>
 		</Form.Fieldset>
+		<Button type="submit" variant="primary" class="w-full">Reserve table</Button>
 	</Form>
 
 	<div {...STACK}>
@@ -214,7 +215,7 @@
 					{:else if index % 3 === 1}
 						<Spinner />
 					{/if}
-					{color}
+					<Chip.Label>{color}</Chip.Label>
 					{#if index % 2 === 0}
 						<Chip.Dismiss />
 					{/if}
@@ -224,7 +225,7 @@
 	{/each}
 
 	<div class="h-256 w-64">
-		<Sidebar>
+		<Sidebar aria-label="Main">
 			<Sidebar.Header>
 				<Sidebar.Section>
 					<Sidebar.Item href="#">
@@ -286,46 +287,46 @@
 
 	<div {...LIST}>
 		<AvatarGroup max={3}>
-			<Avatar>
-				<Avatar.Image src={PHOTO} alt="John Doe" />
+			<Avatar alt="John Doe">
+				<Avatar.Image src={PHOTO} />
 			</Avatar>
-			<Avatar>
-				<Avatar.Image src={PHOTO} alt="John Doe" />
+			<Avatar alt="John Doe">
+				<Avatar.Image src={PHOTO} />
 			</Avatar>
-			<Avatar>
-				<Avatar.Image src={PHOTO} alt="John Doe" />
+			<Avatar alt="John Doe">
+				<Avatar.Image src={PHOTO} />
 			</Avatar>
-			<Avatar>
-				<Avatar.Image src={PHOTO} alt="John Doe" />
+			<Avatar alt="John Doe">
+				<Avatar.Image src={PHOTO} />
 			</Avatar>
-			<Avatar>
-				<Avatar.Image src={PHOTO} alt="John Doe" />
+			<Avatar alt="John Doe">
+				<Avatar.Image src={PHOTO} />
 			</Avatar>
-			<Avatar>
-				<Avatar.Image src={PHOTO} alt="John Doe" />
+			<Avatar alt="John Doe">
+				<Avatar.Image src={PHOTO} />
 			</Avatar>
 		</AvatarGroup>
 
 		<AvatarGroup max={3}>
-			<Avatar>
-				<Avatar.Image src={PHOTO} alt="John Doe" />
+			<Avatar alt="John Doe">
+				<Avatar.Image src={PHOTO} />
 			</Avatar>
-			<Avatar>
-				<Avatar.Image src={PHOTO} alt="John Doe" />
+			<Avatar alt="John Doe">
+				<Avatar.Image src={PHOTO} />
 			</Avatar>
 		</AvatarGroup>
 
-		<Avatar>
-			<Avatar.Image src={PHOTO} alt="John Doe" />
+		<Avatar alt="John Doe">
+			<Avatar.Image src={PHOTO} />
 			<Avatar.Fallback>JD</Avatar.Fallback>
 		</Avatar>
 
-		<Avatar>
+		<Avatar alt="John Doe">
 			<Avatar.Fallback>JD</Avatar.Fallback>
 		</Avatar>
 
-		<Avatar>
-			<Avatar.Image src="ERROR" alt="John Doe" />
+		<Avatar alt="John Doe">
+			<Avatar.Image src="ERROR" />
 			<Avatar.Fallback>JD</Avatar.Fallback>
 		</Avatar>
 	</div>

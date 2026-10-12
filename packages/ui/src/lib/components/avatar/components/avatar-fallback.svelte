@@ -23,8 +23,12 @@
 		} as never)
 	);
 
+	const alt = $derived(ctx.alt.current);
+
 	const attrs = $derived({
 		'data-slot': 'avatar-fallback',
+		role: alt ? 'img' : undefined,
+		'aria-label': alt,
 		...rest,
 		class: cls
 	});
