@@ -12,6 +12,7 @@ export interface FieldCtx {
 	readonly constraints: ReadableBox<Record<string, unknown>>;
 
 	readonly descriptionId: WritableBox<string | undefined>;
+	readonly errorId: WritableBox<string | undefined>;
 	readonly labelId: WritableBox<string | undefined>;
 }
 

@@ -1,6 +1,6 @@
 import { fieldCtx } from '#lib/components/field/field-context.js';
 import { fieldValue } from '#lib/components/input/field-value.svelte.js';
-import { fieldControlAttrs, fieldInvalid } from '#lib/utils/fieldControl.js';
+import { fieldControlAttrs, fieldDescribedBy, fieldInvalid } from '#lib/utils/fieldControl.js';
 import { registerId } from '#lib/utils/registerId.js';
 import { toggleCtx } from '#lib/utils/toggleContext.js';
 import { box, boxWith } from 'svelte-toolbelt';
@@ -54,7 +54,9 @@ export function useToggleInput(opts: ToggleInputOptions) {
 		const named = own['aria-label'] != null || own['aria-labelledby'] != null;
 		const labelledby = named
 			? own['aria-labelledby']
-			: (labelId.current ?? field_ctx?.labelId.current ?? contentId.current);
+			: [descriptionId.current, fieldDescribedBy(field_ctx, opts.invalid())]
+					.filter(Boolean)
+					.join(' ') || undefined;
 
 		const describedby =
 			own['aria-describedby'] ??
