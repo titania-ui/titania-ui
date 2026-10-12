@@ -30,11 +30,17 @@ export interface PressableTag {
 	readonly state: { hovered: boolean; pressed: boolean; focused: boolean };
 }
 
+function blockClick(e: Event) {
+	e.preventDefault();
+	e.stopImmediatePropagation();
+}
+
 export function usePressableTag(options: PressableTagOptions = {}): PressableTag {
 	const href = () => options.href?.();
 	const onclick = () => options.onclick?.();
 	const fallbackTag = () => options.fallbackTag?.();
 	const disabled = () => options.disabled?.() ?? false;
+	const pending = () => options.pending?.() ?? false;
 
 	const tag = $derived<As>(
 		options.as?.() ??
@@ -46,9 +52,7 @@ export function usePressableTag(options: PressableTagOptions = {}): PressableTag
 						? fallbackTag()!
 						: 'button')
 	);
-	const pressDisabled = $derived(
-		disabled() || (options.pending?.() ?? false) || (tag !== 'a' && tag !== 'button')
-	);
+	const pressDisabled = $derived(disabled() || pending() || (tag !== 'a' && tag !== 'button'));
 
 	let hovered = $state(false);
 	let pressed = $state(false);
@@ -69,15 +73,22 @@ export function usePressableTag(options: PressableTagOptions = {}): PressableTag
 		...(tag === 'button'
 			? {
 					type: options.type?.() ?? 'button',
-					disabled: pressDisabled || undefined
+					disabled: disabled() || undefined,
+					// Pending stays focusable (focus is not lost) but is marked as unavailable
+					'aria-disabled': (pending() && !disabled()) || undefined,
+					onclick: pending() ? blockClick : options.onclick?.()
 				}
-			: {
-					href: pressDisabled ? undefined : href(),
-					'aria-disabled': pressDisabled || undefined,
-					tabindex: pressDisabled ? -1 : undefined,
-					role: pressDisabled ? 'link' : undefined,
-					onclick: disabled() ? undefined : options.onclick?.()
-				})
+			: tag === 'a'
+				? {
+						href: pressDisabled ? undefined : href(),
+						'aria-disabled': pressDisabled || undefined,
+						tabindex: pressDisabled ? -1 : undefined,
+						role: pressDisabled ? 'link' : undefined,
+						onclick: pressDisabled ? undefined : options.onclick?.()
+					}
+				: {
+						onclick: disabled() ? undefined : options.onclick?.()
+					})
 	});
 
 	return {
