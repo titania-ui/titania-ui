@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	import { Checkbox, CheckboxField, Field, Label } from '#lib';
+	import { Checkbox, CheckboxField, Field, Label, Text } from '#lib';
 	import type { ToolingProps } from '#lib/types/props.js';
 	import type { RootCfg, RootProps } from './index.js';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
@@ -16,7 +16,7 @@
 			docs: {
 				description: {
 					component:
-						'A native checkbox with a styled control. Supports an indeterminate (mixed) state and exposes `{ checked, indeterminate }` to its children.'
+						'A native checkbox with a styled control. `Checkbox.Content` holds the `Label` (and an optional `Text` description) next to the control. Supports an indeterminate (mixed) state and exposes `{ checked, indeterminate }` to its children.'
 				}
 			}
 		},
@@ -66,7 +66,7 @@
 	parameters={{
 		docs: {
 			source: {
-				code: `<CheckboxField name="terms">\n\t<Checkbox>\n\t\t<Checkbox.Control />\n\t\tAccept terms and conditions\n\t</Checkbox>\n</CheckboxField>`
+				code: `<CheckboxField name="terms">\n\t<Checkbox>\n\t\t<Checkbox.Control />\n\t\t<Checkbox.Content>\n\t\t\t<Label>Accept terms and conditions</Label>\n\t\t</Checkbox.Content>\n\t</Checkbox>\n</CheckboxField>`
 			}
 		}
 	}}
@@ -79,7 +79,7 @@
 			await expect(checkbox).not.toBeChecked();
 		});
 
-		await step('toggles when the label text is clicked', async () => {
+		await step('toggles when the label is clicked', async () => {
 			await userEvent.click(canvas.getByText('Accept terms and conditions'));
 			await expect(checkbox).toBeChecked();
 			await userEvent.click(canvas.getByText('Accept terms and conditions'));
@@ -92,15 +92,124 @@
 			await userEvent.keyboard(' ');
 			await expect(checkbox).toBeChecked();
 		});
+
+		await step('toggles when the control is clicked', async () => {
+			await userEvent.click(checkbox.closest('.tacheckbox__control')!);
+			await expect(checkbox).not.toBeChecked();
+		});
 	}}
 >
 	{#snippet template(props)}
 		<CheckboxField name="terms">
 			<Checkbox {...props as RootProps}>
 				<Checkbox.Control />
-				Accept terms and conditions
+				<Checkbox.Content>
+					<Label>Accept terms and conditions</Label>
+				</Checkbox.Content>
 			</Checkbox>
 		</CheckboxField>
+	{/snippet}
+</Story>
+
+<Story
+	name="With Description"
+	parameters={{
+		docs: {
+			source: {
+				code: `<Checkbox>\n\t<Checkbox.Control />\n\t<Checkbox.Content>\n\t\t<Label>Free shipping via Flowbite</Label>\n\t\t<Text>For orders shipped from $25 in books or $29 in other categories</Text>\n\t</Checkbox.Content>\n</Checkbox>`
+			}
+		}
+	}}
+	play={async ({ canvas, userEvent, step }) => {
+		const checkbox = canvas.getByRole('checkbox', { name: 'Free shipping via Flowbite' });
+
+		await step('is described by the Text', async () => {
+			await expect(checkbox).toHaveAccessibleDescription(
+				'For orders shipped from $25 in books or $29 in other categories'
+			);
+		});
+
+		await step('renders the label as a separate <label> for the input', async () => {
+			const label = canvas.getByText('Free shipping via Flowbite');
+			await expect(label.tagName).toBe('LABEL');
+			await expect(label).toHaveAttribute('for', checkbox.id);
+			await expect(label.contains(checkbox)).toBe(false);
+		});
+
+		await step('does not toggle when the description is clicked', async () => {
+			await userEvent.click(
+				canvas.getByText('For orders shipped from $25 in books or $29 in other categories')
+			);
+			await expect(checkbox).not.toBeChecked();
+		});
+	}}
+>
+	{#snippet template(props)}
+		<Checkbox {...props as RootProps}>
+			<Checkbox.Control />
+			<Checkbox.Content>
+				<Label>Free shipping via Flowbite</Label>
+				<Text>For orders shipped from $25 in books or $29 in other categories</Text>
+			</Checkbox.Content>
+		</Checkbox>
+	{/snippet}
+</Story>
+
+<Story
+	name="Inline Text"
+	parameters={{
+		docs: {
+			source: {
+				code: `<Checkbox>\n\t<Checkbox.Content>\n\t\t<Checkbox.Control />\n\t\tSubscribe to the newsletter\n\t</Checkbox.Content>\n</Checkbox>`
+			}
+		}
+	}}
+	play={async ({ canvas, userEvent, step }) => {
+		const checkbox = canvas.getByRole('checkbox', { name: 'Subscribe to the newsletter' });
+
+		await step('is named by the bare text', async () => {
+			await expect(checkbox).toBeInTheDocument();
+		});
+
+		await step('toggles exactly once when the text is clicked', async () => {
+			await userEvent.click(canvas.getByText('Subscribe to the newsletter'));
+			await expect(checkbox).toBeChecked();
+			await userEvent.click(canvas.getByText('Subscribe to the newsletter'));
+			await expect(checkbox).not.toBeChecked();
+		});
+	}}
+>
+	{#snippet template(props)}
+		<Checkbox {...props as RootProps}>
+			<Checkbox.Content>
+				<Checkbox.Control />
+				Subscribe to the newsletter
+			</Checkbox.Content>
+		</Checkbox>
+	{/snippet}
+</Story>
+
+<Story
+	name="Aria Label"
+	parameters={{
+		docs: {
+			source: {
+				code: `<Checkbox aria-label="Select row">\n\t<Checkbox.Content>\n\t\t<Checkbox.Control />\n\t</Checkbox.Content>\n</Checkbox>`
+			}
+		}
+	}}
+	play={async ({ canvas, step }) => {
+		await step('is named by aria-label', async () => {
+			await expect(canvas.getByRole('checkbox', { name: 'Select row' })).toBeInTheDocument();
+		});
+	}}
+>
+	{#snippet template(props)}
+		<Checkbox aria-label="Select row" {...props as RootProps}>
+			<Checkbox.Content>
+				<Checkbox.Control />
+			</Checkbox.Content>
+		</Checkbox>
 	{/snippet}
 </Story>
 
@@ -110,7 +219,7 @@
 	parameters={{
 		docs: {
 			source: {
-				code: `<Checkbox indeterminate>\n\t<Checkbox.Control />\n\tSelect all\n</Checkbox>`
+				code: `<Checkbox indeterminate>\n\t<Checkbox.Control />\n\t<Checkbox.Content>\n\t\t<Label>Select all</Label>\n\t</Checkbox.Content>\n</Checkbox>`
 			}
 		}
 	}}
@@ -131,7 +240,9 @@
 	{#snippet template(props)}
 		<Checkbox {...props as RootProps}>
 			<Checkbox.Control />
-			Select all
+			<Checkbox.Content>
+				<Label>Select all</Label>
+			</Checkbox.Content>
 		</Checkbox>
 	{/snippet}
 </Story>
@@ -141,7 +252,7 @@
 	parameters={{
 		docs: {
 			source: {
-				code: `<Checkbox indeterminate>\n\t{#snippet children({ checked, indeterminate })}\n\t\t<Checkbox.Control />\n\t\t{indeterminate ? 'Some' : checked ? 'All' : 'None'}\n\t{/snippet}\n</Checkbox>`
+				code: `<Checkbox indeterminate>\n\t{#snippet children({ checked, indeterminate })}\n\t\t<Checkbox.Control />\n\t\t<Checkbox.Content>\n\t\t\t<Label>{indeterminate ? 'Some' : checked ? 'All' : 'None'} selected</Label>\n\t\t</Checkbox.Content>\n\t{/snippet}\n</Checkbox>`
 			}
 		}
 	}}
@@ -160,7 +271,11 @@
 		<Checkbox indeterminate>
 			{#snippet children({ checked, indeterminate })}
 				<Checkbox.Control />
-				{indeterminate ? 'Some selected' : checked ? 'All selected' : 'None selected'}
+				<Checkbox.Content>
+					<Label
+						>{indeterminate ? 'Some selected' : checked ? 'All selected' : 'None selected'}</Label
+					>
+				</Checkbox.Content>
 			{/snippet}
 		</Checkbox>
 	{/snippet}
@@ -172,7 +287,7 @@
 	parameters={{
 		docs: {
 			source: {
-				code: `<CheckboxField errors={['You must accept the terms.']}>\n\t<Checkbox>\n\t\t<Checkbox.Control />\n\t\tAccept terms and conditions\n\t</Checkbox>\n\t<Field.Error />\n</CheckboxField>`
+				code: `<CheckboxField errors={['You must accept the terms.']}>\n\t<Checkbox>\n\t\t<Checkbox.Control />\n\t\t<Checkbox.Content>\n\t\t\t<Label>Accept terms and conditions</Label>\n\t\t</Checkbox.Content>\n\t</Checkbox>\n\t<Field.Error />\n</CheckboxField>`
 			}
 		}
 	}}
@@ -192,7 +307,9 @@
 		<CheckboxField name="terms" errors={props.invalid ? ['You must accept the terms.'] : []}>
 			<Checkbox {...props as RootProps}>
 				<Checkbox.Control />
-				Accept terms and conditions
+				<Checkbox.Content>
+					<Label>Accept terms and conditions</Label>
+				</Checkbox.Content>
 			</Checkbox>
 			<Field.Error />
 		</CheckboxField>
@@ -205,7 +322,7 @@
 	parameters={{
 		docs: {
 			source: {
-				code: `<CheckboxField name="terms" disabled>\n\t<Checkbox>\n\t\t<Checkbox.Control />\n\t\tAccept terms and conditions\n\t</Checkbox>\n</CheckboxField>`
+				code: `<CheckboxField name="terms" disabled>\n\t<Checkbox>\n\t\t<Checkbox.Control />\n\t\t<Checkbox.Content>\n\t\t\t<Label>Accept terms and conditions</Label>\n\t\t</Checkbox.Content>\n\t</Checkbox>\n</CheckboxField>`
 			}
 		}
 	}}
@@ -228,7 +345,9 @@
 		<CheckboxField name="terms" disabled={Boolean(props.disabled)}>
 			<Checkbox {...props as RootProps}>
 				<Checkbox.Control />
-				Accept terms and conditions
+				<Checkbox.Content>
+					<Label>Accept terms and conditions</Label>
+				</Checkbox.Content>
 			</Checkbox>
 		</CheckboxField>
 	{/snippet}
@@ -242,43 +361,18 @@
 			const checkbox = canvas.getByRole('checkbox');
 			await userEvent.tab();
 			await expect(checkbox).toHaveFocus();
-			const control = checkbox.parentElement!.querySelector('.tacheckbox__control')!;
-			const styles = getComputedStyle(control);
-			await expect(styles.outlineStyle).not.toBe('none');
+			await expect(checkbox).toHaveAttribute('data-focus-visible');
+			const control = checkbox.closest('.tacheckbox__control')!;
+			await expect(getComputedStyle(control).boxShadow).not.toBe('none');
 		});
 	}}
 >
 	{#snippet template()}
 		<Checkbox>
 			<Checkbox.Control />
-			Accept terms and conditions
+			<Checkbox.Content>
+				<Label>Accept terms and conditions</Label>
+			</Checkbox.Content>
 		</Checkbox>
-	{/snippet}
-</Story>
-
-<Story
-	name="With Label"
-	parameters={{
-		docs: {
-			source: {
-				code: `<CheckboxField name="newsletter">\n\t<Checkbox>\n\t\t<Checkbox.Control />\n\t</Checkbox>\n\t<Label>Subscribe to the newsletter</Label>\n</CheckboxField>`
-			}
-		}
-	}}
-	play={async ({ canvas, userEvent, step }) => {
-		await step('is named by the Label and toggled through it', async () => {
-			const checkbox = canvas.getByRole('checkbox', { name: 'Subscribe to the newsletter' });
-			await userEvent.click(canvas.getByText('Subscribe to the newsletter'));
-			await expect(checkbox).toBeChecked();
-		});
-	}}
->
-	{#snippet template()}
-		<CheckboxField name="newsletter">
-			<Checkbox>
-				<Checkbox.Control />
-			</Checkbox>
-			<Label>Subscribe to the newsletter</Label>
-		</CheckboxField>
 	{/snippet}
 </Story>

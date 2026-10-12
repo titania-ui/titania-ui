@@ -16,5 +16,6 @@ export const reservationSchema = z.object({
 	terms: z
 		.boolean()
 		.default(false)
-		.refine((v) => v, { error: 'You must accept the terms and conditions' })
+		.refine((v) => v, { error: 'You must accept the terms and conditions' }),
+	notifications: z.boolean().default(false)
 });

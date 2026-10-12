@@ -1,0 +1,241 @@
+.taswitch {
+	--switch-bg: var(--color-brand);
+	--switch-ring: var(--color-brand-soft);
+	--switch-ring-dark: var(--switch-ring);
+	--switch-thumb: var(--color-white);
+
+	@apply flex items-start gap-x-3 text-sm font-medium text-heading select-none;
+
+	/* Invisible, but stretched over the track so clicking it toggles natively */
+	.taswitch__input {
+		@apply absolute inset-0 z-10 m-0 size-full cursor-pointer appearance-none rounded-full opacity-0;
+	}
+
+	/* Track. Thumb sits 2px inside it on every side, so `translate-x-full` lands it at the far end */
+	.taswitch__control {
+		@apply relative inline-flex h-5 w-9 shrink-0 rounded-full bg-neutral-quaternary transition-colors;
+
+		&[data-checked] {
+			background-color: var(--switch-bg);
+		}
+	}
+
+	.taswitch__thumb {
+		@apply pointer-events-none absolute start-[2px] top-[2px] inline-flex size-4 items-center justify-center rounded-full transition-all;
+		background-color: var(--switch-thumb);
+
+		&[data-checked] {
+			@apply translate-x-full rtl:-translate-x-full;
+		}
+	}
+
+	.taswitch__icon {
+		@apply icon-[flowbite--close-outline] size-2.5 text-body-subtle;
+
+		&[data-checked] {
+			@apply icon-[flowbite--check-outline];
+			color: var(--switch-bg);
+		}
+	}
+
+	.taswitch__content {
+		@apply flex flex-col;
+
+		/* Control inline with bare text */
+		&:has(> .taswitch__control) {
+			@apply flex-row items-start gap-x-3;
+		}
+
+		.talabel {
+			@apply mb-0 cursor-pointer font-medium;
+		}
+
+		.tatext {
+			@apply text-xs font-normal text-body;
+		}
+	}
+
+	&:has(.taswitch__input[data-focus-visible]) .taswitch__control {
+		@apply ring-4;
+		--tw-ring-color: var(--switch-ring);
+		@variant dark {
+			--tw-ring-color: var(--switch-ring-dark);
+		}
+	}
+
+	/* Sizes */
+	&.taswitch--size-sm {
+		.taswitch__control {
+			@apply mt-0.5 h-4 w-7;
+		}
+		.taswitch__thumb {
+			@apply size-3;
+		}
+		.taswitch__icon {
+			@apply size-2;
+		}
+	}
+
+	&.taswitch--size-lg {
+		@apply text-base;
+
+		.taswitch__control {
+			@apply h-6 w-11;
+		}
+		.taswitch__thumb {
+			@apply size-5;
+		}
+		.taswitch__icon {
+			@apply size-3;
+		}
+	}
+
+	&.taswitch--invalid {
+		--switch-bg: var(--color-danger);
+		--switch-ring: var(--color-danger-medium);
+
+		.taswitch__control:not([data-checked]) {
+			@apply bg-danger-soft;
+		}
+	}
+
+	/* Colors */
+	&.taswitch--color-dark {
+		--switch-bg: var(--color-black);
+		--switch-ring: var(--color-gray-300);
+		--switch-ring-dark: var(--color-gray-700);
+	}
+
+	&.taswitch--color-zinc {
+		--switch-bg: var(--color-zinc-600);
+		--switch-ring: var(--color-zinc-300);
+		--switch-ring-dark: var(--color-zinc-800);
+	}
+
+	&.taswitch--color-white {
+		--switch-bg: var(--color-white);
+		--switch-ring: var(--color-gray-300);
+		--switch-ring-dark: var(--color-gray-500);
+		--switch-thumb: var(--color-gray-900);
+	}
+
+	&.taswitch--color-red {
+		--switch-bg: var(--color-red-600);
+		--switch-ring: var(--color-red-300);
+		--switch-ring-dark: var(--color-red-800);
+	}
+
+	&.taswitch--color-orange {
+		--switch-bg: var(--color-orange-500);
+		--switch-ring: var(--color-orange-300);
+		--switch-ring-dark: var(--color-orange-800);
+	}
+
+	&.taswitch--color-amber {
+		--switch-bg: var(--color-amber-500);
+		--switch-ring: var(--color-amber-300);
+		--switch-ring-dark: var(--color-amber-800);
+	}
+
+	&.taswitch--color-yellow {
+		--switch-bg: var(--color-yellow-400);
+		--switch-ring: var(--color-yellow-300);
+		--switch-ring-dark: var(--color-yellow-800);
+	}
+
+	&.taswitch--color-lime {
+		--switch-bg: var(--color-lime-500);
+		--switch-ring: var(--color-lime-300);
+		--switch-ring-dark: var(--color-lime-800);
+	}
+
+	&.taswitch--color-green {
+		--switch-bg: var(--color-green-600);
+		--switch-ring: var(--color-green-300);
+		--switch-ring-dark: var(--color-green-800);
+	}
+
+	&.taswitch--color-emerald {
+		--switch-bg: var(--color-emerald-600);
+		--switch-ring: var(--color-emerald-300);
+		--switch-ring-dark: var(--color-emerald-800);
+	}
+
+	&.taswitch--color-teal {
+		--switch-bg: var(--color-teal-600);
+		--switch-ring: var(--color-teal-300);
+		--switch-ring-dark: var(--color-teal-800);
+	}
+
+	&.taswitch--color-cyan {
+		--switch-bg: var(--color-cyan-600);
+		--switch-ring: var(--color-cyan-300);
+		--switch-ring-dark: var(--color-cyan-800);
+	}
+
+	&.taswitch--color-sky {
+		--switch-bg: var(--color-sky-600);
+		--switch-ring: var(--color-sky-300);
+		--switch-ring-dark: var(--color-sky-800);
+	}
+
+	&.taswitch--color-blue {
+		--switch-bg: var(--color-blue-600);
+		--switch-ring: var(--color-blue-300);
+		--switch-ring-dark: var(--color-blue-800);
+	}
+
+	&.taswitch--color-indigo {
+		--switch-bg: var(--color-indigo-600);
+		--switch-ring: var(--color-indigo-300);
+		--switch-ring-dark: var(--color-indigo-800);
+	}
+
+	&.taswitch--color-violet {
+		--switch-bg: var(--color-violet-600);
+		--switch-ring: var(--color-violet-300);
+		--switch-ring-dark: var(--color-violet-800);
+	}
+
+	&.taswitch--color-purple {
+		--switch-bg: var(--color-purple-600);
+		--switch-ring: var(--color-purple-300);
+		--switch-ring-dark: var(--color-purple-800);
+	}
+
+	&.taswitch--color-fuchsia {
+		--switch-bg: var(--color-fuchsia-600);
+		--switch-ring: var(--color-fuchsia-300);
+		--switch-ring-dark: var(--color-fuchsia-800);
+	}
+
+	&.taswitch--color-pink {
+		--switch-bg: var(--color-pink-500);
+		--switch-ring: var(--color-pink-300);
+		--switch-ring-dark: var(--color-pink-800);
+	}
+
+	&.taswitch--color-rose {
+		--switch-bg: var(--color-rose-500);
+		--switch-ring: var(--color-rose-300);
+		--switch-ring-dark: var(--color-rose-800);
+	}
+
+	&.taswitch--disabled {
+		@apply cursor-not-allowed text-fg-disabled;
+
+		.taswitch__input,
+		.talabel {
+			@apply cursor-not-allowed;
+		}
+
+		.talabel,
+		.tatext {
+			@apply text-fg-disabled;
+		}
+
+		.taswitch__control:not([data-checked]) {
+			@apply bg-neutral-tertiary;
+		}
+	}
+}

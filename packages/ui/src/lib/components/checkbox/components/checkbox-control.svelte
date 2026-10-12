@@ -1,5 +1,6 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import ToggleInput from '#lib/helpers/toggle-input.svelte';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { checkboxCtx } from '../checkbox-context.js';
 	import { type ControlCfg, type ControlProps, theme } from '../index.js';
@@ -29,24 +30,32 @@
 		} as never)
 	);
 
-	// Decorative: the native input carries the role, name and state.
 	const attrs = $derived({
 		'data-slot': 'checkbox-control',
 		'data-checked': state.checked ? '' : undefined,
 		'data-indeterminate': state.indeterminate ? '' : undefined,
-		'aria-hidden': 'true',
 		...rest,
 		class: cls
 	});
 </script>
 
+{#snippet input()}
+	<ToggleInput type="checkbox" class="tacheckbox__input" />
+{/snippet}
+
 {#snippet body()}
+	{@render input()}
 	{#if children}
 		{@render children(state)}
 	{:else}
 		<Indicator />
 	{/if}
 {/snippet}
+
+<!-- `child` replaces the body, so the native input has to sit beside it -->
+{#if child}
+	{@render input()}
+{/if}
 
 <Polymorphic
 	tag={Tag}

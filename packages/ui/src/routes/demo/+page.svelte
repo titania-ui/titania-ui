@@ -22,6 +22,7 @@
 		Sidebar,
 		Spinner,
 		Strong,
+		Switch,
 		Text,
 		Textarea
 	} from '../../lib/index.js';
@@ -164,8 +165,20 @@
 				<CheckboxField auto name="terms">
 					<Checkbox>
 						<Checkbox.Control />
-						Accept terms and conditions
+						<Checkbox.Content>
+							<Label>Accept terms and conditions</Label>
+						</Checkbox.Content>
 					</Checkbox>
+					<Field.Error />
+				</CheckboxField>
+				<CheckboxField auto name="notifications">
+					<Switch>
+						<Switch.Control />
+						<Switch.Content>
+							<Label>Email notifications</Label>
+							<Text>We'll send a reminder the day before your reservation.</Text>
+						</Switch.Content>
+					</Switch>
 					<Field.Error />
 				</CheckboxField>
 			</Form.FieldGroup>
@@ -320,120 +333,414 @@
 	<div {...LIST}>
 		<Checkbox>
 			<Checkbox.Control />
-			Default
+			<Checkbox.Content>
+				<Label>Default</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked>
 			<Checkbox.Control />
-			Checked
+			<Checkbox.Content>
+				<Label>Checked</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox indeterminate>
 			<Checkbox.Control />
-			Indeterminate
+			<Checkbox.Content>
+				<Label>Indeterminate</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox invalid>
 			<Checkbox.Control />
-			Invalid
+			<Checkbox.Content>
+				<Label>Invalid</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox disabled>
 			<Checkbox.Control />
-			Disabled
+			<Checkbox.Content>
+				<Label>Disabled</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox disabled checked>
 			<Checkbox.Control />
-			Disabled checked
+			<Checkbox.Content>
+				<Label>Disabled checked</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox disabled indeterminate>
 			<Checkbox.Control />
-			Disabled indeterminate
+			<Checkbox.Content>
+				<Label>Disabled indeterminate</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked>
 			<Checkbox.Control>
 				<Icon icon="icon-[heroicons--heart-solid]" />
 			</Checkbox.Control>
-			Custom control content
+			<Checkbox.Content>
+				<Label>Custom control content</Label>
+			</Checkbox.Content>
+		</Checkbox>
+		<Checkbox>
+			<Checkbox.Control />
+			<Checkbox.Content>
+				<Label>Free shipping via Flowbite</Label>
+				<Text>For orders shipped from $25 in books or $29 in other categories</Text>
+			</Checkbox.Content>
+		</Checkbox>
+		<Checkbox>
+			<Checkbox.Content>
+				<Checkbox.Control />
+				Bare text
+			</Checkbox.Content>
 		</Checkbox>
 	</div>
 
 	<div {...LIST}>
 		<Checkbox checked color="dark">
 			<Checkbox.Control />
-			dark
+			<Checkbox.Content>
+				<Label>dark</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="zinc">
 			<Checkbox.Control />
-			zinc
+			<Checkbox.Content>
+				<Label>zinc</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="white">
 			<Checkbox.Control />
-			white
+			<Checkbox.Content>
+				<Label>white</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="red">
 			<Checkbox.Control />
-			red
+			<Checkbox.Content>
+				<Label>red</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="orange">
 			<Checkbox.Control />
-			orange
+			<Checkbox.Content>
+				<Label>orange</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="amber">
 			<Checkbox.Control />
-			amber
+			<Checkbox.Content>
+				<Label>amber</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="yellow">
 			<Checkbox.Control />
-			yellow
+			<Checkbox.Content>
+				<Label>yellow</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="lime">
 			<Checkbox.Control />
-			lime
+			<Checkbox.Content>
+				<Label>lime</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="green">
 			<Checkbox.Control />
-			green
+			<Checkbox.Content>
+				<Label>green</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="emerald">
 			<Checkbox.Control />
-			emerald
+			<Checkbox.Content>
+				<Label>emerald</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="teal">
 			<Checkbox.Control />
-			teal
+			<Checkbox.Content>
+				<Label>teal</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="cyan">
 			<Checkbox.Control />
-			cyan
+			<Checkbox.Content>
+				<Label>cyan</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="sky">
 			<Checkbox.Control />
-			sky
+			<Checkbox.Content>
+				<Label>sky</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="blue">
 			<Checkbox.Control />
-			blue
+			<Checkbox.Content>
+				<Label>blue</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="indigo">
 			<Checkbox.Control />
-			indigo
+			<Checkbox.Content>
+				<Label>indigo</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="violet">
 			<Checkbox.Control />
-			violet
+			<Checkbox.Content>
+				<Label>violet</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="purple">
 			<Checkbox.Control />
-			purple
+			<Checkbox.Content>
+				<Label>purple</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="fuchsia">
 			<Checkbox.Control />
-			fuchsia
+			<Checkbox.Content>
+				<Label>fuchsia</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="pink">
 			<Checkbox.Control />
-			pink
+			<Checkbox.Content>
+				<Label>pink</Label>
+			</Checkbox.Content>
 		</Checkbox>
 		<Checkbox checked color="rose">
 			<Checkbox.Control />
-			rose
+			<Checkbox.Content>
+				<Label>rose</Label>
+			</Checkbox.Content>
 		</Checkbox>
+	</div>
+
+	<div {...LIST}>
+		<Switch>
+			<Switch.Control />
+			<Switch.Content>
+				<Label>Default</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked>
+			<Switch.Control />
+			<Switch.Content>
+				<Label>Checked</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch invalid>
+			<Switch.Control />
+			<Switch.Content>
+				<Label>Invalid</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch disabled>
+			<Switch.Control />
+			<Switch.Content>
+				<Label>Disabled</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch disabled checked>
+			<Switch.Control />
+			<Switch.Content>
+				<Label>Disabled checked</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch>
+			<Switch.Control />
+			<Switch.Content>
+				<Label>With description</Label>
+				<Text>Get notified when someone mentions you.</Text>
+			</Switch.Content>
+		</Switch>
+		<Switch>
+			<Switch.Content>
+				<Switch.Control />
+				Bare text
+			</Switch.Content>
+		</Switch>
+		<Switch aria-label="Enable notifications">
+			<Switch.Content>
+				<Switch.Control />
+			</Switch.Content>
+		</Switch>
+	</div>
+
+	<div {...LIST}>
+		<Switch size="sm" checked>
+			<Switch.Control>
+				<Switch.Thumb>
+					<Switch.Icon />
+				</Switch.Thumb>
+			</Switch.Control>
+			<Switch.Content>
+				<Label>Size sm</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch size="md" checked>
+			<Switch.Control>
+				<Switch.Thumb>
+					<Switch.Icon />
+				</Switch.Thumb>
+			</Switch.Control>
+			<Switch.Content>
+				<Label>Size md</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch size="lg" checked>
+			<Switch.Control>
+				<Switch.Thumb>
+					<Switch.Icon />
+				</Switch.Thumb>
+			</Switch.Control>
+			<Switch.Content>
+				<Label>Size lg</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="pink">
+			<Switch.Control>
+				<Switch.Thumb>
+					<Switch.Icon class="icon-[heroicons--heart-solid]" />
+				</Switch.Thumb>
+			</Switch.Control>
+			<Switch.Content>
+				<Label>Custom icon</Label>
+			</Switch.Content>
+		</Switch>
+		<div dir="rtl">
+			<Switch checked>
+				<Switch.Control />
+				<Switch.Content>
+					<Label>RTL</Label>
+				</Switch.Content>
+			</Switch>
+		</div>
+	</div>
+
+	<div {...LIST}>
+		<Switch checked color="dark">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>dark</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="zinc">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>zinc</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="white">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>white</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="red">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>red</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="orange">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>orange</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="amber">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>amber</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="yellow">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>yellow</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="lime">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>lime</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="green">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>green</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="emerald">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>emerald</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="teal">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>teal</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="cyan">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>cyan</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="sky">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>sky</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="blue">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>blue</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="indigo">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>indigo</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="violet">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>violet</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="purple">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>purple</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="fuchsia">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>fuchsia</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="pink">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>pink</Label>
+			</Switch.Content>
+		</Switch>
+		<Switch checked color="rose">
+			<Switch.Control />
+			<Switch.Content>
+				<Label>rose</Label>
+			</Switch.Content>
+		</Switch>
 	</div>
 </div>

@@ -256,5 +256,6 @@
 	@import './components/form.css';
 	@import './components/sidebar.css';
 	@import './components/spinner.css';
+	@import './components/switch.css';
 	@import './components/typography.css';
 }

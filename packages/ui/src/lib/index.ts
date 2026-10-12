@@ -16,6 +16,7 @@ export { default as Label } from './components/label/index.js';
 export { default as Select } from './components/select/index.js';
 export { default as Sidebar } from './components/sidebar/index.js';
 export { default as Spinner } from './components/spinner/index.js';
+export { default as Switch } from './components/switch/index.js';
 export { default as Textarea } from './components/textarea/index.js';
 export { default as Code } from './components/typography/code.js';
 export { default as Heading } from './components/typography/heading.js';

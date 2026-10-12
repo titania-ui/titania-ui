@@ -1,6 +1,8 @@
 <script lang="ts">
 	import {
 		Button,
+		Checkbox,
+		CheckboxField,
 		Field,
 		Form,
 		Heading,
@@ -42,12 +44,14 @@
 			<Label>Remember me</Label>
 			<Field.Error />
 		</Field>
-		<!--
-			<CheckboxField>
-				<Checkbox name="remember" />
-				<Label>Remember me</Label>
-			</CheckboxField>
-		-->
+		<CheckboxField auto name="remember">
+			<Checkbox>
+				<Checkbox.Control />
+				<Checkbox.Content>
+					<Label>Remember me</Label>
+				</Checkbox.Content>
+			</Checkbox>
+		</CheckboxField>
 		<Text>
 			<Link href="#">
 				<Strong>Forgot password?</Strong>

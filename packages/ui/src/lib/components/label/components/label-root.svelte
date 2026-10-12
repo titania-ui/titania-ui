@@ -4,9 +4,12 @@
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { registerId } from '#lib/utils/registerId.js';
 	import { splitVariants } from '#lib/utils/splitVariants.js';
+	import { toggleCtx } from '#lib/utils/toggleContext.js';
 	import { type RootCfg, type RootProps, theme } from '../index.js';
 
 	let field_ctx = fieldCtx.getOr(undefined);
+	// Inside a Checkbox / Switch the label names that control, not the surrounding Field
+	let toggle_ctx = toggleCtx.getOr(undefined);
 	const uid = $props.id();
 
 	let {
@@ -23,6 +26,7 @@
 	}: RootProps<TAs> = $props();
 
 	$effect.pre(() => {
+		if (toggle_ctx) return registerId(toggle_ctx.labelId, id);
 		if (field_ctx) return registerId(field_ctx.labelId, id);
 	});
 
@@ -44,7 +48,7 @@
 
 	const attrs = $derived({
 		'data-slot': 'label',
-		for: field_ctx ? field_ctx.name.current : undefined,
+		for: toggle_ctx ? toggle_ctx.inputId.current : field_ctx?.name.current,
 		...split.attrs,
 		class: cls,
 		id

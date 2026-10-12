@@ -4,14 +4,16 @@ export const theme = tv({
 	slots: {
 		root: 'tacheckbox',
 		control: 'tacheckbox__control',
-		indicator: 'tacheckbox__indicator'
+		indicator: 'tacheckbox__indicator',
+		content: 'tacheckbox__content'
 	},
 	variants: {
 		invalid: {
 			true: {
 				root: 'tacheckbox--invalid',
 				control: 'tacheckbox__control--invalid',
-				indicator: 'tacheckbox__indicator--invalid'
+				indicator: 'tacheckbox__indicator--invalid',
+				content: 'tacheckbox__content--invalid'
 			}
 		},
 		color: {
@@ -40,7 +42,8 @@ export const theme = tv({
 			true: {
 				root: 'tacheckbox--disabled',
 				control: 'tacheckbox__control--disabled',
-				indicator: 'tacheckbox__indicator--disabled'
+				indicator: 'tacheckbox__indicator--disabled',
+				content: 'tacheckbox__content--disabled'
 			}
 		}
 	},

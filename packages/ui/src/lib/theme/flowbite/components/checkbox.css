@@ -4,14 +4,16 @@
 	--checkbox-ring-dark: var(--checkbox-ring);
 	--checkbox-fg: var(--color-white);
 
-	@apply flex items-center gap-x-2 text-sm font-medium text-heading select-none;
+	@apply flex items-start gap-x-2 text-sm font-medium text-heading select-none;
 
+	/* Invisible, but stretched over the control so clicking it toggles natively */
 	.tacheckbox__input {
-		@apply sr-only;
+		@apply absolute inset-0 z-10 m-0 size-full cursor-pointer appearance-none opacity-0;
 	}
 
 	.tacheckbox__control {
-		@apply inline-flex size-4 shrink-0 items-center justify-center rounded-xs border border-default-medium bg-neutral-secondary-medium;
+		/* mt-0.5 centres the 16px box on the 20px first line of the text */
+		@apply relative mt-0.5 inline-flex size-4 shrink-0 items-center justify-center rounded-xs border border-default-medium bg-neutral-secondary-medium;
 		color: var(--checkbox-fg);
 
 		&[data-checked],
@@ -30,6 +32,23 @@
 
 		&[data-indeterminate] {
 			@apply icon-[flowbite--minus-outline];
+		}
+	}
+
+	.tacheckbox__content {
+		@apply flex flex-col;
+
+		/* Control inline with bare text */
+		&:has(> .tacheckbox__control) {
+			@apply flex-row items-start gap-x-2;
+		}
+
+		.talabel {
+			@apply mb-0 cursor-pointer font-medium;
+		}
+
+		.tatext {
+			@apply text-xs font-normal text-body;
 		}
 	}
 
@@ -175,6 +194,16 @@
 		@apply cursor-not-allowed text-fg-disabled;
 		--checkbox-bg: var(--color-disabled);
 		--checkbox-fg: var(--color-fg-disabled);
+
+		.tacheckbox__input,
+		.talabel {
+			@apply cursor-not-allowed;
+		}
+
+		.talabel,
+		.tatext {
+			@apply text-fg-disabled;
+		}
 
 		.tacheckbox__control {
 			@apply border-light bg-neutral-secondary-medium;
