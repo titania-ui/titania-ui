@@ -27,7 +27,7 @@
 	);
 </script>
 
-<div
+<main
 	class="bg-neutral-primary-soft block border border-default rounded-base shadow w-full sm:max-w-md"
 >
 	<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -69,4 +69,4 @@
 			</Form.FieldGroup>
 		</Form>
 	</div>
-</div>
+</main>
