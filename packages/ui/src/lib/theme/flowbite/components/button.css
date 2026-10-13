@@ -12,7 +12,7 @@
 	border-color: var(--button-border);
 	color: var(--button-fg);
 
-	&[data-hover] {
+	&[data-hovered] {
 		background-color: var(--button-bg-hover);
 		color: var(--button-fg-hover);
 	}
@@ -21,7 +21,7 @@
 		@apply outline-none;
 	}
 
-	&[data-focus] {
+	&[data-focus-visible] {
 		@apply ring-4;
 	}
 

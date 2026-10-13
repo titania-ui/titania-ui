@@ -22,10 +22,8 @@
 	);
 
 	const attrs = $derived({
-		role: 'status',
 		'data-slot': 'icon',
 		'aria-hidden': true,
-		'aria-label': 'Loading...',
 		...split.attrs,
 		class: cls
 	});

@@ -3,7 +3,7 @@
 }
 
 .taheading {
-	@apply my-4 font-bold text-heading;
+	@apply font-bold text-heading;
 
 	&.taheading--level-1 {
 		@apply text-5xl;
@@ -31,7 +31,7 @@
 }
 
 .tatext {
-	@apply mb-3 text-base text-body;
+	@apply text-base text-body;
 }
 
 .tastrong {

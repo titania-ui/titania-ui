@@ -23,18 +23,24 @@
 		} as never)
 	);
 
+	const alt = $derived(ctx.alt.current);
+
 	const attrs = $derived({
 		'data-slot': 'avatar-fallback',
+		role: alt ? 'img' : undefined,
+		'aria-label': alt,
 		...rest,
 		class: cls
 	});
 </script>
 
-<Polymorphic
-	tag={Tag}
-	{attrs}
-	bind:ref
-	{child}
-	childArg={{ props: attrs } as ChildArgOf<FallbackCfg>}
-	{children}
-/>
+{#if ctx.state.fallbackVisible}
+	<Polymorphic
+		tag={Tag}
+		{attrs}
+		bind:ref
+		{child}
+		childArg={{ props: attrs } as ChildArgOf<FallbackCfg>}
+		{children}
+	/>
+{/if}

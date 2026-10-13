@@ -1,0 +1,229 @@
+.tacheckbox {
+	--checkbox-bg: var(--color-brand-light);
+	--checkbox-ring: var(--color-brand-soft);
+	--checkbox-ring-dark: var(--checkbox-ring);
+	--checkbox-fg: var(--color-white);
+
+	@apply flex items-start gap-x-2 text-sm font-medium text-heading select-none;
+
+	/* Invisible, but stretched over the control so clicking it toggles natively */
+	.tacheckbox__input {
+		@apply absolute inset-0 z-10 m-0 size-full cursor-pointer appearance-none opacity-0;
+	}
+
+	.tacheckbox__control {
+		/* mt-0.5 centres the 16px box on the 20px first line of the text */
+		@apply relative mt-0.5 inline-flex size-4 shrink-0 items-center justify-center rounded-xs border border-default-medium bg-neutral-secondary-medium;
+		color: var(--checkbox-fg);
+
+		&[data-checked],
+		&[data-indeterminate] {
+			border-color: var(--checkbox-bg);
+			background-color: var(--checkbox-bg);
+		}
+	}
+
+	.tacheckbox__indicator {
+		@apply size-3;
+
+		&[data-checked] {
+			@apply icon-[flowbite--check-outline];
+		}
+
+		&[data-indeterminate] {
+			@apply icon-[flowbite--minus-outline];
+		}
+	}
+
+	.tacheckbox__content {
+		@apply flex flex-col;
+
+		/* Control inline with bare text */
+		&:has(> .tacheckbox__control) {
+			@apply flex-row items-start gap-x-2;
+		}
+
+		.talabel {
+			@apply mb-0 cursor-pointer font-medium;
+		}
+
+		.tatext {
+			@apply text-xs font-normal text-body;
+		}
+	}
+
+	&.tacheckbox--invalid .tacheckbox__control {
+		@apply border-danger-subtle bg-danger-soft;
+
+		&[data-checked],
+		&[data-indeterminate] {
+			@apply border-danger bg-danger;
+		}
+	}
+
+	&:has(.tacheckbox__input[data-focus-visible]) .tacheckbox__control {
+		@apply ring-2 ring-offset-neutral-primary;
+		--tw-ring-color: var(--checkbox-ring);
+		@variant dark {
+			--tw-ring-color: var(--checkbox-ring-dark);
+		}
+	}
+
+	&.tacheckbox--color-dark {
+		--checkbox-bg: var(--color-black);
+		--checkbox-ring: var(--color-gray-500);
+		--checkbox-ring-dark: var(--color-gray-600);
+	}
+
+	&.tacheckbox--color-zinc {
+		--checkbox-bg: var(--color-zinc-600);
+		--checkbox-ring: var(--color-zinc-500);
+		--checkbox-ring-dark: var(--color-zinc-600);
+	}
+
+	&.tacheckbox--color-white {
+		--checkbox-bg: var(--color-white);
+		--checkbox-ring: var(--color-gray-300);
+		--checkbox-ring-dark: var(--color-gray-400);
+		--checkbox-fg: var(--color-black);
+	}
+
+	&.tacheckbox--color-red {
+		--checkbox-bg: var(--color-red-600);
+		--checkbox-ring: var(--color-red-500);
+		--checkbox-ring-dark: var(--color-red-600);
+	}
+
+	&.tacheckbox--color-orange {
+		--checkbox-bg: var(--color-orange-500);
+		--checkbox-ring: var(--color-orange-500);
+		--checkbox-ring-dark: var(--color-orange-600);
+	}
+
+	&.tacheckbox--color-yellow {
+		--checkbox-bg: var(--color-yellow-400);
+		--checkbox-ring: var(--color-yellow-500);
+		--checkbox-ring-dark: var(--color-yellow-600);
+	}
+
+	&.tacheckbox--color-amber {
+		--checkbox-bg: var(--color-amber-500);
+		--checkbox-ring: var(--color-amber-500);
+		--checkbox-ring-dark: var(--color-amber-600);
+	}
+
+	&.tacheckbox--color-lime {
+		--checkbox-bg: var(--color-lime-500);
+		--checkbox-ring: var(--color-lime-500);
+		--checkbox-ring-dark: var(--color-lime-600);
+	}
+
+	&.tacheckbox--color-green {
+		--checkbox-bg: var(--color-green-600);
+		--checkbox-ring: var(--color-green-500);
+		--checkbox-ring-dark: var(--color-green-600);
+	}
+
+	&.tacheckbox--color-emerald {
+		--checkbox-bg: var(--color-emerald-600);
+		--checkbox-ring: var(--color-emerald-500);
+		--checkbox-ring-dark: var(--color-emerald-600);
+	}
+
+	&.tacheckbox--color-teal {
+		--checkbox-bg: var(--color-teal-600);
+		--checkbox-ring: var(--color-teal-500);
+		--checkbox-ring-dark: var(--color-teal-600);
+	}
+
+	&.tacheckbox--color-cyan {
+		--checkbox-bg: var(--color-cyan-600);
+		--checkbox-ring: var(--color-cyan-500);
+		--checkbox-ring-dark: var(--color-cyan-600);
+	}
+
+	&.tacheckbox--color-sky {
+		--checkbox-bg: var(--color-sky-600);
+		--checkbox-ring: var(--color-sky-500);
+		--checkbox-ring-dark: var(--color-sky-600);
+	}
+
+	&.tacheckbox--color-blue {
+		--checkbox-bg: var(--color-blue-600);
+		--checkbox-ring: var(--color-blue-500);
+		--checkbox-ring-dark: var(--color-blue-600);
+	}
+
+	&.tacheckbox--color-indigo {
+		--checkbox-bg: var(--color-indigo-600);
+		--checkbox-ring: var(--color-indigo-500);
+		--checkbox-ring-dark: var(--color-indigo-600);
+	}
+
+	&.tacheckbox--color-violet {
+		--checkbox-bg: var(--color-violet-600);
+		--checkbox-ring: var(--color-violet-500);
+		--checkbox-ring-dark: var(--color-violet-600);
+	}
+
+	&.tacheckbox--color-purple {
+		--checkbox-bg: var(--color-purple-600);
+		--checkbox-ring: var(--color-purple-500);
+		--checkbox-ring-dark: var(--color-purple-600);
+	}
+
+	&.tacheckbox--color-fuchsia {
+		--checkbox-bg: var(--color-fuchsia-600);
+		--checkbox-ring: var(--color-fuchsia-500);
+		--checkbox-ring-dark: var(--color-fuchsia-600);
+	}
+
+	&.tacheckbox--color-pink {
+		--checkbox-bg: var(--color-pink-500);
+		--checkbox-ring: var(--color-pink-500);
+		--checkbox-ring-dark: var(--color-pink-600);
+	}
+
+	&.tacheckbox--color-rose {
+		--checkbox-bg: var(--color-rose-500);
+		--checkbox-ring: var(--color-rose-500);
+		--checkbox-ring-dark: var(--color-rose-600);
+	}
+
+	&.tacheckbox--disabled {
+		@apply cursor-not-allowed text-fg-disabled;
+		--checkbox-bg: var(--color-disabled);
+		--checkbox-fg: var(--color-fg-disabled);
+
+		.tacheckbox__input,
+		.talabel {
+			@apply cursor-not-allowed;
+		}
+
+		.talabel,
+		.tatext {
+			@apply text-fg-disabled;
+		}
+
+		.tacheckbox__control {
+			@apply border-light bg-neutral-secondary-medium;
+
+			&[data-checked],
+			&[data-indeterminate] {
+				@apply border-light;
+			}
+		}
+	}
+}
+
+.tacheckboxfield {
+	@apply flex flex-col gap-1.5;
+
+	.talabel {
+		@apply mb-0 select-none;
+	}
+
+	.tafield__error {
+		@apply mt-0;
+	}
+}

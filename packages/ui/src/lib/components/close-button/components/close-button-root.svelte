@@ -31,7 +31,7 @@
 	const attrs = $derived({
 		'data-slot': 'button',
 		'aria-label': 'Close',
-		role: 'button',
+		role: Tag === 'button' ? undefined : 'button',
 		...split.attrs,
 		class: cls,
 		...pressable.attachments

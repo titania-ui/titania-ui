@@ -10,8 +10,21 @@ export { theme };
 // Root
 export type RootCfg = Define<{
 	tag: 'span';
-	own: { dismissed?: boolean; ondismiss?: () => void };
+	when: { href: 'a'; onclick: 'button' };
+	own: {
+		dismissed?: boolean;
+		ondismiss?: () => void;
+		href?: string;
+		onclick?: () => void;
+		disabled?: boolean;
+	};
 	theme: ThemeOf<typeof theme>;
+	state: {
+		disabled: boolean;
+		hovered: boolean;
+		pressed: boolean;
+		focused: boolean;
+	};
 	child: true;
 }>;
 export type RootProps<TAs extends As | undefined = undefined> = Props<TAs, RootCfg>;

@@ -38,7 +38,7 @@
 
 	const attrs = $derived({
 		...fieldControlAttrs(field_ctx, invalid),
-		[createAttachmentKey()]: useHover({ isDisabled: __disabled }),
+		[createAttachmentKey()]: useHover({ disabled: __disabled }),
 		...split.attrs,
 		class: cls
 	});

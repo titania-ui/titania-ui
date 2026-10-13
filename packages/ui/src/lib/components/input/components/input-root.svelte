@@ -39,7 +39,7 @@
 	const attrs = $derived<Record<string, unknown>>({
 		...fieldControlAttrs(field_ctx, invalid),
 		...split.attrs,
-		[createAttachmentKey()]: useHover({ isDisabled: __disabled }),
+		[createAttachmentKey()]: useHover({ disabled: __disabled }),
 		class: cls
 	});
 

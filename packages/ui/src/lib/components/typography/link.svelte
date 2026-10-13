@@ -33,7 +33,7 @@
 		'aria-disabled': disabled ? 'true' : undefined,
 		...split.attrs,
 		class: cls,
-		[HOVER]: useHover({ isDisabled: disabled })
+		[HOVER]: useHover({ disabled: disabled })
 	});
 </script>
 

@@ -51,6 +51,7 @@
 		constraints: boxWith(() => __constraints),
 
 		descriptionId: box<string | undefined>(undefined),
+		errorId: box<string | undefined>(undefined),
 		labelId: box<string | undefined>(undefined)
 	});
 

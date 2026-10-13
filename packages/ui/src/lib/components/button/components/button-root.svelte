@@ -12,6 +12,7 @@
 	let {
 		href,
 		pending = false,
+		pendingLabel = 'Loading',
 		disabled = false,
 		//
 		as: _Tag,
@@ -64,6 +65,9 @@
 {#snippet body()}
 	<TouchTarget>
 		{@render children?.(childrenState)}
+		{#if pending && pendingLabel}
+			<span class="sr-only">, {pendingLabel}</span>
+		{/if}
 	</TouchTarget>
 {/snippet}
 

@@ -29,7 +29,7 @@
 
 	const attrs = $derived({
 		role: 'heading',
-		'aria-level': level,
+		'aria-level': typeof Tag === 'string' && Tag.match(/^h[1-6]$/) ? undefined : level,
 		...split.attrs,
 		class: cls
 	});

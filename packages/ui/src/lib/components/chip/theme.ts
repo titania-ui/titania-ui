@@ -40,7 +40,6 @@ export const theme = tv({
 	},
 	defaultVariants: {
 		color: 'default',
-		size: 'md',
-		variant: 'primary'
+		size: 'md'
 	}
 });

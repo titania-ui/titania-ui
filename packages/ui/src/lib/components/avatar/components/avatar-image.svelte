@@ -23,18 +23,30 @@
 		} as never)
 	);
 
+	$effect(() => ctx.state.registerImage());
+
+	$effect(() =>
+		ctx.state.load(rest.src as string | undefined, {
+			crossOrigin: rest.crossorigin as never,
+			referrerPolicy: rest.referrerpolicy as never
+		})
+	);
+
 	const attrs = $derived({
 		'data-slot': 'avatar-image',
+		alt: ctx.alt.current,
 		...rest,
 		class: cls
 	});
 </script>
 
-<Polymorphic
-	tag={Tag}
-	{attrs}
-	bind:ref
-	{child}
-	childArg={{ props: attrs } as ChildArgOf<ImageCfg>}
-	{children}
-/>
+{#if ctx.state.status === 'loaded'}
+	<Polymorphic
+		tag={Tag}
+		{attrs}
+		bind:ref
+		{child}
+		childArg={{ props: attrs } as ChildArgOf<ImageCfg>}
+		{children}
+	/>
+{/if}

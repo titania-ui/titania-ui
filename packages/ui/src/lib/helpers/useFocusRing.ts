@@ -8,13 +8,13 @@ export interface FocusRingOptions {
 	 */
 	within?: boolean;
 	/** Whether the element is a text input. */
-	isTextInput?: boolean;
+	textInput?: boolean;
 	/** Whether the element will be auto focused. */
 	autoFocus?: boolean;
-	/** Called when focus state changes. */
-	onFocusChange?: (isFocused: boolean) => void;
-	/** Called when focus-visible state changes. */
-	onFocusVisibleChange?: (isFocusVisible: boolean) => void;
+	/** Called when the focused state changes. Mirrors `data-focused`. */
+	onFocusedChange?: (focused: boolean) => void;
+	/** Called when the focus-visible state changes. Mirrors `data-focus-visible`. */
+	onFocusVisibleChange?: (focusVisible: boolean) => void;
 }
 
 let usingKeyboard = true;
@@ -60,11 +60,12 @@ function subscribe(fn: () => void): () => void {
 }
 
 /**
- * Svelte attachment that toggles `data-focus` and `data-focus-visible`
+ * Svelte attachment that toggles `data-focused` and `data-focus-visible`
  * attributes on an element, mirroring React Aria's useFocusRing.
  *
- * `data-focus-visible` is set only when the element is focused AND the
- * user is interacting via keyboard — never on mouse/touch focus.
+ * - `data-focused` is set whenever the element has focus.
+ * - `data-focus-visible` is set only when the element is focused AND the
+ *   user is interacting via keyboard — never on mouse/touch focus.
  *
  * Usage:
  *   <button {@attach useFocusRing()}>…</button>
@@ -72,22 +73,27 @@ function subscribe(fn: () => void): () => void {
  */
 export function useFocusRing(options: FocusRingOptions = {}): Attachment<Element> {
 	return (node) => {
-		const { within = false, isTextInput, autoFocus = false } = options;
+		const { within = false, textInput = false, autoFocus = false } = options;
 
-		let isFocused = false;
+		let focused = false;
 		let focusVisible = autoFocus && usingKeyboard;
+		let lastVisible = false;
 
 		const sync = () => {
-			const showRing = isFocused && focusVisible;
-			node.toggleAttribute('data-focus', showRing);
-			options.onFocusVisibleChange?.(showRing);
+			const visible = focused && focusVisible;
+			node.toggleAttribute('data-focus-visible', visible);
+			if (visible !== lastVisible) {
+				lastVisible = visible;
+				options.onFocusVisibleChange?.(visible);
+			}
 		};
 
 		const setFocused = (next: boolean) => {
-			if (next === isFocused) return;
-			isFocused = next;
+			if (next === focused) return;
+			focused = next;
 			focusVisible = next ? usingKeyboard : false;
-			options.onFocusChange?.(next);
+			node.toggleAttribute('data-focused', next);
+			options.onFocusedChange?.(next);
 			sync();
 		};
 
@@ -107,8 +113,8 @@ export function useFocusRing(options: FocusRingOptions = {}): Attachment<Element
 		node.addEventListener('focusout', onFocusOut as EventListener);
 
 		const unsubscribe = subscribe(() => {
-			if (!isFocused) return;
-			focusVisible = isTextInput ? focusVisible || usingKeyboard : usingKeyboard;
+			if (!focused) return;
+			focusVisible = textInput ? focusVisible || usingKeyboard : usingKeyboard;
 			sync();
 		});
 
@@ -118,7 +124,8 @@ export function useFocusRing(options: FocusRingOptions = {}): Attachment<Element
 			node.removeEventListener('focusin', onFocusIn as EventListener);
 			node.removeEventListener('focusout', onFocusOut as EventListener);
 			unsubscribe();
-			node.removeAttribute('data-focus');
+			node.removeAttribute('data-focused');
+			node.removeAttribute('data-focus-visible');
 		};
 	};
 }

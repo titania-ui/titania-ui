@@ -8,7 +8,12 @@ export { theme };
 export type RootCfg = Define<{
 	tag: 'button';
 	when: { href: 'a' };
-	own: { href?: string; pending?: boolean; disabled?: boolean };
+	own: {
+		href?: string;
+		pending?: boolean;
+		pendingLabel?: string;
+		disabled?: boolean;
+	};
 	theme: ThemeOf<typeof theme>;
 	state: {
 		pending: boolean;
