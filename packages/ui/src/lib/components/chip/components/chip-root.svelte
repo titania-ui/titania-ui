@@ -50,7 +50,7 @@
 		} as never)
 	);
 
-	const ctx = chipCtx.set({
+	chipCtx.set({
 		id: boxWith(() => id),
 		labelId: boxWith(() => undefined),
 		variants: boxWith(() => split.variants),
@@ -65,7 +65,6 @@
 
 	const attrs = $derived({
 		'data-slot': 'chip',
-		'aria-describedby': ctx.labelId.current,
 		...split.attrs,
 		...pressable.attrs,
 		class: cls,

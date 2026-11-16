@@ -117,6 +117,7 @@
 	</div>
 
 	<Form form={reservationForm}>
+		<Form.ErrorSummary />
 		<Form.Fieldset>
 			<Form.Legend>Reservation details</Form.Legend>
 			<Text>Without this your odds of getting a table are low.</Text>

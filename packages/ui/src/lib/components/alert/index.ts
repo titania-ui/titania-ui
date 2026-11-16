@@ -20,11 +20,21 @@ export type RootCfg = Define<{
 		ondismiss?: () => void;
 		/**
 		 * Announcement behaviour.
-		 * - `auto` (default): assertive for warning/danger, polite otherwise. Only announced if the alert appears after the page has loaded.
-		 * - `polite` / `assertive`: always announced, even on initial render.
-		 * - `off`: never announced.
+		 * - `auto` (default): `role="alert"` for warning/danger, `role="status"` otherwise.
+		 * - `polite` / `assertive`: `role="status"` / `role="alert"`.
+		 * - `off`: no live role.
 		 */
 		live?: 'auto' | 'polite' | 'assertive' | 'off';
+		/**
+		 * Visually hidden status word that is read before the alert and rendered by `Alert.Indicator`.
+		 * Defaults to an English word derived from `status`;
+		 */
+		statusLabel?: string;
+		/**
+		 * Element that receives focus when the alert is dismissed. Defaults to the next
+		 * (else previous) focusable element on the page, so focus is never dropped onto `<body>`.
+		 */
+		focusTarget?: HTMLElement | (() => HTMLElement | null | undefined);
 	};
 	theme: ThemeOf<typeof theme>;
 	child: true;

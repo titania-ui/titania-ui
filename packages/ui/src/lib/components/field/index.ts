@@ -26,7 +26,15 @@ export type DescriptionCfg = Define<{ tag: 'p'; child: true }>;
 export type DescriptionProps<TAs extends As | undefined = undefined> = Props<TAs, DescriptionCfg>;
 
 // Error
-export type ErrorCfg = Define<{ tag: 'p'; child: true; state: { errors: string[] } }>;
+export type ErrorCfg = Define<{
+	tag: 'p';
+	own: {
+		/** Visually hidden word read before the message. */
+		label?: string;
+	};
+	child: true;
+	state: { errors: string[] };
+}>;
 export type ErrorProps<TAs extends As | undefined = undefined> = Props<TAs, ErrorCfg> & {
 	children?: never;
 };

@@ -1,5 +1,11 @@
+import { Announcer } from '../src/lib/index.js';
 import '../src/lib/theme/flowbite/index.css';
 import type { Preview } from '@storybook/sveltekit';
+import { mount } from 'svelte';
+
+if (typeof document !== 'undefined' && !document.querySelector('[data-slot="announcer"]')) {
+	mount(Announcer, { target: document.body });
+}
 
 const preview: Preview = {
 	parameters: {

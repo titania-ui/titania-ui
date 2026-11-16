@@ -1,5 +1,6 @@
 // Components
 export { default as Alert } from './components/alert/index.js';
+export { default as Announcer } from './components/announcer/index.js';
 export { default as Avatar } from './components/avatar/index.js';
 export { default as AvatarGroup } from './components/avatar-group/index.js';
 export { default as Button } from './components/button/index.js';
@@ -26,6 +27,7 @@ export { default as Strong } from './components/typography/strong.js';
 export { default as Text } from './components/typography/text.js';
 
 // Helpers
+export { announce } from './helpers/announcer.js';
 export { useActivePress } from './helpers/useActivePress.js';
 export { useFocusRing } from './helpers/useFocusRing.js';
 export { useHover } from './helpers/useHover.js';

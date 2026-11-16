@@ -45,3 +45,4 @@
 	childArg={{ props: attrs } as ChildArgOf<IndicatorCfg>}
 	{children}
 />
+<span data-slot="alert-status" class="sr-only">{ctx.statusLabel.current}:</span>
