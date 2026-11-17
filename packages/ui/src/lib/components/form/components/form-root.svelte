@@ -1,6 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { announce } from '#lib/helpers/announcer.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import { ui_form_errors_announcement } from '#lib/paraglide/messages.js';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { collectFormErrors } from '#lib/utils/formErrors.js';
 	import { splitVariants } from '#lib/utils/splitVariants.js';
@@ -16,8 +17,7 @@
 	let {
 		form,
 		focus = 'auto',
-		announceErrors = (n: number) =>
-			n === 1 ? 'The form has 1 error.' : `The form has ${n} errors.`,
+		announceErrors = (count: number) => ui_form_errors_announcement({ count }),
 		//
 		id = uid,
 		as: Tag = 'form',

@@ -26,7 +26,7 @@ export type RootCfg = Define<{
 		 * - `none`: leave focus alone and announce the error count through the global `<Announcer />`.
 		 */
 		focus?: 'auto' | 'summary' | 'field' | 'none';
-		/** Builds the announcement for a failed submit with `focus="none"`. Defaults to an English sentence, pass your translation. */
+		/** Builds the announcement for a failed submit with `focus="none"`. Defaults to the translated `ui_form_errors_announcement` message. */
 		announceErrors?: (count: number) => string;
 	};
 	theme: ThemeOf<typeof theme>;

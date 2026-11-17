@@ -1,5 +1,11 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import {
+		ui_alert_status_danger,
+		ui_alert_status_info,
+		ui_alert_status_success,
+		ui_alert_status_warning
+	} from '#lib/paraglide/messages.js';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { splitVariants } from '#lib/utils/splitVariants.js';
 	import { alertCtx } from '../alert-context.js';
@@ -9,12 +15,12 @@
 
 	const uid = $props.id();
 
-	const STATUS_LABELS: Record<string, string> = {
-		default: 'Information',
-		accent: 'Information',
-		success: 'Success',
-		warning: 'Warning',
-		danger: 'Error'
+	const STATUS_LABELS: Record<string, () => string> = {
+		default: ui_alert_status_info,
+		accent: ui_alert_status_info,
+		success: ui_alert_status_success,
+		warning: ui_alert_status_warning,
+		danger: ui_alert_status_danger
 	};
 
 	const FOCUSABLE =
@@ -38,7 +44,9 @@
 
 	let split = $derived(splitVariants(theme, rest));
 
-	const label = $derived(statusLabel ?? STATUS_LABELS[String(split.variants.status ?? 'default')]);
+	const label = $derived(
+		statusLabel ?? STATUS_LABELS[String(split.variants.status ?? 'default')]()
+	);
 
 	const cls = $derived(
 		theme().root({

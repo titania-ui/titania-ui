@@ -5,6 +5,7 @@
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import TouchTarget from '#lib/helpers/touch-target.svelte';
 	import { usePressableTag } from '#lib/helpers/usePressableTag.svelte.js';
+	import { ui_button_pending } from '#lib/paraglide/messages.js';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { splitVariants } from '#lib/utils/splitVariants.js';
 	import { type RootCfg, type RootProps, theme } from '../index.js';
@@ -12,7 +13,7 @@
 	let {
 		href,
 		pending = false,
-		pendingLabel = 'Loading',
+		pendingLabel = ui_button_pending(),
 		disabled = false,
 		//
 		as: _Tag,

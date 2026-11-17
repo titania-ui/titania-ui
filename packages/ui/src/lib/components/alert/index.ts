@@ -27,7 +27,7 @@ export type RootCfg = Define<{
 		live?: 'auto' | 'polite' | 'assertive' | 'off';
 		/**
 		 * Visually hidden status word that is read before the alert and rendered by `Alert.Indicator`.
-		 * Defaults to an English word derived from `status`;
+		 * Defaults to the translated word for `status`.
 		 */
 		statusLabel?: string;
 		/**

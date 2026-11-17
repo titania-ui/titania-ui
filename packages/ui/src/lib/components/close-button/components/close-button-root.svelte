@@ -3,6 +3,7 @@
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
 	import TouchTarget from '#lib/helpers/touch-target.svelte';
 	import { usePressableTag } from '#lib/helpers/usePressableTag.svelte.js';
+	import { ui_close } from '#lib/paraglide/messages.js';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { splitVariants } from '#lib/utils/splitVariants.js';
 	import { type RootCfg, type RootProps, theme } from '../index.js';
@@ -30,7 +31,7 @@
 
 	const attrs = $derived({
 		'data-slot': 'button',
-		'aria-label': 'Close',
+		'aria-label': ui_close(),
 		role: Tag === 'button' ? undefined : 'button',
 		...split.attrs,
 		class: cls,

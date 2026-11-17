@@ -1,6 +1,7 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import { CloseButton } from '#lib';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import { ui_alert_dismiss } from '#lib/paraglide/messages.js';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { alertCtx } from '../alert-context.js';
 	import type { DismissCfg, DismissProps } from '../index.js';
@@ -16,7 +17,7 @@
 	}: DismissProps<TAs> = $props();
 
 	const attrs = $derived({
-		'aria-label': 'Dismiss alert',
+		'aria-label': ui_alert_dismiss(),
 		...rest,
 		onclick: (e: MouseEvent) => {
 			if (typeof rest.onclick === 'function') rest.onclick?.(e);

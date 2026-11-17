@@ -1,5 +1,6 @@
 <script lang="ts" generics="TAs extends As | undefined = undefined">
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import { ui_form_errors_title } from '#lib/paraglide/messages.js';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { collectFormErrors } from '#lib/utils/formErrors.js';
 	import { type ErrorSummaryCfg, type ErrorSummaryProps, formCtx, theme } from '../index.js';
@@ -8,7 +9,7 @@
 	const uid = $props.id();
 
 	let {
-		title = (n: number) => (n === 1 ? '1 error' : `${n} errors`),
+		title = (count: number) => ui_form_errors_title({ count }),
 		//
 		id = uid,
 		as: Tag = 'div',

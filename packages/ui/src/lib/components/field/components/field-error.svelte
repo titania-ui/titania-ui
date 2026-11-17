@@ -2,6 +2,7 @@
 	import { formCtx } from '#lib/components/form/form-context.js';
 	import { announce } from '#lib/helpers/announcer.js';
 	import Polymorphic from '#lib/helpers/polymorphic.svelte';
+	import { ui_field_error } from '#lib/paraglide/messages.js';
 	import type { As, ChildArgOf } from '#lib/types/props.js';
 	import { registerId } from '#lib/utils/registerId.js';
 	import { type ErrorCfg, type ErrorProps, fieldCtx, theme } from '../index.js';
@@ -11,7 +12,7 @@
 	const uid = $props.id();
 
 	let {
-		label: errorLabel = 'Error',
+		label: errorLabel = ui_field_error(),
 		//
 		id = uid,
 		as: Tag = 'p',
