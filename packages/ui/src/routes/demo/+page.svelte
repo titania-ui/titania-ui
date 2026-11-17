@@ -11,6 +11,7 @@
 		Chip,
 		Code,
 		DescriptionList,
+		Dropdown,
 		Field,
 		Form,
 		Heading,
@@ -46,6 +47,41 @@
 	const STACK = { class: '*:m-0 space-y-4!' };
 
 	const LIST = { class: 'flex flex-row gap-4 flex-wrap basis items-center' };
+
+	let dropdownOpen = $state(false);
+	let lastAction = $state('none');
+
+	const DROPDOWN_ACCOUNT = [
+		{ label: 'Account', icon: 'icon-[flowbite--user-outline]' },
+		{ label: 'Settings', icon: 'icon-[flowbite--cog-outline]' },
+		{ label: 'Privacy', icon: 'icon-[flowbite--lock-outline]' },
+		{ label: 'Notifications', icon: 'icon-[flowbite--bell-outline]' },
+		{ label: 'Help center', icon: 'icon-[flowbite--question-circle-outline]' }
+	];
+
+	const DROPDOWN_OPTIONS = [
+		['Enable notifications', 'Get notified when someone mentions you.'],
+		['Enable 2FA auth', 'Require a code from your phone to sign in.'],
+		['Subscribe newsletter', 'One email a month, unsubscribe anytime.']
+	];
+
+	const DROPDOWN_USERS = [
+		'Jese Leos',
+		'Robert Gough',
+		'Bonnie Green',
+		'Leslie Livingston',
+		'Michael Gough',
+		'Joseph Mcfall',
+		'Roberta Casas',
+		'Neil Sims'
+	];
+
+	const DROPDOWN_NOTIFICATIONS = [
+		{ who: 'Jese Leos', what: 'sent you a new message', when: 'a few moments ago' },
+		{ who: 'Joseph Mcfall', what: 'and 5 others started following you', when: '10 minutes ago' },
+		{ who: 'Bonnie Green', what: 'and 141 others love your story', when: '44 minutes ago' },
+		{ who: 'Leslie Livingston', what: 'mentioned you in a comment', when: '1 hour ago' }
+	];
 </script>
 
 <div class="space-y-12! p-6 *:m-0">
@@ -141,6 +177,389 @@
 			<Button variant="secondary">Duplicate</Button>
 			<Button variant="secondary">Archive</Button>
 		</ButtonGroup>
+	</div>
+
+	<div {...STACK}>
+		<Heading level={2}>Dropdown</Heading>
+
+		<Heading level={4}>Triggers</Heading>
+		<div {...LIST}>
+			<Dropdown>
+				<Dropdown.Trigger variant="primary">Primary</Dropdown.Trigger>
+				<Dropdown.Content>
+					<Dropdown.List>
+						<Dropdown.Item href="#dashboard">Dashboard</Dropdown.Item>
+						<Dropdown.Item href="#settings">Settings</Dropdown.Item>
+						<Dropdown.Item href="#earnings">Earnings</Dropdown.Item>
+					</Dropdown.List>
+				</Dropdown.Content>
+			</Dropdown>
+
+			<Dropdown>
+				<Dropdown.Trigger variant="outline" size="sm">Outline small</Dropdown.Trigger>
+				<Dropdown.Content>
+					<Dropdown.List>
+						<Dropdown.Item href="#dashboard">Dashboard</Dropdown.Item>
+						<Dropdown.Item href="#settings">Settings</Dropdown.Item>
+					</Dropdown.List>
+				</Dropdown.Content>
+			</Dropdown>
+
+			<Dropdown>
+				<Dropdown.Trigger variant="secondary" chevron={false}>
+					<Icon icon="icon-[flowbite--cog-outline]" />
+					No chevron
+				</Dropdown.Trigger>
+				<Dropdown.Content>
+					<Dropdown.List>
+						<Dropdown.Item href="#dashboard">Dashboard</Dropdown.Item>
+						<Dropdown.Item href="#settings">Settings</Dropdown.Item>
+					</Dropdown.List>
+				</Dropdown.Content>
+			</Dropdown>
+
+			<Dropdown>
+				<Dropdown.Trigger variant="primary" disabled>Disabled</Dropdown.Trigger>
+				<Dropdown.Content>
+					<Dropdown.List>
+						<Dropdown.Item href="#dashboard">Dashboard</Dropdown.Item>
+					</Dropdown.List>
+				</Dropdown.Content>
+			</Dropdown>
+
+			<ButtonGroup aria-label="Save">
+				<Button variant="primary">Save</Button>
+				<Dropdown placement="bottom-end">
+					<Dropdown.Trigger variant="primary" aria-label="More save options" class="px-2.5" />
+					<Dropdown.Content>
+						<Dropdown.List>
+							<Dropdown.Item onclick={() => (lastAction = 'Save as draft')}>
+								Save as draft
+							</Dropdown.Item>
+							<Dropdown.Item onclick={() => (lastAction = 'Save and publish')}>
+								Save and publish
+							</Dropdown.Item>
+						</Dropdown.List>
+					</Dropdown.Content>
+				</Dropdown>
+			</ButtonGroup>
+
+			<Dropdown>
+				<Dropdown.Trigger
+					variant="ghost"
+					chevron={false}
+					aria-label="Open user menu"
+					class="rounded-full border-0 p-0"
+				>
+					<Avatar alt="" size="sm"><Avatar.Image src={PHOTO} /></Avatar>
+				</Dropdown.Trigger>
+				<Dropdown.Content class="w-56">
+					<Dropdown.List>
+						{#each DROPDOWN_ACCOUNT.slice(0, 2) as item (item.label)}
+							<Dropdown.Item href="#{item.label}">
+								<Icon icon={item.icon} />
+								{item.label}
+							</Dropdown.Item>
+						{/each}
+					</Dropdown.List>
+				</Dropdown.Content>
+			</Dropdown>
+
+			<Dropdown placement="bottom-end">
+				<Dropdown.Trigger variant="ghost" chevron={false} class="relative">
+					<Icon icon="icon-[flowbite--bell-outline]" class="size-6" />
+					<span class="sr-only">Notifications, {DROPDOWN_NOTIFICATIONS.length} unread</span>
+					<span
+						aria-hidden="true"
+						class="absolute start-6 top-2 size-3 rounded-full border-2 border-buffer bg-danger"
+					></span>
+				</Dropdown.Trigger>
+				<Dropdown.Content class="w-sm divide-y divide-default-medium">
+					<Dropdown.Header
+						id="demo-notifications-title"
+						class="bg-neutral-secondary-medium px-4 py-2 text-center"
+					>
+						Notifications
+					</Dropdown.Header>
+					<Dropdown.List
+						aria-labelledby="demo-notifications-title"
+						class="divide-y divide-default p-0"
+					>
+						{#each DROPDOWN_NOTIFICATIONS as n (n.who)}
+							<Dropdown.Item
+								href="#notification"
+								class="items-start gap-x-3 rounded-none px-4 py-3"
+							>
+								<Avatar alt="" class="size-11 shrink-0 rounded-full">
+									<Avatar.Image src={PHOTO} />
+								</Avatar>
+								<span class="flex flex-col gap-y-1.5 font-normal">
+									<span><Strong>{n.who}</Strong> {n.what}</span>
+									<span class="text-xs text-fg-brand">{n.when}</span>
+								</span>
+							</Dropdown.Item>
+						{/each}
+					</Dropdown.List>
+					<Dropdown.Footer class="border-0 bg-neutral-secondary-medium p-0 text-center">
+						<Link href="#all" class="flex items-center justify-center gap-x-1.5 py-2">
+							<Icon icon="icon-[flowbite--eye-outline]" class="size-5" />
+							View all
+						</Link>
+					</Dropdown.Footer>
+				</Dropdown.Content>
+			</Dropdown>
+		</div>
+
+		<Heading level={4}>Header, footer, dividers</Heading>
+		<div {...LIST}>
+			<Dropdown>
+				<Dropdown.Trigger variant="secondary">Divider</Dropdown.Trigger>
+				<Dropdown.Content>
+					<Dropdown.List>
+						<Dropdown.Item href="#dashboard">Dashboard</Dropdown.Item>
+						<Dropdown.Item href="#settings">Settings</Dropdown.Item>
+						<Dropdown.Item href="#earnings">Earnings</Dropdown.Item>
+					</Dropdown.List>
+					<Dropdown.Divider />
+					<Dropdown.List>
+						<Dropdown.Item href="#separated">Separated link</Dropdown.Item>
+					</Dropdown.List>
+				</Dropdown.Content>
+			</Dropdown>
+
+			<Dropdown>
+				<Dropdown.Trigger variant="secondary">Header</Dropdown.Trigger>
+				<Dropdown.Content class="w-72">
+					<Dropdown.Header>
+						<div class="flex items-center gap-x-2 rounded bg-black/5 p-2">
+							<Avatar alt="" size="sm"><Avatar.Image src={PHOTO} /></Avatar>
+							<div class="min-w-0 text-sm">
+								<Strong class="block">Tom Example</Strong>
+								<Text class="truncate text-sm">tom@example.com</Text>
+							</div>
+							<Chip color="accent" size="sm" class="ms-auto">PRO</Chip>
+						</div>
+					</Dropdown.Header>
+					<Dropdown.List>
+						{#each DROPDOWN_ACCOUNT as item (item.label)}
+							<Dropdown.Item href="#{item.label}">
+								<Icon icon={item.icon} />
+								{item.label}
+							</Dropdown.Item>
+						{/each}
+						<Dropdown.Item>
+							<Switch>
+								<Switch.Content>
+									<Label class="flex items-center gap-x-1.5">
+										<Icon icon="icon-[flowbite--moon-outline]" />
+										Dark mode
+									</Label>
+								</Switch.Content>
+								<Switch.Control class="ms-auto" />
+							</Switch>
+						</Dropdown.Item>
+						<Dropdown.Divider />
+						<Dropdown.Item href="#upgrade">
+							<Icon icon="icon-[flowbite--rocket-outline]" />
+							Upgrade to PRO
+						</Dropdown.Item>
+						<Dropdown.Item href="#sign-out" danger>
+							<Icon icon="icon-[flowbite--arrow-right-to-bracket-outline]" />
+							Sign out
+						</Dropdown.Item>
+					</Dropdown.List>
+				</Dropdown.Content>
+			</Dropdown>
+
+			<Dropdown>
+				<Dropdown.Trigger variant="secondary">Footer</Dropdown.Trigger>
+				<Dropdown.Content class="w-56">
+					<Dropdown.List>
+						{#each DROPDOWN_ACCOUNT.slice(0, 3) as item (item.label)}
+							<Dropdown.Item href="#{item.label}">
+								<Icon icon={item.icon} />
+								{item.label}
+							</Dropdown.Item>
+						{/each}
+					</Dropdown.List>
+					<Dropdown.Footer>
+						<Button variant="danger" size="xs" class="w-full">
+							<Icon icon="icon-[flowbite--arrow-right-to-bracket-outline]" />
+							Sign out
+						</Button>
+					</Dropdown.Footer>
+				</Dropdown.Content>
+			</Dropdown>
+
+			<Dropdown>
+				<Dropdown.Trigger variant="secondary">Header and footer</Dropdown.Trigger>
+				<Dropdown.Content class="w-64">
+					<Dropdown.Header class="border-b border-default-medium">
+						<Strong id="demo-workspace-title" class="block px-2">Switch workspace</Strong>
+						<Text class="px-2 text-xs">You are a member of 3 workspaces.</Text>
+					</Dropdown.Header>
+					<Dropdown.List aria-labelledby="demo-workspace-title" class="pt-2!">
+						<Dropdown.Item onclick={() => (lastAction = 'Acme Inc.')}>Acme Inc.</Dropdown.Item>
+						<Dropdown.Item onclick={() => (lastAction = 'Globex')}>Globex</Dropdown.Item>
+						<Dropdown.Item disabled onclick={() => (lastAction = 'Initech')}>
+							Initech (suspended)
+						</Dropdown.Item>
+					</Dropdown.List>
+					<Dropdown.Footer>
+						<Link href="#new-workspace" class="flex items-center gap-x-1.5 px-2 py-1 text-sm">
+							<Icon icon="icon-[flowbite--grid-plus-outline]" />
+							Create workspace
+						</Link>
+					</Dropdown.Footer>
+				</Dropdown.Content>
+			</Dropdown>
+
+			<Dropdown>
+				<Dropdown.Trigger variant="secondary">Scrollable with footer</Dropdown.Trigger>
+				<Dropdown.Content class="w-56">
+					<Dropdown.List class="h-48 overflow-y-auto" tabindex={0} aria-label="Users">
+						{#each DROPDOWN_USERS as name (name)}
+							<Dropdown.Item>
+								<Checkbox class="flex-row-reverse justify-between">
+									<Checkbox.Control />
+									<Checkbox.Content class="flex-row items-center gap-x-2">
+										<Avatar alt="" size="sm" class="size-5"><Avatar.Image src={PHOTO} /></Avatar>
+										<Label>{name}</Label>
+									</Checkbox.Content>
+								</Checkbox>
+							</Dropdown.Item>
+						{/each}
+					</Dropdown.List>
+					<Dropdown.Footer>
+						<Button variant="danger" size="xs" class="w-full">
+							<Icon icon="icon-[flowbite--trash-bin-outline]" />
+							Delete user
+						</Button>
+					</Dropdown.Footer>
+				</Dropdown.Content>
+			</Dropdown>
+		</div>
+
+		<Heading level={4}>Checkboxes and toggles</Heading>
+		<div {...LIST}>
+			<Dropdown>
+				<Dropdown.Trigger variant="secondary">Checkboxes</Dropdown.Trigger>
+				<Dropdown.Content class="w-52">
+					<Dropdown.List>
+						{#each ['Default checkbox', 'Checked state', 'Another checkbox'] as label, i (label)}
+							<Dropdown.Item plain>
+								<Checkbox checked={i === 1}>
+									<Checkbox.Control />
+									<Checkbox.Content><Label>{label}</Label></Checkbox.Content>
+								</Checkbox>
+							</Dropdown.Item>
+						{/each}
+					</Dropdown.List>
+				</Dropdown.Content>
+			</Dropdown>
+
+			<Dropdown>
+				<Dropdown.Trigger variant="secondary">Checkboxes with hover</Dropdown.Trigger>
+				<Dropdown.Content class="w-52">
+					<Dropdown.List>
+						{#each ['Default checkbox', 'Checked state', 'Another checkbox'] as label, i (label)}
+							<Dropdown.Item>
+								<Checkbox checked={i === 1}>
+									<Checkbox.Control />
+									<Checkbox.Content><Label>{label}</Label></Checkbox.Content>
+								</Checkbox>
+							</Dropdown.Item>
+						{/each}
+					</Dropdown.List>
+				</Dropdown.Content>
+			</Dropdown>
+
+			<Dropdown>
+				<Dropdown.Trigger variant="secondary">Checkboxes with helper</Dropdown.Trigger>
+				<Dropdown.Content class="w-64">
+					<Dropdown.List>
+						{#each DROPDOWN_OPTIONS as [label, help] (label)}
+							<Dropdown.Item>
+								<Checkbox>
+									<Checkbox.Control />
+									<Checkbox.Content>
+										<Label>{label}</Label>
+										<Text>{help}</Text>
+									</Checkbox.Content>
+								</Checkbox>
+							</Dropdown.Item>
+						{/each}
+					</Dropdown.List>
+				</Dropdown.Content>
+			</Dropdown>
+
+			<Dropdown>
+				<Dropdown.Trigger variant="secondary">Toggles</Dropdown.Trigger>
+				<Dropdown.Content class="w-72">
+					<Dropdown.List>
+						{#each DROPDOWN_OPTIONS as [label] (label)}
+							<Dropdown.Item>
+								<Switch>
+									<Switch.Control />
+									<Switch.Content><Label>{label}</Label></Switch.Content>
+								</Switch>
+							</Dropdown.Item>
+						{/each}
+						<Dropdown.Item disabled>
+							<Switch disabled>
+								<Switch.Control />
+								<Switch.Content><Label>Beta features (unavailable)</Label></Switch.Content>
+							</Switch>
+						</Dropdown.Item>
+					</Dropdown.List>
+				</Dropdown.Content>
+			</Dropdown>
+		</div>
+
+		<Heading level={4}>Behaviour</Heading>
+		<div {...LIST}>
+			<Dropdown bind:open={dropdownOpen}>
+				<Dropdown.Trigger variant="secondary">Controlled</Dropdown.Trigger>
+				<Dropdown.Content>
+					<Dropdown.List>
+						<Dropdown.Item onclick={() => (lastAction = 'Rename')}>Rename</Dropdown.Item>
+						<Dropdown.Item onclick={() => (lastAction = 'Duplicate')}>Duplicate</Dropdown.Item>
+						<Dropdown.Item
+							onclick={(e: MouseEvent) => {
+								e.preventDefault();
+								lastAction = 'Refreshed (stayed open)';
+							}}
+						>
+							Refresh (keeps open)
+						</Dropdown.Item>
+						<Dropdown.Item disabled onclick={() => (lastAction = 'never')}>Archive</Dropdown.Item>
+						<Dropdown.Divider />
+						<Dropdown.Item danger onclick={() => (lastAction = 'Delete')}>Delete</Dropdown.Item>
+					</Dropdown.List>
+				</Dropdown.Content>
+			</Dropdown>
+			<Button variant="ghost" onclick={() => (dropdownOpen = !dropdownOpen)}>
+				Toggle from outside
+			</Button>
+			<Text>Open: <Code>{dropdownOpen}</Code> · Last action: <Code>{lastAction}</Code></Text>
+		</div>
+
+		<Heading level={4}>Placements</Heading>
+		<div class="grid grid-cols-3 gap-4 py-24 sm:px-24">
+			{#each Object.keys(Dropdown.theme.variants.placement) as placement (placement)}
+				<Dropdown placement={placement as keyof typeof Dropdown.theme.variants.placement}>
+					<Dropdown.Trigger variant="secondary" size="sm" class="justify-self-center">
+						{placement}
+					</Dropdown.Trigger>
+					<Dropdown.Content class="w-36">
+						<Dropdown.List>
+							<Dropdown.Item href="#one">One</Dropdown.Item>
+							<Dropdown.Item href="#two">Two</Dropdown.Item>
+						</Dropdown.List>
+					</Dropdown.Content>
+				</Dropdown>
+			{/each}
+		</div>
 	</div>
 
 	<Form form={reservationForm}>

@@ -11,12 +11,14 @@
 		}
 	}
 
-	&:not(.tabuttongroup--orientation-vertical) > .tabutton {
-		&:not(:first-child) {
+	/* Sibling selectors rather than :first/:last-child, so non-button siblings
+	   (e.g. a Dropdown's popover after its trigger) don't break the joins */
+	&:not(.tabuttongroup--orientation-vertical) {
+		& > .tabutton ~ .tabutton {
 			@apply rounded-s-none;
 		}
 
-		&:not(:last-child) {
+		& > .tabutton:has(~ .tabutton) {
 			@apply rounded-e-none;
 		}
 	}
@@ -25,13 +27,11 @@
 .tabuttongroup--orientation-vertical {
 	@apply flex-col -space-y-px space-x-0;
 
-	& > .tabutton {
-		&:not(:first-child) {
-			@apply rounded-t-none;
-		}
+	& > .tabutton ~ .tabutton {
+		@apply rounded-t-none;
+	}
 
-		&:not(:last-child) {
-			@apply rounded-b-none;
-		}
+	& > .tabutton:has(~ .tabutton) {
+		@apply rounded-b-none;
 	}
 }

@@ -10,6 +10,7 @@ export { default as CheckboxField } from './components/checkbox-field/index.js';
 export { default as Chip } from './components/chip/index.js';
 export { default as CloseButton } from './components/close-button/index.js';
 export { default as DescriptionList } from './components/description-list/index.js';
+export { default as Dropdown } from './components/dropdown/index.js';
 export { default as Field } from './components/field/index.js';
 export { default as Form } from './components/form/index.js';
 export { default as Input } from './components/input/index.js';

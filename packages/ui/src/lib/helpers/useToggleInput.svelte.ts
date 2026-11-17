@@ -123,5 +123,7 @@ export function useToggleContent(id: () => string) {
 		if (e.defaultPrevented || ctx.labelId.current) return;
 		if ((e.target as Element | null)?.closest(INTERACTIVE)) return;
 		ctx.ref.current?.click();
+		// Handled: stops a forwarding ancestor (e.g. a Dropdown row) toggling a second time
+		e.preventDefault();
 	};
 }
