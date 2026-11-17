@@ -5,6 +5,7 @@
 		Avatar,
 		AvatarGroup,
 		Button,
+		ButtonGroup,
 		Checkbox,
 		CheckboxField,
 		Chip,
@@ -114,6 +115,32 @@
 				{color} disabled
 			</Button>
 		{/each}
+	</div>
+
+	<div {...LIST}>
+		<ButtonGroup aria-label="Account sections">
+			<Button variant="tertiary">Profile</Button>
+			<Button variant="tertiary">Settings</Button>
+			<Button variant="tertiary">Messages</Button>
+		</ButtonGroup>
+
+		<ButtonGroup aria-label="Text alignment">
+			<Button variant="outline" size="sm">
+				<Icon icon="icon-[heroicons--bars-3-bottom-left-solid]" />
+				Left
+			</Button>
+			<Button variant="outline" size="sm">
+				<Icon icon="icon-[heroicons--bars-3-solid]" />
+				Center
+			</Button>
+			<Button variant="outline" size="sm" disabled>Right</Button>
+		</ButtonGroup>
+
+		<ButtonGroup orientation="vertical" aria-label="Actions">
+			<Button variant="secondary">Edit</Button>
+			<Button variant="secondary">Duplicate</Button>
+			<Button variant="secondary">Archive</Button>
+		</ButtonGroup>
 	</div>
 
 	<Form form={reservationForm}>

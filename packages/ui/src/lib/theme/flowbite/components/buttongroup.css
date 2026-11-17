@@ -1,0 +1,37 @@
+.tabuttongroup {
+	@apply inline-flex -space-x-px rounded-base shadow-xs;
+
+	& > .tabutton {
+		@apply shadow-none;
+
+		&:hover,
+		&:focus-visible,
+		&[data-hovered] {
+			@apply z-10;
+		}
+	}
+
+	&:not(.tabuttongroup--orientation-vertical) > .tabutton {
+		&:not(:first-child) {
+			@apply rounded-s-none;
+		}
+
+		&:not(:last-child) {
+			@apply rounded-e-none;
+		}
+	}
+}
+
+.tabuttongroup--orientation-vertical {
+	@apply flex-col -space-y-px space-x-0;
+
+	& > .tabutton {
+		&:not(:first-child) {
+			@apply rounded-t-none;
+		}
+
+		&:not(:last-child) {
+			@apply rounded-b-none;
+		}
+	}
+}
