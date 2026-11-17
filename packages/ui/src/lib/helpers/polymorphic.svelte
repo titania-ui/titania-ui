@@ -50,10 +50,13 @@
 
 {#if child}
 	{@render child(childArg as TChildArg)}
-{:else if typeof Tag === 'string'}
+{:else if typeof Tag === 'string' && children}
 	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs}>
-		{@render children?.()}
+		{@render children()}
 	</svelte:element>
+{:else if typeof Tag === 'string'}
+	<!-- No body block at all, so void tags (<hr>, <img>, <input>) don't trip Svelte's void-content check -->
+	<svelte:element this={Tag} bind:this={() => ref, (v) => (ref = v as never)} {...attrs} />
 {:else}
 	<Tag bind:ref={() => ref as never, (v) => (ref = v as never)} {...attrs} {children} />
 {/if}
