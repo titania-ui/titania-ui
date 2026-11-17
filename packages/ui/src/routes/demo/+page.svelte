@@ -45,7 +45,7 @@
 
 	const STACK = { class: '*:m-0 space-y-4!' };
 
-	const LIST = { class: 'flex flex-row gap-4 flex-wrap basis' };
+	const LIST = { class: 'flex flex-row gap-4 flex-wrap basis items-center' };
 </script>
 
 <div class="space-y-12! p-6 *:m-0">
@@ -119,21 +119,21 @@
 
 	<div {...LIST}>
 		<ButtonGroup aria-label="Account sections">
-			<Button variant="tertiary">Profile</Button>
-			<Button variant="tertiary">Settings</Button>
-			<Button variant="tertiary">Messages</Button>
+			<Button variant="secondary">Profile</Button>
+			<Button variant="secondary">Settings</Button>
+			<Button variant="secondary">Messages</Button>
 		</ButtonGroup>
 
 		<ButtonGroup aria-label="Text alignment">
-			<Button variant="outline" size="sm">
+			<Button variant="secondary" size="sm">
 				<Icon icon="icon-[heroicons--bars-3-bottom-left-solid]" />
 				Left
 			</Button>
-			<Button variant="outline" size="sm">
+			<Button variant="secondary" size="sm">
 				<Icon icon="icon-[heroicons--bars-3-solid]" />
 				Center
 			</Button>
-			<Button variant="outline" size="sm" disabled>Right</Button>
+			<Button variant="secondary" size="sm" disabled>Right</Button>
 		</ButtonGroup>
 
 		<ButtonGroup orientation="vertical" aria-label="Actions">
