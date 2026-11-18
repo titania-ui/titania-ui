@@ -10,7 +10,12 @@
 	@apply mb-6;
 
 	.tafield__error {
-		@apply mt-2.5 text-sm text-fg-danger-strong;
+		@apply mt-2.5 flex items-start gap-1.5 text-sm font-medium text-fg-danger-strong;
+
+		&::before {
+			content: '';
+			@apply mt-0.5 icon-[flowbite--exclamation-circle-outline] size-4 shrink-0;
+		}
 	}
 	.tafield__description {
 		@apply mt-2.5 text-sm text-body;
@@ -33,21 +38,21 @@
 .tainput {
 	@apply block w-full rounded-base border border-default-medium bg-neutral-secondary-medium px-3 py-2.5 text-sm text-heading shadow-xs placeholder:text-body focus:border-brand focus:ring-brand;
 	&.tainput--invalid {
-		@apply border-danger-subtle bg-danger-soft text-fg-danger-strong placeholder:text-fg-danger-strong focus:border-danger focus:ring-danger;
+		@apply border-fg-danger bg-danger-soft text-fg-danger-strong placeholder:text-body focus:border-danger focus:ring-danger;
 	}
 }
 
 .tatextarea {
 	@apply block w-full rounded-base border border-default-medium bg-neutral-secondary-medium p-3.5 text-sm text-heading shadow-xs placeholder:text-body focus:border-brand focus:ring-brand;
 	&.tatextarea--invalid {
-		@apply border-danger-subtle bg-danger-soft text-fg-danger-strong placeholder:text-fg-danger-strong focus:border-danger focus:ring-danger;
+		@apply border-fg-danger bg-danger-soft text-fg-danger-strong placeholder:text-body focus:border-danger focus:ring-danger;
 	}
 }
 
 .taselect {
 	@apply block w-full rounded-base border border-default-medium bg-neutral-secondary-medium px-3 py-2.5 text-sm text-heading shadow-xs placeholder:text-body focus:border-brand focus:ring-brand;
 	&.taselect--invalid {
-		@apply border-danger-subtle bg-danger-soft text-fg-danger-strong placeholder:text-fg-danger-strong focus:border-danger focus:ring-danger;
+		@apply border-fg-danger bg-danger-soft text-fg-danger-strong placeholder:text-body focus:border-danger focus:ring-danger;
 	}
 	.taselect__icon__wrapper {
 		@apply hidden;
@@ -71,7 +76,7 @@
 
 		&.tainputgroup__prefix--invalid,
 		&.tainputgroup__suffix--invalid {
-			@apply border-danger-subtle bg-danger-soft text-fg-danger-strong focus:border-danger focus:ring-danger;
+			@apply border-fg-danger bg-danger-soft text-fg-danger-strong focus:border-danger focus:ring-danger;
 		}
 	}
 
@@ -85,5 +90,19 @@
 
 	.tainput {
 		@apply rounded-none;
+	}
+}
+
+.taform__errorsummary {
+	@apply mb-6 rounded-base border border-fg-danger bg-danger-soft p-4 text-sm text-fg-danger-strong focus:outline-2 focus:outline-offset-2 focus:outline-fg-danger;
+
+	.taform__errorsummary-title {
+		@apply mb-2 font-bold;
+	}
+	ul {
+		@apply list-disc ps-5;
+	}
+	a {
+		@apply font-medium underline;
 	}
 }

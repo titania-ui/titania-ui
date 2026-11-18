@@ -4,7 +4,7 @@
 	import { capitalize } from '#lib/utils/capitalize.js';
 	import type { RootCfg } from './index.js';
 	import { defineMeta } from '@storybook/addon-svelte-csf';
-	import { expect, fn } from 'storybook/test';
+	import { expect, fn, waitFor } from 'storybook/test';
 	import type { Snippet } from 'svelte';
 
 	const { Story } = defineMeta<Snippet<[ToolingProps<RootCfg>, unknown]>, typeof Alert>({
@@ -77,11 +77,12 @@
 	args={{
 		ondismiss: fn()
 	}}
-	play={async ({ canvas, userEvent, args, step }) => {
-		const alert = canvas.getByRole('status');
+	play={async ({ canvas, canvasElement, userEvent, args, step }) => {
+		const alert = canvasElement.querySelector<HTMLElement>('[data-slot="alert"]')!;
 
 		await step('renders as an alert with title and description', async () => {
 			await expect(alert).toBeVisible();
+			await expect(alert).toHaveAttribute('role', 'status');
 			await expect(canvas.getByText('Title')).toBeVisible();
 			await expect(canvas.getByText(/Lorem ipsum dolor sit amet/)).toBeVisible();
 		});
@@ -110,9 +111,9 @@
 		dismissed: true,
 		ondismiss: fn()
 	}}
-	play={async ({ canvas, step }) => {
+	play={async ({ canvasElement, step }) => {
 		await step('renders nothing once dismissed is true', async () => {
-			await expect(canvas.queryByRole('alert')).not.toBeInTheDocument();
+			await expect(canvasElement.querySelector('[data-slot="alert"]')).toBeNull();
 		});
 	}}
 >
@@ -123,6 +124,43 @@
 		mollitia qui deleniti ipsam doloremque assumenda.
 	</Alert.Description>
 	<Alert.Dismiss />
+</Story>
+
+<Story
+	name="Danger Is Assertive"
+	tags={['!dev', '!autodocs']}
+	args={{ status: 'danger' }}
+	play={async ({ canvasElement, step }) => {
+		await step('uses role=alert for danger', async () => {
+			const alert = canvasElement.querySelector<HTMLElement>('[data-slot="alert"]')!;
+			await expect(alert).toHaveAttribute('role', 'alert');
+			await expect(alert).toHaveTextContent(/Error:.*Save failed/);
+		});
+	}}
+>
+	<Alert.Indicator />
+	<Alert.Title>Save failed</Alert.Title>
+	<Alert.Description>Try again later.</Alert.Description>
+	<Alert.Dismiss />
+</Story>
+
+<Story
+	name="Dismiss Focus"
+	tags={['!dev', '!autodocs']}
+	play={async ({ canvas, userEvent, step }) => {
+		await step('moves focus to the next focusable element instead of dropping it', async () => {
+			await userEvent.click(canvas.getByRole('button', { name: 'Dismiss alert' }));
+			await waitFor(() => expect(canvas.getByRole('button', { name: 'Next' })).toHaveFocus());
+		});
+	}}
+>
+	<div class="space-y-4">
+		<Alert>
+			<Alert.Title>Title</Alert.Title>
+			<Alert.Dismiss />
+		</Alert>
+		<Button>Next</Button>
+	</div>
 </Story>
 
 <Story

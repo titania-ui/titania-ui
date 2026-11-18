@@ -1,0 +1,158 @@
+.tadropdown__trigger {
+	.tadropdown__chevron {
+		@apply -me-0.5 transition-transform;
+	}
+
+	&[aria-expanded='true'] .tadropdown__chevron {
+		@apply rotate-180;
+	}
+}
+
+.tadropdown__content {
+	/* Undo the UA popover box (centred in the viewport): anchor positioning places it instead */
+	inset: auto;
+	margin: 0;
+	padding: 0;
+	min-width: anchor-size(width);
+	position-try-fallbacks:
+		flip-block,
+		flip-inline,
+		flip-block flip-inline;
+	/* Hide along with the trigger once it scrolls out of view */
+	position-visibility: anchors-visible;
+
+	@apply w-44 max-w-[calc(100vw-1rem)] overflow-auto rounded-base border border-default-medium bg-neutral-primary-medium text-sm font-medium text-body shadow-lg;
+
+	/* Gap to the trigger lives on the side facing it. flip-* mirrors margins too */
+	&.tadropdown__content--placement-bottom-start {
+		position-area: block-end span-inline-end;
+		@apply mt-2;
+	}
+
+	&.tadropdown__content--placement-bottom {
+		position-area: block-end;
+		@apply mt-2;
+	}
+
+	&.tadropdown__content--placement-bottom-end {
+		position-area: block-end span-inline-start;
+		@apply mt-2;
+	}
+
+	&.tadropdown__content--placement-top-start {
+		position-area: block-start span-inline-end;
+		@apply mb-2;
+	}
+
+	&.tadropdown__content--placement-top {
+		position-area: block-start;
+		@apply mb-2;
+	}
+
+	&.tadropdown__content--placement-top-end {
+		position-area: block-start span-inline-start;
+		@apply mb-2;
+	}
+
+	&.tadropdown__content--placement-right-start {
+		position-area: inline-end span-block-end;
+		@apply ms-2;
+	}
+
+	&.tadropdown__content--placement-right {
+		position-area: inline-end;
+		@apply ms-2;
+	}
+
+	&.tadropdown__content--placement-right-end {
+		position-area: inline-end span-block-start;
+		@apply ms-2;
+	}
+
+	&.tadropdown__content--placement-left-start {
+		position-area: inline-start span-block-end;
+		@apply me-2;
+	}
+
+	&.tadropdown__content--placement-left {
+		position-area: inline-start;
+		@apply me-2;
+	}
+
+	&.tadropdown__content--placement-left-end {
+		position-area: inline-start span-block-start;
+		@apply me-2;
+	}
+}
+
+.tadropdown__header {
+	@apply p-2;
+
+	/* Header straight on top of a list: list padding already separates them */
+	& + .tadropdown__list {
+		@apply pt-0;
+	}
+}
+
+.tadropdown__footer {
+	@apply border-t border-default-medium p-2;
+}
+
+.tadropdown__list {
+	@apply p-2;
+}
+
+.tadropdown__item {
+	@apply relative flex w-full items-center gap-x-1.5 rounded p-2 text-start;
+
+	& > [data-slot='icon'] {
+		@apply size-4 shrink-0;
+	}
+
+	/* Hosted controls fill the row, and a click anywhere on it toggles them */
+	&:has(> .tacheckbox, > .taswitch) {
+		@apply cursor-pointer;
+	}
+
+	& > .tacheckbox,
+	& > .taswitch {
+		@apply flex-1;
+	}
+
+	&:focus {
+		@apply outline-none;
+	}
+
+	&[data-focus-visible] {
+		@apply ring-2 ring-brand-soft;
+	}
+
+	&[data-hovered] {
+		@apply bg-neutral-tertiary-medium text-heading;
+	}
+
+	&.tadropdown__item--plain[data-hovered] {
+		@apply bg-transparent;
+	}
+
+	&.tadropdown__item--danger {
+		@apply text-fg-danger;
+
+		&[data-hovered] {
+			@apply text-fg-danger-strong;
+		}
+	}
+
+	&.tadropdown__item--disabled {
+		@apply cursor-not-allowed text-fg-disabled;
+	}
+}
+
+.tadropdown__divider {
+	@apply my-0 border-t border-default-medium;
+
+	/* Inside a list it splits groups of items, so give it breathing room */
+	&:is(li) {
+		@apply -mx-2 my-1.5;
+	}
+}

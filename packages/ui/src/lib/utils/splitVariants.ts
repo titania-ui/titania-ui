@@ -27,5 +27,10 @@ export function splitVariants<
 		if (!isVariant.has(k) || isKept.has(k)) attrs[k] = rest[k];
 	}
 
+	// Attachments (`{@attach}`, or ones handed over by e.g. bits-ui) are symbol-keyed props
+	for (const s of Object.getOwnPropertySymbols(rest)) {
+		(attrs as Record<symbol, unknown>)[s] = (rest as Record<symbol, unknown>)[s];
+	}
+
 	return { variants, attrs } as SplitVariants<Th, T, K>;
 }

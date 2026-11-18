@@ -1,0 +1,34 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"ui_alert_dismiss": "Hinweis schließen",
+	"ui_alert_status_info": "Information",
+	"ui_alert_status_success": "Erfolg",
+	"ui_alert_status_warning": "Warnung",
+	"ui_alert_status_danger": "Fehler",
+	"ui_alert_dialog_cancel": "Abbrechen",
+	"ui_alert_dialog_confirm": "Bestätigen",
+	"ui_button_pending": "Wird geladen",
+	"ui_chip_remove": "Chip entfernen",
+	"ui_close": "Schließen",
+	"ui_field_error": "Fehler",
+	"ui_form_errors_announcement": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "Das Formular hat {count} Fehler.",
+				"countPlural=other": "Das Formular hat {count} Fehler."
+			}
+		}
+	],
+	"ui_form_errors_title": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count} Fehler",
+				"countPlural=other": "{count} Fehler"
+			}
+		}
+	]
+}

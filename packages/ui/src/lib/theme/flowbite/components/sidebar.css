@@ -6,7 +6,11 @@
 	}
 
 	.tasidebar__item {
-		@apply relative flex items-center rounded-base px-2 py-1.5 text-body data-hover:bg-neutral-tertiary data-hover:text-fg-brand;
+		@apply relative flex items-center rounded-base px-2 py-1.5 text-body;
+
+		&[data-hovered] {
+			@apply bg-neutral-tertiary text-fg-brand;
+		}
 
 		& > [data-slot='icon'] {
 			@apply size-5 shrink-0 transition duration-75;

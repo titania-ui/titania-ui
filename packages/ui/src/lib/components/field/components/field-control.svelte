@@ -8,13 +8,13 @@
 	let {
 		children,
 		//
-		id = uid,
+		id = undefined,
 		...props
 	}: ControlProps = $props();
 
 	const mergedProps = $derived({
 		...fieldControlAttrs(field_ctx),
-		id,
+		id: id ?? field_ctx.name.current ?? uid,
 		...props
 	});
 </script>

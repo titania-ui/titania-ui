@@ -40,6 +40,19 @@
 		--button-focus: var(--color-brand-medium);
 	}
 
+	&:is(.taalertdialog__content > *) {
+		--button-bg-hover: var(--color-neutral-tertiary);
+		@apply absolute end-2.5 top-3 m-0 size-9 rounded-base text-sm text-body;
+
+		&[data-hovered] {
+			@apply text-heading;
+		}
+
+		& > [data-slot='icon'] {
+			@apply size-5;
+		}
+	}
+
 	&:is(.tachip > *) {
 		--button-bg-hover: var(--chip-hover);
 		@apply m-0 size-auto rounded-xs p-0.5 text-sm;

@@ -5,7 +5,8 @@ export const theme = tv({
 		root: 'taform',
 		fieldset: 'taform__fieldset',
 		legend: 'taform__legend',
-		fieldgroup: 'taform__fieldgroup'
+		fieldgroup: 'taform__fieldgroup',
+		errorsummary: 'taform__errorsummary'
 	},
 	variants: {}
 });

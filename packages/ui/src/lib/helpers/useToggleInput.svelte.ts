@@ -54,13 +54,13 @@ export function useToggleInput(opts: ToggleInputOptions) {
 		const named = own['aria-label'] != null || own['aria-labelledby'] != null;
 		const labelledby = named
 			? own['aria-labelledby']
-			: [descriptionId.current, fieldDescribedBy(field_ctx, opts.invalid())]
-					.filter(Boolean)
-					.join(' ') || undefined;
+			: (labelId.current ?? field_ctx?.labelId.current ?? contentId.current);
 
 		const describedby =
 			own['aria-describedby'] ??
-			([descriptionId.current, field_ctx?.descriptionId.current].filter(Boolean).join(' ') ||
+			([descriptionId.current, fieldDescribedBy(field_ctx, opts.invalid())]
+				.filter(Boolean)
+				.join(' ') ||
 				undefined);
 
 		return {
@@ -123,5 +123,7 @@ export function useToggleContent(id: () => string) {
 		if (e.defaultPrevented || ctx.labelId.current) return;
 		if ((e.target as Element | null)?.closest(INTERACTIVE)) return;
 		ctx.ref.current?.click();
+		// Handled: stops a forwarding ancestor (e.g. a Dropdown row) toggling a second time
+		e.preventDefault();
 	};
 }

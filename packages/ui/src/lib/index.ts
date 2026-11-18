@@ -1,13 +1,17 @@
 // Components
 export { default as Alert } from './components/alert/index.js';
+export { default as AlertDialog } from './components/alert-dialog/index.js';
+export { default as Announcer } from './components/announcer/index.js';
 export { default as Avatar } from './components/avatar/index.js';
 export { default as AvatarGroup } from './components/avatar-group/index.js';
 export { default as Button } from './components/button/index.js';
+export { default as ButtonGroup } from './components/button-group/index.js';
 export { default as Checkbox } from './components/checkbox/index.js';
 export { default as CheckboxField } from './components/checkbox-field/index.js';
 export { default as Chip } from './components/chip/index.js';
 export { default as CloseButton } from './components/close-button/index.js';
 export { default as DescriptionList } from './components/description-list/index.js';
+export { default as Dropdown } from './components/dropdown/index.js';
 export { default as Field } from './components/field/index.js';
 export { default as Form } from './components/form/index.js';
 export { default as Input } from './components/input/index.js';
@@ -26,6 +30,7 @@ export { default as Strong } from './components/typography/strong.js';
 export { default as Text } from './components/typography/text.js';
 
 // Helpers
+export { announce } from './helpers/announcer.js';
 export { useActivePress } from './helpers/useActivePress.js';
 export { useFocusRing } from './helpers/useFocusRing.js';
 export { useHover } from './helpers/useHover.js';

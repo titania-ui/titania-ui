@@ -5,6 +5,7 @@ export interface AlertCtx {
 	readonly id: ReadableBox<string>;
 	readonly variants: ReadableBox<Record<string, unknown>>;
 	readonly dismissed: WritableBox<boolean>;
+	readonly statusLabel: ReadableBox<string>;
 }
 
 export const alertCtx = new Context<AlertCtx>('Alert.Root');

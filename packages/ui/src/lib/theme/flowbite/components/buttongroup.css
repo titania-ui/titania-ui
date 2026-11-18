@@ -1,0 +1,37 @@
+.tabuttongroup {
+	@apply inline-flex -space-x-px rounded-base shadow-xs;
+
+	& > .tabutton {
+		@apply shadow-none;
+
+		&:hover,
+		&:focus-visible,
+		&[data-hovered] {
+			@apply z-10;
+		}
+	}
+
+	/* Sibling selectors rather than :first/:last-child, so non-button siblings
+	   (e.g. a Dropdown's popover after its trigger) don't break the joins */
+	&:not(.tabuttongroup--orientation-vertical) {
+		& > .tabutton ~ .tabutton {
+			@apply rounded-s-none;
+		}
+
+		& > .tabutton:has(~ .tabutton) {
+			@apply rounded-e-none;
+		}
+	}
+}
+
+.tabuttongroup--orientation-vertical {
+	@apply flex-col -space-y-px space-x-0;
+
+	& > .tabutton ~ .tabutton {
+		@apply rounded-t-none;
+	}
+
+	& > .tabutton:has(~ .tabutton) {
+		@apply rounded-b-none;
+	}
+}
