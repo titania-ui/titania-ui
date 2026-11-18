@@ -2,6 +2,7 @@
 	import PHOTO from '../../lib/assets/placeholder_avatar.png';
 	import {
 		Alert,
+		AlertDialog,
 		Avatar,
 		AvatarGroup,
 		Button,
@@ -177,6 +178,34 @@
 			<Button variant="secondary">Duplicate</Button>
 			<Button variant="secondary">Archive</Button>
 		</ButtonGroup>
+	</div>
+
+	<div {...STACK}>
+		<Heading level={2}>AlertDialog</Heading>
+		<div {...LIST}>
+			<AlertDialog status="danger">
+				<AlertDialog.Trigger variant="danger">Delete product</AlertDialog.Trigger>
+				<AlertDialog.Content>
+					<AlertDialog.Close />
+					<AlertDialog.Indicator />
+					<AlertDialog.Title>Are you sure you want to delete this product?</AlertDialog.Title>
+					<AlertDialog.Footer>
+						<AlertDialog.Cancel>No, cancel</AlertDialog.Cancel>
+						<AlertDialog.Action>Yes, I'm sure</AlertDialog.Action>
+					</AlertDialog.Footer>
+				</AlertDialog.Content>
+			</AlertDialog>
+
+			<AlertDialog status="warning">
+				<AlertDialog.Trigger variant="secondary">Discard changes</AlertDialog.Trigger>
+				<AlertDialog.Content>
+					<AlertDialog.Indicator />
+					<AlertDialog.Title>Discard unsaved changes?</AlertDialog.Title>
+					<AlertDialog.Description>Your edits will be permanently lost.</AlertDialog.Description>
+					<AlertDialog.Footer />
+				</AlertDialog.Content>
+			</AlertDialog>
+		</div>
 	</div>
 
 	<div {...STACK}>

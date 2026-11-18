@@ -1,0 +1,113 @@
+.taalertdialog__overlay {
+	@apply fixed inset-0 z-50 bg-dark-backdrop/50;
+}
+
+/* Flowbite popup modal: max-w-md wrapper with p-4 around a card with p-4 md:p-6, body p-4 md:p-5 */
+.taalertdialog__content {
+	@apply fixed start-1/2 top-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-[calc(var(--container-md)-2rem)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-base border border-default bg-neutral-primary-soft p-8 text-center text-base shadow-sm md:px-11 md:py-11 rtl:translate-x-1/2;
+
+	/* Programmatic focus lands here when there is no Cancel; the dialog itself needs no ring */
+	&:focus {
+		@apply outline-none;
+	}
+
+	/* Scoped under the content so it beats the global [data-slot='icon'] size */
+	& > .taalertdialog__indicator {
+		@apply mx-auto mb-4 block size-12 text-fg-disabled;
+
+		&.taalertdialog__indicator--placeholder {
+			@apply icon-[flowbite--exclamation-circle-outline];
+
+			&.taalertdialog__indicator--status-accent {
+				@apply icon-[flowbite--info-circle-outline];
+			}
+
+			&.taalertdialog__indicator--status-warning {
+				@apply icon-[material-symbols--warning-outline-rounded];
+			}
+
+			&.taalertdialog__indicator--status-success {
+				@apply icon-[flowbite--check-circle-outline];
+			}
+		}
+
+		&.taalertdialog__indicator--status-accent {
+			@apply text-fg-brand;
+		}
+
+		&.taalertdialog__indicator--status-success {
+			@apply text-fg-success;
+		}
+
+		&.taalertdialog__indicator--status-warning {
+			@apply text-fg-warning-subtle;
+		}
+
+		&.taalertdialog__indicator--status-danger {
+			@apply text-fg-danger;
+		}
+	}
+
+	& > .taalertdialog__title {
+		@apply mb-6 text-body;
+	}
+
+	/* A description takes over the gap above the buttons */
+	& > .taalertdialog__title:has(+ .taalertdialog__description) {
+		@apply mb-2 font-medium text-heading;
+	}
+
+	& > .taalertdialog__description {
+		@apply mb-6 text-sm text-body;
+	}
+
+	& > .taalertdialog__footer {
+		@apply flex flex-wrap items-center justify-center gap-4;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.taalertdialog__overlay {
+		&[data-state='open'] {
+			animation: taalertdialog-fade-in 150ms ease-out;
+		}
+		&[data-state='closed'] {
+			animation: taalertdialog-fade-out 150ms ease-in;
+		}
+	}
+
+	.taalertdialog__content {
+		&[data-state='open'] {
+			animation: taalertdialog-zoom-in 150ms ease-out;
+		}
+		&[data-state='closed'] {
+			animation: taalertdialog-zoom-out 150ms ease-in;
+		}
+	}
+}
+
+@keyframes taalertdialog-fade-in {
+	from {
+		opacity: 0;
+	}
+}
+
+@keyframes taalertdialog-fade-out {
+	to {
+		opacity: 0;
+	}
+}
+
+@keyframes taalertdialog-zoom-in {
+	from {
+		opacity: 0;
+		scale: 0.95;
+	}
+}
+
+@keyframes taalertdialog-zoom-out {
+	to {
+		opacity: 0;
+		scale: 0.95;
+	}
+}

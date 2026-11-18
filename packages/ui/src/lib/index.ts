@@ -1,5 +1,6 @@
 // Components
 export { default as Alert } from './components/alert/index.js';
+export { default as AlertDialog } from './components/alert-dialog/index.js';
 export { default as Announcer } from './components/announcer/index.js';
 export { default as Avatar } from './components/avatar/index.js';
 export { default as AvatarGroup } from './components/avatar-group/index.js';

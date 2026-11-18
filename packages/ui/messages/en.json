@@ -5,6 +5,8 @@
 	"ui_alert_status_success": "Success",
 	"ui_alert_status_warning": "Warning",
 	"ui_alert_status_danger": "Error",
+	"ui_alert_dialog_cancel": "Cancel",
+	"ui_alert_dialog_confirm": "Confirm",
 	"ui_button_pending": "Loading",
 	"ui_chip_remove": "Remove chip",
 	"ui_close": "Close",

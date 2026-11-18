@@ -246,6 +246,7 @@
 
 @layer components {
 	@import './components/alert.css';
+	@import './components/alertdialog.css';
 	@import './components/avatar.css';
 	@import './components/avatargroup.css';
 	@import './components/button.css';
